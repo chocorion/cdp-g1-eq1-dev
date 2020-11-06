@@ -1,6 +1,6 @@
 # Task 1
 | ID | Titre | Description | DOD | Dépendances | US |Estimation (h/h) | Etat |
------|-------|-------------|-----|-------------|----|-----------------|------|
+-----|-------|-------------|-----|:-----------:|:--:|:---------------:|:----:|
 | T1-01 | Créer la release pour la fin du sprint 1.|Le fichier .war pour le serveur doit être généré, et le front doit être compilé en version production.|En faisant docker-compose up, l’application doit être lancée et accessible.| T0-00 |  | 2 | TODO |
 |T2-01|Créer la release du sprint 2|Créer la release pour la fin du sprint 2.<br> Le fichier .war pour le serveur doit être généré, et le front doit être compilé en version production.|En faisant docker-compose up, l’application doit être lancée et accessible.|T0-00| |2|TODO|
 |T3-01|Créer la release du sprint 3|Créer la release pour la fin du sprint 3. <br> Le fichier .war pour le serveur doit être généré, et le front doit être compilé en version production.|En faisant docker-compose up, l’application doit être lancée et accessible.|T0-00| |2|TODO|
