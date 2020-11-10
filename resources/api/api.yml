@@ -1,0 +1,290 @@
+swagger: '2.0'
+info:
+  title: Cdp-g1-eq1
+  description: Api for cdp project.
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.1
+tags:
+  - name: Authentification
+    description: All routes related to authentification.
+  - name: Projects
+    description: All routes related to projects.
+  - name: Members
+    description: All routes related to members.
+  - name: UserStories
+    description: All routes related to user stories.
+  - name: Tasks
+    description: All routes related to tasks.
+  - name: Sprints
+    description: All tasks related to sprints.
+  - name: Tests
+    description: All tasks related to tests.
+securityDefinitions:
+  basicAuth:
+    type: basic
+paths:
+  /logout:
+    get:
+      tags:
+        - Authentification
+      security:
+        - basicAuth: []
+      summary: End the user session.
+      responses:
+        '401':
+          description: Not authenticated.
+  /login:
+    post:
+      tags:
+        - Authentification
+      summary: ''
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+            example:
+              username: chocorion
+              password: mySecretPassword
+      responses:
+        '405':
+          description: Invalid input.
+  /projects:
+    post:
+      tags:
+        - Projects
+      security:
+        - basicAuth: []
+      summary: Add a new project.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Project object
+          required: true
+          schema:
+            $ref: '#/definitions/Project'
+      responses:
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - Projects
+      security:
+        - basicAuth: []
+      summary: Get list of projects.
+      responses:
+        '404':
+          description: Inalid url
+  '/projects/{id}':
+    get:
+      tags:
+        - Projects
+      security:
+        - basicAuth: []
+      summary: Get a specific project.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/us/':
+    get:
+      tags:
+        - UserStories
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/us/{us_id}':
+    get:
+      tags:
+        - UserStories
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+        - in: path
+          name: us_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/tasks/':
+    get:
+      tags:
+        - Tasks
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/tasks/{task_id}':
+    get:
+      tags:
+        - Tasks
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+        - in: path
+          name: task_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/sprints/':
+    get:
+      tags:
+        - Sprints
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/sprints/{sprint_id}':
+    get:
+      tags:
+        - Sprints
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+        - in: path
+          name: sprint_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/tests/':
+    get:
+      tags:
+        - Tests
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/tests/{test_id}':
+    get:
+      tags:
+        - Tests
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+        - in: path
+          name: test_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/members/':
+    get:
+      tags:
+        - Members
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/members/{member_id}':
+    get:
+      tags:
+        - Members
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+        - in: path
+          name: member_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+definitions:
+  Project:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+        example: cdp-g1-eq1
+      description:
+        type: string
+        example: Projet pour l'UE conduite de projet à l'université de Bordeaux.
+  US:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+        example: 'En tant qu''utilisateur, je souhaite pouvoir me connecter.'
+      description:
+        type: string
+        example: Je souhaite avoir un bouton de connexion en haut à droite de l'application.
