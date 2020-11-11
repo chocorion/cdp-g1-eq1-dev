@@ -14,3 +14,5 @@ Pour tester le tout : `docker-compose up` (ajouter `--force-recreate --build` pe
 Le front doit être accessible sur `http://localhost:8080/` (pour le moment projet de base angular), et le back à `http://localhost:9000/api/v1/`.
 
 `http://localhost:9000/api/v1/hello/world` affiche *hello world !* si tout va bien.S
+
+Pour relancer les tests, pour le moment il faut remettre la bdd dans son état originel avec : `docker-compose up -d --build --force-recreate --renew-anon-volumes db`
