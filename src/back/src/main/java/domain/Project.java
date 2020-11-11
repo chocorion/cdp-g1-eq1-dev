@@ -3,22 +3,26 @@ package domain;
 import java.util.Optional;
 
 public class Project {
-    private Optional<Integer> id;
+    private int id;
 
     private String name;
     private String description;
 
+    public Project() {
+        id = -1;
+    }
+
     public Project(String name, String description) {
         this.name = name;
         this.description = description;
-        this.id = Optional.empty();
+        this.id = -1;
     }
 
 
     public Project(String name, String description, int id) {
         this.name = name;
         this.description = description;
-        this.id = Optional.of(id);
+        this.id = id;
     }
 
     public String getName() {
@@ -29,7 +33,7 @@ public class Project {
         return description;
     }
 
-    public Optional<Integer> getId() {
+    public int getId() {
         return id;
     }
 

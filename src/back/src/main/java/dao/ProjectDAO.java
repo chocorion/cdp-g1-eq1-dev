@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ProjectDAO {
     Optional<Project> getById(int id);
     List<Project> getAll();
-    Optional<Project> addOne(Project project) throws SQLException;
+    Project addOne(Project project) throws SQLException;
     void updateOne(Project project) throws SQLException;
+    void deleteOne(Project project) throws SQLException;
 }

@@ -25,8 +25,7 @@ class SQLProjectDAOTest {
 
         Project project = projectOptional.get();
 
-        assertTrue(project.getId().isPresent());
-        assertEquals(project.getId().get(), 1);
+        assertEquals(project.getId(), 1);
 
         assertEquals(project.getName(), "cdp-g1-eq1");
         assertEquals(project.getDescription(), "Projet pour le cours de Conduite de projet");
@@ -47,14 +46,10 @@ class SQLProjectDAOTest {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
         Project project = new Project("new project", "my new project");
 
-        Optional<Project> projectOptional = dao.addOne(project);
+        Project projectInserted = dao.addOne(project);
 
-        assertNotNull(projectOptional);
-        assertTrue(projectOptional.isPresent());
-
-
-        Project projectInserted = projectOptional.get();
-        assertTrue(projectInserted.getId().isPresent());
+        assertNotNull(projectInserted);
+        assertNotEquals(projectInserted.getId(), -1);
 
         assertEquals(project.getName(), projectInserted.getName());
         assertEquals(project.getDescription(), projectInserted.getDescription());
