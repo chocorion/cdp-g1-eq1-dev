@@ -9,7 +9,7 @@ CREATE TABLE tests (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(50) UNIQUE,
     description varchar(500),
-    lastExecution TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+    lastExecution TIMESTAMP NULL,
     state ENUM('validate', 'refused', 'not executed'),
     project_id int,
     PRIMARY KEY (id),

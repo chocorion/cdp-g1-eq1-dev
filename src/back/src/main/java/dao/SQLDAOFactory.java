@@ -36,4 +36,9 @@ public class SQLDAOFactory implements DAOFactory {
     public ProjectDAO getProjectDAO() {
         return SQLProjectDAO.getInstance();
     }
+
+    @Override
+    public TestDAO getTestDAO() {
+        return SQLTestDAO.getInstance();
+    }
 }
