@@ -43,7 +43,6 @@ public class Projects {
     @Produces("application/json")
     public Response putProject(Project project) {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-        Project built;
 
         try {
             projectDAO.updateOne(project);

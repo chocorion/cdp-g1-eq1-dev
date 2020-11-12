@@ -7,12 +7,13 @@ CREATE TABLE projects (
 
 CREATE TABLE tests (
     id int NOT NULL AUTO_INCREMENT,
-    name varchar(50) UNIQUE,
+    name varchar(50),
     description varchar(500),
     lastExecution TIMESTAMP NULL,
     state ENUM('validate', 'refused', 'not executed'),
     project_id int,
     PRIMARY KEY (id),
-    FOREIGN KEY (project_id) REFERENCES projects(id)
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    UNIQUE (project_id, name)
 );
 
