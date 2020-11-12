@@ -7,18 +7,33 @@ import domain.Project;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
-import java.util.List;
 
 @Path("projects")
 public class Projects {
     @GET
     @Produces("application/json")
-    public List<Project> getProjects() {
+    public Response getProjects() {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
 
-        return projectDAO.getAll();
+        try {
+            return Response.status(Response.Status.OK).entity(projectDAO.getAll()).build();
+        } catch (SQLException exception) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 
+    @Path("{id}")
+    @GET
+    @Produces("application/json")
+    public Response getProject(@PathParam("id") int id) {
+        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
+
+        try {
+            return Response.status(Response.Status.OK).entity(projectDAO.getById(id)).build();
+        } catch (SQLException exception) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
 
     @POST
     @Consumes("application/json")

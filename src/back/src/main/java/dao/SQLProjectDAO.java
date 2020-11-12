@@ -5,7 +5,6 @@ import domain.Project;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class SQLProjectDAO implements ProjectDAO {
     private static SQLProjectDAO instance;
@@ -21,54 +20,49 @@ public class SQLProjectDAO implements ProjectDAO {
     }
 
     @Override
-    public Optional<Project> getById(int id) {
+    public Project getById(int id) throws SQLException {
         Connection conn = SQLDAOFactory.getConnection();
 
         String statement = "SELECT * FROM projects WHERE id=?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(statement);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                Project project = new Project(resultSet.getString("name"), resultSet.getString("description"), id);
+        PreparedStatement preparedStatement = conn.prepareStatement(statement);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-                resultSet.close();
-                preparedStatement.close();
+        if (resultSet.next()) {
+            Project project = new Project(resultSet.getString("name"), resultSet.getString("description"), id);
 
-                return Optional.of(project);
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+            resultSet.close();
+            preparedStatement.close();
+
+            return project;
         }
 
-        return Optional.empty();
+        throw new SQLException("Can't find project with this id");
     }
 
     @Override
-    public List<Project> getAll() {
+    public List<Project> getAll() throws SQLException {
         Connection conn = SQLDAOFactory.getConnection();
         String statement = "SELECT * FROM projects";
         List<Project> projects = new ArrayList<>();
 
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(statement);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                projects.add(
-                        new Project(
-                                resultSet.getString("name"),
-                                resultSet.getString("description"),
-                                resultSet.getInt("id"))
-                );
-            }
+        PreparedStatement preparedStatement = conn.prepareStatement(statement);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-            resultSet.close();
-            preparedStatement.close();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        while (resultSet.next()) {
+            projects.add(
+                    new Project(
+                            resultSet.getString("name"),
+                            resultSet.getString("description"),
+                            resultSet.getInt("id"))
+            );
         }
+
+        resultSet.close();
+        preparedStatement.close();
+
 
         return projects;
     }

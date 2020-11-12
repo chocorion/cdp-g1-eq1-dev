@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.Optional;
-
 public class Project {
     private int id;
 

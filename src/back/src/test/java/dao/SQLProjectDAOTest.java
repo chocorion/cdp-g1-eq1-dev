@@ -5,25 +5,19 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SQLProjectDAOTest {
     @Test
-    void getById() {
+    void getById() throws SQLException {
         /*
             First entry in db is :
             |  1 | cdp-g1-eq1 | Projet pour le cours de Conduite de projet |
          */
 
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
-        Optional<Project> projectOptional = dao.getById(1);
-
-        assertNotNull(projectOptional);
-        assertTrue(projectOptional.isPresent());
-
-        Project project = projectOptional.get();
+        Project project = dao.getById(1);
 
         assertEquals(project.getId(), 1);
 
@@ -32,7 +26,7 @@ class SQLProjectDAOTest {
     }
 
     @Test
-    void testGetAll() {
+    void testGetAll() throws SQLException {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
         List<Project> projects = dao.getAll();
 
@@ -58,20 +52,15 @@ class SQLProjectDAOTest {
     }
 
     @Test
-    void updateOne() {
+    void updateOne() throws SQLException {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
-        Optional<Project> projectOptional = dao.getById(1);
-        assertTrue(projectOptional.isPresent());
 
-        Project project = projectOptional.get();
+        Project project = dao.getById(1);
         project.setName("test");
 
         assertDoesNotThrow(() -> dao.updateOne(project));
 
-        Optional<Project> projectInsertedOptional = dao.getById(1);
-        assertTrue(projectInsertedOptional.isPresent());
-
-        Project projectInserted = projectInsertedOptional.get();
+        Project projectInserted = dao.getById(1);
 
         assertEquals(project.getName(), "test");
         assertEquals(project.getDescription(), projectInserted.getDescription());
