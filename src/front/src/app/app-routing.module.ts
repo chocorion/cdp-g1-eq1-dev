@@ -10,6 +10,7 @@ import { ReleasesComponent } from './releases/releases.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProjectComponent } from './project/project.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'releases'     , component: ReleasesComponent },
   { path: 'documentation', component: DocumentationComponent },
   { path: 'statistics'   , component: StatisticsComponent },
-  { path: ''             , redirectTo: '/backlog', pathMatch: 'full'},
+  { path: 'project'      , component: ProjectComponent},
+  { path: ''             , redirectTo: '/project', pathMatch: 'full'},
   { path: '**'           , component: PageNotFoundComponent}
 ];
 
