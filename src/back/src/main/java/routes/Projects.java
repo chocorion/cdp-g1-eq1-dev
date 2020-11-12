@@ -72,11 +72,12 @@ public class Projects {
     }
 
     @DELETE
-    @Consumes("application/json")
-    public Response deleteProject(Project project) {
+    @Path("{id}")
+    public Response deleteProject(@PathParam("id") int id) {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
 
         try {
+            Project project = projectDAO.getById(id);
             projectDAO.deleteOne(project);
         } catch (SQLException exception) {
             return Response
