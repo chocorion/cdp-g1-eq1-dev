@@ -37,8 +37,7 @@ import { TestItemComponent } from './tests/test-item/test-item.component';
         ProjectSearchComponent,
         ProjectListComponent,
         ProjectItemComponent,
-        SidebarComponent
-        ProjectItemComponent,
+        SidebarComponent,
         TestItemComponent
     ],
     imports: [
