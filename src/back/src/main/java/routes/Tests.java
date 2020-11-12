@@ -50,7 +50,7 @@ public class Tests {
     @PUT
     @Consumes("application/json")
     @Produces("application/json")
-    public Response putProject(@PathParam("id") int id, Test test) {
+    public Response putTest(@PathParam("id") int id, Test test) {
         if (test.getProjectId() != id) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -71,18 +71,21 @@ public class Tests {
         return Response.status(Response.Status.OK).entity(test).build();
     }
 
+    @Path("{test_id}")
     @DELETE
     @Consumes("application/json")
-    public Response deleteProject(@PathParam("id") int id, Test test) {
-        if (test.getProjectId() != id) {
-            return Response
-                    .status(Response.Status.CONFLICT)
-                    .entity("Project id doesn't match with path id.")
-                    .build();
-        }
+    public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int test_id) {
         TestDAO dao = DAOFactory.getInstance().getTestDAO();
 
         try {
+            Test test = dao.getById(test_id);
+            if (test.getProjectId() != id) {
+                return Response
+                        .status(Response.Status.CONFLICT)
+                        .entity("Test.projectId doesn't match with path")
+                        .build();
+            }
+
             dao.deleteOne(test);
         } catch (SQLException exception) {
             return Response
