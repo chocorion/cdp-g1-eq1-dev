@@ -1,15 +1,32 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Project} from '../model/project.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProjectService {
+    currentProject: Project = null;
+    currentProjectSubject = new Subject<Project>();
+
 
     constructor(private http: HttpClient) {
+    }
+
+    setCurrentProject(project: Project): void {
+        this.currentProject = project;
+        this.emitCurrentProject();
+    }
+
+    clearCurrentProject(): void {
+        this.currentProject = null;
+        // emit null ?
+    }
+
+    emitCurrentProject(): void {
+        this.currentProjectSubject.next(this.currentProject);
     }
 
     getProjects(): Observable<Project[]> {

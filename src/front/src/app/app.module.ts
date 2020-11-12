@@ -18,6 +18,7 @@ import {ProjectSearchComponent} from './project/project-search/project-search.co
 import {ProjectListComponent} from './project/project-list/project-list.component';
 import {ProjectItemComponent} from './project/project-item/project-item.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
+import { TestItemComponent } from './tests/test-item/test-item.component';
 
 
 @NgModule({
@@ -37,6 +38,8 @@ import {SidebarComponent} from './sidebar/sidebar.component';
         ProjectListComponent,
         ProjectItemComponent,
         SidebarComponent
+        ProjectItemComponent,
+        TestItemComponent
     ],
     imports: [
         BrowserModule,
