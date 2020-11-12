@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { element } from 'protractor';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  private visible = true;
-  constructor() { }
+    collapsed = false;
+    visible = false;
 
-  ngOnInit(): void {
-  }
+    constructor(private router: Router) {
+        router.events.subscribe(
+            () => this.visible = this.router.url === '/project'
+        );
+    }
 
-  collapse(): void{
-    const sidebar = document.getElementById('sidebar');
-    if (this.visible){
-      sidebar.style.width = '100px';
+    ngOnInit(): void {
+
     }
-    else{
-      sidebar.style.width = '250px';
+
+    collapse(): void {
+        this.collapsed = !this.collapsed;
     }
-    this.visible = !this.visible;
-    // Il faut cacher le texte
-  }
 }

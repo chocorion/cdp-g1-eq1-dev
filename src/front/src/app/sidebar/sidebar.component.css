@@ -1,10 +1,19 @@
-#sidebar {
-  position: absolute;
-  width: 250px;
-  height: auto;
-  color: #fff;
+.sidebar {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 250px;
+    height: 100%;
+    color: #fff;
+    transition: width 1s;
 }
 
-#img-collapse{
-  padding-left: 220px;
+.disabled {
+    pointer-events: none;
+    display: none;
+}
+
+.sidebar-collapsed {
+    width: 100px;
+    transition: width 1s;
 }

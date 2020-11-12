@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProjectService} from '../services/project.service';
 
 @Component({
   selector: 'app-project',
@@ -9,9 +10,10 @@ export class ProjectComponent implements OnInit {
 
    submit: string;
 
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
+      this.projectService.clearCurrentProject();
   }
 
 }
