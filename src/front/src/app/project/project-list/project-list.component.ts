@@ -6,36 +6,36 @@ import { Component, OnInit,Input } from '@angular/core';
   styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
-  @Input() search:String;
+  @Input() search: string;
 
   projects = [
     {
       id : 1,
       name: 'Projet 1',
-      description: " C'est un projet sans grand intérêt",
+      description: ' C\'est un projet sans grand intérêt',
       nbUS: 3,
-      totalUS:4,
-      all:4,
-      done:2
+      totalUS: 4,
+      all: 4,
+      done: 2
 
     },
     {
-      id:2,
+      id: 2,
       name: 'Projet 2',
-      description: "Un second projet sans intérêt",
+      description: 'Un second projet sans intérêt',
       nbUS: 5,
-      totalUS:15,
-      all:10,
-      done:2
+      totalUS: 15,
+      all: 10,
+      done: 2
     },
     {
       id:3,
       name: 'Projet 3',
-      description: "Un troisième projet ... et devinez quoi il est aussi sans intérêt",
+      description: 'Un troisième projet ... et devinez quoi il est aussi sans intérêt',
       nbUS: 3,
-      totalUS:4,
-      all:4,
-      done:3
+      totalUS: 4,
+      all: 4,
+      done: 3
     }
   ];
 

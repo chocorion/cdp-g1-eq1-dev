@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectComponent implements OnInit {
 
-   submit :String;
+   submit: string;
 
   constructor() { }
 

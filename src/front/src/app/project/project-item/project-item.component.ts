@@ -10,7 +10,7 @@ export class ProjectItemComponent implements OnInit {
   @Input() projectDescription: string;
   @Input() nbUS: number;
   @Input() totalUS: number;
-  @Input() percent : number;
+  @Input() percent: number;
   constructor() { }
 
   ngOnInit(): void {

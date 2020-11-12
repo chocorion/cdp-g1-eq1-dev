@@ -15,10 +15,10 @@ export class ProjectSearchComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit(){
+  onSubmit(): void {
     console.log(this.form.get('search'));
    }
-   
 
-} 
+
+}
 

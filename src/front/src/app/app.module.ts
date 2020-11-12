@@ -13,6 +13,10 @@ import {StatisticsComponent} from './statistics/statistics.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {ProjectService} from './services/project.service';
 import {HttpClientModule} from '@angular/common/http';
+import {ProjectComponent} from './project/project.component';
+import {ProjectSearchComponent} from './project/project-search/project-search.component';
+import {ProjectListComponent} from './project/project-list/project-list.component';
+import {ProjectItemComponent} from './project/project-item/project-item.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import {HttpClientModule} from '@angular/common/http';
         ReleasesComponent,
         DocumentationComponent,
         StatisticsComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        ProjectComponent,
+        ProjectSearchComponent,
+        ProjectListComponent,
+        ProjectItemComponent
     ],
     imports: [
         BrowserModule,
