@@ -5,6 +5,7 @@
         [nbUS]="project.nbUS"
         [totalUS]="project.totalUS"
         [percent]= "(100*project.done)/project.all"
+       (click)="onClick(project)"
     ></app-project-item>
 
 </ul>

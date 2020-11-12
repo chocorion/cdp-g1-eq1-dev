@@ -17,6 +17,7 @@ import {ProjectComponent} from './project/project.component';
 import {ProjectSearchComponent} from './project/project-search/project-search.component';
 import {ProjectListComponent} from './project/project-list/project-list.component';
 import {ProjectItemComponent} from './project/project-item/project-item.component';
+import { TestItemComponent } from './tests/test-item/test-item.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {ProjectItemComponent} from './project/project-item/project-item.componen
         ProjectComponent,
         ProjectSearchComponent,
         ProjectListComponent,
-        ProjectItemComponent
+        ProjectItemComponent,
+        TestItemComponent
     ],
     imports: [
         BrowserModule,

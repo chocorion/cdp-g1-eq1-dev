@@ -15,6 +15,17 @@ export class Test{
         this.id = (id) ? id : -1;
     }
 
+    static fromJSON(json): Test {
+        return new Test(
+            json.name,
+            json.description,
+            json.lastExecution,
+            json.state,
+            json.projectId,
+            json.id
+        );
+    }
+
     public getId(): number {
         return this.id;
     }
