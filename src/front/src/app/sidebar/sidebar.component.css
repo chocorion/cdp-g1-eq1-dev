@@ -1,0 +1,10 @@
+#sidebar {
+  position: absolute;
+  width: 250px;
+  height: auto;
+  color: #fff;
+}
+
+#img-collapse{
+  padding-left: 220px;
+}
