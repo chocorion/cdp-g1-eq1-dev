@@ -2,7 +2,7 @@ export class Project{
     private id: number;
     private name: string;
     private description: string;
-    
+
     private readonly NAMESIZE: number = 50;
     private readonly DESCRIPTIONSIZE: number = 500;
 
@@ -12,22 +12,26 @@ export class Project{
         this.setDescription(description);
     }
 
-    public setName(name: string){
-        if (name.length > this.NAMESIZE)
+    public setName(name: string): void {
+        if (name.length > this.NAMESIZE) {
             this.name = name.slice(0, this.NAMESIZE);
-        else
+        }
+        else {
             this.name = name;
+        }
     }
 
-    public setDescription(description: string){
-        if (description.length > this.DESCRIPTIONSIZE)
+    public setDescription(description: string): void {
+        if (description.length > this.DESCRIPTIONSIZE) {
             this.description = description.slice(0, this.DESCRIPTIONSIZE);
-        else
+        }
+        else {
             this.description = description;
+        }
     }
 
-    public setId(id: number){
-        if (id < 0) id = 0;
+    public setId(id: number): void {
+        if (id < 0) { id = 0; }
         this.id = id;
     }
 
