@@ -51,6 +51,7 @@ public class Tests {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putTest(@PathParam("id") int id, Test test) {
+        System.out.println("Date is " + test.getLastExecution());
         if (test.getProjectId() != id) {
             return Response
                     .status(Response.Status.CONFLICT)

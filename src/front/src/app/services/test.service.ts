@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Test} from '../model/test.model';
 import {environment} from '../../environments/environment';
 
@@ -8,7 +8,6 @@ import {environment} from '../../environments/environment';
     providedIn: 'root'
 })
 export class TestService {
-
     constructor(private http: HttpClient) {
     }
 
@@ -21,7 +20,7 @@ export class TestService {
     }
 
     updateTest(test: Test): Observable<Test> {
-        return this.http.put<Test>(environment.apiUrl + `projects/${test.getProjectId()}/tests`, test);
+        return this.http.put<Test>(environment.apiUrl + `projects/${test.getProjectId()}/tests/`, test);
     }
 
     deleteTest(test: Test): void {

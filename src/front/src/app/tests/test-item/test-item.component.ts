@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Test} from '../../model/test.model';
+import {TestService} from '../../services/test.service';
 
 @Component({
     selector: 'app-test-item',
@@ -8,7 +9,8 @@ import {Test} from '../../model/test.model';
 })
 export class TestItemComponent implements OnInit {
     @Input() test: Test;
-    constructor() {
+
+    constructor(private testService: TestService) {
     }
 
     ngOnInit(): void {
@@ -27,5 +29,13 @@ export class TestItemComponent implements OnInit {
             default:
                 return 'bg-light';
         }
+    }
+
+    changeState(newState: string): void {
+        this.test.setState(newState);
+        // this.test.setLastExecution(new Date());
+        this.testService.updateTest(this.test).subscribe(
+            test => this.test = Test.fromJSON(test)
+        );
     }
 }

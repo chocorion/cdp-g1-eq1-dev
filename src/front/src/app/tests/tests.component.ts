@@ -47,6 +47,7 @@ export class TestsComponent implements OnInit, OnDestroy {
         this.testService.getAllForProject(this.currentProject.getId()).subscribe(
             result => {
                 this.tests = result.map(x => Test.fromJSON(x));
+                this.tests.forEach(t => console.log('Display test with date ' + t.getLastExecution()));
             }
         );
     }

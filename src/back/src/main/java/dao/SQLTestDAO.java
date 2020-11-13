@@ -112,8 +112,7 @@ public class SQLTestDAO implements TestDAO {
                     test.getProjectId()
 
             );
-
-
+        
         throw new SQLException("Can't add this test");
     }
 
@@ -123,15 +122,21 @@ public class SQLTestDAO implements TestDAO {
             throw new SQLException("This test doesn't has an id, use insertOne !");
         }
         Connection conn = SQLDAOFactory.getConnection();
-        String statement = "UPDATE tests SET name=?, description=?, state=? WHERE id=? LIMIT 1";
+        String statement = "UPDATE tests SET name=?, description=?, state=?, lastExecution=? WHERE id=? LIMIT 1";
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
             preparedStatement.setString(1, test.getName());
             preparedStatement.setString(2, test.getDescription());
             preparedStatement.setString(3, test.getState());
-            preparedStatement.setInt(4, test.getId());
 
+            if (test.getLastExecution() != null) {
+                preparedStatement.setDate(4, java.sql.Date.valueOf(String.valueOf(test.getLastExecution())));
+            } else {
+                preparedStatement.setDate(4, null);
+            }
+
+            preparedStatement.setInt(5, test.getId());
             preparedStatement.execute();
 
         } catch (SQLException exception) {

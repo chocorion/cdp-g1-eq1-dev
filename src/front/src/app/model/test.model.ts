@@ -59,5 +59,11 @@ export class Test{
         this.name = value;
     }
 
+    public setState(state: string): void {
+        this.state = state;
+    }
 
+    public setLastExecution(date: Date): void {
+        this.lastExecution = date;
+    }
 }

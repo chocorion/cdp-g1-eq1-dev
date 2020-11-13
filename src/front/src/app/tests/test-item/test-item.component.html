@@ -6,14 +6,14 @@
         <h5 class="card-title">{{test.getName()}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
             Dernière excecution :
-            {{test.getLastExecution() == null ? "jamais" : test.getLastExecution()}}
+            {{test.getLastExecution() === null ? "jamais" : test.getLastExecution().toISOString().slice(0, 10)}}
         </h6>
         <p class="card-text">
             {{test.getDescription()}}
         </p>
 
-        <button class="btn btn-success">Valider</button>
-        <button class="btn btn-danger">Refuser</button>
+        <button class="btn btn-success" (click)="changeState('validate')">Valider</button>
+        <button class="btn btn-danger" (click)="changeState('refused')">Refuser</button>
     </div>
 
 </div>
