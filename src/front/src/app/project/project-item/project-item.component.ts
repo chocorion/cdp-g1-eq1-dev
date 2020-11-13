@@ -21,6 +21,11 @@ export class ProjectItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteProject(): void{
+    this.projectService.deleteProject(this.currentProject);
+    console.log('delete incomming...');
+  }
+
   onSubmit(data): void {
     console.log(data);
     this.currentProject.setName(data.name);
