@@ -1,0 +1,71 @@
+<div class="sidebar" [class.sidebar-collapsed]="collapsed" [class.disabled]="visible">
+    <ul class="list-unstyled pl-2">
+        <li class="my-4">
+            <a routerLink="/backlog" routerLinkActive="active">
+                <img src="https://i.imgur.com/dnz1iBv.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Backlog</span>
+            </a>
+        </li>
+
+        <li class="my-4">
+            <a routerLink="/tasks" routerLinkActive="active">
+                <img src="https://i.imgur.com/k0W5IWE.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Tâches</span>
+            </a>
+        </li>
+
+        <li class="my-4">
+            <a routerLink="/planification" routerLinkActive="active">
+                <img src="https://i.imgur.com/whDsfSE.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Planification</span>
+            </a>
+        </li>
+
+        <li class="my-4">
+            <a routerLink="/sprintActif" routerLinkActive="active">
+                <img src="https://i.imgur.com/4cHPv0l.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Sprint Actif</span>
+            </a>
+        </li>
+
+        <li class="my-4">
+            <a routerLink="/tests" routerLinkActive="active">
+                <img src="https://i.imgur.com/sOwCCf8.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Tests</span>
+            </a>
+        </li>
+
+        <li class="my-4">
+            <a routerLink="/releases" routerLinkActive="active">
+                <img src="https://i.imgur.com/ja2hdEG.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Release</span>
+            </a>
+        </li>
+
+        <li class="my-4">
+            <a routerLink="/documentation" routerLinkActive="active">
+                <img src="https://i.imgur.com/tVUu53Z.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Documentation</span>
+            </a>
+        </li>
+
+        <li class="my-4">
+            <a routerLink="/statistics" routerLinkActive="active">
+                <img src="https://i.imgur.com/hm2TrBN.png" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Statistiques</span>
+            </a>
+        </li>
+
+        <li>
+            <a routerLink="/project" routerLinkActive="active">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRPT6K0J0bKGku8JN4firPRO0GXT7jSIKYf_A&usqp=CAU" width="50" height="50" alt="">
+                <span [class.disabled]="collapsed" class="sidebar-item">Projets</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="sidebar-button" [class.sidebar-button-collapsed]="collapsed" [class.disabled]="visible">
+    <button class="btn bg-light" (click)="collapse()">Menu</button>
+</div>
+

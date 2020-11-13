@@ -1,0 +1,37 @@
+version: "3.3"
+  
+services:
+  front:
+    restart: always
+    build:
+      context: ./src/front
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:80"
+
+    image: cdp-g1-eq1-front
+
+  back:
+    restart: always
+    build:
+      context: ./src/back
+      dockerfile: ./Dockerfile
+    ports:
+      - "9000:8080"
+
+    image: cdp-g1-eq1-back
+
+  db:
+    restart: always
+    build: 
+      context: ./src/bdd
+      dockerfile: ./Dockerfile
+    environment: 
+      MYSQL_DATABASE: 'cdp'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'changeMeLater'
+      MYSQL_ROOT_PASSWORD: 'changeMeLater'
+    ports:
+      - "3307:3306"
+
+    image: cdp-g1-eq1-db

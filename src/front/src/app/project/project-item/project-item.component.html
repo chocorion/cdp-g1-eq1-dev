@@ -1,0 +1,60 @@
+<div class="list-group-item" ng-hide="expression">
+    <div class="row">
+        <button class="btn projectName" (click)="onClick()">{{currentProject.getName()}}</button>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <div class="projectInfo"> Description : <br> {{currentProject.getDescription()}}</div>
+        </div>
+        <div class="col-2">
+            <!--<div class="progress">
+                <div id ="bar" class="progress-bar" role="progressbar" [style.width.%]="percent" aria-valuenow="percent" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+
+            <div class ="cpt"> {{nbUS}} US réalisées sur {{totalUS}}</div>-->
+        </div>
+    </div>
+    <div class="row">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Edit
+        </button>
+        <button type = "button" class= "btn btn-danger" (click)= "deleteProject()">Supprimer</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                            <div>
+                                <label for="name">
+                                    Name
+                                </label>
+                                <input id="name" type="text" formControlName="name"></div>
+
+                            <div>
+                                <label for="description">
+                                    Description
+                                </label>
+                                <input id="description" type="text" formControlName="description"></div>
+
+                            <button type="submit" class="button">Save changes</button>
+                        </form>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

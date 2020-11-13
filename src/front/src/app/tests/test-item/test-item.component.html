@@ -1,0 +1,19 @@
+<div class="card m-4">
+    <div class="card-header" [ngClass]="getColor()" >
+
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{test.getName()}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            Dernière excecution :
+            {{test.getLastExecution() === null ? "jamais" : test.getLastExecution()}}
+        </h6>
+        <p class="card-text">
+            {{test.getDescription()}}
+        </p>
+
+        <button class="btn btn-success" (click)="changeState('validate')">Valider</button>
+        <button class="btn btn-danger" (click)="changeState('refused')">Refuser</button>
+    </div>
+
+</div>
