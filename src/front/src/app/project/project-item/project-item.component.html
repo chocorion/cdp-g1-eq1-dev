@@ -16,12 +16,12 @@
     </div>
     <div class="row">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#id'+currentProject.id">
             Edit
         </button>
         <button type = "button" class= "btn btn-danger" (click)= "deleteProject()">Supprimer</button>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" [attr.id]="'id'+currentProject.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -44,7 +44,7 @@
                                     Description
                                 </label>
                                 <input id="description" type="text" formControlName="description"></div>
-
+                            
                             <button type="submit" class="button">Save changes</button>
                         </form>
                     </div>
