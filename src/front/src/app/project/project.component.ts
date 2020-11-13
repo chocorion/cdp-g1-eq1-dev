@@ -16,4 +16,8 @@ export class ProjectComponent implements OnInit {
       this.projectService.clearCurrentProject();
   }
 
+  submitClick(){
+    this.submit = document.getElementById('username').innerHTML;
+  }
+
 }

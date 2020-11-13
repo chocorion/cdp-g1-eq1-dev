@@ -7,18 +7,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./project-search.component.css']
 })
 export class ProjectSearchComponent implements OnInit {
-   form = new FormGroup({
-    search  : new FormControl('')
-  });
-
+  
   constructor() { }
 
   ngOnInit(): void {
   }
-  onSubmit(): void {
-    console.log(this.form.get('search'));
-   }
-
 
 }
 

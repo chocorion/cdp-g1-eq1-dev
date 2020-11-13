@@ -10,37 +10,8 @@ import {Router} from '@angular/router';
 })
 export class ProjectListComponent implements OnInit {
     @Input() search: string;
-
-    projects = [
-        {
-            id: 1,
-            name: 'Projet 1',
-            description: ' C\'est un projet sans grand intérêt',
-            nbUS: 3,
-            totalUS: 4,
-            all: 4,
-            done: 2
-
-        },
-        {
-            id: 2,
-            name: 'Projet 2',
-            description: 'Un second projet sans intérêt',
-            nbUS: 5,
-            totalUS: 15,
-            all: 10,
-            done: 2
-        },
-        {
-            id: 3,
-            name: 'Projet 3',
-            description: 'Un troisième projet ... et devinez quoi il est aussi sans intérêt',
-            nbUS: 3,
-            totalUS: 4,
-            all: 4,
-            done: 3
-        }
-    ];
+    @Input() submit: boolean = false;
+    projects: Project[];
 
     constructor(
         private projectService: ProjectService,
@@ -49,6 +20,16 @@ export class ProjectListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.projectService.getProjects().subscribe(
+                result => {
+                    this.projects = result.map(x => Project.fromJSON(x));
+                    if(this.submit){
+                        this.projects = this.projects.filter(p => ! p.getName().includes(this.search));
+                        this.submit =false;
+                    }
+            }
+        );
+        
     }
 
     onClick(project: Project): void {
