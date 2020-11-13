@@ -19,7 +19,7 @@ import {ProjectListComponent} from './project/project-list/project-list.componen
 import {ProjectItemComponent} from './project/project-item/project-item.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import { TestItemComponent } from './tests/test-item/test-item.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -43,7 +43,8 @@ import { TestItemComponent } from './tests/test-item/test-item.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule
     ],
     providers: [
         ProjectService
