@@ -1,12 +1,22 @@
 .sidebar {
     top: 0;
     left: 0;
-    position: absolute;
+    position: fixed;
     width: 250px;
     height: 100%;
-    color: #fff;
-    transition: width 1s;
+    transition: width 0.8s;
+    background-color: rgba(240, 240, 240, 0.4);
 }
+
+.sidebar a {
+    text-decoration: none;
+    color: #292929;
+}
+
+.sidebar a.active {
+    text-decoration: underline;
+}
+
 
 .disabled {
     pointer-events: none;
@@ -14,6 +24,27 @@
 }
 
 .sidebar-collapsed {
-    width: 100px;
-    transition: width 1s;
+    width: 70px;
+    transition: width 0.8s;
+}
+
+.sidebar-button {
+    position: fixed;
+    top: 20px;
+    left: 270px;
+
+    transition: left 0.8s;
+}
+
+.sidebar-button-collapsed {
+    position: fixed;
+    top: 20px;
+    left: 90px;
+
+    transition: left 0.8s;
+}
+
+.sidebar-item {
+    font-size: 1.4em;
+    margin-left: 15px;
 }
