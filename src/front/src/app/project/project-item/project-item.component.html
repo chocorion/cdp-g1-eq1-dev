@@ -1,17 +1,17 @@
 <div class="list-group-item"  ng-hide="expression">
     <div class="row">
-        <button class = "btn projectName">{{projectName}}</button>
+        <button class = "btn projectName">{{currentProject.getName()}}</button>
     </div>
     <div class="row">
         <div class="col-10">
-            <div class = "projectInfo"> Description : <br> {{projectDescription}}</div>
+            <div class = "projectInfo"> Description : <br> {{currentProject.getDescription()}}</div>
         </div>
         <div class="col-2">
-            <div class="progress">
+          <!--<div class="progress">
                 <div id ="bar" class="progress-bar" role="progressbar" [style.width.%]="percent" aria-valuenow="percent" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               
-            <div class ="cpt"> {{nbUS}} US réalisées sur {{totalUS}}</div>
+            <div class ="cpt"> {{nbUS}} US réalisées sur {{totalUS}}</div>-->  
         </div>
     </div>
     

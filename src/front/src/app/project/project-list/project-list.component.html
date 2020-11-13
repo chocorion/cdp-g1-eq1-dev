@@ -1,11 +1,7 @@
 <ul class="list-group">
     <app-project-item  *ngFor="let project of projects"
-        [projectName]="project.name"
-        [projectDescription]="project.description"
-        [nbUS]="project.nbUS"
-        [totalUS]="project.totalUS"
-        [percent]= "(100*project.done)/project.all"
-       (click)="onClick(project)"
+        [currentProject] ="project"
+        (click)="onClick(project)"
     ></app-project-item>
 
 </ul>

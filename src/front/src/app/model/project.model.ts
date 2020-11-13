@@ -12,6 +12,14 @@ export class Project{
         this.setDescription(description);
     }
 
+    static fromJSON(json): Project {
+        return new Project(
+            json.id,
+            json.name,
+            json.description,
+        );
+    }
+
     public setName(name: string): void {
         if (name.length > this.NAMESIZE) {
             this.name = name.slice(0, this.NAMESIZE);

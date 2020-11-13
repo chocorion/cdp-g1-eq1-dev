@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Project } from 'src/app/model/project.model';
 
 @Component({
   selector: 'app-project-item',
@@ -6,11 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./project-item.component.css']
 })
 export class ProjectItemComponent implements OnInit {
-  @Input() projectName: string ;
-  @Input() projectDescription: string;
-  @Input() nbUS: number;
-  @Input() totalUS: number;
-  @Input() percent: number;
+  @Input() currentProject : Project;
   constructor() { }
 
   ngOnInit(): void {
