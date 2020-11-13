@@ -20,7 +20,7 @@ export class TestService {
     }
 
     updateTest(test: Test): Observable<Test> {
-        return this.http.put<Test>(environment.apiUrl + `projects/${test.getProjectId()}/tests/`, test);
+        return this.http.put<Test>(environment.apiUrl + `projects/${test.getProjectId()}/tests/${test.getId()}`, test);
     }
 
     deleteTest(test: Test): void {

@@ -6,6 +6,6 @@ import javax.ws.rs.ApplicationPath;
 public class Api extends ResourceConfig {
     public Api() {
         packages("", "routes");
-        register(CORSResponseFilter.class);
+        register(CorsFilter.class);
     }
 }

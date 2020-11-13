@@ -4,6 +4,7 @@ import domain.Test;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class SQLTestDAO implements TestDAO {
@@ -35,7 +36,7 @@ public class SQLTestDAO implements TestDAO {
             Test test = new Test(
                     resultSet.getString("name"),
                     resultSet.getString("description"),
-                    resultSet.getDate("lastExecution"),
+                    (resultSet.getDate("lastExecution") == null) ? null : resultSet.getDate("lastExecution").toString(),
                     resultSet.getString("state"),
                     id,
                     resultSet.getInt("project_id")
@@ -65,7 +66,7 @@ public class SQLTestDAO implements TestDAO {
                     new Test(
                             resultSet.getString("name"),
                             resultSet.getString("description"),
-                            resultSet.getDate("lastExecution"),
+                            (resultSet.getDate("lastExecution") == null) ? null : resultSet.getDate("lastExecution").toString(),
                             resultSet.getString("state"),
                             resultSet.getInt("id"),
                             projectId
@@ -112,7 +113,7 @@ public class SQLTestDAO implements TestDAO {
                     test.getProjectId()
 
             );
-        
+
         throw new SQLException("Can't add this test");
     }
 

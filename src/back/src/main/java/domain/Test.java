@@ -1,13 +1,12 @@
 package domain;
 
-import java.util.Date;
 
 public class Test {
     private int id;
 
     private String name;
     private String description;
-    private Date lastExecution;
+    private String lastExecution;
     private String state;
     private int projectId;
 
@@ -15,7 +14,7 @@ public class Test {
         id = -1;
     }
 
-    public Test(String name, String description, Date lastExecution, String state, int projectId) {
+    public Test(String name, String description, String lastExecution, String state, int projectId) {
         this.name = name;
         this.description = description;
         this.lastExecution = lastExecution;
@@ -24,7 +23,7 @@ public class Test {
         this.id = -1;
     }
 
-    public Test(String name, String description, Date lastExecution, String state, int id, int projectId) {
+    public Test(String name, String description, String lastExecution, String state, int id, int projectId) {
         this.name = name;
         this.description = description;
         this.lastExecution = lastExecution;
@@ -53,7 +52,7 @@ public class Test {
         return description;
     }
 
-    public Date getLastExecution() {
+    public String getLastExecution() {
         return lastExecution;
     }
 

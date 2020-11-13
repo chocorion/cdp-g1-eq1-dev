@@ -48,10 +48,10 @@ public class Tests {
     }
 
     @PUT
+    @Path("{test_id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response putTest(@PathParam("id") int id, Test test) {
-        System.out.println("Date is " + test.getLastExecution());
+    public Response putTest(@PathParam("id") int id, @PathParam("test_id") int test_id, Test test) {
         if (test.getProjectId() != id) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -74,7 +74,7 @@ public class Tests {
 
     @Path("{test_id}")
     @DELETE
-    @Consumes("application/json")
+    @Produces("application/json")
     public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int test_id) {
         TestDAO dao = DAOFactory.getInstance().getTestDAO();
 

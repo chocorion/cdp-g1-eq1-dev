@@ -2,11 +2,11 @@ export class Test{
     private id: number;
     private name: string;
     private description: string;
-    private lastExecution: Date;
+    private lastExecution: string;
     private state: string;
     private projectId: number;
 
-    constructor(name: string, description: string, lastExecution: Date, state: string, projectId: number, id?: number) {
+    constructor(name: string, description: string, lastExecution: string, state: string, projectId: number, id?: number) {
         this.name = name;
         this.description = description;
         this.lastExecution = lastExecution;
@@ -41,7 +41,7 @@ export class Test{
     }
 
 
-    public getLastExecution(): Date {
+    public getLastExecution(): string {
         return this.lastExecution;
     }
 
@@ -63,7 +63,7 @@ export class Test{
         this.state = state;
     }
 
-    public setLastExecution(date: Date): void {
+    public setLastExecution(date: string): void {
         this.lastExecution = date;
     }
 }
