@@ -1,6 +1,6 @@
 export class Project{
     private id: number;
-    private name: string;
+    public name: string;
     private description: string;
 
     private readonly NAMESIZE: number = 50;
