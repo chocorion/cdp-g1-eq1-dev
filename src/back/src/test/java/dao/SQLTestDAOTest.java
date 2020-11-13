@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SQLTestDAOTest {
+public class SQLTestDAOTest {
     @Test
     void getById() {
         SQLTestDAO dao = SQLTestDAO.getInstance();

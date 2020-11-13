@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SQLProjectDAOTest {
+public class SQLProjectDAOTest {
     @Test
     void getById() throws SQLException {
         /*

@@ -1,0 +1,5 @@
+FROM java:8
+WORKDIR /
+ADD ./target/back-1.0-SNAPSHOT-tests.jar tests.jar
+EXPOSE 8080
+CMD java -cp tests.jar org.junit.runner.JUnitCore TestSuite
