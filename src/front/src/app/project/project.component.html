@@ -2,19 +2,25 @@
 <div class ="container">
     <div class = "row">
         <div class="col-10">
-            <form  id="form" name="search-bar">
+           <!-- <form  id="form" name="search-bar">
                 <div class= "input-group mb-3">
-                    <input type="text" class="form-control form-control-lg" placeholder="Mots clés" ngmodel="test">
+                    <input type="text" class="form-control form-control-lg" placeholder="Mots clés" id="toFind">
                     <div class= "input-group-append">
-                        <button class="btn search" type="submit" id="button" (click)="submitClick()"> Trouver</button>
+                        <button class="btn search" type="button" id="button" (click)="submitClick()"> Trouver</button>
                     </div>
                  </div>
-             </form>
+             </form>-->
+             <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                <div>
+                    <input id="search" type="text" formControlName="search">
+                </div>
+                <button type="submit" class="button">Rechercher</button>
+            </form>
         </div>
         <div class="col-2">
             <button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit">nouveau projet</button>
         </div>
     </div>
-    <app-project-list [search] ="submit" [submit]="true"></app-project-list>
+    <app-project-list #child> </app-project-list>
 </div>
 

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Subject } from 'rxjs';
 import {ProjectService} from '../services/project.service';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 @Component({
   selector: 'app-project',
@@ -8,16 +11,26 @@ import {ProjectService} from '../services/project.service';
 })
 export class ProjectComponent implements OnInit {
 
-   submit: string;
+  @ViewChild('child')
+  private child : ProjectListComponent;
+  submit : string;
+  form: any;
+  private formBuilder: FormBuilder = new FormBuilder();
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService) {
+    this.form = this.formBuilder.group({
+        search: ''
+    });
+}
 
   ngOnInit(): void {
       this.projectService.clearCurrentProject();
   }
 
-  submitClick(){
-    this.submit = document.getElementById('username').innerHTML;
-  }
+  onSubmit(data): void {
+    this.submit = data.search;
+    this.child.notifyMe(this.submit);
+
+}
 
 }
