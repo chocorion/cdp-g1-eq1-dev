@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Test} from '../../model/test.model';
 import {TestService} from '../../services/test.service';
 
@@ -9,6 +9,7 @@ import {TestService} from '../../services/test.service';
 })
 export class TestItemComponent implements OnInit {
     @Input() test: Test;
+    @Output() stateChange = new EventEmitter<void>();
 
     constructor(private testService: TestService) {
     }
@@ -35,7 +36,11 @@ export class TestItemComponent implements OnInit {
         this.test.setState(newState);
         this.test.setLastExecution(new Date().toISOString().slice(0, 10));
         this.testService.updateTest(this.test).subscribe(
-            test => this.test = Test.fromJSON(test)
+            test => {
+                this.test = Test.fromJSON(test);
+                this.stateChange.emit();
+            }
         );
+
     }
 }

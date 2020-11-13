@@ -1,7 +1,14 @@
 <div class="container">
     <h1>Tests</h1>
-    <div class="row">
-        <app-test-item *ngFor="let test of tests" [test]="test"></app-test-item>
+    <h2>État :</h2>
+
+    <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': successRate+'%'}" [attr.aria-valuenow]="successRate" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-light" role="progressbar" [ngStyle]="{'width': (100 - failureRate - successRate)+'%'}" [attr.aria-valuenow]="successRate" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-danger" role="progressbar" [ngStyle]="{'width': failureRate+'%'}" [attr.aria-valuenow]="failureRate" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
+    <div class="row">
+        <app-test-item *ngFor="let test of tests" [test]="test" (stateChange)="updateTests()"></app-test-item>
+    </div>
 </div>

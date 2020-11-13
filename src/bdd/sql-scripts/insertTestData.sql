@@ -33,6 +33,18 @@ VALUES (
     'not executed',
     2
 ), (
+    'test4 p2',
+    'test2 p2 description',
+    NULL,
+    'not executed',
+    2
+), (
+    'test5 p2',
+    'test2 p2 description',
+    NULL,
+    'not executed',
+    2
+), (
     'test3 p2',
     'test3 p2 description',
     NULL,

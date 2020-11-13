@@ -14,6 +14,8 @@ import {Router} from '@angular/router';
 export class TestsComponent implements OnInit, OnDestroy {
     currentProject: Project = null;
     currentProjectSubscription: Subscription;
+    successRate = 0;
+    failureRate = 0;
     tests: Test[] = [];
 
     constructor(
@@ -47,8 +49,17 @@ export class TestsComponent implements OnInit, OnDestroy {
         this.testService.getAllForProject(this.currentProject.getId()).subscribe(
             result => {
                 this.tests = result.map(x => Test.fromJSON(x));
-                this.tests.forEach(t => console.log('Display test with date ' + t.getLastExecution()));
+                this.updatePercentFailure();
+                this.updatePercentSuccess();
             }
         );
+    }
+
+    updatePercentSuccess(): void {
+        this.successRate = this.tests.filter(x => x.getState() === 'validate').length / this.tests.length * 100;
+    }
+
+    updatePercentFailure(): void {
+        this.failureRate = this.tests.filter(x => x.getState() === 'refused').length / this.tests.length * 100;
     }
 }
