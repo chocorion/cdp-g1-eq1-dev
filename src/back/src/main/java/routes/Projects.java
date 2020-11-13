@@ -58,7 +58,6 @@ public class Projects {
     @Produces("application/json")
     public Response putProject(Project project) {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-
         try {
             projectDAO.updateOne(project);
         } catch (SQLException exception) {
@@ -71,8 +70,8 @@ public class Projects {
         return Response.status(Response.Status.OK).entity(project).build();
     }
 
-    @DELETE
     @Path("{id}")
+    @DELETE
     public Response deleteProject(@PathParam("id") int id) {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
 

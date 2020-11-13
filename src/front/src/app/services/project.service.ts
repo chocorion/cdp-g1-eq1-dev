@@ -38,7 +38,8 @@ export class ProjectService {
     }
 
     updateProject(project: Project): Observable<Project> {
-        return this.http.put<Project>(environment.apiUrl + 'projects/' + project.getId(), project);
+        console.log("Up + " + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
+        return this.http.put<Project>(environment.apiUrl + 'projects/', project);
     }
 
     postProject(project: Project): Observable<Project> {

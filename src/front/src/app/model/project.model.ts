@@ -3,9 +3,6 @@ export class Project{
     private name: string;
     private description: string;
 
-    private readonly NAMESIZE: number = 50;
-    private readonly DESCRIPTIONSIZE: number = 500;
-
     constructor(id: number , name: string, description: string){
         this.setId(id);
         this.setName(name);
@@ -21,21 +18,11 @@ export class Project{
     }
 
     public setName(name: string): void {
-        if (name.length > this.NAMESIZE) {
-            this.name = name.slice(0, this.NAMESIZE);
-        }
-        else {
-            this.name = name;
-        }
+        this.name = name;
     }
 
     public setDescription(description: string): void {
-        if (description.length > this.DESCRIPTIONSIZE) {
-            this.description = description.slice(0, this.DESCRIPTIONSIZE);
-        }
-        else {
-            this.description = description;
-        }
+        this.description = description;
     }
 
     public setId(id: number): void {
