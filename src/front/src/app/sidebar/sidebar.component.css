@@ -1,5 +1,5 @@
 .sidebar {
-    top: 15%;
+    top: 0;
     left: 0;
     position: absolute;
     width: 250px;
@@ -8,22 +8,6 @@
     transition: width 1s;
 }
 
-.active {
-    color: #fff;
-    text-decoration: none;
-    background-color: #a19f09;
-  }
-  
-.img-collapse{
-    margin-left: calc(100% - 15px);
-    background: transparent;
-    transition: margin-left 1s;
-}
-.img-collapsed{
-    margin-left: 0px;
-    background: transparent;
-    transition: margin-left 1s;
-}
 .disabled {
     pointer-events: none;
     display: none;
