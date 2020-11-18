@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLDAOFactory extends DAOFactory {
-    private static final String dbUsername = "user";
-    private static final String dbPassword = "changeMeLater";
+    private static final String dbUsername = "cdp";
+    private static final String dbPassword = "cdp";
     private static final String dbName = "cdp";
     private static final int dbPort = 3306;
 
