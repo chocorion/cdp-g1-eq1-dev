@@ -1,6 +1,5 @@
-import dao.SQLDAOFactoryTest;
-import dao.SQLProjectDAOTest;
-import dao.SQLTestDAOTest;
+package dao;
+
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.SelectPackages;
@@ -14,5 +13,5 @@ import org.junit.runner.RunWith;
         SQLTestDAOTest.class
 } )
 @SelectPackages("")
-public class TestSuite {
+public class DAOTestSuite {
 }
