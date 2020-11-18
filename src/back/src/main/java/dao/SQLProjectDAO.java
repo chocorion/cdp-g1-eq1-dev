@@ -21,19 +21,17 @@ public class SQLProjectDAO implements ProjectDAO {
 
     @Override
     public Project getById(int id) throws SQLException {
-        Connection conn = SQLDAOFactory.getConnection();
-
         String statement = "SELECT * FROM projects WHERE id=?";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Object> opt = new ArrayList<>();
+        opt.add(id);
+
+        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
 
         if (resultSet.next()) {
             Project project = new Project(resultSet.getString("name"), resultSet.getString("description"), id);
 
             resultSet.close();
-            preparedStatement.close();
 
             return project;
         }
@@ -43,13 +41,11 @@ public class SQLProjectDAO implements ProjectDAO {
 
     @Override
     public List<Project> getAll() throws SQLException {
-        Connection conn = SQLDAOFactory.getConnection();
         String statement = "SELECT * FROM projects";
+
+        ResultSet resultSet = SQLDAOFactory.query(statement);
+
         List<Project> projects = new ArrayList<>();
-
-
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
             projects.add(
@@ -61,28 +57,23 @@ public class SQLProjectDAO implements ProjectDAO {
         }
 
         resultSet.close();
-        preparedStatement.close();
-
 
         return projects;
     }
 
     @Override
-    public Project addOne(Project project) throws SQLException {
+    public Project insert(Project project) throws SQLException {
         if (project.getId() != -1)
             throw new SQLException("This project already has an id, use update !");
 
-        Connection conn = SQLDAOFactory.getConnection();
         String statement = "INSERT INTO projects (name, description) VALUE (?, ?)";
 
+        List<Object> opt = new ArrayList<>();
+        opt.add(project.getName());
+        opt.add(project.getDescription());
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, project.getName());
-        preparedStatement.setString(2, project.getDescription());
+        ResultSet generatedKey = SQLDAOFactory.query(statement, opt);
 
-        preparedStatement.execute();
-
-        ResultSet generatedKey = preparedStatement.getGeneratedKeys();
         if (generatedKey.next())
             return new Project(project.getName(), project.getDescription(), generatedKey.getInt(1));
 
@@ -90,32 +81,31 @@ public class SQLProjectDAO implements ProjectDAO {
     }
 
     @Override
-    public void updateOne(Project project) throws SQLException {
+    public void update(Project project) throws SQLException {
         if (project.getId() == -1) {
             throw new SQLException("This project doesn't has an id, use insertOne !");
         }
-        Connection conn = SQLDAOFactory.getConnection();
+
         String statement = "UPDATE projects SET name=?, description=? WHERE id=? LIMIT 1";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        preparedStatement.setString(1, project.getName());
-        preparedStatement.setString(2, project.getDescription());
-        preparedStatement.setInt(3, project.getId());
+        List<Object> opt = new ArrayList<>();
+        opt.add(project.getName());
+        opt.add(project.getDescription());
+        opt.add(project.getId());
 
-        preparedStatement.execute();
+        SQLDAOFactory.exec(statement, opt);
     }
 
     @Override
-    public void deleteOne(Project project) throws SQLException {
+    public void delete(Project project) throws SQLException {
         if (project.getId() == -1) {
             throw new SQLException("This project doesn't has an id !");
         }
-        Connection conn = SQLDAOFactory.getConnection();
         String statement = "DELETE FROM projects WHERE id=? LIMIT 1";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        preparedStatement.setInt(1, project.getId());
+        List<Object> opt = new ArrayList<>();
+        opt.add(project.getId());
 
-        preparedStatement.execute();
+        SQLDAOFactory.exec(statement, opt);
     }
 }

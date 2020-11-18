@@ -1,7 +1,10 @@
 package dao;
 
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SQLDAOFactory extends DAOFactory {
@@ -29,6 +32,33 @@ public class SQLDAOFactory extends DAOFactory {
             openConnection();
 
         return connection;
+    }
+
+    public static ResultSet query(String statement, List<Object> items) throws SQLException {
+        Connection conn = SQLDAOFactory.getConnection();
+
+        PreparedStatement preparedStatement = conn.prepareStatement(statement);
+
+        for(int i = 1; items != null && i < items.size(); i++) {
+            preparedStatement.setObject(i, items.get(i));
+        }
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        preparedStatement.close();
+
+        return resultSet;
+    }
+
+    public static ResultSet query(String statement) throws SQLException {
+        return query(statement, null);
+    }
+
+    public static void exec(String statement, List<Object> items) throws SQLException {
+        query(statement, items);
+    }
+
+    public static void exec(String statement) throws SQLException {
+        exec(statement, null);
     }
 
     @Override
