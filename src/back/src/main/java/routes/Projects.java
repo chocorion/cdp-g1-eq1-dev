@@ -41,7 +41,7 @@ public class Projects {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
         Project built;
         try {
-            built = projectDAO.addOne(project);
+            built = projectDAO.insert(project);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -58,7 +58,7 @@ public class Projects {
     public Response putProject(Project project) {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
         try {
-            projectDAO.updateOne(project);
+            projectDAO.update(project);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -76,7 +76,7 @@ public class Projects {
 
         try {
             Project project = projectDAO.getById(id);
-            projectDAO.deleteOne(project);
+            projectDAO.delete(project);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.NOT_FOUND)

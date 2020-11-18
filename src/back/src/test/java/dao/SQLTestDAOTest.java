@@ -44,7 +44,7 @@ public class SQLTestDAOTest {
     }
 
     @Test
-    void addOne() {
+    void insert() {
         SQLTestDAO dao = SQLTestDAO.getInstance();
 
         domain.Test test = new domain.Test(
@@ -57,10 +57,10 @@ public class SQLTestDAOTest {
 
         domain.Test insertedTest = null;
         try {
-            insertedTest = dao.addOne(test);
+            insertedTest = dao.insert(test);
 
         } catch (SQLException exception) {
-            fail("Exception on addOne");
+            fail("Exception on insert");
         }
 
         assertNotNull(insertedTest);
@@ -72,17 +72,17 @@ public class SQLTestDAOTest {
         assertEquals(test.lastExecution, insertedTest.lastExecution);
 
         final domain.Test testF = insertedTest;
-        assertThrows(SQLException.class, () -> dao.addOne(testF));
+        assertThrows(SQLException.class, () -> dao.insert(testF));
     }
 
     @Test
-    void updateOne() throws SQLException {
+    void update() throws SQLException {
         SQLTestDAO dao = SQLTestDAO.getInstance();
         domain.Test test = dao.getById(1);
 
         domain.Test test2 = new domain.Test("coucou", test.description, test.lastExecution, test.state, test.id, test.projectId);
 
-        assertDoesNotThrow(() -> dao.updateOne(test2));
+        assertDoesNotThrow(() -> dao.update(test2));
 
         domain.Test testInserted = dao.getById(1);
 

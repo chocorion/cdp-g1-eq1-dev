@@ -36,11 +36,11 @@ public class SQLProjectDAOTest {
 
 
     @Test
-    void insertOne() throws SQLException {
+    void insert() throws SQLException {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
         Project project = new Project("new project", "my new project");
 
-        Project projectInserted = dao.addOne(project);
+        Project projectInserted = dao.insert(project);
 
         assertNotNull(projectInserted);
         assertNotEquals(projectInserted.id, null);
@@ -48,17 +48,17 @@ public class SQLProjectDAOTest {
         assertEquals(project.name, projectInserted.name);
         assertEquals(project.description, projectInserted.description);
 
-        assertThrows(SQLException.class, () -> dao.addOne(projectInserted));
+        assertThrows(SQLException.class, () -> dao.insert(projectInserted));
     }
 
     @Test
-    void updateOne() throws SQLException {
+    void update() throws SQLException {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
 
         Project project = dao.getById(1);
         final Project project2 = new Project("test", project.description);
 
-        assertDoesNotThrow(() -> dao.updateOne(project));
+        assertDoesNotThrow(() -> dao.update(project));
 
         Project projectInserted = dao.getById(1);
 

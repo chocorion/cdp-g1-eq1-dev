@@ -46,5 +46,3 @@ services:
       - '4242:80'
     environment:
       PMA_HOST: db
-
-    image: phpmyadmin
