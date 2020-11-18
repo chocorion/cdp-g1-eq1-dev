@@ -22,13 +22,12 @@ public class SQLTestDAO implements TestDAO {
 
     @Override
     public Test getById(int id) throws SQLException {
-        Connection conn = SQLDAOFactory.getConnection();
-
         String statement = "SELECT * FROM tests WHERE id=?";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Object> opt = new ArrayList<>();
+        opt.add(id);
+
+        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
 
         if (resultSet.next()) {
 
@@ -42,7 +41,6 @@ public class SQLTestDAO implements TestDAO {
             );
 
             resultSet.close();
-            preparedStatement.close();
 
             return test;
         }
@@ -52,13 +50,14 @@ public class SQLTestDAO implements TestDAO {
 
     @Override
     public List<Test> getAllForProject(int projectId) throws SQLException {
-        Connection conn = SQLDAOFactory.getConnection();
         String statement = "SELECT * FROM tests WHERE project_id=?";
-        List<Test> tests = new ArrayList<>();
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        preparedStatement.setInt(1, projectId);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Object> opt = new ArrayList<>();
+        opt.add(projectId);
+
+        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
+
+        List<Test> tests = new ArrayList<>();
 
         while (resultSet.next()) {
             tests.add(
@@ -74,34 +73,31 @@ public class SQLTestDAO implements TestDAO {
         }
 
         resultSet.close();
-        preparedStatement.close();
 
         return tests;
     }
 
     @Override
-    public Test addOne(Test test) throws SQLException {
+    public Test insert(Test test) throws SQLException {
         if (test.getId() != -1)
             throw new SQLException("This test already has an id, use update !");
 
-        Connection conn = SQLDAOFactory.getConnection();
         String statement = "INSERT INTO tests (name, description, lastExecution, state, project_id) VALUE (?, ?, ?, ?, ?)";
 
+        List<Object> opt = new ArrayList<>();
+        opt.add(test.getName());
+        opt.add(test.getDescription());
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, test.getName());
-        preparedStatement.setString(2, test.getDescription());
         if (test.getLastExecution() != null)
-            preparedStatement.setDate(3, java.sql.Date.valueOf(String.valueOf(test.getLastExecution())));
+            opt.add(java.sql.Date.valueOf(String.valueOf(test.getLastExecution())));
         else
-            preparedStatement.setDate(3, null);
+            opt.add(null);
 
-        preparedStatement.setString(4, test.getState());
-        preparedStatement.setInt(5, test.getProjectId());
+        opt.add(test.getState());
+        opt.add(test.getProjectId());
 
-        preparedStatement.execute();
+        ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
 
-        ResultSet generatedKey = preparedStatement.getGeneratedKeys();
         if (generatedKey.next())
             return new Test(
                     test.getName(),
@@ -117,46 +113,38 @@ public class SQLTestDAO implements TestDAO {
     }
 
     @Override
-    public void updateOne(Test test) throws SQLException {
+    public void update(Test test) throws SQLException {
         if (test.getId() == -1) {
-            throw new SQLException("This test doesn't has an id, use insertOne !");
+            throw new SQLException("This test doesn't have an id, use insertOne !");
         }
-        Connection conn = SQLDAOFactory.getConnection();
         String statement = "UPDATE tests SET name=?, description=?, state=?, lastExecution=? WHERE id=? LIMIT 1";
 
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(statement);
-            preparedStatement.setString(1, test.getName());
-            preparedStatement.setString(2, test.getDescription());
-            preparedStatement.setString(3, test.getState());
+        List<Object> opt = new ArrayList<>();
+        opt.add(test.getName());
+        opt.add(test.getDescription());
+        opt.add(test.getState());
 
-            if (test.getLastExecution() != null) {
-                preparedStatement.setDate(4, java.sql.Date.valueOf(String.valueOf(test.getLastExecution())));
-            } else {
-                preparedStatement.setDate(4, null);
-            }
+        if (test.getLastExecution() != null) 
+            opt.add(java.sql.Date.valueOf(String.valueOf(test.getLastExecution())));
+        else
+            opt.add(null);
 
-            preparedStatement.setInt(5, test.getId());
-            preparedStatement.execute();
+        opt.add(test.getId());
 
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-
+        SQLDAOFactory.exec(statement, opt);
     }
 
     @Override
-    public void deleteOne(Test test) throws SQLException {
+    public void delete(Test test) throws SQLException {
         if (test.getId() == -1) {
-            throw new SQLException("This test doesn't has an id !");
+            throw new SQLException("This test doesn't have an id !");
         }
 
-        Connection conn = SQLDAOFactory.getConnection();
         String statement = "DELETE FROM tests WHERE id=? LIMIT 1";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        preparedStatement.setInt(1, test.getId());
+        List<Object> opt = new ArrayList<>();
+        opt.add(test.getId());
 
-        preparedStatement.execute();
+        SQLDAOFactory.exec(statement, opt);
     }
 }

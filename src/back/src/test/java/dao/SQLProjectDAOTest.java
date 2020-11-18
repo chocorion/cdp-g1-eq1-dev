@@ -36,7 +36,7 @@ public class SQLProjectDAOTest {
 
 
     @Test
-    void insertOne() throws SQLException {
+    void insert() throws SQLException {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
         Project project = new Project("new project", "my new project");
 
@@ -52,7 +52,7 @@ public class SQLProjectDAOTest {
     }
 
     @Test
-    void updateOne() throws SQLException {
+    void update() throws SQLException {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
 
         Project project = dao.getById(1);

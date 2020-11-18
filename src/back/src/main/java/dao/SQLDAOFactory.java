@@ -53,12 +53,25 @@ public class SQLDAOFactory extends DAOFactory {
         return query(statement, null);
     }
 
-    public static void exec(String statement, List<Object> items) throws SQLException {
-        query(statement, items);
+    public static ResultSet exec(String statement, List<Object> items) throws SQLException {
+        Connection conn = SQLDAOFactory.getConnection();
+
+        PreparedStatement preparedStatement = conn.prepareStatement(statement);
+
+        for(int i = 1; items != null && i < items.size(); i++) {
+            preparedStatement.setObject(i, items.get(i));
+        }
+
+        preparedStatement.execute();
+
+        ResultSet resultSet = preparedStatement.getGeneratedKeys();
+        preparedStatement.close();
+
+        return resultSet;
     }
 
-    public static void exec(String statement) throws SQLException {
-        exec(statement, null);
+    public static ResultSet exec(String statement) throws SQLException {
+        return exec(statement, null);
     }
 
     @Override

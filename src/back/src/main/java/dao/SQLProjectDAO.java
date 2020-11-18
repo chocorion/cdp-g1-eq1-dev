@@ -72,7 +72,7 @@ public class SQLProjectDAO implements ProjectDAO {
         opt.add(project.getName());
         opt.add(project.getDescription());
 
-        ResultSet generatedKey = SQLDAOFactory.query(statement, opt);
+        ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
 
         if (generatedKey.next())
             return new Project(project.getName(), project.getDescription(), generatedKey.getInt(1));

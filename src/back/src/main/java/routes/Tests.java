@@ -36,7 +36,7 @@ public class Tests {
         TestDAO dao = DAOFactory.getInstance().getTestDAO();
         Test built;
         try {
-            built = dao.addOne(test);
+            built = dao.insert(test);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -61,7 +61,7 @@ public class Tests {
         TestDAO dao = DAOFactory.getInstance().getTestDAO();
 
         try {
-            dao.updateOne(test);
+            dao.update(test);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -87,7 +87,7 @@ public class Tests {
                         .build();
             }
 
-            dao.deleteOne(test);
+            dao.delete(test);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.NOT_FOUND)
