@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ProjectService} from '../services/project.service';
-import {Project} from '../model/project.model';
+import {ProjectService} from '../../../services/project.service';
+import {Project} from '../../../models/project.model';
 import {Subscription} from 'rxjs';
-import {Test} from '../model/test.model';
-import {TestService} from '../services/test.service';
+import {Test} from '../../../models/test.model';
+import {TestService} from '../../../services/test.service';
 import {Router} from '@angular/router';
 
 @Component({

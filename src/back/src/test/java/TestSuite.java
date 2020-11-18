@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
 @SelectClasses( {
-        SQLProjectDAOTest.class,
         SQLDAOFactoryTest.class,
+        SQLProjectDAOTest.class,
         SQLTestDAOTest.class
 } )
 @SelectPackages("")

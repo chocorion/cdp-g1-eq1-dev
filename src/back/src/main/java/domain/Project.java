@@ -11,9 +11,7 @@ public class Project {
     }
 
     public Project(String name, String description) {
-        this.name = name;
-        this.description = description;
-        this.id = -1;
+        this(name, description, -1);
     }
 
 
