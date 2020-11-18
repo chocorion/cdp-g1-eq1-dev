@@ -167,6 +167,46 @@ paths:
       responses:
         '401':
           description: Not authenticated.
+  '/projects/{project_id}/tasks/{task_id}/dods':
+    get:
+      tags:
+        - Tasks
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+        - in: path
+          name: task_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
+  '/projects/{project_id}/tasks/{task_id}/dods/{dod_id}':
+    get:
+      tags:
+        - Tasks
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          type: number
+        - in: path
+          name: task_id
+          required: true
+          type: number
+        - in: path
+          name: dod_id
+          required: true
+          type: number
+      responses:
+        '401':
+          description: Not authenticated.
   '/projects/{project_id}/sprints/':
     get:
       tags:
