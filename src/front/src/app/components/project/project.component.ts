@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
-import {ProjectService} from '../services/project.service';
+import {ProjectService} from '../../services/project.service';
 import { ProjectListComponent } from './project-list/project-list.component';
 
 @Component({

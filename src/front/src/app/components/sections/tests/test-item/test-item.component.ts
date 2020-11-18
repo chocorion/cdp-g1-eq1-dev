@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Test} from '../../model/test.model';
-import {TestService} from '../../services/test.service';
+import {Test} from '../../../../models/test.model';
+import {TestService} from '../../../../services/test.service';
 
 @Component({
     selector: 'app-test-item',

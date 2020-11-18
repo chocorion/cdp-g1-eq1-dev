@@ -17,7 +17,7 @@ public class Projects {
 
         try {
             return Response.status(Response.Status.OK).entity(projectDAO.getAll()).build();
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -30,7 +30,7 @@ public class Projects {
 
         try {
             return Response.status(Response.Status.OK).entity(projectDAO.getById(id)).build();
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -43,7 +43,7 @@ public class Projects {
         Project built;
         try {
             built = projectDAO.addOne(project);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -60,7 +60,7 @@ public class Projects {
         ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
         try {
             projectDAO.updateOne(project);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -78,7 +78,7 @@ public class Projects {
         try {
             Project project = projectDAO.getById(id);
             projectDAO.deleteOne(project);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .entity(exception.getMessage())

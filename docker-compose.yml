@@ -5,7 +5,7 @@ services:
     restart: always
     build:
       context: ./src/front
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     ports:
       - "8080:80"
 
@@ -15,7 +15,7 @@ services:
     restart: always
     build:
       context: ./src/back
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     ports:
       - "9000:8080"
 
@@ -25,7 +25,7 @@ services:
     restart: always
     build: 
       context: ./src/bdd
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     environment: 
       MYSQL_DATABASE: 'cdp'
       MYSQL_USER: 'cdp'

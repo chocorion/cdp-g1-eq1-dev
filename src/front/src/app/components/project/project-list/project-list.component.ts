@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, SimpleChange, SimpleChanges} from '@angular/core';
-import {Project} from '../../model/project.model';
-import {ProjectService} from '../../services/project.service';
+import {Project} from '../../../models/project.model';
+import {ProjectService} from '../../../services/project.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
-    
+
     projects: Project[];
 
     constructor(
@@ -30,7 +30,7 @@ export class ProjectListComponent implements OnInit {
         this.projects = this.projects.filter(p => p.getName().includes(value));
     }
 
- 
+
     onClick(project: Project): void {
         this.projectService.setCurrentProject(project);
         this.router.navigate(['tests']);

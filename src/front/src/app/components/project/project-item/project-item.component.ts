@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Project} from 'src/app/model/project.model';
+import {Project} from 'src/app/models/project.model';
 import {FormBuilder} from '@angular/forms';
 import {ProjectService} from 'src/app/services/project.service';
 import {Router} from '@angular/router';

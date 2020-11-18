@@ -17,7 +17,7 @@ public class Tests {
 
         try {
             return Response.status(Response.Status.OK).entity(dao.getAllForProject(id)).build();
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -37,7 +37,7 @@ public class Tests {
         Test built;
         try {
             built = dao.addOne(test);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -62,7 +62,7 @@ public class Tests {
 
         try {
             dao.updateOne(test);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -88,7 +88,7 @@ public class Tests {
             }
 
             dao.deleteOne(test);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .entity(exception.getMessage())
