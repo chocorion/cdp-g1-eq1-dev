@@ -6,7 +6,6 @@ import domain.Test;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 
 @Path("/projects/{id}/tests")
 public class Tests {
@@ -26,13 +25,7 @@ public class Tests {
     @Consumes("application/json")
     @Produces("application/json")
     public Response postTest(@PathParam("id") int id, Test test) {
-        if (test.getProjectId() != id) {
-            return Response
-                    .status(Response.Status.CONFLICT)
-                    .entity("Project id doesn't match with path id.")
-                    .build();
-        }
-
+        test = new Test(test.name, test.description, test.lastExecution, test.state, id);
         TestDAO dao = DAOFactory.getInstance().getTestDAO();
         Test built;
         try {
@@ -52,12 +45,7 @@ public class Tests {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putTest(@PathParam("id") int id, @PathParam("test_id") int test_id, Test test) {
-        if (test.getProjectId() != id) {
-            return Response
-                    .status(Response.Status.CONFLICT)
-                    .entity("Project id doesn't match with path id.")
-                    .build();
-        }
+        test = new Test(test.name, test.description, test.lastExecution, test.state, test_id, id);
         TestDAO dao = DAOFactory.getInstance().getTestDAO();
 
         try {
@@ -80,7 +68,7 @@ public class Tests {
 
         try {
             Test test = dao.getById(test_id);
-            if (test.getProjectId() != id) {
+            if (test.id != id) {
                 return Response
                         .status(Response.Status.CONFLICT)
                         .entity("Test.projectId doesn't match with path")

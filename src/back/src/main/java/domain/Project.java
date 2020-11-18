@@ -1,43 +1,44 @@
 package domain;
 
+import java.util.Comparator;
+
 public class Project {
-    private int id;
+    final public Integer id;
+    final public String name;
+    final public String description;
 
-    private String name;
-    private String description;
+    final public static Comparator<Project> comparator;
 
-    public Project() {
-        id = -1;
+    static {
+        comparator = Comparator
+                .comparing((Project project) -> project.id)
+                .thenComparing((Project project) -> project.name)
+                .thenComparing((Project project) -> project.description);
+    }
+
+    // Required by Jackson
+    public Project () {
+        this(null, null);
     }
 
     public Project(String name, String description) {
-        this(name, description, -1);
+        this(name, description, null);
     }
 
-
-    public Project(String name, String description, int id) {
+    public Project(String name, String description, Integer id) {
         this.name = name;
         this.description = description;
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
 
-    public String getDescription() {
-        return description;
-    }
+        if (!(obj instanceof Project))
+            return false;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return comparator.compare(this, (Project) obj) == 0;
     }
 }

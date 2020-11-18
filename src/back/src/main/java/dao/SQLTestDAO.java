@@ -81,7 +81,7 @@ public class SQLTestDAO implements TestDAO {
 
     @Override
     public Test addOne(Test test) throws SQLException {
-        if (test.getId() != -1)
+        if (test.id != null)
             throw new SQLException("This test already has an id, use update !");
 
         Connection conn = SQLDAOFactory.getConnection();
@@ -89,28 +89,27 @@ public class SQLTestDAO implements TestDAO {
 
 
         PreparedStatement preparedStatement = conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, test.getName());
-        preparedStatement.setString(2, test.getDescription());
-        if (test.getLastExecution() != null)
-            preparedStatement.setDate(3, java.sql.Date.valueOf(String.valueOf(test.getLastExecution())));
+        preparedStatement.setString(1, test.name);
+        preparedStatement.setString(2, test.description);
+        if (test.lastExecution != null)
+            preparedStatement.setDate(3, java.sql.Date.valueOf(String.valueOf(test.lastExecution)));
         else
             preparedStatement.setDate(3, null);
 
-        preparedStatement.setString(4, test.getState());
-        preparedStatement.setInt(5, test.getProjectId());
+        preparedStatement.setString(4, test.state);
+        preparedStatement.setInt(5, test.projectId);
 
         preparedStatement.execute();
 
         ResultSet generatedKey = preparedStatement.getGeneratedKeys();
         if (generatedKey.next())
             return new Test(
-                    test.getName(),
-                    test.getDescription(),
-                    test.getLastExecution(),
-                    test.getState(),
+                    test.name,
+                    test.description,
+                    test.lastExecution,
+                    test.state,
                     generatedKey.getInt(1),
-                    test.getProjectId()
-
+                    test.projectId
             );
 
         throw new SQLException("Can't add this test");
@@ -118,7 +117,7 @@ public class SQLTestDAO implements TestDAO {
 
     @Override
     public void updateOne(Test test) throws SQLException {
-        if (test.getId() == -1) {
+        if (test.id == null) {
             throw new SQLException("This test doesn't has an id, use insertOne !");
         }
         Connection conn = SQLDAOFactory.getConnection();
@@ -126,17 +125,17 @@ public class SQLTestDAO implements TestDAO {
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
-            preparedStatement.setString(1, test.getName());
-            preparedStatement.setString(2, test.getDescription());
-            preparedStatement.setString(3, test.getState());
+            preparedStatement.setString(1, test.name);
+            preparedStatement.setString(2, test.description);
+            preparedStatement.setString(3, test.state);
 
-            if (test.getLastExecution() != null) {
-                preparedStatement.setDate(4, java.sql.Date.valueOf(String.valueOf(test.getLastExecution())));
+            if (test.lastExecution != null) {
+                preparedStatement.setDate(4, java.sql.Date.valueOf(String.valueOf(test.lastExecution)));
             } else {
                 preparedStatement.setDate(4, null);
             }
 
-            preparedStatement.setInt(5, test.getId());
+            preparedStatement.setInt(5, test.id);
             preparedStatement.execute();
 
         } catch (SQLException exception) {
@@ -147,7 +146,7 @@ public class SQLTestDAO implements TestDAO {
 
     @Override
     public void deleteOne(Test test) throws SQLException {
-        if (test.getId() == -1) {
+        if (test.id == null) {
             throw new SQLException("This test doesn't has an id !");
         }
 
@@ -155,7 +154,7 @@ public class SQLTestDAO implements TestDAO {
         String statement = "DELETE FROM tests WHERE id=? LIMIT 1";
 
         PreparedStatement preparedStatement = conn.prepareStatement(statement);
-        preparedStatement.setInt(1, test.getId());
+        preparedStatement.setInt(1, test.id);
 
         preparedStatement.execute();
     }

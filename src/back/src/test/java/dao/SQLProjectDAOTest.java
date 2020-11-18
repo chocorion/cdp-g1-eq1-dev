@@ -19,10 +19,10 @@ public class SQLProjectDAOTest {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
         Project project = dao.getById(1);
 
-        assertEquals(project.getId(), 1);
+        assertEquals(project.id, 1);
 
-        assertEquals(project.getName(), "cdp-g1-eq1");
-        assertEquals(project.getDescription(), "Projet pour le cours de Conduite de projet");
+        assertEquals(project.name, "cdp-g1-eq1");
+        assertEquals(project.description, "Projet pour le cours de Conduite de projet");
     }
 
     @Test
@@ -43,10 +43,10 @@ public class SQLProjectDAOTest {
         Project projectInserted = dao.addOne(project);
 
         assertNotNull(projectInserted);
-        assertNotEquals(projectInserted.getId(), -1);
+        assertNotEquals(projectInserted.id, null);
 
-        assertEquals(project.getName(), projectInserted.getName());
-        assertEquals(project.getDescription(), projectInserted.getDescription());
+        assertEquals(project.name, projectInserted.name);
+        assertEquals(project.description, projectInserted.description);
 
         assertThrows(SQLException.class, () -> dao.addOne(projectInserted));
     }
@@ -56,13 +56,13 @@ public class SQLProjectDAOTest {
         SQLProjectDAO dao = SQLProjectDAO.getInstance();
 
         Project project = dao.getById(1);
-        project.setName("test");
+        final Project project2 = new Project("test", project.description);
 
         assertDoesNotThrow(() -> dao.updateOne(project));
 
         Project projectInserted = dao.getById(1);
 
-        assertEquals(project.getName(), "test");
-        assertEquals(project.getDescription(), projectInserted.getDescription());
+        assertEquals(project2.name, "test");
+        assertEquals(project.description, projectInserted.description);
     }
 }
