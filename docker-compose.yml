@@ -35,3 +35,14 @@ services:
       - "3307:3306"
 
     image: cdp-g1-eq1-db
+
+  app:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - '4242:80'
+    environment:
+      PMA_HOST: db
