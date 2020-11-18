@@ -1,8 +1,8 @@
 CREATE TABLE project (
     id int AUTO_INCREMENT,
-    name varchar(50) UNIQUE,
-    description varchar(500),
+    name VARCHAR(50) UNIQUE,
+    description VARCHAR(500),
 
-    PRIMARY KEY (id)
+    CONSTRAINT PK_ID PRIMARY KEY (id)
 );
 
