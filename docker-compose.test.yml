@@ -1,13 +1,6 @@
 version: "3.3"
   
 services:
-  back-test:
-    build:
-      context: ./src/back
-      dockerfile: ./Dockerfile.test
-
-    image: cdp-g1-eq1-back-test
-
   db:
     restart: always
     build: 
