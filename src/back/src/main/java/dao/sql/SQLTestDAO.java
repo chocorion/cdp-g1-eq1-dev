@@ -71,7 +71,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
                 test.name,
                 test.description,
                 test.state,
-                (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,,
+                (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,
                 test.projectId
         );
 

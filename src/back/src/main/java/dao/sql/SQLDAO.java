@@ -17,6 +17,7 @@ public abstract class SQLDAO<T> {
             T item = createObjectFromResult(resultSet);
 
             resultSet.close();
+            preparedStatement.close();
 
             return item;
         }
