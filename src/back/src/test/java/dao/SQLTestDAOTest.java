@@ -22,11 +22,11 @@ public class SQLTestDAOTest {
         }
         assertNotNull(test);
 
-        assertEquals(test.getName(), "test1 p1");
-        assertEquals(test.getDescription(), "test1 p1 description");
-        assertNull(test.getLastExecution());
-        assertEquals(test.getState(), "not executed");
-        assertEquals(test.getProjectId(), 1);
+        assertEquals(test.name, "test1 p1");
+        assertEquals(test.description, "test1 p1 description");
+        assertNull(test.lastExecution);
+        assertEquals(test.state, "not executed");
+        assertEquals(test.projectId, 1);
     }
 
     @Test
@@ -65,11 +65,11 @@ public class SQLTestDAOTest {
 
         assertNotNull(insertedTest);
 
-        assertEquals(test.getProjectId(), insertedTest.getProjectId());
-        assertEquals(test.getName(), insertedTest.getName());
-        assertEquals(test.getDescription(), insertedTest.getDescription());
-        assertEquals(test.getState(), insertedTest.getState());
-        assertEquals(test.getLastExecution(), insertedTest.getLastExecution());
+        assertEquals(test.projectId, insertedTest.projectId);
+        assertEquals(test.name, insertedTest.name);
+        assertEquals(test.description, insertedTest.description);
+        assertEquals(test.state, insertedTest.state);
+        assertEquals(test.lastExecution, insertedTest.lastExecution);
 
         final domain.Test testF = insertedTest;
         assertThrows(SQLException.class, () -> dao.insert(testF));
@@ -80,16 +80,16 @@ public class SQLTestDAOTest {
         SQLTestDAO dao = SQLTestDAO.getInstance();
         domain.Test test = dao.getById(1);
 
-        test.setName("coucou");
+        domain.Test test2 = new domain.Test("coucou", test.description, test.lastExecution, test.state, test.id, test.projectId);
 
-        assertDoesNotThrow(() -> dao.update(test));
+        assertDoesNotThrow(() -> dao.update(test2));
 
         domain.Test testInserted = dao.getById(1);
 
-        assertEquals(test.getProjectId(), testInserted.getProjectId());
-        assertEquals(test.getName(), testInserted.getName());
-        assertEquals(test.getDescription(), testInserted.getDescription());
-        assertEquals(test.getState(), testInserted.getState());
-        assertEquals(test.getLastExecution(), testInserted.getLastExecution());
+        assertEquals(test.projectId, testInserted.projectId);
+        assertNotEquals(test.name, testInserted.name);
+        assertEquals(test.description, testInserted.description);
+        assertEquals(test.state, testInserted.state);
+        assertEquals(test.lastExecution, testInserted.lastExecution);
     }
 }

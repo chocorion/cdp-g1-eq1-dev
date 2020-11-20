@@ -63,48 +63,48 @@ public class SQLProjectDAO implements ProjectDAO {
 
     @Override
     public Project insert(Project project) throws SQLException {
-        if (project.getId() != -1)
+        if (project.id != null)
             throw new SQLException("This project already has an id, use update !");
 
         String statement = "INSERT INTO projects (name, description) VALUE (?, ?)";
 
         List<Object> opt = new ArrayList<>();
-        opt.add(project.getName());
-        opt.add(project.getDescription());
+        opt.add(project.name);
+        opt.add(project.description);
 
         ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
 
         if (generatedKey.next())
-            return new Project(project.getName(), project.getDescription(), generatedKey.getInt(1));
+            return new Project(project.name, project.description, generatedKey.getInt(1));
 
         throw new SQLException("Can't add this project in database");
     }
 
     @Override
     public void update(Project project) throws SQLException {
-        if (project.getId() == -1) {
+        if (project.id == null) {
             throw new SQLException("This project doesn't has an id, use insertOne !");
         }
 
         String statement = "UPDATE projects SET name=?, description=? WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
-        opt.add(project.getName());
-        opt.add(project.getDescription());
-        opt.add(project.getId());
+        opt.add(project.name);
+        opt.add(project.description);
+        opt.add(project.id);
 
         SQLDAOFactory.exec(statement, opt);
     }
 
     @Override
     public void delete(Project project) throws SQLException {
-        if (project.getId() == -1) {
+        if (project.id == null) {
             throw new SQLException("This project doesn't has an id !");
         }
         String statement = "DELETE FROM projects WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
-        opt.add(project.getId());
+        opt.add(project.id);
 
         SQLDAOFactory.exec(statement, opt);
     }
