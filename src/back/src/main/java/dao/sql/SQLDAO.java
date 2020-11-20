@@ -11,6 +11,9 @@ public abstract class SQLDAO<T> {
     protected T queryFirstObject(String statement, List<Object> opt) throws SQLException {
 
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+
+        System.out.println(preparedStatement);
+        
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
@@ -28,6 +31,9 @@ public abstract class SQLDAO<T> {
     protected List<T> queryAllObjects(String statement, List<Object> opt) throws SQLException {
 
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+
+        System.out.println(preparedStatement);
+
         ResultSet resultSet = preparedStatement.executeQuery();
         
         List<T> items = new ArrayList<>();
@@ -53,6 +59,8 @@ public abstract class SQLDAO<T> {
     protected T doInsert(String statement, List<Object> opt) throws SQLException {
 
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+
+        System.out.println(preparedStatement);
 
         ResultSet generatedKey = preparedStatement.getGeneratedKeys();
 

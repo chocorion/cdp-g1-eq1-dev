@@ -33,10 +33,10 @@ public class SQLDatabase {
     public static PreparedStatement prepare(String statement, List<Object> items) throws SQLException {
         Connection conn = getConnection();
 
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
+        PreparedStatement preparedStatement = conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
 
-        for(int i = 1; items != null && i < items.size(); i++) {
-            preparedStatement.setObject(i, items.get(i));
+        for(int i = 1; items != null && i <= items.size(); i++) {
+            preparedStatement.setObject(i, items.get(i-1));
         }
 
         return preparedStatement;
