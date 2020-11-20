@@ -1,5 +1,6 @@
-package dao;
+package dao.SQLDAO;
 
+import dao.UserStoryDAO;
 import domain.UserStory;
 
 import java.sql.*;
@@ -7,19 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLUserStoryDAO implements UserStoryDAO {
-    private static SQLUserStoryDAO instance;
-
-    private SQLUserStoryDAO() {
-
-    }
-
-    public static SQLUserStoryDAO getInstance() {
-        if (instance == null)
-            instance = new SQLUserStoryDAO();
-
-        return instance;
-    }
-
     private UserStory getObjectFromResult(ResultSet resultSet) throws SQLException {
         return new UserStory(
             resultSet.getInt("project"),
@@ -38,7 +26,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         opt.add(project_id);
         opt.add(id);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
+        ResultSet resultSet = SQLDatabase.query(statement, opt);
 
         if (resultSet.next()) {
 
@@ -59,7 +47,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(project_id);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
+        ResultSet resultSet = SQLDatabase.query(statement, opt);
 
         List<UserStory> uss = new ArrayList<>();
 
@@ -83,7 +71,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         opt.add(us.priority);
         opt.add(us.difficulty);
 
-        ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
+        ResultSet generatedKey = SQLDatabase.exec(statement, opt);
 
         if (generatedKey.next())
             return getObjectFromResult(generatedKey);
@@ -103,7 +91,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         opt.add(us.projectId);
         opt.add(us.id);
 
-        SQLDAOFactory.exec(statement, opt);
+        SQLDatabase.exec(statement, opt);
     }
 
     @Override
@@ -113,8 +101,8 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(us.projectId);
         opt.add(us.id);
-        
-        SQLDAOFactory.exec(statement, opt);
+
+        SQLDatabase.exec(statement, opt);
     }
 
     @Override
@@ -125,7 +113,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         opt.add(project_id);
         opt.add(priority);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
+        ResultSet resultSet = SQLDatabase.query(statement, opt);
 
         List<UserStory> uss = new ArrayList<>();
 
@@ -146,7 +134,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         opt.add(project_id);
         opt.add(difficulty);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
+        ResultSet resultSet = SQLDatabase.query(statement, opt);
 
         List<UserStory> uss = new ArrayList<>();
 

@@ -1,22 +1,27 @@
 package routes;
 
-import dao.DAOFactory;
+
 import dao.ProjectDAO;
 import domain.Project;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Path("projects")
 public class Projects {
+    @Inject ProjectDAO projectDAO;
+
     @GET
     @Produces("application/json")
     public Response getProjects() {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-
+        System.out.println("In get");
+        System.out.println(projectDAO);
         try {
             return Response.status(Response.Status.OK).entity(projectDAO.getAll()).build();
         } catch (Exception exception) {
+            System.out.println(exception);
+            System.out.println(exception.getMessage());
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -25,8 +30,6 @@ public class Projects {
     @GET
     @Produces("application/json")
     public Response getProject(@PathParam("id") int id) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-
         try {
             return Response.status(Response.Status.OK).entity(projectDAO.getById(id)).build();
         } catch (Exception exception) {
@@ -38,7 +41,6 @@ public class Projects {
     @Consumes("application/json")
     @Produces("application/json")
     public Response postProject(Project project) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
         Project built;
         try {
             built = projectDAO.insert(project);
@@ -56,7 +58,6 @@ public class Projects {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putProject(Project project) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
         try {
             projectDAO.update(project);
         } catch (Exception exception) {
@@ -72,8 +73,6 @@ public class Projects {
     @Path("{id}")
     @DELETE
     public Response deleteProject(@PathParam("id") int id) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-
         try {
             Project project = projectDAO.getById(id);
             projectDAO.delete(project);

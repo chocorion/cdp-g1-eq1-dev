@@ -1,5 +1,6 @@
-package dao;
+package dao.SQLDAO;
 
+import dao.ProjectDAO;
 import domain.Project;
 
 import java.sql.*;
@@ -7,26 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLProjectDAO implements ProjectDAO {
-    private static SQLProjectDAO instance;
-
-    private SQLProjectDAO() {
-    }
-
-    public static SQLProjectDAO getInstance() {
-        if (instance == null)
-            instance = new SQLProjectDAO();
-
-        return instance;
-    }
-
     @Override
     public Project getById(int id) throws SQLException {
-        String statement = "SELECT * FROM projects WHERE id=?";
+        String statement = "SELECT * FROM project WHERE id=?";
 
         List<Object> opt = new ArrayList<>();
         opt.add(id);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
+        ResultSet resultSet = SQLDatabase.query(statement, opt);
 
         if (resultSet.next()) {
             Project project = new Project(resultSet.getString("name"), resultSet.getString("description"), id);
@@ -41,9 +30,10 @@ public class SQLProjectDAO implements ProjectDAO {
 
     @Override
     public List<Project> getAll() throws SQLException {
-        String statement = "SELECT * FROM projects";
+        System.out.println("Coucou");
+        String statement = "SELECT * FROM project";
 
-        ResultSet resultSet = SQLDAOFactory.query(statement);
+        ResultSet resultSet = SQLDatabase.query(statement);
 
         List<Project> projects = new ArrayList<>();
 
@@ -58,6 +48,7 @@ public class SQLProjectDAO implements ProjectDAO {
 
         resultSet.close();
 
+        System.out.println("End function");
         return projects;
     }
 
@@ -66,13 +57,13 @@ public class SQLProjectDAO implements ProjectDAO {
         if (project.id != null)
             throw new SQLException("This project already has an id, use update !");
 
-        String statement = "INSERT INTO projects (name, description) VALUE (?, ?)";
+        String statement = "INSERT INTO project (name, description) VALUE (?, ?)";
 
         List<Object> opt = new ArrayList<>();
         opt.add(project.name);
         opt.add(project.description);
 
-        ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
+        ResultSet generatedKey = SQLDatabase.exec(statement, opt);
 
         if (generatedKey.next())
             return new Project(project.name, project.description, generatedKey.getInt(1));
@@ -86,14 +77,14 @@ public class SQLProjectDAO implements ProjectDAO {
             throw new SQLException("This project doesn't has an id, use insertOne !");
         }
 
-        String statement = "UPDATE projects SET name=?, description=? WHERE id=? LIMIT 1";
+        String statement = "UPDATE project SET name=?, description=? WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
         opt.add(project.name);
         opt.add(project.description);
         opt.add(project.id);
 
-        SQLDAOFactory.exec(statement, opt);
+        SQLDatabase.exec(statement, opt);
     }
 
     @Override
@@ -101,11 +92,11 @@ public class SQLProjectDAO implements ProjectDAO {
         if (project.id == null) {
             throw new SQLException("This project doesn't has an id !");
         }
-        String statement = "DELETE FROM projects WHERE id=? LIMIT 1";
+        String statement = "DELETE FROM project WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
         opt.add(project.id);
 
-        SQLDAOFactory.exec(statement, opt);
+        SQLDatabase.exec(statement, opt);
     }
 }
