@@ -6,10 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLProjectDAO extends SQLDAO implements ProjectDAO {
+public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
     
     @Override
-    protected Test getObjectFromResult(ResultSet resultSet) throws SQLException {
+    protected Project getObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Project(
             resultSet.getString("name"),
             resultSet.getString("description"),

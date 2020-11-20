@@ -8,7 +8,7 @@ public abstract class SQLDAO<T> {
 
     protected abstract T getObjectFromResult(ResultSet resultSet) throws SQLException;
 
-    protected List<T> getAllObjectsFromResult(ResultSet resultSet) {
+    protected List<T> getAllObjectsFromResult(ResultSet resultSet) throws SQLException {
         
         List<T> items = new ArrayList<>();
 

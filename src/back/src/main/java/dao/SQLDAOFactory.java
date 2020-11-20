@@ -76,16 +76,16 @@ public class SQLDAOFactory extends DAOFactory {
 
     @Override
     public ProjectDAO getProjectDAO() {
-        return SQLProjectDAO.getInstance();
+        return new SQLProjectDAO();
     }
 
     @Override
     public TestDAO getTestDAO() {
-        return SQLTestDAO.getInstance();
+        return new SQLTestDAO();
     }
 
     @Override
     public UserStoryDAO getUserStoryDAO() {
-        return SQLUserStoryDAO.getInstance();
+        return new SQLUserStoryDAO();
     }
 }

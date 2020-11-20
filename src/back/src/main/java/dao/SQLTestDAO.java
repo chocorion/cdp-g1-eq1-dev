@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLTestDAO extends SQLDAO implements TestDAO {
+public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
     
     @Override
     protected Test getObjectFromResult(ResultSet resultSet) throws SQLException {
