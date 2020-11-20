@@ -10,7 +10,8 @@ public abstract class SQLDAO<T> {
 
     protected T queryFirstObject(String statement, List<Object> opt) throws SQLException {
 
-        ResultSet resultSet = SQLDatabase.query(statement, opt);
+        PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
             T item = createObjectFromResult(resultSet);
@@ -25,7 +26,8 @@ public abstract class SQLDAO<T> {
 
     protected List<T> queryAllObjects(String statement, List<Object> opt) throws SQLException {
 
-        ResultSet resultSet = SQLDatabase.query(statement, opt);
+        PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+        ResultSet resultSet = preparedStatement.executeQuery();
         
         List<T> items = new ArrayList<>();
 
@@ -34,6 +36,7 @@ public abstract class SQLDAO<T> {
         }
 
         resultSet.close();
+        preparedStatement.close();
 
         return items;
     }
@@ -47,10 +50,18 @@ public abstract class SQLDAO<T> {
     }
 
     protected T doInsert(String statement, List<Object> opt) throws SQLException {
-        ResultSet generatedKey = SQLDatabase.exec(statement, opt);
 
-        if (generatedKey.next())
-            return createObjectFromResult(generatedKey);
+        PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+
+        ResultSet generatedKey = preparedStatement.getGeneratedKeys();
+
+        if (generatedKey.next()) {
+            T item = createObjectFromResult(generatedKey);
+
+            preparedStatement.close();
+
+            return item;
+        }
 
         throw new SQLException("Can't add this $$Lambda$");
     }
