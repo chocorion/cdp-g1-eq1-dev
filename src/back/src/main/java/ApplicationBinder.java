@@ -1,6 +1,6 @@
 import dao.ProjectDAO;
-import dao.SQLDAO.SQLProjectDAO;
-import dao.SQLDAO.SQLTestDAO;
+import dao.sql.SQLProjectDAO;
+import dao.sql.SQLTestDAO;
 import dao.TestDAO;
 import org.glassfish.jersey.internal.inject.AbstractBinder;
 

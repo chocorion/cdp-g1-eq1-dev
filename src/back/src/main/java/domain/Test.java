@@ -41,10 +41,10 @@ public class Test {
     }
 
     public Test(String name, String description, String lastExecution, String state, Integer projectId) {
-        this(name, description, lastExecution, state, null, projectId);
+        this(name, description, lastExecution, state, projectId, null);
     }
 
-    public Test(String name, String description, String lastExecution, String state, Integer id, Integer projectId) {
+    public Test(String name, String description, String lastExecution, String state, Integer projectId, Integer id) {
         this.name = name;
         this.description = description;
         this.lastExecution = lastExecution;
