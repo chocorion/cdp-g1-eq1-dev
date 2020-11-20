@@ -6,7 +6,7 @@ public class UserStory {
     final public Integer id;
 
     final public Integer projectId;
-    final public String name;
+    final public String description;
     final public String priority;
     final public Integer difficulty;
 
@@ -21,7 +21,7 @@ public class UserStory {
                         (UserStory us) -> us.projectId,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
-                        (UserStory us) -> us.name,
+                        (UserStory us) -> us.description,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
                         (UserStory us) -> us.priority,
@@ -35,10 +35,10 @@ public class UserStory {
         this(null, null, null, null, null);
     }
 
-    public UserStory(Integer id, Integer projectId, String name, String priority, Integer difficulty) {
+    public UserStory(Integer id, Integer projectId, String description, String priority, Integer difficulty) {
         this.id = id;
         this.projectId = projectId;
-        this.name = name;
+        this.description = description;
         this.priority = priority;
         this.difficulty = difficulty;
     }

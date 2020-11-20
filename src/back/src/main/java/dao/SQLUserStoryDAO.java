@@ -1,6 +1,6 @@
 package dao;
 
-import domain.Test;
+import domain.UserStory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,13 +20,13 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         return instance;
     }
 
-    private UserStory getObjectFromResult(ResultSet resultSet) {
+    private UserStory getObjectFromResult(ResultSet resultSet) throws SQLException {
         return new UserStory(
             resultSet.getInt("project"),
             resultSet.getInt("id"),
             resultSet.getString("description"),
             resultSet.getString("priority"),
-            resultSet.getString("difficulty")
+            resultSet.getInt("difficulty")
         );
     }
 
