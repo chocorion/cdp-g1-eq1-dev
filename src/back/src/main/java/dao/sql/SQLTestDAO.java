@@ -51,7 +51,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         List<Object> opt = Arrays.asList(
                 test.name,
                 test.description,
-                lastExecution,
+                (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,
                 test.state,
                 test.projectId
         );
@@ -70,8 +70,8 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         List<Object> opt = Arrays.asList(
                 test.name,
                 test.description,
-                lastExecution,
                 test.state,
+                (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,,
                 test.projectId
         );
 
