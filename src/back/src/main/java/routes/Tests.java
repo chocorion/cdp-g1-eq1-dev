@@ -1,21 +1,21 @@
 package routes;
 
-import dao.DAOFactory;
 import dao.TestDAO;
 import domain.Test;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Path("/projects/{id}/tests")
 public class Tests {
+    @Inject TestDAO testDAO;
+
     @GET
     @Produces("application/json")
     public Response getTests(@PathParam("id") int id) {
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
-
         try {
-            return Response.status(Response.Status.OK).entity(dao.getAllForProject(id)).build();
+            return Response.status(Response.Status.OK).entity(testDAO.getAllForProject(id)).build();
         } catch (Exception exception) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -26,10 +26,9 @@ public class Tests {
     @Produces("application/json")
     public Response postTest(@PathParam("id") int id, Test test) {
         test = new Test(test.name, test.description, test.lastExecution, test.state, id);
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
         Test built;
         try {
-            built = dao.insert(test);
+            built = testDAO.insert(test);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -46,10 +45,9 @@ public class Tests {
     @Produces("application/json")
     public Response putTest(@PathParam("id") int id, @PathParam("test_id") int test_id, Test test) {
         test = new Test(test.name, test.description, test.lastExecution, test.state, test_id, id);
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
 
         try {
-            dao.update(test);
+            testDAO.update(test);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
@@ -64,10 +62,8 @@ public class Tests {
     @DELETE
     @Produces("application/json")
     public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int test_id) {
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
-
         try {
-            Test test = dao.getById(test_id);
+            Test test = testDAO.getById(test_id);
             if (test.id != id) {
                 return Response
                         .status(Response.Status.CONFLICT)
@@ -75,7 +71,7 @@ public class Tests {
                         .build();
             }
 
-            dao.delete(test);
+            testDAO.delete(test);
         } catch (Exception exception) {
             return Response
                     .status(Response.Status.NOT_FOUND)

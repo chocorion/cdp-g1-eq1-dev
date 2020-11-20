@@ -1,68 +1,44 @@
 package dao;
 
-import domain.Project;
 import org.junit.jupiter.api.Test;
 
+import dao.sql.SQLProjectDAO;
+import domain.Project;
+
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SQLProjectDAOTest {
+class ProjectTest {
     @Test
-    void getById() throws SQLException {
-        /*
-            First entry in db is :
-            |  1 | cdp-g1-eq1 | Projet pour le cours de Conduite de projet |
-         */
+    void testSimpleInsert() {
+        SQLProjectDAO projectDAO = new SQLProjectDAO();
+        Project project = new Project("OCaMl project","I am an OCaMl project");
 
-        SQLProjectDAO dao = SQLProjectDAO.getInstance();
-        Project project = dao.getById(1);
+        assertDoesNotThrow(() -> projectDAO.insert(project));
+    }
 
-        assertEquals(project.id, 1);
-
-        assertEquals(project.name, "cdp-g1-eq1");
-        assertEquals(project.description, "Projet pour le cours de Conduite de projet");
+    void testGet() throws Exception {
+        new SQLProjectDAO().getAll().forEach(project -> System.out.println(project.description));;
     }
 
     @Test
-    void testGetAll() throws SQLException {
-        SQLProjectDAO dao = SQLProjectDAO.getInstance();
-        List<Project> projects = dao.getAll();
+    void testSimpleInsertTwice() {
+        SQLProjectDAO projectDAO = new SQLProjectDAO();
+        Project project = new Project("Java project","I am a java project");
 
-        assertNotNull(projects);
-        assertEquals(projects.size(), 2);
-    }
-
-
-    @Test
-    void insert() throws SQLException {
-        SQLProjectDAO dao = SQLProjectDAO.getInstance();
-        Project project = new Project("new project", "my new project");
-
-        Project projectInserted = dao.insert(project);
-
-        assertNotNull(projectInserted);
-        assertNotEquals(projectInserted.id, null);
-
-        assertEquals(project.name, projectInserted.name);
-        assertEquals(project.description, projectInserted.description);
-
-        assertThrows(SQLException.class, () -> dao.insert(projectInserted));
+        assertDoesNotThrow(() -> projectDAO.insert(project));
+        assertThrows(SQLException.class, () -> projectDAO.insert(project));
     }
 
     @Test
-    void update() throws SQLException {
-        SQLProjectDAO dao = SQLProjectDAO.getInstance();
+    void testInsert() throws SQLException {
+        SQLProjectDAO projectDAO = new SQLProjectDAO();
+        Project project = new Project("Python project","I am a Python project");
 
-        Project project = dao.getById(1);
-        final Project project2 = new Project("test", project.description);
+        Project insertedProject = projectDAO.insert(project);
 
-        assertDoesNotThrow(() -> dao.update(project));
-
-        Project projectInserted = dao.getById(1);
-
-        assertEquals(project2.name, "test");
-        assertEquals(project.description, projectInserted.description);
+        assertEquals(project.name, insertedProject.name);
+        assertEquals(project.description, project.description);
     }
 }
