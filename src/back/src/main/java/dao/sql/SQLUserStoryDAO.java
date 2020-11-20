@@ -51,7 +51,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
                 us.difficulty
         );
 
-        return doInsert(statement, opt);
+        return new UserStory(us.projectId, doInsert(statement, opt), us.description, us.priority, us.difficulty);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         String statement = "INSERT INTO project (`name`, `description`) VALUES (?, ?)";
         List<Object> opt = Arrays.asList(project.name, project.description);
 
-        return doInsert(statement, opt);
+        return new Project(project.name, project.description, doInsert(statement, opt));
     }
 
     @Override
