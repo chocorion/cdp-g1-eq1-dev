@@ -13,7 +13,7 @@ public abstract class SQLDAO<T> {
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
 
         System.out.println(preparedStatement);
-        
+
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
@@ -61,6 +61,8 @@ public abstract class SQLDAO<T> {
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
 
         System.out.println(preparedStatement);
+
+        preparedStatement.execute();
 
         ResultSet generatedKey = preparedStatement.getGeneratedKeys();
 
