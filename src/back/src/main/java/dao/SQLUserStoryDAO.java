@@ -9,7 +9,7 @@ import java.util.List;
 public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
     
     @Override
-    protected UserStory getObjectFromResult(ResultSet resultSet) throws SQLException {
+    protected UserStory createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new UserStory(
             resultSet.getInt("project"),
             resultSet.getInt("id"),
@@ -26,19 +26,8 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(project_id);
         opt.add(id);
-
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
-
-        if (resultSet.next()) {
-
-            UserStory us = getObjectFromResult(resultSet);
-
-            resultSet.close();
-
-            return us;
-        }
-
-        throw new SQLException("Can't find user story with this id and project");
+        
+        return queryFirstObject(statement, opt);
     }
 
     @Override
@@ -48,9 +37,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(project_id);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
-
-        return getAllObjectsFromResult(resultSet);
+        return queryAllObjects(statement, opt);
     }
 
     @Override
@@ -100,10 +87,8 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(project_id);
         opt.add(priority);
-
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
-
-        return getAllObjectsFromResult(resultSet);
+        
+        return queryAllObjects(statement, opt);
     }
 
     @Override
@@ -113,9 +98,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(project_id);
         opt.add(difficulty);
-
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
-
-        return getAllObjectsFromResult(resultSet);
+        
+        return queryAllObjects(statement, opt);
     }
 }

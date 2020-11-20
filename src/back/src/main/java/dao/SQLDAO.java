@@ -6,14 +6,31 @@ import java.util.ArrayList;
 
 public abstract class SQLDAO<T> {
 
-    protected abstract T getObjectFromResult(ResultSet resultSet) throws SQLException;
+    protected abstract T createObjectFromResult(ResultSet resultSet) throws SQLException;
 
-    protected List<T> getAllObjectsFromResult(ResultSet resultSet) throws SQLException {
+    protected T queryFirstObject(String statement, List<Object> opt) throws SQLException {
+
+        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
+
+        if (resultSet.next()) {
+            T item = createObjectFromResult(resultSet);
+
+            resultSet.close();
+
+            return item;
+        }
+
+        throw new SQLException("Can't get $$Lambda$");
+    }
+
+    protected List<T> queryAllObjects(String statement, List<Object> opt) throws SQLException {
+
+        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
         
         List<T> items = new ArrayList<>();
 
         while (resultSet.next()) {
-            items.add(getObjectFromResult(resultSet));
+            items.add(createObjectFromResult(resultSet));
         }
 
         resultSet.close();
@@ -21,12 +38,20 @@ public abstract class SQLDAO<T> {
         return items;
     }
 
+    protected T queryFirstObject(String statement) throws SQLException {
+        return queryFirstObject(statement, null);
+    }
+
+    protected List<T> queryAllObjects(String statement) throws SQLException {
+        return queryAllObjects(statement, null);
+    }
+
     protected T doInsert(String statement, List<Object> opt) throws SQLException {
         ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
 
         if (generatedKey.next())
-            return getObjectFromResult(generatedKey);
+            return createObjectFromResult(generatedKey);
 
-        throw new SQLException("Can't add this $$Lamba$");
+        throw new SQLException("Can't add this $$Lambda$");
     }
 }

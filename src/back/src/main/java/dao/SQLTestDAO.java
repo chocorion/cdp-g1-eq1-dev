@@ -9,7 +9,7 @@ import java.util.List;
 public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
     
     @Override
-    protected Test getObjectFromResult(ResultSet resultSet) throws SQLException {
+    protected Test createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Test(
             resultSet.getString("name"),
             resultSet.getString("description"),
@@ -27,18 +27,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(id);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
-
-        if (resultSet.next()) {
-
-            Test test = getObjectFromResult(resultSet);
-
-            resultSet.close();
-
-            return test;
-        }
-
-        throw new SQLException("Can't find test with this id");
+        return queryFirstObject(statement, opt);
     }
 
     @Override
@@ -48,9 +37,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(projectId);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
-
-        return getAllObjectsFromResult(resultSet);
+        return queryAllObjects(statement, opt);
     }
 
     @Override

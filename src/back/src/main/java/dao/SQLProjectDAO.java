@@ -9,7 +9,7 @@ import java.util.List;
 public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
     
     @Override
-    protected Project getObjectFromResult(ResultSet resultSet) throws SQLException {
+    protected Project createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Project(
             resultSet.getString("name"),
             resultSet.getString("description"),
@@ -23,26 +23,14 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         List<Object> opt = new ArrayList<>();
         opt.add(id);
 
-        ResultSet resultSet = SQLDAOFactory.query(statement, opt);
-
-        if (resultSet.next()) {
-            Project project = getObjectFromResult(resultSet);
-
-            resultSet.close();
-
-            return project;
-        }
-
-        throw new SQLException("Can't find project with this id");
+        return queryFirstObject(statement, opt);
     }
 
     @Override
     public List<Project> getAll() throws SQLException {
         String statement = "SELECT * FROM projects";
 
-        ResultSet resultSet = SQLDAOFactory.query(statement);
-
-        return getAllObjectsFromResult(resultSet);
+        return queryAllObjects(statement);
     }
 
     @Override
