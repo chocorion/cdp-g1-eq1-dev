@@ -22,7 +22,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
 
     @Override
     public Test getById(int id) throws SQLException {
-        String statement = "SELECT * FROM tests WHERE id=?";
+        String statement = "SELECT * FROM test WHERE id=?";
 
         List<Object> opt = new ArrayList<>();
         opt.add(id);
@@ -32,7 +32,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
 
     @Override
     public List<Test> getAllForProject(int projectId) throws SQLException {
-        String statement = "SELECT * FROM tests WHERE project_id=?";
+        String statement = "SELECT * FROM test WHERE project=?";
 
         List<Object> opt = new ArrayList<>();
         opt.add(projectId);
@@ -45,7 +45,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         if (test.id != null)
             throw new SQLException("This test already has an id, use update !");
 
-        String statement = "INSERT INTO tests (name, description, lastExecution, state, project_id) VALUE (?, ?, ?, ?, ?)";
+        String statement = "INSERT INTO test (name, description, lastExecution, state, project) VALUE (?, ?, ?, ?, ?)";
 
         List<Object> opt = new ArrayList<>();
         opt.add(test.name);
@@ -67,7 +67,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         if (test.id == null) {
             throw new SQLException("This test doesn't have an id, use insertOne !");
         }
-        String statement = "UPDATE tests SET name=?, description=?, state=?, lastExecution=? WHERE id=? LIMIT 1";
+        String statement = "UPDATE test SET name=?, description=?, state=?, lastExecution=? WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
         opt.add(test.name);
@@ -90,7 +90,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
             throw new SQLException("This test doesn't have an id !");
         }
 
-        String statement = "DELETE FROM tests WHERE id=? LIMIT 1";
+        String statement = "DELETE FROM test WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
         opt.add(test.id);

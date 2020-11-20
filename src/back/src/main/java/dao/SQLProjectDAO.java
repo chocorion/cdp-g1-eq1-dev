@@ -18,7 +18,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
 
     @Override
     public Project getById(int id) throws SQLException {
-        String statement = "SELECT * FROM projects WHERE id=?";
+        String statement = "SELECT * FROM project WHERE id=?";
 
         List<Object> opt = new ArrayList<>();
         opt.add(id);
@@ -28,7 +28,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
 
     @Override
     public List<Project> getAll() throws SQLException {
-        String statement = "SELECT * FROM projects";
+        String statement = "SELECT * FROM project";
 
         return queryAllObjects(statement);
     }
@@ -38,7 +38,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         if (project.id != null)
             throw new SQLException("This project already has an id, use update !");
 
-        String statement = "INSERT INTO projects (name, description) VALUE (?, ?)";
+        String statement = "INSERT INTO project (name, description) VALUE (?, ?)";
 
         List<Object> opt = new ArrayList<>();
         opt.add(project.name);
@@ -53,7 +53,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
             throw new SQLException("This project doesn't has an id, use insertOne !");
         }
 
-        String statement = "UPDATE projects SET name=?, description=? WHERE id=? LIMIT 1";
+        String statement = "UPDATE project SET name=?, description=? WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
         opt.add(project.name);
@@ -68,7 +68,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         if (project.id == null) {
             throw new SQLException("This project doesn't has an id !");
         }
-        String statement = "DELETE FROM projects WHERE id=? LIMIT 1";
+        String statement = "DELETE FROM project WHERE id=? LIMIT 1";
 
         List<Object> opt = new ArrayList<>();
         opt.add(project.id);
