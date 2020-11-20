@@ -16,12 +16,23 @@ public class Test {
 
     static {
         comparator = Comparator
-                .comparing((Test test) -> test.id)
-                .thenComparing((Test test) -> test.name)
-                .thenComparing((Test test) -> test.description)
-                .thenComparing((Test test) -> test.lastExecution)
-                .thenComparing((Test test) -> test.state)
-                .thenComparing((Test test) -> test.projectId);
+                .comparing(
+                        (Test test) -> test.id,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.name,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing((Test test) -> test.description,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.lastExecution,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.state,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.projectId,
+                        Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
     // Required by jackson

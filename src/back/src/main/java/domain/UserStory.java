@@ -14,11 +14,21 @@ public class UserStory {
 
     static {
         comparator = Comparator
-                .comparing((UserStory us) -> us.id)
-                .thenComparing((UserStory us) -> us.projectId)
-                .thenComparing((UserStory us) -> us.name)
-                .thenComparing((UserStory us) -> us.priority)
-                .thenComparing((UserStory us) -> us.difficulty);
+                .comparing(
+                        (UserStory us) -> us.id,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (UserStory us) -> us.projectId,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (UserStory us) -> us.name,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (UserStory us) -> us.priority,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (UserStory us) -> us.difficulty,
+                        Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
     public UserStory() {

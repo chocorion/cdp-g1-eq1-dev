@@ -11,13 +11,19 @@ public class Project {
 
     static {
         comparator = Comparator
-                .comparing((Project project) -> project.id)
-                .thenComparing((Project project) -> project.name)
-                .thenComparing((Project project) -> project.description);
+                .comparing(
+                        (Project project) -> project.id,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Project project) -> project.name,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Project project) -> project.description,
+                        Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
     // Required by Jackson
-    public Project () {
+    public Project() {
         this(null, null);
     }
 

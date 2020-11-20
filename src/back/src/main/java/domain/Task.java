@@ -14,12 +14,24 @@ public class Task {
 
     static {
         comparator = Comparator
-                .comparing((Task task) -> task.id)
-                .thenComparing((Task task) -> task.projectId)
-                .thenComparing((Task task) -> task.usId)
-                .thenComparing((Task task) -> task.title)
-                .thenComparing((Task task) -> task.duration)
-                .thenComparing((Task task) -> task.status);
+                .comparing(
+                        (Task task) -> task.id,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Task task) -> task.projectId,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Task task) -> task.usId,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Task task) -> task.title,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Task task) -> task.duration,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Task task) -> task.status,
+                        Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
     public Task() {
