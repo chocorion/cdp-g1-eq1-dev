@@ -12,6 +12,8 @@ public abstract class SQLDAO<T> {
 
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
 
+        String sql = preparedStatement.toString();
+
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
@@ -23,7 +25,7 @@ public abstract class SQLDAO<T> {
             return item;
         }
 
-        throw new SQLException("Can't get $$Lambda$");
+        throw new SQLException("Could not query : "+sql);
     }
 
     protected List<T> queryAllObjects(String statement, List<Object> opt) throws SQLException {
@@ -56,6 +58,8 @@ public abstract class SQLDAO<T> {
 
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
 
+        String sql = preparedStatement.toString();
+
         preparedStatement.execute();
 
         ResultSet generatedKey = preparedStatement.getGeneratedKeys();
@@ -69,6 +73,6 @@ public abstract class SQLDAO<T> {
             return id;
         }
 
-        throw new SQLException("Can't add this $$Lambda$");
+        throw new SQLException("Could not insert : "+sql);
     }
 }

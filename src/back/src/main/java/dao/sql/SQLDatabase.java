@@ -7,7 +7,7 @@ public class SQLDatabase {
     private static final String dbUsername = "cdp";
     private static final String dbPassword = "cdp";
     private static final String dbName = "cdp";
-    private static final int dbPort = 3306;
+    private static final int dbPort = 3307;
 
     private static Connection connection;
 
@@ -15,7 +15,7 @@ public class SQLDatabase {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://db:" + dbPort + "/" + dbName + "?user=" +
+                    "jdbc:mysql://localhost:" + dbPort + "/" + dbName + "?user=" +
                             dbUsername + "&password=" + dbPassword
             );
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
