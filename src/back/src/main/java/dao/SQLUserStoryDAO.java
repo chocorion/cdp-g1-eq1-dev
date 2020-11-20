@@ -78,7 +78,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         statement += "VALUES (?,?,?,?)";
 
         List<Object> opt = new ArrayList<>();
-        opt.add(us.project);
+        opt.add(us.projectId);
         opt.add(us.description);
         opt.add(us.priority);
         opt.add(us.difficulty);
@@ -100,7 +100,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         opt.add(us.priority);
         opt.add(us.difficulty);
 
-        opt.add(us.project);
+        opt.add(us.projectId);
         opt.add(us.id);
 
         SQLDAOFactory.exec(statement, opt);
@@ -111,7 +111,7 @@ public class SQLUserStoryDAO implements UserStoryDAO {
         String statement = "DELETE FROM us WHERE project = ? AND id = ?";
 
         List<Object> opt = new ArrayList<>();
-        opt.add(us.project);
+        opt.add(us.projectId);
         opt.add(us.id);
         
         SQLDAOFactory.exec(statement, opt);
