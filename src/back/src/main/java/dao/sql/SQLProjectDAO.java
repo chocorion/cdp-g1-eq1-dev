@@ -5,24 +5,23 @@ import domain.Project;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
-    
+
     @Override
     protected Project createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Project(
-            resultSet.getString("name"),
-            resultSet.getString("description"),
-            resultSet.getInt("id"));
+                resultSet.getString("name"),
+                resultSet.getString("description"),
+                resultSet.getInt("id"));
     }
 
     @Override
     public Project getById(int id) throws SQLException {
         String statement = "SELECT * FROM project WHERE id=?";
-
-        List<Object> opt = new ArrayList<>();
-        opt.add(id);
+        List<Object> opt = Arrays.asList(id);
 
         return queryFirstObject(statement, opt);
     }
@@ -40,10 +39,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
             throw new SQLException("This project already has an id, use update !");
 
         String statement = "INSERT INTO project (name, description) VALUE (?, ?)";
-
-        List<Object> opt = new ArrayList<>();
-        opt.add(project.name);
-        opt.add(project.description);
+        List<Object> opt = Arrays.asList(project.name, project.description);
 
         return doInsert(statement, opt);
     }
@@ -55,11 +51,11 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         }
 
         String statement = "UPDATE project SET name=?, description=? WHERE id=? LIMIT 1";
-
-        List<Object> opt = new ArrayList<>();
-        opt.add(project.name);
-        opt.add(project.description);
-        opt.add(project.id);
+        List<Object> opt = Arrays.asList(
+            project.name,
+            project.description,
+            project.id
+        );
 
         SQLDatabase.exec(statement, opt);
     }
@@ -70,9 +66,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
             throw new SQLException("This project doesn't has an id !");
         }
         String statement = "DELETE FROM project WHERE id=? LIMIT 1";
-
-        List<Object> opt = new ArrayList<>();
-        opt.add(project.id);
+        List<Object> opt = Arrays.asList(project.id);
 
         SQLDatabase.exec(statement, opt);
     }
