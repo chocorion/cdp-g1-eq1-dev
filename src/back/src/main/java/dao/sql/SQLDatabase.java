@@ -46,18 +46,11 @@ public class SQLDatabase {
         return prepare(statement, null);
     }
 
-    public static ResultSet exec(String statement, List<Object> items) throws SQLException {
-        PreparedStatement preparedStatement = prepare(statement, items);
-
-        preparedStatement.execute();
-
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        preparedStatement.close();
-
-        return resultSet;
+    public static void exec(String statement, List<Object> items) throws SQLException {
+        prepare(statement, items).execute();
     }
 
-    public static ResultSet exec(String statement) throws SQLException {
-        return exec(statement, null);
+    public static void exec(String statement) throws SQLException {
+        exec(statement, null);
     }
 }
