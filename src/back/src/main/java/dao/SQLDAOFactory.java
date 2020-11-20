@@ -83,4 +83,9 @@ public class SQLDAOFactory extends DAOFactory {
     public TestDAO getTestDAO() {
         return SQLTestDAO.getInstance();
     }
+
+    @Override
+    public UserStoryDAO getUserStoryDAO() {
+        return SQLDAOUserStory.getInstance();
+    }
 }
