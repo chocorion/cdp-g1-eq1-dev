@@ -38,10 +38,10 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         if (project.id != null)
             throw new SQLException("This project already has an id, use update !");
 
-        String statement = "INSERT INTO project (name, description) VALUES (?, ?)";
+        String statement = "INSERT INTO project (`name`, `description`) VALUES (?, ?)";
         List<Object> opt = Arrays.asList(project.name, project.description);
 
-        return doInsert(statement, opt);
+        return new Project(project.name, project.description, doInsert(statement, opt));
     }
 
     @Override

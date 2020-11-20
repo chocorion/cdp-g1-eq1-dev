@@ -56,7 +56,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
                 test.projectId
         );
 
-        return doInsert(statement, opt);
+        return new Test(test.name, test.description, test.lastExecution, test.state, test.projectId, doInsert(statement, opt));
     }
 
     @Override

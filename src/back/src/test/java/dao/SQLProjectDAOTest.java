@@ -18,6 +18,10 @@ class ProjectTest {
         assertDoesNotThrow(() -> projectDAO.insert(project));
     }
 
+    void testGet() throws Exception {
+        new SQLProjectDAO().getAll().forEach(project -> System.out.println(project.description));;
+    }
+
     @Test
     void testSimpleInsertTwice() {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
