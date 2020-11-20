@@ -20,3 +20,11 @@ VALUES (1, "Premiere US", "High", 1),
     (1, "Seconde US", "Medium", 3),
     (1, "Troisieme US", "High", 2),
     (2, "Premiere US du second projet", "Low", 5);
+
+
+INSERT INTO task (project, title, duration, status, us)
+VALUES (1, "Faire un truc", "3hh", "TODO", 1),
+    (1, "Faire un autre truc", "2hh", "TODO", 1),
+    (1, "Faire un truc pour l'autre truc", "3hh", "TODO", 2),
+    (2, "Faire le premier truc", "1d", "DOING", 1),
+    (2, "Faire un truc on sait pas pourquoi encore", "", "TODO", null);
