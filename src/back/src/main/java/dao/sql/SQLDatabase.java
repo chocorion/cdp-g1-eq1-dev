@@ -30,7 +30,7 @@ public class SQLDatabase {
         return connection;
     }
 
-    public static ResultSet query(String statement, List<Object> items) throws SQLException {
+    public static PreparedStatement prepare(String statement, List<Object> items) throws SQLException {
         Connection conn = getConnection();
 
         PreparedStatement preparedStatement = conn.prepareStatement(statement);
@@ -39,24 +39,15 @@ public class SQLDatabase {
             preparedStatement.setObject(i, items.get(i));
         }
 
-        ResultSet resultSet = preparedStatement.executeQuery();
-        preparedStatement.close();
-
-        return resultSet;
+        return preparedStatement;
     }
 
-    public static ResultSet query(String statement) throws SQLException {
-        return query(statement, null);
+    public static PreparedStatement prepare(String statement) throws SQLException {
+        return prepare(statement, null);
     }
 
     public static ResultSet exec(String statement, List<Object> items) throws SQLException {
-        Connection conn = getConnection();
-
-        PreparedStatement preparedStatement = conn.prepareStatement(statement);
-
-        for(int i = 1; items != null && i < items.size(); i++) {
-            preparedStatement.setObject(i, items.get(i));
-        }
+        PreparedStatement preparedStatement = prepare(statement, items);
 
         preparedStatement.execute();
 
