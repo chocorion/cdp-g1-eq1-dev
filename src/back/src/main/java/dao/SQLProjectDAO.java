@@ -6,17 +6,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLProjectDAO implements ProjectDAO {
-    private static SQLProjectDAO instance;
-
-    private SQLProjectDAO() {
-    }
-
-    public static SQLProjectDAO getInstance() {
-        if (instance == null)
-            instance = new SQLProjectDAO();
-
-        return instance;
+public class SQLProjectDAO extends SQLDAO implements ProjectDAO {
+    
+    @Override
+    protected Test getObjectFromResult(ResultSet resultSet) throws SQLException {
+        return new Project(
+            resultSet.getString("name"),
+            resultSet.getString("description"),
+            resultSet.getInt("id"));
     }
 
     @Override
@@ -29,7 +26,7 @@ public class SQLProjectDAO implements ProjectDAO {
         ResultSet resultSet = SQLDAOFactory.query(statement, opt);
 
         if (resultSet.next()) {
-            Project project = new Project(resultSet.getString("name"), resultSet.getString("description"), id);
+            Project project = getObjectFromResult(resultSet);
 
             resultSet.close();
 
@@ -45,20 +42,7 @@ public class SQLProjectDAO implements ProjectDAO {
 
         ResultSet resultSet = SQLDAOFactory.query(statement);
 
-        List<Project> projects = new ArrayList<>();
-
-        while (resultSet.next()) {
-            projects.add(
-                    new Project(
-                            resultSet.getString("name"),
-                            resultSet.getString("description"),
-                            resultSet.getInt("id"))
-            );
-        }
-
-        resultSet.close();
-
-        return projects;
+        return getAllObjectsFromResult(resultSet);
     }
 
     @Override
@@ -72,12 +56,7 @@ public class SQLProjectDAO implements ProjectDAO {
         opt.add(project.name);
         opt.add(project.description);
 
-        ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
-
-        if (generatedKey.next())
-            return new Project(project.name, project.description, generatedKey.getInt(1));
-
-        throw new SQLException("Can't add this project in database");
+        return doInsert(statement, opt);
     }
 
     @Override

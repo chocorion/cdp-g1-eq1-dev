@@ -6,18 +6,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLTestDAO implements TestDAO {
-    private static SQLTestDAO instance;
-
-    private SQLTestDAO() {
-
-    }
-
-    public static SQLTestDAO getInstance() {
-        if (instance == null)
-            instance = new SQLTestDAO();
-
-        return instance;
+public class SQLTestDAO extends SQLDAO implements TestDAO {
+    
+    @Override
+    protected Test getObjectFromResult(ResultSet resultSet) throws SQLException {
+        return new Test(
+            resultSet.getString("name"),
+            resultSet.getString("description"),
+            (resultSet.getDate("lastExecution") == null) ? null : resultSet.getDate("lastExecution").toString(),
+            resultSet.getString("state"),
+            resultSet.getInt("project"),
+            resultSet.getInt("id")
+        );
     }
 
     @Override
@@ -31,14 +31,7 @@ public class SQLTestDAO implements TestDAO {
 
         if (resultSet.next()) {
 
-            Test test = new Test(
-                    resultSet.getString("name"),
-                    resultSet.getString("description"),
-                    (resultSet.getDate("lastExecution") == null) ? null : resultSet.getDate("lastExecution").toString(),
-                    resultSet.getString("state"),
-                    id,
-                    resultSet.getInt("project_id")
-            );
+            Test test = getObjectFromResult(resultSet);
 
             resultSet.close();
 
@@ -57,24 +50,7 @@ public class SQLTestDAO implements TestDAO {
 
         ResultSet resultSet = SQLDAOFactory.query(statement, opt);
 
-        List<Test> tests = new ArrayList<>();
-
-        while (resultSet.next()) {
-            tests.add(
-                    new Test(
-                            resultSet.getString("name"),
-                            resultSet.getString("description"),
-                            (resultSet.getDate("lastExecution") == null) ? null : resultSet.getDate("lastExecution").toString(),
-                            resultSet.getString("state"),
-                            resultSet.getInt("id"),
-                            projectId
-                    )
-            );
-        }
-
-        resultSet.close();
-
-        return tests;
+        return getAllObjectsFromResult(resultSet);
     }
 
     @Override
@@ -96,19 +72,7 @@ public class SQLTestDAO implements TestDAO {
         opt.add(test.state);
         opt.add(test.projectId);
 
-        ResultSet generatedKey = SQLDAOFactory.exec(statement, opt);
-
-        if (generatedKey.next())
-            return new Test(
-                    test.name,
-                    test.description,
-                    test.lastExecution,
-                    test.state,
-                    generatedKey.getInt(1),
-                    test.projectId
-            );
-
-        throw new SQLException("Can't add this test");
+        return doInsert(statement, opt);
     }
 
     @Override
