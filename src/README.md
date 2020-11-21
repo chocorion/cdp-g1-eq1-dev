@@ -15,4 +15,4 @@ Le front doit être accessible sur `http://localhost:8080/` (pour le moment proj
 
 `http://localhost:9000/api/v1/hello/world` affiche *hello world !* si tout va bien.S
 
-Pour relancer les tests, pour le moment il faut remettre la bdd dans son état originel avec : `docker-compose up  --build --force-recreate --renew-anon-volumes db`
+Pour relancer les tests, pour le moment il faut remettre la bdd dans son état originel avec : `docker-compose -f docker-compose.test.yml up --build --force-recreate --renew-anon-volumes db`
