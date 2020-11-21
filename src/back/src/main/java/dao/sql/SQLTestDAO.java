@@ -23,10 +23,10 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
     }
 
     @Override
-    public Test getById(int id) throws SQLException {
-        String statement = "SELECT * FROM test WHERE id=?";
+    public Test getById(int projectId, int id) throws SQLException {
+        String statement = "SELECT * FROM test WHERE id=? AND project=?";
 
-        List<Object> opt = Arrays.asList(id);
+        List<Object> opt = Arrays.asList(id, projectId);
 
         return queryFirstObject(statement, opt);
     }
