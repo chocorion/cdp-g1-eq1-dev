@@ -23,7 +23,7 @@ public class Tasks {
     }
 
     @GET
-    @Path("us/{usId}")
+    @Path("us/{usId}/tasks")
     @Produces
     public Response getAllForUs(@PathParam("projectId") int projectId, @PathParam("usId") int usId) {
         try {
