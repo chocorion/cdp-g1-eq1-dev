@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SQLSprintDAOTest {
-    /*
+
     @Test
     void testSimpleInsert() {
         SQLSprintDAO sprintDAO = new SQLSprintDAO();
@@ -18,21 +18,22 @@ class SQLSprintDAOTest {
     }
 
     @Test
-    void testSimpleInsertTwice() {
+    void testSimpleInsertTwice()  {
         SQLSprintDAO sprintDAO = new SQLSprintDAO();
         Sprint sprint = new Sprint(1, "I am a sprint 2");
 
         assertDoesNotThrow(() -> sprintDAO.insert(sprint));
-        assertThrows(SQLException.class, () -> sprintDAO.insert(sprint));
+        assertDoesNotThrow(() -> sprintDAO.insert(sprint));
     }
 
     @Test
-    void testInsert() throws SQLException {
+    void testInsert() throws Exception {
         SQLSprintDAO sprintDAO = new SQLSprintDAO();
         Sprint sprint = new Sprint(1, "I am a sprint 3");
 
         Sprint insertedSprint = sprintDAO.insert(sprint);
 
         assertEquals(sprint.name, insertedSprint.name);
-    }*/
+        assertEquals(sprint.projectId, sprint.projectId);
+    }
 }
