@@ -1,2 +1,10 @@
 CREATE DATABASE IF NOT EXISTS `cdp`;
 GRANT ALL ON *.* TO 'cdp'@'%' WITH GRANT OPTION;
+
+CREATE TABLE last_id (
+    id int,
+
+    CONSTRAINT PK_ID PRIMARY KEY (id)
+);
+
+INSERT INTO last_id (id) VALUES (0);
