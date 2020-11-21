@@ -3,32 +3,18 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { Task } from '../models/task.model';
 import {environment} from '../../environments/environment';
+import {GenericService} from './genericService';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TaskService {
+export class TaskService extends GenericService<Task>{
 
     constructor(private http: HttpClient) {
-    }
-
-    getAllForProject(projectId: number): Observable<Task[]> {
-        return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/tasks`);
+        super(http, 'tasks');
     }
 
     getAllForUs(projectId: number, usId: number): Observable<Task[]> {
         return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/us/${usId}/tasks`);
-    }
-
-    post(projectId: number, task: Task): Observable<Task> {
-        return this.http.post<Task>(environment.apiUrl + `projects/${projectId}/tasks`, task);
-    }
-
-    update(projectId: number, task: Task): Observable<Task> {
-        return this.http.post<Task>(environment.apiUrl + `projects/${projectId}/tasks/${task.getId()}`, task);
-    }
-
-    delete(projectId: number, task: Task): void {
-        this.http.delete(environment.apiUrl + `projects/${projectId}/tasks/${task.getId()}`);
     }
 }
