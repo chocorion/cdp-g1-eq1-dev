@@ -3,6 +3,7 @@ package routes;
 import dao.TaskDAO;
 import dao.UserStoryDAO;
 import domain.Task;
+import domain.Test;
 import domain.UserStory;
 
 import javax.inject.Inject;
@@ -54,6 +55,24 @@ public class UserStories {
         }
 
         return Response.status(Response.Status.OK).entity(userStory).build();
+    }
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response postTest(@PathParam("projectId") int projectId, UserStory userStory) {
+        userStory = new UserStory(null, projectId, userStory.description, userStory.priority, userStory.difficulty);
+        UserStory built;
+        try {
+            built = userStoryDAO.insert(userStory);
+        } catch (Exception exception) {
+            return Response
+                    .status(Response.Status.CONFLICT)
+                    .entity(exception.getMessage())
+                    .build();
+        }
+
+        return Response.status(Response.Status.OK).entity(built).build();
     }
 
     @Path("{usId}")
