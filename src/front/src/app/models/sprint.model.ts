@@ -1,4 +1,6 @@
-export class Sprint {
+import {PossesId} from './possesId';
+
+export class Sprint implements PossesId {
     private projectId: number;
     private id: number;
     private name: string;

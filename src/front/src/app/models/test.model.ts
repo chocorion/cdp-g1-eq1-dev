@@ -1,4 +1,6 @@
-export class Test{
+import {PossesId} from './possesId';
+
+export class Test implements PossesId {
     private id: number;
     private name: string;
     private description: string;

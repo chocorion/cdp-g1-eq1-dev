@@ -1,4 +1,6 @@
-export class Task {
+import {PossesId} from './possesId';
+
+export class Task implements PossesId {
     private id: number;
     private projectId: number;
     private usId: number;

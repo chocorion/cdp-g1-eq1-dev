@@ -1,4 +1,6 @@
-export class Us{
+import {PossesId} from './possesId';
+
+export class Us implements PossesId {
     public id: number;
     private projectId: number;
     private description: string;
