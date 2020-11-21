@@ -61,7 +61,7 @@ public class UserStories {
     @Consumes("application/json")
     @Produces("application/json")
     public Response postTest(@PathParam("projectId") int projectId, UserStory userStory) {
-        userStory = new UserStory(null, projectId, userStory.description, userStory.priority, userStory.difficulty);
+        userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty);
         UserStory built;
         try {
             built = userStoryDAO.insert(userStory);
