@@ -26,7 +26,7 @@ class SQLTaskDAOTest {
         SQLTaskDAO taskDAO = new SQLTaskDAO();
         Task task = new Task(null, 1, 1, "super title2", "1h.h", "TODO");
         assertDoesNotThrow(() -> taskDAO.insert(task));
-        assertThrows(SQLException.class, () -> taskDAO.insert(task));
+        assertDoesNotThrow(() -> taskDAO.insert(task));
     }
 
     @Test
