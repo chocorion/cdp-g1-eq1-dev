@@ -12,12 +12,12 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
     @Override
     protected Task createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Task(
-                resultSet.getInt("id"),
-                resultSet.getInt("project"),
-                resultSet.getInt("us"),
-                resultSet.getString("title"),
-                resultSet.getString("duration"),
-                resultSet.getString("status")
+            resultSet.getInt("project"),
+            resultSet.getInt("us"),
+            resultSet.getString("title"),
+            resultSet.getString("duration"),
+            resultSet.getString("status"),
+            resultSet.getInt("id")
         );
     }
 
@@ -58,7 +58,7 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
                 task.usId
         );
 
-        return new Task(doInsert(statement, opt), task.projectId, task.usId, task.title, task.duration, task.status);
+        return new Task(task.projectId, task.usId, task.title, task.duration, task.status, doInsert(statement, opt));
     }
 
     @Override
