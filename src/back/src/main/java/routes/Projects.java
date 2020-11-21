@@ -15,13 +15,9 @@ public class Projects {
     @GET
     @Produces("application/json")
     public Response getProjects() {
-        System.out.println("In get");
-        System.out.println(projectDAO);
         try {
             return Response.status(Response.Status.OK).entity(projectDAO.getAll()).build();
         } catch (Exception exception) {
-            System.out.println(exception);
-            System.out.println(exception.getMessage());
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
