@@ -55,6 +55,7 @@ public abstract class SQLDAO<T> {
     }
 
     protected int doInsert(String statement, List<Object> opt) throws SQLException {
+        int id;
 
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
 
@@ -64,14 +65,28 @@ public abstract class SQLDAO<T> {
 
         ResultSet generatedKey = preparedStatement.getGeneratedKeys();
 
+        // Try to get the generated id
         if (generatedKey.next()) {
-            int id = generatedKey.getInt(1);
-
+            id = generatedKey.getInt(1);
             generatedKey.close();
             preparedStatement.close();
-
             return id;
         }
+
+        // If not auto-incremented, still try to get last insert id
+        generatedKey.close();
+        preparedStatement.close();
+
+        preparedStatement = SQLDatabase.prepare("SELECT LAST_INSERT_ID()");
+
+        ResultSet rs = preparedStatement.executeQuery();
+        if(rs.next()) {
+            id = rs.getInt(1);
+            rs.close();
+            preparedStatement.close();
+            return id;
+        }
+        
 
         throw new SQLException("Could not insert : " + sql);
     }
