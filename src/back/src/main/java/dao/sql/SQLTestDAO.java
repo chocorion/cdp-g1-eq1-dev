@@ -49,11 +49,11 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         String lastExecution = test.lastExecution;
 
         List<Object> opt = Arrays.asList(
-                test.name,
-                test.description,
-                (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,
-                test.state,
-                test.projectId
+            test.projectId,
+            test.name,
+            test.description,
+            (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,
+            test.state
         );
 
         return new Test(test.name, test.description, test.lastExecution, test.state, test.projectId, doInsert(statement, opt));
