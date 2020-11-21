@@ -9,8 +9,8 @@ import {Router} from '@angular/router';
     styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
-
-    projects: Project[];
+    allprojects: Project[] = [];
+    projects: Project[] =[];
 
     constructor(
         private projectService: ProjectService,
@@ -18,18 +18,19 @@ export class ProjectListComponent implements OnInit {
         ) {
     }
 
+
     ngOnInit(): void {
         this.projectService.getProjects().subscribe(
                 result => {
                     this.projects = result.map(x => Project.fromJSON(x));
+                    this.projects.forEach(val => this.allprojects.push(Project.assign(val)));
             }
         );
     }
 
     notifyMe(value: string){
-        this.projects = this.projects.filter(p => p.getName().includes(value));
+        this.projects = this.allprojects.filter(p => p.getName().includes(value));
     }
-
 
     onClick(project: Project): void {
         this.projectService.setCurrentProject(project);
