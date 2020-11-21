@@ -35,7 +35,12 @@ public class UserStory {
         this(null, null, null, null, null);
     }
 
-    public UserStory(Integer id, Integer projectId, String description, String priority, Integer difficulty) {
+
+    public UserStory(Integer projectId, String description, String priority, Integer difficulty) {
+        this(projectId, description, priority, difficulty, null);
+    }
+
+    public UserStory(Integer projectId, String description, String priority, Integer difficulty, Integer id) {
         this.id = id;
         this.projectId = projectId;
         this.description = description;
