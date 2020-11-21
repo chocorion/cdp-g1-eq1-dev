@@ -64,7 +64,7 @@ public class Tests {
     @Produces("application/json")
     public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int test_id) {
         try {
-            Test test = testDAO.getById(test_id);
+            Test test = testDAO.getById(id, test_id);
             if (test.id != id) {
                 return Response
                         .status(Response.Status.CONFLICT)

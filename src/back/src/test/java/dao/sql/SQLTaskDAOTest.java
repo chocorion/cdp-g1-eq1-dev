@@ -11,7 +11,7 @@ class SQLTaskDAOTest {
     @Test
     void testSimpleInsert() {
         SQLTaskDAO taskDAO = new SQLTaskDAO();
-        Task task = new Task(null, 1, 1, "super title", "1h.h", "TODO");
+        Task task = new Task(1, 1, "super title", "1h.h", "TODO");
 
         assertDoesNotThrow(() -> taskDAO.insert(task));
     }
@@ -24,15 +24,15 @@ class SQLTaskDAOTest {
     @Test
     void testSimpleInsertTwice() {
         SQLTaskDAO taskDAO = new SQLTaskDAO();
-        Task task = new Task(null, 1, 1, "super title2", "1h.h", "TODO");
+        Task task = new Task(1, 1, "super title2", "1h.h", "TODO");
         assertDoesNotThrow(() -> taskDAO.insert(task));
-        assertThrows(SQLException.class, () -> taskDAO.insert(task));
+        assertDoesNotThrow(() -> taskDAO.insert(task));
     }
 
     @Test
     void testInsert() throws Exception {
         SQLTaskDAO taskDAO = new SQLTaskDAO();
-        Task task = new Task(null, 1, 1, "super title3", "1h.h", "TODO");
+        Task task = new Task(1, 1, "super title3", "1h.h", "TODO");
 
         Task inserted = taskDAO.insert(task);
 

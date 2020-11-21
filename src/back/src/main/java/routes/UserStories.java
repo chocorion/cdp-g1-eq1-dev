@@ -43,7 +43,7 @@ public class UserStories {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putTest(@PathParam("projectId") int projectId, @PathParam("usId") int usId, UserStory userStory) {
-        userStory = new UserStory(usId, projectId, userStory.description, userStory.priority, userStory.difficulty);
+        userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty, usId);
 
         try {
             userStoryDAO.update(userStory);
@@ -83,7 +83,7 @@ public class UserStories {
             UserStory userStory = userStoryDAO.getById(projectId, usId);
 
             for (Task task : taskDAO.getAllForUserStory(projectId, usId)) {
-                taskDAO.update(new Task(task.id, task.projectId, null, task.title, task.duration, task.status));
+                taskDAO.update(new Task(task.projectId, null, task.title, task.duration, task.status, task.id));
             }
 
             userStoryDAO.delete(userStory);

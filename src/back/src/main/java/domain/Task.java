@@ -38,7 +38,11 @@ public class Task {
         this(null, null, null, null, null, null);
     }
 
-    public Task(Integer id, Integer projectId, Integer usId, String title, String duration, String status) {
+    public Task(Integer projectId, Integer usId, String title, String duration, String status) {
+        this(projectId, usId, title, duration, status, null);
+    }
+
+    public Task(Integer projectId, Integer usId, String title, String duration, String status, Integer id) {
         this.id = id;
         this.projectId = projectId;
         this.usId = usId;

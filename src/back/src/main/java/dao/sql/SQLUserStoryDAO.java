@@ -13,11 +13,11 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
     @Override
     protected UserStory createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new UserStory(
-                resultSet.getInt("id"),
-                resultSet.getInt("project"),
-                resultSet.getString("description"),
-                resultSet.getString("priority"),
-                resultSet.getInt("difficulty")
+            resultSet.getInt("project"),
+            resultSet.getString("description"),
+            resultSet.getString("priority"),
+            resultSet.getInt("difficulty"),
+            resultSet.getInt("id")
         );
     }
 
@@ -51,7 +51,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
                 us.difficulty
         );
 
-        return new UserStory(us.projectId, doInsert(statement, opt), us.description, us.priority, us.difficulty);
+        return new UserStory(us.projectId, us.description, us.priority, us.difficulty, doInsert(statement, opt));
     }
 
     @Override
