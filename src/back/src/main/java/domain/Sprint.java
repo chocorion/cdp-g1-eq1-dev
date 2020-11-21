@@ -27,10 +27,14 @@ public class Sprint {
         this(null, null, null);
     }
 
-    public Sprint(Integer projectId, Integer id, String name) {
+    public Sprint(Integer projectId, String name){
+        this(projectId, name, null);
+    }
+
+    public Sprint(Integer projectId, String name, Integer id) {
         this.projectId = projectId;
-        this.id = id;
         this.name = name;
+        this.id = id;
     }
 
     @Override

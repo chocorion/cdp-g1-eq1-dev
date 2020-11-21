@@ -30,7 +30,10 @@ export class ProjectComponent implements OnInit {
   onSubmit(data): void {
     this.submit = data.search;
     this.child.notifyMe(this.submit);
+  }
 
-}
+  onClick(): void{
+    this.child.notifyMe('');
+  }
 
 }

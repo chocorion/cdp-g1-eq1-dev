@@ -17,6 +17,14 @@ export class Project{
         );
     }
 
+    static assign(project: Project): Project {
+        return new Project(
+            project.getId(),
+            project.getName(),
+            project.getDescription()
+        );
+    }
+
     public setName(name: string): void {
         this.name = name;
     }

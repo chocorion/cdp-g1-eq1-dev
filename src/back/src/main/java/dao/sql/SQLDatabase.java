@@ -4,10 +4,14 @@ import java.sql.*;
 import java.util.List;
 
 public class SQLDatabase {
+    private static final String dbHost = "db";
     private static final String dbUsername = "cdp";
     private static final String dbPassword = "cdp";
     private static final String dbName = "cdp";
     private static final int dbPort = 3306;
+
+    private static final String backupHost = "localhost";
+    private static final int backupPort = 3307;
 
     private static Connection connection;
 
@@ -15,11 +19,19 @@ public class SQLDatabase {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://db:" + dbPort + "/" + dbName + "?user=" +
+                    "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?user=" +
                             dbUsername + "&password=" + dbPassword
             );
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
-            throw new Error(exception);
+        } catch (Exception ignored) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                connection = DriverManager.getConnection(
+                        "jdbc:mysql://" + backupHost + ":" + backupPort + "/" + dbName + "?user=" +
+                                dbUsername + "&password=" + dbPassword
+                );
+            } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+                throw new Error(exception);
+            }
         }
     }
 
