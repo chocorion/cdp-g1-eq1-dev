@@ -14,7 +14,6 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 import {ProjectService} from './services/project.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ProjectComponent} from './components/project/project.component';
-import {ProjectSearchComponent} from './components/project/project-search/project-search.component';
 import {ProjectListComponent} from './components/project/project-list/project-list.component';
 import {ProjectItemComponent} from './components/project/project-item/project-item.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
@@ -34,7 +33,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
         StatisticsComponent,
         PageNotFoundComponent,
         ProjectComponent,
-        ProjectSearchComponent,
         ProjectListComponent,
         ProjectItemComponent,
         SidebarComponent,
