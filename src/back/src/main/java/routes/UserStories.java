@@ -66,6 +66,7 @@ public class UserStories {
             for (Task task : taskDAO.getAllForUserStory(projectId, usId)) {
                 taskDAO.update(new Task(task.id, task.projectId, null, task.title, task.duration, task.status));
             }
+
             userStoryDAO.delete(userStory);
         } catch (Exception exception) {
             return Response

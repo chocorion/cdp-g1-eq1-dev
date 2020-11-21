@@ -71,7 +71,7 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
                 task.status,
                 task.usId,
                 task.projectId,
-                task.projectId
+                task.id
         );
 
         SQLDatabase.exec(statement, opt);
