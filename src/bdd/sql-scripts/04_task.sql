@@ -11,8 +11,9 @@ CREATE TABLE task (
 );
 
 DELIMITER |
-CREATE TRIGGER CK_TASK BEFORE INSERT ON task FOR EACH ROW 
-BEGIN
-    SET NEW.id = IFNULL((SELECT MAX(id) FROM task WHERE project = NEW.project),0) + 1;
-END| 
+CREATE PROCEDURE insert_task(project_ int, title_ text, duration_ text, status_ text, us_ int, OUT id_ int) 
+BEGIN 
+    SET id_ = IFNULL((SELECT MAX(id) FROM task WHERE project = project_),0) + 1; 
+    INSERT INTO task (project, id, title, duration, status, us) VALUES (project_, id_, title_, duration_, status_, us_); 
+END; |
 DELIMITER ;

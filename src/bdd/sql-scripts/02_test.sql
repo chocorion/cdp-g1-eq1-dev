@@ -11,8 +11,9 @@ CREATE TABLE test (
 );
 
 DELIMITER |
-CREATE TRIGGER CK_TEST BEFORE INSERT ON test FOR EACH ROW 
-BEGIN
-    SET NEW.id = IFNULL((SELECT MAX(id) FROM test WHERE project = NEW.project),0) + 1;
-END| 
+CREATE PROCEDURE insert_test(project_ int, name_ text, description_ text, lastExecution_ DATETIME, state_ TEXT, OUT id_ int) 
+BEGIN 
+    SET id_ = IFNULL((SELECT MAX(id) FROM test WHERE project = project_),0) + 1; 
+    INSERT INTO test (project, id, name, description, lastExecution, state) VALUES (project_, id_, name_, description_, lastExecution_, state_); 
+END; |
 DELIMITER ;

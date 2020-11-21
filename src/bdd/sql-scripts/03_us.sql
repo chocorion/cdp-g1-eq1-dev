@@ -10,8 +10,9 @@ CREATE TABLE us (
 );
 
 DELIMITER |
-CREATE TRIGGER CK_US BEFORE INSERT ON us FOR EACH ROW 
-BEGIN
-    SET NEW.id = IFNULL((SELECT MAX(id) FROM us WHERE project = NEW.project),0) + 1;
-END| 
+CREATE PROCEDURE insert_us(project_ int, description_ text, priority_ text, difficulty_ int, OUT id_ int) 
+BEGIN 
+    SET id_ = IFNULL((SELECT MAX(id) FROM us WHERE project = project_),0) + 1; 
+    INSERT INTO us (project, id, description, priority, difficulty) VALUES (project_, id_, description_, priority_, difficulty_); 
+END; |
 DELIMITER ;

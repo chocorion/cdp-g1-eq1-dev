@@ -41,8 +41,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
 
     @Override
     public UserStory insert(UserStory us) throws SQLException {
-        String statement = "INSERT INTO us (project, description, priority, difficulty)";
-        statement += "VALUES (?,?,?,?)";
+        String statement = "{CALL insert_us(?, ?, ?, ?, @id)}";
 
         List<Object> opt = Arrays.asList(
                 us.projectId,

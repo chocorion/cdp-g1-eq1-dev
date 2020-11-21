@@ -45,7 +45,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
         if (test.id != null)
             throw new SQLException("This test already has an id, use update !");
 
-        String statement = "INSERT INTO test (name, description, lastExecution, state, project) VALUES (?, ?, ?, ?, ?)";
+        String statement = "{CALL insert_test(?, ?, ?, ?, ?, @id)}";
         String lastExecution = test.lastExecution;
 
         List<Object> opt = Arrays.asList(

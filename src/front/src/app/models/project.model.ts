@@ -17,7 +17,7 @@ export class Project{
         );
     }
 
-    static assign(project : Project): Project {
+    static assign(project: Project): Project {
         return new Project(
             project.getId(),
             project.getName(),

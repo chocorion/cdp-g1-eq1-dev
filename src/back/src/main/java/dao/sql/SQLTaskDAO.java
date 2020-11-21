@@ -47,8 +47,7 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
 
     @Override
     public Task insert(Task task) throws Exception {
-        String statement = "INSERT INTO task (project, title, duration, status, us) ";
-        statement += "VALUES (?,?,?,?,?)";
+        String statement = "{CALL insert_task(?, ?, ?, ?, ?, @id)}";
 
         List<Object> opt = Arrays.asList(
                 task.projectId,
