@@ -73,6 +73,6 @@ public abstract class SQLDAO<T> {
             return id;
         }
 
-        throw new SQLException("Could not insert : "+sql);
+        throw new SQLException("Could not insert : " + sql);
     }
 }

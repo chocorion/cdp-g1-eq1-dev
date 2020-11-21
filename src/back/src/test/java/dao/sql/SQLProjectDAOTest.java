@@ -1,4 +1,4 @@
-package dao;
+package dao.sql;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,17 +9,13 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProjectTest {
+class SQLProjectDAOTest {
     @Test
     void testSimpleInsert() {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
         Project project = new Project("OCaMl project","I am an OCaMl project");
 
         assertDoesNotThrow(() -> projectDAO.insert(project));
-    }
-
-    void testGet() throws Exception {
-        new SQLProjectDAO().getAll().forEach(project -> System.out.println(project.description));;
     }
 
     @Test
