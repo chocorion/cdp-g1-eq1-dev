@@ -77,7 +77,7 @@ public abstract class SQLDAO<T> {
         generatedKey.close();
         preparedStatement.close();
 
-        preparedStatement = SQLDatabase.prepare("SELECT id FROM last_id");
+        preparedStatement = SQLDatabase.prepare("SELECT @id");
 
         ResultSet rs = preparedStatement.executeQuery();
         if(rs.next()) {
