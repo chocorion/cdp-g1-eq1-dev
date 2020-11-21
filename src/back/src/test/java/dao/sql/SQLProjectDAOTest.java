@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SQLProjectDAOTest {
     @Test
-    void testSimpleInsert() {
+    void testSimpleInsertDelete() {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
         Project project = new Project("OCaMl project","I am an OCaMl project");
 
-        assertDoesNotThrow(() -> projectDAO.insert(project));
+        assertDoesNotThrow(() -> projectDAO.delete(projectDAO.insert(project)));
     }
 
     @Test
@@ -23,8 +23,9 @@ class SQLProjectDAOTest {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
         Project project = new Project("Java project","I am a java project");
 
-        assertDoesNotThrow(() -> projectDAO.insert(project));
+        Project insertedProject = (Project) assertDoesNotThrow(() -> projectDAO.insert(project));
         assertThrows(SQLException.class, () -> projectDAO.insert(project));
+        assertDoesNotThrow(() -> projectDAO.delete(insertedProject));
     }
 
     @Test
@@ -36,5 +37,12 @@ class SQLProjectDAOTest {
 
         assertEquals(project.name, insertedProject.name);
         assertEquals(project.description, project.description);
+
+        try {
+            projectDAO.delete(insertedProject);
+        } catch(Exception exception) {
+            // We don't want this to fail the test
+            // It is to be able to launch the tests twice in a row
+        }
     }
 }

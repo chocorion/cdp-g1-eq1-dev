@@ -47,7 +47,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
     @Override
     public void update(Project project) throws SQLException {
         if (project.id == null) {
-            throw new SQLException("This project doesn't has an id, use insertOne !");
+            throw new SQLException("This project doesn't have an id, use insertOne !");
         }
 
         String statement = "UPDATE project SET name=?, description=? WHERE id=? LIMIT 1";
@@ -63,7 +63,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
     @Override
     public void delete(Project project) throws SQLException {
         if (project.id == null) {
-            throw new SQLException("This project doesn't has an id !");
+            throw new SQLException("This project doesn't have an id !");
         }
         String statement = "DELETE FROM project WHERE id=? LIMIT 1";
         List<Object> opt = Arrays.asList(project.id);
