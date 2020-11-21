@@ -63,4 +63,15 @@ public class Test {
 
         return comparator.compare(this, (Test) obj) == 0;
     }
+
+    @Override
+    public String toString() {
+        return "Test(id=" + id +
+                ", name=" + name +
+                ", description=" + description +
+                ", lastExecution=" + lastExecution +
+                ", state=" + state +
+                ", projectId=" + projectId +
+                ")";
+    }
 }

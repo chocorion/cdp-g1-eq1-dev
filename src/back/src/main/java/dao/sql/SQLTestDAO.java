@@ -62,16 +62,17 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
     @Override
     public void update(Test test) throws SQLException {
         if (test.id == null) {
-            throw new SQLException("This test doesn't have an id, use insertOne !");
+            throw new SQLException("This test doesn't have an id, use insert !");
         }
-        String statement = "UPDATE test SET name=?, description=?, state=?, lastExecution=? WHERE id=? LIMIT 1";
+        String statement = "UPDATE test SET name=?, description=?, state=?, lastExecution=? WHERE id=? AND project=? LIMIT 1";
         String lastExecution = test.lastExecution;
 
         List<Object> opt = Arrays.asList(
                 test.name,
                 test.description,
                 test.state,
-                (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,
+                (lastExecution != null)? java.sql.Date.valueOf(lastExecution) : null,
+                test.id,
                 test.projectId
         );
 
@@ -84,9 +85,9 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
             throw new SQLException("This test doesn't have an id !");
         }
 
-        String statement = "DELETE FROM test WHERE id=? LIMIT 1";
+        String statement = "DELETE FROM test WHERE id=? AND project=? LIMIT 1";
 
-        List<Object> opt = Arrays.asList(test.id);
+        List<Object> opt = Arrays.asList(test.id, test.projectId);
 
         SQLDatabase.exec(statement, opt);
     }

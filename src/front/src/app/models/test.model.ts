@@ -30,11 +30,9 @@ export class Test{
         return this.id;
     }
 
-
     public getName(): string {
         return this.name;
     }
-
 
     public getDescription(): string {
         return this.description;
@@ -45,11 +43,9 @@ export class Test{
         return this.lastExecution;
     }
 
-
     public getState(): string {
         return this.state;
     }
-
 
     public getProjectId(): number {
         return this.projectId;

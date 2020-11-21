@@ -44,11 +44,12 @@ public class Tests {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putTest(@PathParam("id") int id, @PathParam("test_id") int test_id, Test test) {
-        test = new Test(test.name, test.description, test.lastExecution, test.state, test_id, id);
+        test = new Test(test.name, test.description, test.lastExecution, test.state, id, test_id);
 
         try {
             testDAO.update(test);
         } catch (Exception exception) {
+            System.out.println("Probleme : " + exception.getMessage());
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
