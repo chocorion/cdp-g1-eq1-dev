@@ -20,17 +20,26 @@ export class ProjectListComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.projectService.getProjects().subscribe(
-                result => {
-                    this.projects = result.map(x => Project.fromJSON(x));
-                    this.projects.forEach(val => this.allprojects.push(Project.assign(val)));
-            }
-        );
+        this.updateProjects();
     }
 
-    notifyMe(value: string){
-        this.projects = this.allprojects.filter(p => p.getName().includes(value));
+    updateProjects(): void{
+        console.log("update");
+        this.projectService.getProjects().subscribe(
+            result => {
+                this.projects = result.map(x => Project.fromJSON(x));
+                this.projects.forEach(val => this.allprojects.push(Project.assign(val)));
+            }
+        )
     }
+
+    notifyMe(exec: string, value?: string): void{
+        if(exec === "search")
+            this.projects = this.allprojects.filter(p => p.getName().includes(value));
+        else if (exec === "update")
+            this.updateProjects();
+    }
+
 
     onClick(project: Project): void {
         this.projectService.setCurrentProject(project);

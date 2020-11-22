@@ -38,15 +38,17 @@ export class ProjectService {
     }
 
     updateProject(project: Project): Observable<Project> {
-        console.log("Up + " + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
+        console.log("Update + " + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
         return this.http.put<Project>(environment.apiUrl + 'projects/', project);
     }
 
     postProject(project: Project): Observable<Project> {
-        return this.http.post<Project>(environment.apiUrl + 'projects/' + project.getId(), project);
+        console.log("Add " + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
+        return this.http.post<Project>(environment.apiUrl + 'projects/', project);
     }
 
-    deleteProject(project: Project): void {
-        this.http.delete(environment.apiUrl + 'projects/' + project.getId());
+    deleteProject(project: Project) {
+        console.log("Delete " + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
+       return this.http.delete(environment.apiUrl + 'projects/' + project.getId());
     }
 }

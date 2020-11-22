@@ -3,25 +3,25 @@ export class Project{
     private name: string;
     private description: string;
 
-    constructor(id: number , name: string, description: string){
-        this.setId(id);
+    constructor( name: string, description: string, id? : number){
+        this.setId((id) ? id:-1);
         this.setName(name);
         this.setDescription(description);
     }
 
     static fromJSON(json): Project {
         return new Project(
-            json.id,
             json.name,
             json.description,
+            json.id
         );
     }
 
     static assign(project: Project): Project {
         return new Project(
-            project.getId(),
             project.getName(),
-            project.getDescription()
+            project.getDescription(),
+            project.getId(),
         );
     }
 
@@ -34,7 +34,7 @@ export class Project{
     }
 
     public setId(id: number): void {
-        if (id < 0) { id = 0; }
+        if (id < 0) { id = null; }
         this.id = id;
     }
 

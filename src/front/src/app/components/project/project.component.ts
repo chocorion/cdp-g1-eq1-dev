@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { ConstantPool } from '@angular/compiler';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Project } from 'src/app/models/project.model';
 import {ProjectService} from '../../services/project.service';
 import { ProjectListComponent } from './project-list/project-list.component';
 
@@ -14,26 +15,39 @@ export class ProjectComponent implements OnInit {
   @ViewChild('child')
   private child : ProjectListComponent;
   submit : string;
-  form: any;
+  searchForm: any;
   private formBuilder: FormBuilder = new FormBuilder();
+  newProjectForm :any;
+  private newProject: Project;
 
   constructor(private projectService: ProjectService) {
-    this.form = this.formBuilder.group({
+    this.searchForm = this.formBuilder.group({
         search: ''
     });
-}
+    this.newProjectForm =this.formBuilder.group({
+      name: '',
+      description: ''
+    });
+  }
 
   ngOnInit(): void {
       this.projectService.clearCurrentProject();
   }
 
-  onSubmit(data): void {
+  onSubmitSearch(data): void {
     this.submit = data.search;
-    this.child.notifyMe(this.submit);
+    this.child.notifyMe("search",this.submit);
   }
 
-  onClick(): void{
-    this.child.notifyMe('');
+  onSubmitNewProject(data) :void{
+    this.newProject = new Project(data.name, data.description);
+    this.projectService.postProject(this.newProject).subscribe(
+      ()=> {}
+    );
+  }
+
+  updateChild() :void{
+    this.child.notifyMe("update");
   }
 
 }

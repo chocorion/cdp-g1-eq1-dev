@@ -23,10 +23,13 @@ export class ProjectItemComponent implements OnInit {
             description: ''
         });
     }
-  deleteProject(): void{
-    this.projectService.deleteProject(this.currentProject);
-    console.log('delete incomming...');
-  }
+
+    deleteProject(): void{
+        this.projectService.deleteProject(this.currentProject).subscribe(
+            ()=>{}
+        );
+        console.log('delete incomming...');
+    }
 
     ngOnInit(): void {
         console.log("id " + this.currentProject.getId() + ' ' + this.currentProject.getName());
