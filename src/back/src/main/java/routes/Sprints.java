@@ -1,6 +1,7 @@
 package routes;
 
 import dao.SprintDAO;
+import dao.UserStoryDAO;
 import domain.Sprint;
 
 import javax.inject.Inject;
@@ -10,12 +11,24 @@ import javax.ws.rs.core.Response;
 @Path("projects/{projectId}/sprints")
 public class Sprints {
     @Inject SprintDAO sprintDAO;
+    @Inject UserStoryDAO userStoryDAO;
 
     @GET
     @Produces("application/json")
     public Response getAllForProject(@PathParam("projectId") int projectId) {
         try {
             return Response.status(200).entity(sprintDAO.getAllForProject(projectId)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("{sprintId}/us")
+    @Produces("application/json")
+    public Response getUs(@PathParam("projectId") int projectId, @PathParam("sprintId") int sprintId) {
+        try {
+            return Response.status(200).entity(userStoryDAO.getBySprint(projectId, sprintId)).build();
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }

@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface UserStoryDAO {
     UserStory getById(int project_id, int id) throws Exception;
+    UserStory getBySprint(int project_id, int sprintId) throws Exception;
     List<UserStory> getAllForProject(int project_id) throws Exception;
     UserStory insert(UserStory userStory) throws Exception;
     void update(UserStory userStory) throws Exception;
