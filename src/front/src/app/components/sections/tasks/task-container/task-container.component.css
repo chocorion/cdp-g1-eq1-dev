@@ -1,0 +1,16 @@
+.col{
+    min-width: 200px;
+    min-height: 200px;
+}
+h2{
+    padding-left: 100px;
+}
+
+.dropzone {
+    border: solid 1px #ccc;
+    min-height: 400px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+  }

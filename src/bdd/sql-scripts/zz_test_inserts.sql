@@ -31,6 +31,8 @@ CALL insert_us(2, "Premiere US du second projet", "Low", 5, null, @id);
 CALL insert_task(1, "Faire un truc", "3hh", "TODO", 1, @id);
 CALL insert_task(1, "Faire un autre truc", "2hh", "TODO", 1, @id);
 CALL insert_task(1, "Faire un truc pour l'autre truc", "3hh", "TODO", 2, @id);
+CALL insert_task(1, "Faire le premier truc", "1d", "DOING", 1, @id);
+CALL insert_task(1, "Check quand la liste est vide", "1d", "DONE", 1, @id);
 CALL insert_task(2, "Faire le premier truc", "1d", "DOING", 1, @id);
 CALL insert_task(2, "Faire un truc on sait pas pourquoi encore", "", "TODO", null, @id);
 
