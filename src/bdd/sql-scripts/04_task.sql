@@ -7,7 +7,8 @@ CREATE TABLE task (
     us int,
 
     CONSTRAINT PK_ID PRIMARY KEY (project, id),
-    FOREIGN KEY (project, us) REFERENCES us(project, id) ON DELETE CASCADE
+    FOREIGN KEY (project) REFERENCES project(id) ON DELETE CASCADE,
+    FOREIGN KEY (project, us) REFERENCES us(project, id)
 );
 
 DELIMITER |
