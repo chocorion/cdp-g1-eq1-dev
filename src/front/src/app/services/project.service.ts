@@ -49,6 +49,6 @@ export class ProjectService {
 
     deleteProject(project: Project) {
         console.log("Delete " + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
-       return this.http.delete(environment.apiUrl + 'projects/' + project.getId());
+        return this.http.delete(environment.apiUrl + 'projects/' +  project.getId());
     }
 }

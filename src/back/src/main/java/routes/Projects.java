@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("projects")
+@Path("projects/")
 public class Projects {
     @Inject ProjectDAO projectDAO;
 

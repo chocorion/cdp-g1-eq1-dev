@@ -7,12 +7,11 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("projects/{projectId}/")
+@Path("projects/{projectId}/tasks/")
 public class Tasks {
     @Inject TaskDAO taskDAO;
 
     @GET
-    @Path("tasks")
     @Produces("application/json")
     public Response getAllForProject(@PathParam("projectId") int projectId) {
         try {
@@ -23,7 +22,7 @@ public class Tasks {
     }
 
     @GET
-    @Path("us/{usId}/tasks")
+    @Path("us/{usId}")
     @Produces
     public Response getAllForUs(@PathParam("projectId") int projectId, @PathParam("usId") int usId) {
         try {
@@ -34,7 +33,6 @@ public class Tasks {
     }
 
     @POST
-    @Path("tasks")
     @Consumes("application/json")
     @Produces("application/json")
     public Response insert(@PathParam("projectId") int projectId, Task task) {
@@ -48,7 +46,7 @@ public class Tasks {
     }
 
     @PUT
-    @Path("tasks/{taskId}")
+    @Path("{taskId}")
     @Consumes("application/json")
     @Produces("application/json")
     public Response update(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId, Task task) {
@@ -63,7 +61,7 @@ public class Tasks {
     }
 
     @DELETE
-    @Path("tasks/{taskId}")
+    @Path("{taskId}")
     public Response delete(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId) {
         try {
             taskDAO.delete(taskDAO.getById(projectId, taskId));
