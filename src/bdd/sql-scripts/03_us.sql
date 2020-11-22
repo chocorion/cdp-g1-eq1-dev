@@ -6,7 +6,7 @@ CREATE TABLE us (
     difficulty int,
 
     CONSTRAINT PK_ID PRIMARY KEY (project, id),
-    FOREIGN KEY (project) REFERENCES project(id)
+    FOREIGN KEY (project) REFERENCES project(id) ON DELETE CASCADE
 );
 
 DELIMITER |
