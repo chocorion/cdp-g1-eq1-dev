@@ -19,6 +19,7 @@ import {ProjectItemComponent} from './components/project/project-item/project-it
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import { TestItemComponent } from './components/sections/tests/test-item/test-item.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ExpandedTaskCardComponent } from './components/sections/tasks/expanded-task-card/expanded-task-card.component';
 import { UsContainerComponent } from './components/sections/backlog/us-container/us-container.component';
 import { UsCardComponent } from './components/sections/backlog/us-card/us-card.component';
 
@@ -40,7 +41,8 @@ import { UsCardComponent } from './components/sections/backlog/us-card/us-card.c
         SidebarComponent,
         TestItemComponent,
         UsContainerComponent,
-        UsCardComponent
+        UsCardComponent,
+        ExpandedTaskCardComponent
     ],
     imports: [
         BrowserModule,
