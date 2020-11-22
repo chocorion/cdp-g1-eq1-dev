@@ -41,6 +41,9 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
 
     @Override
     public UserStory insert(UserStory us) throws SQLException {
+        if (us.id != null)
+            throw new SQLException("This us has an id, cannot insert.");
+
         String statement = "{CALL insert_us(?, ?, ?, ?, @id)}";
 
         List<Object> opt = Arrays.asList(
@@ -55,6 +58,9 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
 
     @Override
     public void update(UserStory us) throws SQLException {
+        if (us.id != null)
+            throw new SQLException("This us doesn't have an id, cannot update.");
+
         String statement = "UPDATE us SET description = ?, priority = ?, difficulty = ? WHERE project = ? AND id = ?";
 
         List<Object> opt = Arrays.asList(
@@ -70,9 +76,18 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
 
     @Override
     public void delete(UserStory us) throws SQLException {
-        String statement = "DELETE FROM us WHERE project = ? AND id = ?";
+        if (us.id == null)
+            throw new SQLException("This us doesn't have an id, cannot delete");
+
+        String statement = "UPDATE task SET us = null WHERE project = ? AND us = ?";
 
         List<Object> opt = Arrays.asList(us.projectId, us.id);
+
+        SQLDatabase.exec(statement, opt);
+
+        statement = "DELETE FROM us WHERE project = ? AND id = ?";
+
+        opt = Arrays.asList(us.projectId, us.id);
 
         SQLDatabase.exec(statement, opt);
     }
