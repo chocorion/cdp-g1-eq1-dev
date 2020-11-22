@@ -7,7 +7,7 @@ CREATE TABLE test (
     state ENUM('validate', 'refused', 'not executed'),
 
     CONSTRAINT PK_ID PRIMARY KEY (project, id),
-    FOREIGN KEY (project) REFERENCES project(id)
+    FOREIGN KEY (project) REFERENCES project(id) ON DELETE CASCADE
 );
 
 DELIMITER |
