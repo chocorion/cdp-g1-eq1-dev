@@ -30,3 +30,10 @@ INSERT INTO sprint (project, name)
 VALUES (1,"Sprint 1"),
     (1, "Le super Sprint"),
     (2, "Sprint 1");
+
+
+-- Adding new members to project 1 and 2
+
+INSERT INTO member (project, role, level)
+VALUES (1, 'product owner', 'senior'),
+       (2, 'developper front', 'junior');
