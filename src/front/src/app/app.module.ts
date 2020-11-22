@@ -22,6 +22,8 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ExpandedTaskCardComponent } from './components/sections/tasks/expanded-task-card/expanded-task-card.component';
 import { UsContainerComponent } from './components/sections/backlog/us-container/us-container.component';
 import { UsCardComponent } from './components/sections/backlog/us-card/us-card.component';
+import { TaskCardComponent } from './components/sections/tasks/task-card/task-card.component';
+import { TaskContainerComponent } from './components/sections/tasks/task-container/task-container.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +44,9 @@ import { UsCardComponent } from './components/sections/backlog/us-card/us-card.c
         TestItemComponent,
         UsContainerComponent,
         UsCardComponent,
-        ExpandedTaskCardComponent
+        ExpandedTaskCardComponent,
+        TaskCardComponent,
+        TaskContainerComponent
     ],
     imports: [
         BrowserModule,

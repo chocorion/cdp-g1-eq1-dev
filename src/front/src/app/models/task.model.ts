@@ -6,7 +6,7 @@ export class Task implements PossesId {
     private usId: number;
     private title: string;
     private duration: string;
-    private status: string;
+    public status: string;
 
     constructor(id: number, projectId: number, usId: number, title: string, duration: string, status: string) {
         this.id = (id) ? id : -1;

@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Tasks</h1>
+    <div class="col">
+        <h2>TODO</h2>
+        <div class="row">
+            <app-task-card *ngFor="let task of tasksTodo" [task]="task" (stateChange)="updateTask()"></app-task-card>
+        </div>
+    </div>
+    <div class="col">
+        <h2>DOING</h2>
+        <div class="row">
+                <app-task-card *ngFor="let task of tasksDoing" [task]="task" (stateChange)="updateTask()"></app-task-card>
+        </div>
+    </div>
+    <div class="col">
+        <h2>DONE</h2>
+        <div class="row">
+            <app-task-card *ngFor="let task of tasksDone" [task]="task" (stateChange)="updateTask()"></app-task-card>
+        </div>
+    </div>
+</div>
+
