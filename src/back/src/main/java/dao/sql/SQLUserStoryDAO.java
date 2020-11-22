@@ -16,6 +16,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
             resultSet.getString("description"),
             resultSet.getString("priority"),
             resultSet.getInt("difficulty"),
+            resultSet.getInt("sprint"),
             resultSet.getInt("id")
         );
     }
@@ -52,16 +53,17 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
         if (us.id != null)
             throw new SQLException("This us has an id, cannot insert.");
 
-        String statement = "{CALL insert_us(?, ?, ?, ?, @id)}";
+        String statement = "{CALL insert_us(?, ?, ?, ?, ?, @id)}";
 
         List<Object> opt = Arrays.asList(
                 us.projectId,
                 us.description,
                 us.priority,
-                us.difficulty
+                us.difficulty,
+                us.sprint
         );
 
-        return new UserStory(us.projectId, us.description, us.priority, us.difficulty, doInsert(statement, opt));
+        return new UserStory(us.projectId, us.description, us.priority, us.difficulty, us.sprint, doInsert(statement, opt));
     }
 
     @Override
@@ -69,7 +71,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
         if (us.id != null)
             throw new SQLException("This us doesn't have an id, cannot update.");
 
-        String statement = "UPDATE us SET description = ?, priority = ?, difficulty = ? WHERE project = ? AND id = ?";
+        String statement = "UPDATE us SET description = ?, priority = ?, difficulty = ?, sprint = ? WHERE project = ? AND id = ?";
 
         List<Object> opt = Arrays.asList(
                 us.description,

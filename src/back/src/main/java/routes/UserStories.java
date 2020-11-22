@@ -43,7 +43,7 @@ public class UserStories {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putTest(@PathParam("projectId") int projectId, @PathParam("usId") int usId, UserStory userStory) {
-        userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty, usId);
+        userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty, userStory.sprint, usId);
 
         try {
             userStoryDAO.update(userStory);
@@ -61,7 +61,7 @@ public class UserStories {
     @Consumes("application/json")
     @Produces("application/json")
     public Response postTest(@PathParam("projectId") int projectId, UserStory userStory) {
-        userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty);
+        userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty, userStory.sprint);
         UserStory built;
         try {
             built = userStoryDAO.insert(userStory);

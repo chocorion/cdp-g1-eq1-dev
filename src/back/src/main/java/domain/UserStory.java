@@ -9,6 +9,7 @@ public class UserStory {
     final public String description;
     final public String priority;
     final public Integer difficulty;
+    final public Integer sprint;
 
     final public static Comparator<UserStory> comparator;
 
@@ -28,24 +29,28 @@ public class UserStory {
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
                         (UserStory us) -> us.difficulty,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (UserStory us) -> us.sprint,
                         Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
     public UserStory() {
-        this(null, null, null, null, null);
+        this(null, null, null, null, null, null);
     }
 
 
-    public UserStory(Integer projectId, String description, String priority, Integer difficulty) {
-        this(projectId, description, priority, difficulty, null);
+    public UserStory(Integer projectId, String description, String priority, Integer difficulty, Integer sprint) {
+        this(projectId, description, priority, difficulty, sprint, null);
     }
 
-    public UserStory(Integer projectId, String description, String priority, Integer difficulty, Integer id) {
+    public UserStory(Integer projectId, String description, String priority, Integer difficulty, Integer sprint, Integer id) {
         this.id = id;
         this.projectId = projectId;
         this.description = description;
         this.priority = priority;
         this.difficulty = difficulty;
+        this.sprint = sprint;
     }
 
     @Override

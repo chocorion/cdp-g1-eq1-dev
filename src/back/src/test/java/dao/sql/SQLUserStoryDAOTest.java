@@ -11,7 +11,7 @@ class SQLUserStoryDAOTest {
     @Test
     void testSimpleInsert() {
         SQLUserStoryDAO userStoryDAO = new SQLUserStoryDAO();
-        UserStory us = new UserStory(1, "US trop bien", "High", 2);
+        UserStory us = new UserStory(1, "US trop bien", "High", 2, null);
 
         assertDoesNotThrow(() -> userStoryDAO.insert(us));
     }
@@ -24,7 +24,7 @@ class SQLUserStoryDAOTest {
     @Test
     void testSimpleInsertTwice() {
         SQLUserStoryDAO userStoryDAO = new SQLUserStoryDAO();
-        UserStory us = new UserStory(1, "US trop bien", "High", 2);
+        UserStory us = new UserStory(1, "US trop bien", "High", 2, null);
 
         assertDoesNotThrow(() -> userStoryDAO.insert(us));
         assertDoesNotThrow(() -> userStoryDAO.insert(us));
@@ -33,7 +33,7 @@ class SQLUserStoryDAOTest {
     @Test
     void testInsert() throws Exception {
         SQLUserStoryDAO userStoryDAO = new SQLUserStoryDAO();
-        UserStory us = new UserStory(1, "US trop bien", "High", 2);
+        UserStory us = new UserStory(1, "US trop bien", "High", 2, null);
 
         UserStory inserted = userStoryDAO.insert(us);
 
@@ -42,5 +42,6 @@ class SQLUserStoryDAOTest {
         assertEquals(us.projectId, inserted.projectId);
         assertEquals(us.difficulty, inserted.difficulty);
         assertEquals(us.priority, inserted.priority);
+        assertEquals(us.sprint, inserted.sprint);
     }
 }
