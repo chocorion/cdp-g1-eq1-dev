@@ -1,7 +1,12 @@
 <div class="card m-4"  *ngIf="task">
-    <div class="card-header"></div>
+    <div class="card-header">
+        <h5 class="card-title" (click) = "expand()">{{task.getTitle()}}
+            <span *ngIf = "expanded">
+                <app-expanded-task-card [task]="task"></app-expanded-task-card>
+            </span>
+        </h5>
+    </div>
     <div class="card-body">
-        <h5 class="card-title">{{task.getTitle()}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
             Id :
             {{task.getId()}}
