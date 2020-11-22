@@ -12,6 +12,8 @@ CALL insert_test(1, 'test2 p1', 'test2 p1 description', NULL, 'not executed', @i
 CALL insert_test(2, 'test1 p2', 'test1 p2 description', NULL, 'not executed', @id);
 CALL insert_test(2, 'test2 p2', 'test2 p2 description', NULL, 'not executed', @id);
 
+-- Create sprints for the projects
+
 INSERT INTO sprint (project, name)
 VALUES (1,"Sprint 1"),
     (1, "Le super Sprint"),
@@ -24,9 +26,24 @@ CALL insert_us(1, "Seconde US", "Medium", 3, 1, @id);
 CALL insert_us(1, "Troisieme US", "High", 2, 2, @id);
 CALL insert_us(2, "Premiere US du second projet", "Low", 5, null, @id);
 
+-- Add a few tasks to the first two projects
 
 CALL insert_task(1, "Faire un truc", "3hh", "TODO", 1, @id);
 CALL insert_task(1, "Faire un autre truc", "2hh", "TODO", 1, @id);
 CALL insert_task(1, "Faire un truc pour l'autre truc", "3hh", "TODO", 2, @id);
 CALL insert_task(2, "Faire le premier truc", "1d", "DOING", 1, @id);
 CALL insert_task(2, "Faire un truc on sait pas pourquoi encore", "", "TODO", null, @id);
+
+-- Adding new members to project 1 and 2
+
+INSERT INTO member (project, role, level)
+VALUES (1, 'product owner', 'senior'),
+       (2, 'developper front', 'junior');
+
+-- Create some DODs for a few tasks
+
+INSERT INTO dod (project, task, id, description, state)
+VALUES (1, 1, 1, "Vérifier que ça marche", 0),
+    (1, 1, 2, "Vérifier que ça marche toujours", 0),
+    (1, 2, 3, "Vérifier que ça marche", 1),
+    (2, 1, 4, "Vérifier que ça marche pas", 1);

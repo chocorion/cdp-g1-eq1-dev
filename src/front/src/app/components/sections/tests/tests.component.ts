@@ -32,8 +32,7 @@ export class TestsComponent implements OnInit, OnDestroy {
                     this.router.navigate(['']);
                     return;
                 }
-                // @ts-ignore
-                this.currentProject = new Project(project.id, project.name, project.description);
+                this.currentProject = Project.fromJSON(project);
                 this.updateTests();
             }
         );
@@ -46,6 +45,7 @@ export class TestsComponent implements OnInit, OnDestroy {
     }
 
     updateTests(): void {
+        console.log('Updating tests for project with id ' + this.currentProject.getId());
         this.testService.getAllForProject(this.currentProject.getId()).subscribe(
             result => {
                 this.tests = result.map(x => Test.fromJSON(x));

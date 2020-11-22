@@ -4,7 +4,6 @@ import dao.UserStoryDAO;
 import domain.UserStory;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,12 +30,12 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
     }
 
     @Override
-    public UserStory getBySprint(int project_id, int sprintId) throws Exception {
+    public List<UserStory> getBySprint(int project_id, int sprintId) throws Exception {
         String statement = "SELECT * FROM us WHERE project=? AND sprint=?";
 
         List<Object> opt = Arrays.asList(project_id, sprintId);
 
-        return queryFirstObject(statement, opt);
+        return queryAllObjects(statement, opt);
     }
 
     @Override

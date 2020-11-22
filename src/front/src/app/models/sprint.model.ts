@@ -12,7 +12,7 @@ export class Sprint implements PossesId {
     }
 
     static fromJSON(json): Sprint {
-        return new Sprint(json._name, json._projectId, json._id);
+        return new Sprint(json.name, json.projectId, json.id);
     }
 
     getProjectId(): number {

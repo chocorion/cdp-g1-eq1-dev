@@ -3,6 +3,7 @@ import {ProjectService} from '../../../services/project.service';
 import {Sprint} from '../../../models/sprint.model';
 import {SprintService} from '../../../services/sprint.service';
 
+
 @Component({
     selector: 'app-backlog',
     templateUrl: './backlog.component.html',
@@ -20,9 +21,10 @@ export class BacklogComponent implements OnInit {
     ngOnInit(): void {
         this.sprintService.getAllForProject(this.projectService.currentProject.getId()).subscribe(
             sprints => {
-                sprints = [];
-                sprints.map(sprint => Sprint.fromJSON(sprint));
-                sprints.forEach(sprint => this.sprints.push(sprint));
+                    this.sprints = [];
+                    sprints.forEach(sprint => this.sprints.push(Sprint.fromJSON(sprint)));
+                    console.log('Getting sprints : ');
+                    this.sprints.forEach(sprint => console.log(sprint));
             }
         );
     }
