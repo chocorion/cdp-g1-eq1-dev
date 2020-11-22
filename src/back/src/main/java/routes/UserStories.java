@@ -82,10 +82,6 @@ public class UserStories {
         try {
             UserStory userStory = userStoryDAO.getById(projectId, usId);
 
-            for (Task task : taskDAO.getAllForUserStory(projectId, usId)) {
-                taskDAO.update(new Task(task.projectId, null, task.title, task.duration, task.status, task.id));
-            }
-
             userStoryDAO.delete(userStory);
         } catch (Exception exception) {
             return Response
