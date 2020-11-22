@@ -1,4 +1,4 @@
-<div class="list-group-item" ng-hide="expression">
+<div class="list-group-item my-2 rounded" ng-hide="expression">
     <div class="row">
         <button class="btn projectName" (click)="onClick()">{{currentProject.getName()}}</button>
     </div>
@@ -16,10 +16,10 @@
     </div>
     <div class="row">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#id'+currentProject.id">
+        <button type="button" class="btn btn-primary ml-2 mt-2" data-toggle="modal" [attr.data-target]="'#id'+currentProject.id">
             Edit
         </button>
-        <button type = "button" class= "btn btn-danger" (click)= "deleteProject()">Supprimer</button>
+        <button type = "button" class= "btn btn-danger ml-1 mt-2" (click)= "deleteProject()">Supprimer</button>
         <!-- Modal -->
         <div class="modal fade" [attr.id]="'id'+currentProject.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
@@ -44,7 +44,7 @@
                                     Description
                                 </label>
                                 <input id="description" type="text" formControlName="description"></div>
-                            
+
                             <button type="submit" class="button">Save changes</button>
                         </form>
                     </div>
