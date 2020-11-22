@@ -1,3 +1,5 @@
-<p>backlog works!</p>
+<div class="container">
+    <h1>Backlog</h1>
 
-<li *ngFor="let project of projects">{{ project.getName() }}</li>
+    <app-us-container *ngFor="let sprint of sprints" [sprint]="sprint"></app-us-container>
+</div>

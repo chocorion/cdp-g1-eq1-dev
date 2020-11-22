@@ -12,12 +12,19 @@ CALL insert_test(1, 'test2 p1', 'test2 p1 description', NULL, 'not executed', @i
 CALL insert_test(2, 'test1 p2', 'test1 p2 description', NULL, 'not executed', @id);
 CALL insert_test(2, 'test2 p2', 'test2 p2 description', NULL, 'not executed', @id);
 
+-- Create sprints for the projects
+
+INSERT INTO sprint (project, name)
+VALUES (1,"Sprint 1"),
+    (1, "Le super Sprint"),
+    (2, "Sprint 1");
+
 -- Add 3 us to the first project, 1 us to the second us
 
-CALL insert_us(1, "Premiere US", "High", 1, @id);
-CALL insert_us(1, "Seconde US", "Medium", 3, @id);
-CALL insert_us(1, "Troisieme US", "High", 2, @id);
-CALL insert_us(2, "Premiere US du second projet", "Low", 5, @id);
+CALL insert_us(1, "Premiere US", "High", 1, 1, @id);
+CALL insert_us(1, "Seconde US", "Medium", 3, 1, @id);
+CALL insert_us(1, "Troisieme US", "High", 2, 2, @id);
+CALL insert_us(2, "Premiere US du second projet", "Low", 5, null, @id);
 
 -- Add a few tasks to the first two projects
 
@@ -26,13 +33,6 @@ CALL insert_task(1, "Faire un autre truc", "2hh", "TODO", 1, @id);
 CALL insert_task(1, "Faire un truc pour l'autre truc", "3hh", "TODO", 2, @id);
 CALL insert_task(2, "Faire le premier truc", "1d", "DOING", 1, @id);
 CALL insert_task(2, "Faire un truc on sait pas pourquoi encore", "", "TODO", null, @id);
-
--- Create sprints for the projects
-
-INSERT INTO sprint (project, name)
-VALUES (1,"Sprint 1"),
-    (1, "Le super Sprint"),
-    (2, "Sprint 1");
 
 -- Adding new members to project 1 and 2
 
