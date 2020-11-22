@@ -47,3 +47,10 @@ VALUES (1, 1, 1, "Vérifier que ça marche", 0),
     (1, 1, 2, "Vérifier que ça marche toujours", 0),
     (1, 2, 3, "Vérifier que ça marche", 1),
     (2, 1, 4, "Vérifier que ça marche pas", 1);
+
+-- Add dependencies between tasks
+
+INSERT INTO task_dep (project, parent, child)
+VALUES (1, 1, 2),
+    (1, 2, 3),
+    (2, 1, 2);
