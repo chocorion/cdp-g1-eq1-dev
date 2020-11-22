@@ -1,4 +1,4 @@
-<div class="sidebar" [class.sidebar-collapsed]="collapsed" [class.disabled]="visible">
+<div class="sidebar" [class.sidebar-collapsed]="collapsed" [class.disabled]="!visible">
     <ul class="list-unstyled pl-2">
         <li class="my-4">
             <a routerLink="/backlog" routerLinkActive="active">
@@ -65,7 +65,7 @@
     </ul>
 </div>
 
-<div class="sidebar-button" [class.sidebar-button-collapsed]="collapsed" [class.disabled]="visible">
+<div class="sidebar-button" [class.sidebar-button-collapsed]="collapsed" [class.disabled]="!visible">
     <button class="btn bg-light" (click)="collapse()">Menu</button>
 </div>
 

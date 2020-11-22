@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {SidebarService} from '../../services/sidebar.service';
+import {SidebarState} from '../../models/sidebar-state';
 
 @Component({
     selector: 'app-sidebar',
@@ -7,20 +8,35 @@ import {Router} from '@angular/router';
     styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-    collapsed = false;
-    visible = false;
+    public state: SidebarState;
 
-    constructor(private router: Router) {
-        router.events.subscribe(
-            () => this.visible = this.router.url === '/project'
-        );
+    public visible: boolean;
+    public collapsed: boolean;
+
+    constructor(private sidebarService: SidebarService) {
     }
 
     ngOnInit(): void {
+        this.sidebarService.sideBarSubject.subscribe(
+            next => {
+                this.state = next;
+                this.update();
+            }
+        );
 
+        this.sidebarService.emit();
     }
 
     collapse(): void {
-        this.collapsed = !this.collapsed;
+        if (this.state === SidebarState.closed) {
+            this.sidebarService.changeState(SidebarState.open);
+        } else {
+            this.sidebarService.changeState(SidebarState.closed);
+        }
+    }
+
+    private update(): void {
+        this.visible = (this.state !== SidebarState.disabled);
+        this.collapsed = (this.state === SidebarState.closed);
     }
 }
