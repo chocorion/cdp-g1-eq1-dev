@@ -4,20 +4,20 @@
         <div class="col-10">
             <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch(searchForm.value)">
                 <input id="search" type="text" formControlName="search" placeholder="Mots Clés">
-                <button type="submit" class="button">Rechercher</button>
-                <button class="button" type="button" (click)="updateChild()">Annuler la recherche</button>
+                <button type="submit" class="btn bg-light ml-2 mr-2">Rechercher</button>
+                <button class="btn bg-light my-4" type="button" (click)="updateChild()">Annuler la recherche</button>
             </form>
         </div>
         <div class="col-2">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target ="#new"> Nouveau Projet</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target ="#new">Nouveau</button>
             <!-- Modal -->
             <div class="modal fade" id ="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Ajouter un Projet</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="updateChild()"> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="updateChild()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -27,12 +27,12 @@
                                     <label for="name">Name</label>
                                     <input id="name" type="text" formControlName="name">
                                 </div>
-            
+
                                 <div>
                                     <label for="description"> Description </label>
                                     <input id="description" type="text" formControlName="description">
                                 </div>
-                                
+
                                 <button type="submit" class="button">Ajouter</button>
 
                             </form>
@@ -42,6 +42,9 @@
             </div>
         </div>
     </div>
-    <app-project-list #child> </app-project-list>
+    <div class="mt-3">
+        <app-project-list #child> </app-project-list>
+    </div>
+
 </div>
 

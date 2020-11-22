@@ -1,2 +1,9 @@
-<app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
+<div class="wrapper">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div [class.content-closeside]="!sideBarOpen" [class.content-openside]="sideBarOpen">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
