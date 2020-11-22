@@ -41,7 +41,7 @@ import { UsCardComponent } from './components/sections/backlog/us-card/us-card.c
         SidebarComponent,
         TestItemComponent,
         UsContainerComponent,
-        UsCardComponent
+        UsCardComponent,
         ExpandedTaskCardComponent
     ],
     imports: [
