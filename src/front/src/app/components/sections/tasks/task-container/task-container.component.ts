@@ -5,6 +5,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import {Task} from '../../../../models/task.model';
 import {Router} from '@angular/router';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-task-container',
   templateUrl: './task-container.component.html',
@@ -64,6 +65,17 @@ export class TaskContainerComponent implements OnInit {
             });
         }
     );
+}
+dropped(event: CdkDragDrop<string[]>) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data,
+      event.previousIndex,
+      event.currentIndex);
+  } else {
+    transferArrayItem(event.previousContainer.data,
+      event.container.data,
+      event.previousIndex, event.currentIndex);
+  }
 }
 
 }

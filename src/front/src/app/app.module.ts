@@ -24,7 +24,7 @@ import { UsContainerComponent } from './components/sections/backlog/us-container
 import { UsCardComponent } from './components/sections/backlog/us-card/us-card.component';
 import { TaskCardComponent } from './components/sections/tasks/task-card/task-card.component';
 import { TaskContainerComponent } from './components/sections/tasks/task-container/task-container.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
     declarations: [
         AppComponent,
@@ -53,7 +53,8 @@ import { TaskContainerComponent } from './components/sections/tasks/task-contain
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        DragDropModule
     ],
     providers: [
         ProjectService

@@ -1,4 +1,4 @@
-<div class="card m-4"  *ngIf="task">
+<div class="card m-4"  *ngIf="task" cdkDrag>
     <div class="card-header">
         <h5 class="card-title" (click) = "expand()">{{task.getTitle()}}
             <span *ngIf = "expanded">
