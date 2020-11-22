@@ -2,8 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
-import jdk.jfr.Timestamp;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemberTest {

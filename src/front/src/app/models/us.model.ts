@@ -19,8 +19,8 @@ export class Us implements PossesId {
         return new Us(
             json.id,
             json.projectId,
-            json.description,
             json.priority,
+            json.description,
             json.difficulty
         );
     }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
-import {Project} from '../../../models/project.model';
+import {Sprint} from '../../../models/sprint.model';
+import {SprintService} from '../../../services/sprint.service';
+
 
 @Component({
     selector: 'app-backlog',
@@ -8,16 +10,22 @@ import {Project} from '../../../models/project.model';
     styleUrls: ['./backlog.component.css']
 })
 export class BacklogComponent implements OnInit {
-    projects: Project[] = [];
+    sprints: Sprint[] = [];
 
-    constructor(private projectService: ProjectService) {
+    constructor(
+        private projectService: ProjectService,
+        private sprintService: SprintService
+    ) {
     }
 
     ngOnInit(): void {
-        // https://stackoverflow.com/questions/51763745/angular-6-error-typeerror-is-not-a-function-but-it-is
-        this.projectService.getProjects().subscribe(
-            // @ts-ignore
-            result => this.projects = result.map(x => new Project(x.id, x.name, x.description))
+        this.sprintService.getAllForProject(this.projectService.currentProject.getId()).subscribe(
+            sprints => {
+                    this.sprints = [];
+                    sprints.forEach(sprint => this.sprints.push(Sprint.fromJSON(sprint)));
+                    console.log('Getting sprints : ');
+                    this.sprints.forEach(sprint => console.log(sprint));
+            }
         );
     }
 }
