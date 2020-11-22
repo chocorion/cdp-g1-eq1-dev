@@ -12,7 +12,9 @@ export class GenericService<T extends PossesId> {
     ) {}
 
     getAllForProject(projectId: number): Observable<T[]> {
-        return this.httpClient.get<T[]>(this.projectRoute + `${projectId}/${this.routeBaseName}`);
+        const url = this.projectRoute + `${projectId}/${this.routeBaseName}`;
+        console.log('Get all projects for route ' + url);
+        return this.httpClient.get<T[]>(url);
     }
 
     post(projectId: number, item: T): Observable<T> {
