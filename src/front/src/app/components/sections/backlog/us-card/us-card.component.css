@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+
+    align-items: center;
+
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 2px;
+}
+
+.container > * {
+    margin-right: 2%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}

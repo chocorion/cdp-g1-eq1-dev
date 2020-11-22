@@ -26,17 +26,17 @@ export class ProjectItemComponent implements OnInit {
 
     deleteProject(): void{
         this.projectService.deleteProject(this.currentProject).subscribe(
-            ()=>{}
+            () => {}
         );
-        console.log('delete incomming...');
+        console.log('delete incoming...');
     }
 
     ngOnInit(): void {
-        console.log("id " + this.currentProject.getId() + ' ' + this.currentProject.getName());
+        console.log('id ' + this.currentProject.getId() + ' ' + this.currentProject.getName());
     }
 
     onSubmit(data): void {
-        console.log("id " + this.currentProject.getId() + ' ' + this.currentProject.getName());
+        console.log('id ' + this.currentProject.getId() + ' ' + this.currentProject.getName());
         this.currentProject.setName(data.name);
         this.currentProject.setDescription(data.description);
         this.projectService.updateProject(this.currentProject).subscribe(
@@ -46,6 +46,6 @@ export class ProjectItemComponent implements OnInit {
 
     onClick(): void {
         this.projectService.setCurrentProject(this.currentProject);
-        this.router.navigate(['tests']);
+        this.router.navigate(['backlog']);
     }
 }
