@@ -34,6 +34,10 @@ export class UsContainerComponent implements OnInit {
     }
 
     drop(event: CdkDragDrop<Us[], any>): void {
+        console.log(event);
+        console.log(event.previousContainer);
+        console.log(event.container);
+
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {

@@ -27,9 +27,15 @@ export class BacklogComponent implements OnInit {
         );
     }
 
-    sprintConnectedTo(): string[] {
+    sprintConnectedTo(sprint: Sprint): string[] {
         const result = [];
-        this.sprints.forEach(s => result.push(+s.getId()));
+        const id = sprint.getId();
+
+        this.sprints.forEach(s => {
+            if (s.getId() !== id) {
+                result.push('us-container' + s.getId());
+            }
+        });
 
         return result;
     }

@@ -4,6 +4,6 @@
     <app-us-container
         *ngFor="let sprint of sprints"
         [sprint]="sprint"
-        [connectedTo]="sprintConnectedTo()"
+        [connectedTo]="sprintConnectedTo(sprint)"
     ></app-us-container>
 </div>

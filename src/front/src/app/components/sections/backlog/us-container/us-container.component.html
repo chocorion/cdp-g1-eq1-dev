@@ -1,7 +1,7 @@
 <div
     class="container us-container my-4"
     cdkDropList
-    id="{{sprint.getId}}"
+    id="{{'us-container' + sprint.getId()}}"
     [cdkDropListData]="userStories"
     [cdkDropListConnectedTo]="connectedTo"
     (cdkDropListDropped)="drop($event)"
