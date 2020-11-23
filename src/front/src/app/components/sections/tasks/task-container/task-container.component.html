@@ -9,9 +9,11 @@
             [cdkDropListData]="tasksTodo" 
             [cdkDropListConnectedTo]="[DOING, DONE]"    
             (cdkDropListDropped)="dropped($event)">
-                <app-task-card *ngFor="let task of tasksTodo" [task]="task" (stateChange)="updateTask()" ></app-task-card>
+            <div class="block" >
+                <app-task-card *ngFor="let task of tasksTodo" [task]="task" (stateChange)="updateTask()" cdkDrag></app-task-card>
             </div>
         </div>
+    </div>
 
         <div class="col" >
             <h2>DOING</h2>
@@ -21,7 +23,9 @@
             [cdkDropListData]="tasksDoing" 
             [cdkDropListConnectedTo]="[TODO, DONE]"    
             (cdkDropListDropped)="dropped($event)">
-            <app-task-card *ngFor="let task of tasksDoing" [task]="task" (stateChange)="updateTask()"></app-task-card>
+            <div class="block" >
+                <app-task-card *ngFor="let task of tasksDoing" [task]="task" (stateChange)="updateTask()" cdkDrag></app-task-card>
+            </div>
         </div>
     </div>
     <div class="col ">
@@ -33,10 +37,9 @@
         [cdkDropListConnectedTo]="[TODO, DOING]"    
         (cdkDropListDropped)="dropped($event)">
         <div class="block" >
-            <app-task-card *ngFor="let task of tasksDone" [task]="task" (stateChange)="updateTask()"></app-task-card>
-        </div>
-        
-    </div>
+            <app-task-card *ngFor="let task of tasksDone" [task]="task" (stateChange)="updateTask()" cdkDrag></app-task-card>
+                </div>
+            </div>
         </div>
     </div>
 </div>
