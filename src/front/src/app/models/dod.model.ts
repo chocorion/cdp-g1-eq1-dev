@@ -5,7 +5,7 @@ export class DOD implements PossesId {
     private projectId: number;
     private taskId: number;
     private description: string;
-    private state: boolean;
+    public state: boolean;
 
 
     constructor(id: number, projectId: number, taskId: number, description: string, state: boolean) {

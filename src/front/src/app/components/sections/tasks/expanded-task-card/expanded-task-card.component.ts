@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from '../../../../models/task.model';
-import {TaskService} from '../../../../services/task.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DOD } from 'src/app/models/dod.model';
+import { Task } from '../../../../models/task.model';
+import { TaskService } from '../../../../services/task.service';
+
 
 
 @Component({
@@ -10,18 +12,22 @@ import {TaskService} from '../../../../services/task.service';
 })
 export class ExpandedTaskCardComponent implements OnInit {
   @Input() task: Task;
-  @Output() stateChange = new EventEmitter<void>();
-
+  @Output() expand = new EventEmitter<any>();
   parentDependency: Task[] = [];
   childrenDependency: Task[] = [];
+  dods: DOD[] = [];
 
   constructor(
-    private taskService: TaskService)
-    { }
+    private taskService: TaskService) { }
 
-    ngOnInit(): void {
-      this.getDependencies();
-    }
+  ngOnInit(): void {
+    this.getDependencies();
+    this.getDOD();
+  }
+
+  emitExpand(): void {
+    this.expand.emit();
+  }
 
   getDependencies(): void {
     this.taskService.getChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(
@@ -36,13 +42,27 @@ export class ExpandedTaskCardComponent implements OnInit {
     );
   }
 
-  getChildren(): string{
+  getDOD(): void {
+    this.taskService.getDOD(this.task.getProjectId(), this.task.getId()).subscribe(
+      result => {
+        this.dods = result.map(t => DOD.fromJSON(t));
+      }
+    );
+  }
+
+  updateDOD(dod: DOD): void {
+    this.taskService.updateDOD(this.task.getProjectId(), this.task.getId(), dod).subscribe(
+      () => { }
+    );
+  }
+
+  getChildren(): string {
     let s = '';
     this.childrenDependency.forEach(x => s += x.getId() + ', ');
     return s.slice(0, -2);
   }
 
-  getParents(): string{
+  getParents(): string {
     let s = '';
     this.parentDependency.forEach(x => s += x.getId() + ', ');
     return s.slice(0, -2);

@@ -25,6 +25,10 @@ import { UsCardComponent } from './components/sections/backlog/us-card/us-card.c
 import { TaskCardComponent } from './components/sections/tasks/task-card/task-card.component';
 import { TaskContainerComponent } from './components/sections/tasks/task-container/task-container.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -50,11 +54,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        DragDropModule
+        DragDropModule,
+        MatCheckboxModule
     ],
     providers: [
         ProjectService

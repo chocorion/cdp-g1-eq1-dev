@@ -1,9 +1,6 @@
 <div class="card m-4"  *ngIf="task" >
-    <div class="card-header">
-        <h5 class="card-title" (click) = "expand()">{{task.getTitle()}}
-            <span *ngIf = "expanded">
-                <app-expanded-task-card [task]="task"></app-expanded-task-card>
-            </span>
+    <div class="card-header"  data-toggle="modal" [attr.data-target]="'#id'+task.getId()" (click) = "expand()" >
+        <h5 class="card-title">{{task.getTitle()}}
         </h5>
     </div>
     <div class="card-body">
@@ -14,7 +11,9 @@
         <p class="card-text">
             Us associée:  {{task.getUsId()}}
         </p>
-
+        <span *ngIf = "expanded">
+            <app-expanded-task-card [task]="task" (expand) = "expand()"></app-expanded-task-card>
+        </span>
     </div>
 
 </div>

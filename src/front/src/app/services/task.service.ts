@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import { Task } from '../models/task.model';
 import {environment} from '../../environments/environment';
 import {GenericService} from './genericService';
+import { DOD } from '../models/dod.model';
 
 @Injectable({
     providedIn: 'root'
@@ -25,4 +26,13 @@ export class TaskService extends GenericService<Task>{
     getParentTasks(projectId: number, taskId: number): Observable<Task[]> {
         return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/parent`);
     }
+
+    getDOD(projectId: number, taskId: number): Observable<DOD[]> {
+        return this.http.get<DOD[]>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/DOD`);
+    }
+
+    updateDOD(projectId: number, taskId: number, dod: DOD): Observable<DOD> {
+        return this.http.put<DOD>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/DOD`, dod);
+    }
+
 }

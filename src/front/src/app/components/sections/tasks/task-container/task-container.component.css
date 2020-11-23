@@ -1,5 +1,5 @@
 .col{
-    min-width: 200px;
+    min-width: 300px;
     min-height: 200px;
     display: inline-block;
     vertical-align: top;
@@ -13,6 +13,7 @@ h2{
 .dropzone {
     border: solid 1px #ccc;
     min-height: 400px;
+    min-width: 200px;
     background: white;
     border-radius: 4px;
     overflow: hidden;

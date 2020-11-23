@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from '../../../../models/task.model';
-import {TaskService} from '../../../../services/task.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Task } from '../../../../models/task.model';
+import { TaskService } from '../../../../services/task.service';
 
 @Component({
   selector: 'app-task-card',
@@ -10,13 +10,14 @@ import {TaskService} from '../../../../services/task.service';
 export class TaskCardComponent implements OnInit {
   @Input() task: Task;
   expanded = false;
+
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
   }
 
   expand(): void {
-      this.expanded = !this.expanded;
+    this.expanded = !this.expanded;
   }
 
 }

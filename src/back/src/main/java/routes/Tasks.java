@@ -1,6 +1,8 @@
 package routes;
 
+import dao.DODDAO;
 import dao.TaskDAO;
+import domain.DOD;
 import domain.Task;
 
 import javax.inject.Inject;
@@ -10,6 +12,7 @@ import javax.ws.rs.core.Response;
 @Path("projects/{projectId}/tasks/")
 public class Tasks {
     @Inject TaskDAO taskDAO;
+    @Inject DODDAO dodDAO;
 
     @GET
     @Produces("application/json")
@@ -51,6 +54,31 @@ public class Tasks {
         try {
             Task task = taskDAO.getById(projectId, taskId);
             return Response.status(200).entity(taskDAO.getChildrenTasks(task)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("{taskId}/DOD")
+    @Produces("application/json")
+    public Response getDOD(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId) {
+        try {
+            return Response.status(200).entity(dodDAO.getAllForTask(projectId, taskId)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @PUT
+    @Path("{taskId}/DOD")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateDOD(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId, DOD dod) {
+        dod = new DOD(projectId, taskId, dod.description, dod.state, dod.id);
+        try {
+            dodDAO.update(dod);
+            return Response.status(200).entity(dod).build();
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }

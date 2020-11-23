@@ -1,3 +1,6 @@
 .card-text{
     font-size: medium;
 }
+.example-margin {
+    margin: 0 12px;
+  }

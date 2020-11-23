@@ -9,6 +9,7 @@ public class ApplicationBinder extends AbstractBinder {
         bind(SQLTestDAO.class).to(TestDAO.class);
         bind(SQLUserStoryDAO.class).to(UserStoryDAO.class);
         bind(SQLTaskDAO.class).to(TaskDAO.class);
+        bind(SQLDODDAO.class).to(DODDAO.class);
         bind(SQLSprintDAO.class).to(SprintDAO.class);
     }
 }

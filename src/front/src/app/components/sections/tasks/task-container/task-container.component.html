@@ -3,47 +3,34 @@
     <div class="row">
         <div class="col">
             <h2>TODO</h2>
-            <div class="dropzone"
-            cdkDropList
-            id= "TODO"
-            #TODO="cdkDropList" 
-            [cdkDropListData]="tasksTodo" 
-            [cdkDropListConnectedTo]="[DOING, DONE]"    
-            (cdkDropListDropped)="dropped($event)">
-            <div class="block" >
-                <app-task-card *ngFor="let task of tasksTodo" [task]="task" (stateChange)="updateTask()" cdkDrag></app-task-card>
+            <div class="dropzone" cdkDropList id="TODO" #TODO="cdkDropList" [cdkDropListData]="tasksTodo"
+                [cdkDropListConnectedTo]="[DOING, DONE]" (cdkDropListDropped)="dropped($event)">
+                <div class="block">
+                    <app-task-card *ngFor="let task of tasksTodo" [task]="task" (stateChange)="updateTask()" cdkDrag>
+                    </app-task-card>
+                </div>
             </div>
         </div>
-    </div>
 
-        <div class="col" >
+        <div class="col">
             <h2>DOING</h2>
-            <div class="dropzone"
-            cdkDropList
-            id= "DOING"
-            #DOING="cdkDropList" 
-            [cdkDropListData]="tasksDoing" 
-            [cdkDropListConnectedTo]="[TODO, DONE]"    
-            (cdkDropListDropped)="dropped($event)">
-            <div class="block" >
-                <app-task-card *ngFor="let task of tasksDoing" [task]="task" (stateChange)="updateTask()" cdkDrag></app-task-card>
+            <div class="dropzone" cdkDropList id="DOING" #DOING="cdkDropList" [cdkDropListData]="tasksDoing"
+                [cdkDropListConnectedTo]="[TODO, DONE]" (cdkDropListDropped)="dropped($event)">
+                <div class="block">
+                    <app-task-card *ngFor="let task of tasksDoing" [task]="task" (stateChange)="updateTask()" cdkDrag>
+                    </app-task-card>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col ">
-        <h2>DONE</h2>
-        <div class="dropzone"
-        cdkDropList
-        id= "DONE"
-        #DONE="cdkDropList" 
-        [cdkDropListData]="tasksDone" 
-        [cdkDropListConnectedTo]="[TODO, DOING]"    
-        (cdkDropListDropped)="dropped($event)">
-        <div class="block" >
-            <app-task-card *ngFor="let task of tasksDone" [task]="task" (stateChange)="updateTask()" cdkDrag></app-task-card>
+        <div class="col ">
+            <h2>DONE</h2>
+            <div class="dropzone" cdkDropList id="DONE" #DONE="cdkDropList" [cdkDropListData]="tasksDone"
+                [cdkDropListConnectedTo]="[TODO, DOING]" (cdkDropListDropped)="dropped($event)">
+                <div class="block">
+                    <app-task-card *ngFor="let task of tasksDone" [task]="task" (stateChange)="updateTask()" cdkDrag>
+                    </app-task-card>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
