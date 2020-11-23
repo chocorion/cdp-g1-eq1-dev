@@ -3,18 +3,16 @@
     <div class="card-body">
         <h5 class="card-title">{{task.getTitle()}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
-            Id :
-            {{task.getId()}}
+            #{{task.getId()}}
         </h6>
         <div class="card-text">
-            <p>ProjectId: {{task.getProjectId()}}</p>
             <p>UsId:  {{task.getUsId()}}</p>
             <p>Duration: {{task.getDuration()}}</p>
             <p>Status: {{task.getStatus()}}</p>
-            <p>Chiffrage: Not done</p>
-            <p>Dépendances: Not done</p>
-            <p>Type: Not done</p>
+            <p>Dépendances Parents: {{this.getParents()}}</p>
+            <p>Dépendances Enfants: {{this.getChildren()}}</p>
             <p>Member: Not done</p>
+            <p>DOD: Not done</p>
         </div>
 
     </div>
