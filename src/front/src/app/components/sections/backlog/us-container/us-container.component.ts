@@ -4,6 +4,7 @@ import {SprintService} from '../../../../services/sprint.service';
 import {ProjectService} from '../../../../services/project.service';
 import {UsService} from '../../../../services/us.service';
 import {Us} from '../../../../models/us.model';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-us-container',
@@ -12,7 +13,9 @@ import {Us} from '../../../../models/us.model';
 })
 export class UsContainerComponent implements OnInit {
     @Input() sprint: Sprint;
-    public us: Us[] = [];
+    @Input() connectedTo: string[];
+
+    public userStories: Us[] = [];
 
     constructor(
         private usService: UsService,
@@ -24,10 +27,20 @@ export class UsContainerComponent implements OnInit {
     ngOnInit(): void {
         this.sprintService.getUs(this.projectService.currentProject.getId(), this.sprint.getId()).subscribe(
             usList => {
-                this.us = [];
-                usList.forEach(us => this.us.push(Us.fromJSON(us)));
+                this.userStories = [];
+                usList.forEach(us => this.userStories.push(Us.fromJSON(us)));
             }
         );
     }
 
+    drop(event: CdkDragDrop<Us[], any>): void {
+        if (event.previousContainer === event.container) {
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        } else {
+            transferArrayItem(event.previousContainer.data,
+                event.container.data,
+                event.previousIndex,
+                event.currentIndex);
+        }
+    }
 }

@@ -1,5 +1,9 @@
 <div class="container">
     <h1>Backlog</h1>
 
-    <app-us-container *ngFor="let sprint of sprints" [sprint]="sprint"></app-us-container>
+    <app-us-container
+        *ngFor="let sprint of sprints"
+        [sprint]="sprint"
+        [connectedTo]="sprintConnectedTo()"
+    ></app-us-container>
 </div>

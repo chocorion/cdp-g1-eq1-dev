@@ -23,9 +23,14 @@ export class BacklogComponent implements OnInit {
             sprints => {
                     this.sprints = [];
                     sprints.forEach(sprint => this.sprints.push(Sprint.fromJSON(sprint)));
-                    console.log('Getting sprints : ');
-                    this.sprints.forEach(sprint => console.log(sprint));
             }
         );
+    }
+
+    sprintConnectedTo(): string[] {
+        const result = [];
+        this.sprints.forEach(s => result.push(+s.getId()));
+
+        return result;
     }
 }
