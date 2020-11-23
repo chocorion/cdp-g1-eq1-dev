@@ -5,6 +5,7 @@
             <h2>TODO</h2>
             <div class="dropzone"
             cdkDropList
+            id= "TODO"
             #TODO="cdkDropList" 
             [cdkDropListData]="tasksTodo" 
             [cdkDropListConnectedTo]="[DOING, DONE]"    
@@ -19,6 +20,7 @@
             <h2>DOING</h2>
             <div class="dropzone"
             cdkDropList
+            id= "DOING"
             #DOING="cdkDropList" 
             [cdkDropListData]="tasksDoing" 
             [cdkDropListConnectedTo]="[TODO, DONE]"    
@@ -32,6 +34,7 @@
         <h2>DONE</h2>
         <div class="dropzone"
         cdkDropList
+        id= "DONE"
         #DONE="cdkDropList" 
         [cdkDropListData]="tasksDone" 
         [cdkDropListConnectedTo]="[TODO, DOING]"    

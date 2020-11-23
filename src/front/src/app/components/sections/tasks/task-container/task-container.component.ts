@@ -66,16 +66,42 @@ export class TaskContainerComponent implements OnInit {
         }
     );
 }
-dropped(event: CdkDragDrop<string[]>) {
-  if (event.previousContainer === event.container) {
-    moveItemInArray(event.container.data,
-      event.previousIndex,
-      event.currentIndex);
-  } else {
-    transferArrayItem(event.previousContainer.data,
-      event.container.data,
-      event.previousIndex, event.currentIndex);
+  dropped(event: CdkDragDrop<any>): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex, event.currentIndex);
+      event.container.data[event.currentIndex].status = event.container.id;
+      this.updateTaskState(event);
+    }
+}
+
+  updateTaskState(event: CdkDragDrop<any>): void{
+    event.container.data[event.currentIndex].status = event.container.id;
+    let task: Task;
+    switch (event.container.id){
+      case 'TODO':
+        task = this.tasksTodo[event.currentIndex];
+        break;
+      case 'DOING':
+        task = this.tasksDoing[event.currentIndex];
+        break;
+      default:
+        task = this.tasksDone[event.currentIndex];
+        break;
+    }
+
+    this.update(task);
   }
+
+  update(task: Task): void {
+    this.taskService.update(task.getProjectId(), task).subscribe(
+      () => {}
+    );
 }
 
 }
