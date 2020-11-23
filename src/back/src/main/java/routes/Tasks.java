@@ -32,6 +32,30 @@ public class Tasks {
         }
     }
 
+    @GET
+    @Path("{taskId}/parent")
+    @Produces("application/json")
+    public Response getParentTasks(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId) {
+        try {
+            Task task = taskDAO.getById(projectId, taskId);
+            return Response.status(200).entity(taskDAO.getParentTasks(task)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("{taskId}/children")
+    @Produces("application/json")
+    public Response getChildrenTasks(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId) {
+        try {
+            Task task = taskDAO.getById(projectId, taskId);
+            return Response.status(200).entity(taskDAO.getChildrenTasks(task)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
     @POST
     @Consumes("application/json")
     @Produces("application/json")

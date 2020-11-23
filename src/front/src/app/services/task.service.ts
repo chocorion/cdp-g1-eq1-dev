@@ -17,4 +17,12 @@ export class TaskService extends GenericService<Task>{
     getAllForUs(projectId: number, usId: number): Observable<Task[]> {
         return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/us/${usId}/tasks`);
     }
+
+    getChildrenTasks(projectId: number, taskId: number): Observable<Task[]> {
+        return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/children`);
+    }
+
+    getParentTasks(projectId: number, taskId: number): Observable<Task[]> {
+        return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/parent`);
+    }
 }
