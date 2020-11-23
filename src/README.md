@@ -1,18 +1,25 @@
-Pour tester le front : 
+# Readme
 
-- Sans docker : `ng serve`, ajouter `--watch` pour mettre à jour automatiquement en cas de changement.
-- Avec docker (prod) : `ng build --prod `, puis `docker build -t test-front .` et enfin `docker run -p 8080:80 test-front` 8080 peut être remplacé par n'importe quel numéro de port.
+Nous utilisons [*docker*](https://docs.docker.com/get-docker/) et [*docker-compose*](https://docs.docker.com/compose/install/) pour le déployement.  
 
-Pour tester le back :
+### Utilisateur
 
-- Avec docker : Il faut build le .war, dans *intellij* c'est dans **build/build artefacts** puis **back:war** (voire avec maven pour faire sans intellij). Ensuite, `docker build -t test-back .` et enfin `docker run -p 8080:8080 test-back` le premier 8080 pouvant être changé.
+Pour lancer notre application, s'il s'agit d'une release, il suffit de lancer `docker-compose up`, et de se rendre sur [localhost:8080](http://localhost:8080). Sinon, il va falloir passer par l'étape de **Build**.
+
+### Build
+
+Pour pouvoir build notre projet, il faut avoir installé *maven* et *npm*.
+
+La procédure d'installation (testé sous ubuntu 20.04):
+```bash
+sudo apt install maven npm;
+```
+
+Pour la première fois, il faut installer les dépendances pour le *front*. Il faut pour cela aller dans le dossier `src/front` et lancer la commande `npm install`. Il suffit alors de lancer `scripts/run-prod.sh` pour lancer notre application, accessible sur [localhost:8080](http://localhost:8080).
+
+Pour faire à la Main : pour build le *front*, il faut lancer dans `src/front` la commande `ng build --prod`, et pour la *back*,  il faut lancer dans `src/back` la commande `mvn war:war`.
 
 
+Pour lancer les tests unitaires, il faut lancer le script `scripts/run-test.sh`.
 
-Pour tester le tout : `docker-compose up` (ajouter `--force-recreate --build` permet d'éviter des surprises avec docker !)
-
-Le front doit être accessible sur `http://localhost:8080/` (pour le moment projet de base angular), et le back à `http://localhost:9000/api/v1/`.
-
-`http://localhost:9000/api/v1/hello/world` affiche *hello world !* si tout va bien.S
-
-Pour relancer les tests, pour le moment il faut remettre la bdd dans son état originel avec : `docker-compose -f docker-compose.test.yml up --build --force-recreate --renew-anon-volumes db`
+Pour ne lancer que le *back* et la *db*, afin de tester le *front* avec `ng serve --watch`: `docker-compose up --build --force-recreate --renew-anon-volumes back db`. Il faut ajouter `app` dans la liste des services pour ajouter *phpmyadmin*, accessible sur le port `4242`.
