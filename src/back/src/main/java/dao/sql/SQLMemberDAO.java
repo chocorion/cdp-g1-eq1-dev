@@ -20,19 +20,22 @@ public class SQLMemberDAO extends SQLDAO<Member> implements MemberDAO {
     }
 
     @Override
-    public Member getById(int user) throws SQLException {
-        String statement = "SELECT * FROM member WHERE user=?";
-        List<Object> opt = Arrays.asList(user);
+    public Member getById(int project_id, int user) throws SQLException {
+        String statement = "SELECT * FROM member WHERE project=? AND user=?";
+        List<Object> opt = Arrays.asList(project_id, user);
 
         return queryFirstObject(statement, opt);
     }
 
-    @Override
-    public List<Member> getAll() throws SQLException {
-        String statement = "SELECT * FROM member";
 
-        return queryAllObjects(statement);
+    @Override
+    public List<Member> getAllForProject(int project_id) throws SQLException {
+        String statement = "SELECT * FROM member WHERE project=?";
+
+        List<Object> opt =Arrays.asList(project_id);
+        return queryAllObjects(statement, opt);
     }
+
 
     @Override
     public Member insert(Member member) throws SQLException {
