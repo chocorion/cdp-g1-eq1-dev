@@ -36,12 +36,40 @@ public class Tasks {
     }
 
     @GET
-    @Path("{taskId}/parent")
+    @Path("{taskId}/parents")
     @Produces("application/json")
     public Response getParentTasks(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId) {
         try {
             Task task = taskDAO.getById(projectId, taskId);
             return Response.status(200).entity(taskDAO.getParentTasks(task)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @POST
+    @Path("{taskId}/parents")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response addParentTask(@PathParam("projectId") int projectId, @PathParam("taskId") int childId, Task parent) {
+        try {
+            Task child = taskDAO.getById(projectId, childId);
+            taskDAO.addDependency(parent, child);
+            return Response.status(200).entity(taskDAO.getParentTasks(child)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("{taskId}/parents")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response deleteParentTask(@PathParam("projectId") int projectId, @PathParam("taskId") int childId, Task parent) {
+        try {
+            Task child = taskDAO.getById(projectId, childId);
+            taskDAO.deleteDependency(parent, child);
+            return Response.status(200).entity(taskDAO.getParentTasks(child)).build();
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }
@@ -54,6 +82,34 @@ public class Tasks {
         try {
             Task task = taskDAO.getById(projectId, taskId);
             return Response.status(200).entity(taskDAO.getChildrenTasks(task)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @POST
+    @Path("{taskId}/children")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response addChildTask(@PathParam("projectId") int projectId, @PathParam("taskId") int parentId, Task child) {
+        try {
+            Task parent = taskDAO.getById(projectId, parentId);
+            taskDAO.addDependency(parent, child);
+            return Response.status(200).entity(taskDAO.getChildrenTasks(parent)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("{taskId}/children")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response deleteChildTask(@PathParam("projectId") int projectId, @PathParam("taskId") int parentId, Task child) {
+        try {
+            Task parent = taskDAO.getById(projectId, parentId);
+            taskDAO.deleteDependency(parent, child);
+            return Response.status(200).entity(taskDAO.getChildrenTasks(parent)).build();
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }
@@ -79,6 +135,34 @@ public class Tasks {
         try {
             dodDAO.update(dod);
             return Response.status(200).entity(dod).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @POST
+    @Path("{taskId}/DOD")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response insertDOD(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId, DOD dod) {
+        dod = new DOD(projectId, taskId, dod.description, dod.state, dod.id);
+        try {
+            DOD inserted = dodDAO.insert(dod);
+            return Response.status(200).entity(inserted).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("{taskId}/DOD")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response deleteDOD(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId, DOD dod) {
+        dod = new DOD(projectId, taskId, dod.description, dod.state, dod.id);
+        try {
+            dodDAO.delete(dod);
+            return getDOD(projectId, taskId);
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }
