@@ -12,6 +12,7 @@ import { TaskService } from '../../../../services/task.service';
 export class ExpandedTaskCardComponent implements OnInit {
   @Input() task: Task;
   @Output() expand = new EventEmitter<any>();
+  @Output() stateChange = new EventEmitter<any>();
 
   parentDependency: Task[] = [];
   childrenDependency: Task[] = [];
@@ -43,6 +44,10 @@ export class ExpandedTaskCardComponent implements OnInit {
     this.expand.emit();
   }
 
+  emitStateChange(): void {
+    this.stateChange.emit();
+  }
+
   updateModify(): void{
     this.modify = !this.modify;
   }
@@ -72,7 +77,7 @@ export class ExpandedTaskCardComponent implements OnInit {
 
   updateDOD(dod: DOD): void {
     this.taskService.updateDOD(this.task.getProjectId(), this.task.getId(), dod).subscribe(
-      () => { }
+      () => { this.emitStateChange(); }
     );
   }
 

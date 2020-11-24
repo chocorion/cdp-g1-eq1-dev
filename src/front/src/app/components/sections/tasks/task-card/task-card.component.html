@@ -11,8 +11,11 @@
         <p class="card-text">
             Us associée:  {{task.getUsId()}}
         </p>
+        <h5><div class="badge badge-primary text-wrap float-right mt-2" id= "badge">
+            {{currentState}}
+            </div></h5>
         <span *ngIf = "expanded">
-            <app-expanded-task-card [task]="task" (expand) = "expand()"></app-expanded-task-card>
+            <app-expanded-task-card [task]="task" (expand) = "expand()" (stateChange) = "getCurrentDodStates()"></app-expanded-task-card>
         </span>
     </div>
 

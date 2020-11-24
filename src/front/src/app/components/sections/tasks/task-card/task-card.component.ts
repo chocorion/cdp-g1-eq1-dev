@@ -10,14 +10,26 @@ import { TaskService } from '../../../../services/task.service';
 export class TaskCardComponent implements OnInit {
   @Input() task: Task;
   expanded = false;
-
+  currentState: string;
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    this.getCurrentDodStates();
   }
 
   expand(): void {
     this.expanded = !this.expanded;
   }
+
+  getCurrentDodStates(): void {
+    this.taskService.getDOD(this.task.getProjectId(), this.task.getId()).subscribe(
+      result => {
+        const t = result.filter(x => x.state === true);
+        this.currentState = t.length + '/' + result.length;
+      }
+    );
+    console.log('cc');
+  }
+
 
 }
