@@ -1,7 +1,6 @@
 import {PossesId} from './possesId';
-import {FromJSON} from './fromJSON';
 
-export class Sprint implements PossesId, FromJSON<Sprint> {
+export class Sprint implements PossesId {
     private projectId: number;
     private id: number;
     private name: string;
@@ -9,10 +8,10 @@ export class Sprint implements PossesId, FromJSON<Sprint> {
     constructor(name: string, projectId: number, id?: number) {
         this.name = name;
         this.projectId = projectId;
-        this.id = (id) ? id : null;
+        this.id = id;
     }
 
-    fromJSON(json): Sprint {
+    static fromJSON(json): Sprint {
         return new Sprint(json.name, json.projectId, json.id);
     }
 

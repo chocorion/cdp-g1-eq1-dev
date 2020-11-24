@@ -19,8 +19,7 @@ export class UsService extends GenericService<Us> {
         return this.http.get<Us>(environment.apiUrl + `projects/${projectId}/us/${usId}`);
     }
 
-    getUnplanned(projectId: number): Observable<Us[]> {
-        return super.getAllForProject(projectId).pipe(
-            map(usList => usList.filter(us => Us.fromJSON(us).getSprint() === -1)));
+    getElementFromJSON(jsonObject): Us {
+        return Us.fromJSON(jsonObject);
     }
 }

@@ -1,7 +1,6 @@
 import {PossesId} from './possesId';
-import {FromJSON} from './fromJSON';
 
-export class Us implements PossesId, FromJSON<Us> {
+export class Us implements PossesId {
     public id: number;
     private projectId: number;
     private description: string;
@@ -18,7 +17,7 @@ export class Us implements PossesId, FromJSON<Us> {
         this.setSprint(sprint);
     }
 
-    fromJSON(json): Us {
+    static fromJSON(json): Us {
         return new Us(
             json.id,
             json.projectId,
@@ -30,7 +29,7 @@ export class Us implements PossesId, FromJSON<Us> {
     }
 
     public setId(id: number): void {
-        this.id = (id) ? id : null;
+        this.id = id;
     }
 
     public setProjectId(projectId: number): void {
@@ -72,7 +71,7 @@ export class Us implements PossesId, FromJSON<Us> {
     }
 
     private setSprint(sprint: number): void {
-        this.sprint = (sprint) ? sprint : -1;
+        this.sprint = (sprint) ? sprint : null;
     }
 
     public getSprint(): number {

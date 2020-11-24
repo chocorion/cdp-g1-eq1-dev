@@ -10,4 +10,8 @@ export class TestService extends GenericService<Test>{
     constructor(private http: HttpClient) {
         super(http, 'tests');
     }
+
+    getElementFromJSON(jsonObject): Test {
+        return Test.fromJSON(jsonObject);
+    }
 }

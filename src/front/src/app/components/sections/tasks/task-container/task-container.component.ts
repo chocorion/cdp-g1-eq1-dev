@@ -15,6 +15,10 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 export class TaskContainerComponent implements OnInit, OnDestroy {
     currentProject: Project = null;
     currentProjectSubscription: Subscription;
+    tasksSubscription: Subscription;
+
+    tasks: Task[] = [];
+
     tasksTodo: Task[] = [];
     tasksDoing: Task[] = [];
     tasksDone: Task[] = [];
@@ -37,35 +41,26 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
             }
         );
         this.projectService.emitCurrentProject();
+
+        this.tasksSubscription = this.taskService.subject.subscribe(
+            result => {
+                this.tasks = result;
+                this.updateTask();
+            }
+        );
+
+        this.taskService.getAllForProject(this.projectService.currentProject.getId());
     }
 
     ngOnDestroy(): void {
         this.currentProjectSubscription.unsubscribe();
+        this.tasksSubscription.unsubscribe();
     }
 
     updateTask(): void {
-        console.log('Updating task for project with id ' + this.currentProject.getId());
-        this.taskService.getAllForProject(this.currentProject.getId()).subscribe(
-            result => {
-                this.tasksTodo = result.map(x => {
-                    if (x.status === 'TODO') {
-                        return Task.fromJSON(x);
-                    }
-                });
-
-                this.tasksDoing = result.map(x => {
-                    if (x.status === 'DOING') {
-                        return Task.fromJSON(x);
-                    }
-                });
-
-                this.tasksDone = result.map(x => {
-                    if (x.status === 'DONE') {
-                        return Task.fromJSON(x);
-                    }
-                });
-            }
-        );
+        this.tasksTodo = this.tasks.filter(x => x.status === 'TODO');
+        this.tasksDoing = this.tasks.filter(x => x.status === 'DOING');
+        this.tasksDone = this.tasks.filter(x => x.status === 'DONE');
     }
 
     dropped(event: CdkDragDrop<string[]>): void {

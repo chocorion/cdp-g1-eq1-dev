@@ -17,4 +17,8 @@ export class TaskService extends GenericService<Task>{
     getAllForUs(projectId: number, usId: number): Observable<Task[]> {
         return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/us/${usId}/tasks`);
     }
+
+    getElementFromJSON(jsonObject): Task {
+        return Task.fromJSON(jsonObject);
+    }
 }

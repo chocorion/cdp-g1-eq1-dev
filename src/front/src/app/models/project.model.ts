@@ -3,8 +3,8 @@ export class Project{
     private name: string;
     private description: string;
 
-    constructor( name: string, description: string, id? : number){
-        this.setId((id) ? id:-1);
+    constructor( name: string, description: string, id?: number){
+        this.setId((id) ? id : -1);
         this.setName(name);
         this.setDescription(description);
     }

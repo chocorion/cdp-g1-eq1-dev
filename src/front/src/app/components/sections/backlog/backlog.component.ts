@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
 import {Sprint} from '../../../models/sprint.model';
 import {SprintService} from '../../../services/sprint.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -10,7 +10,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
     templateUrl: './backlog.component.html',
     styleUrls: ['./backlog.component.css']
 })
-export class BacklogComponent implements OnInit {
+export class BacklogComponent implements OnInit, OnDestroy {
+    subscription: Subscription;
     sprints: Sprint[] = [];
 
     constructor(
@@ -19,12 +20,20 @@ export class BacklogComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.sprintService.getAllForProject(this.projectService.currentProject.getId()).subscribe(
-            sprints => {
-                    this.sprints = [];
-                    sprints.forEach(sprint => this.sprints.push(Sprint.fromJSON(sprint)));
+        this.subscription = this.sprintService.subject.subscribe(
+            sprintList => {
+                console.log('In backlog init : ');
+                console.log('Receive sprintlist : ');
+                console.log(sprintList);
+                this.sprints = sprintList;
             }
         );
+
+        this.sprintService.getAllForProject(this.projectService.currentProject.getId());
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     sprintConnectedTo(sprint: Sprint): string[] {
