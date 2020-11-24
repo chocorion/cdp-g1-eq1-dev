@@ -141,6 +141,34 @@ public class Tasks {
     }
 
     @POST
+    @Path("{taskId}/DOD")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response insertDOD(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId, DOD dod) {
+        dod = new DOD(projectId, taskId, dod.description, dod.state, dod.id);
+        try {
+            DOD inserted = dodDAO.insert(dod);
+            return Response.status(200).entity(inserted).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("{taskId}/DOD")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response deleteDOD(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId, DOD dod) {
+        dod = new DOD(projectId, taskId, dod.description, dod.state, dod.id);
+        try {
+            dodDAO.delete(dod);
+            return getDOD(projectId, taskId);
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @POST
     @Consumes("application/json")
     @Produces("application/json")
     public Response insert(@PathParam("projectId") int projectId, Task task) {
