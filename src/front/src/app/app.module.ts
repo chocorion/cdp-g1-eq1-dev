@@ -27,6 +27,8 @@ import { TaskContainerComponent } from './components/sections/tasks/task-contain
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MemberListComponent } from './components/sections/planification/member-list/member-list.component';
+import { MemberItemComponent } from './components/sections/planification/member-list/member-item/member-item.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         UsCardComponent,
         ExpandedTaskCardComponent,
         TaskCardComponent,
-        TaskContainerComponent
+        TaskContainerComponent,
+        MemberListComponent,
+        MemberItemComponent
     ],
     imports: [
         BrowserModule,
