@@ -1,28 +1,29 @@
 export class Member {
     public user : number;
-    private projectId : number;
+    private project : number;
     private role : string;
     private level : string;
 
-    constructor(projectId :number, role :string, level:string, user?: number ){
+    constructor(project :number, role :string, level:string, user?: number ){
         this.setUser((user) ? user:-1);
-        this.setProjectId(projectId);
+        this.setProject(project);
         this.setRole(role);
         this.setLevel(level);
     }
 
-    static fromJson(json) : Member {
+    static fromJSON(json) : Member {
         return new Member(
-            json.user,
-            json.projectId,
+            json.project,
             json.role,
-            json.level
+            json.level,
+            json.user,
+
         );
     }
 
     static assign(member : Member) : Member {
         return new Member(
-            member.getProjectId(),
+            member.getProject(),
             member.getRole(),
             member.getLevel(),
             member.getUser()
@@ -38,12 +39,12 @@ export class Member {
         this.user = user;
     }
 
-    public getProjectId() : number {
-        return this.projectId;
+    public getProject() : number {
+        return this.project;
     }
 
-    public setProjectId(projectId :number):void{
-        this.projectId =projectId;
+    public setProject(project :number):void{
+        this.project =project;
     }
     public getRole() : string {
         return this.role;
