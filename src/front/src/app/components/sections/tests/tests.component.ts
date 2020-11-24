@@ -13,7 +13,10 @@ import {Router} from '@angular/router';
 })
 export class TestsComponent implements OnInit, OnDestroy {
     currentProject: Project = null;
+
     currentProjectSubscription: Subscription;
+    testsSubscription: Subscription;
+
     successRate = 0;
     failureRate = 0;
     tests: Test[] = [];
@@ -38,21 +41,24 @@ export class TestsComponent implements OnInit, OnDestroy {
         );
 
         this.projectService.emitCurrentProject();
+
+        this.testsSubscription = this.testService.subject.subscribe(
+            tests => {
+                this.tests = tests;
+                this.updateTests();
+            }
+        );
+        this.testService.getAllForProject(this.projectService.currentProject.getId());
     }
 
     ngOnDestroy(): void {
         this.currentProjectSubscription.unsubscribe();
+        this.testsSubscription.unsubscribe();
     }
 
     updateTests(): void {
-        console.log('Updating tests for project with id ' + this.currentProject.getId());
-        this.testService.getAllForProject(this.currentProject.getId()).subscribe(
-            result => {
-                this.tests = result.map(x => Test.fromJSON(x));
-                this.updatePercentFailure();
-                this.updatePercentSuccess();
-            }
-        );
+        this.updatePercentFailure();
+        this.updatePercentSuccess();
     }
 
     updatePercentSuccess(): void {

@@ -6,13 +6,15 @@ export class Us implements PossesId {
     private description: string;
     private priority: string;
     private difficulty: number;
+    private sprint: number;
 
-    constructor(id: number , projectId: number, priority: string, description: string, difficulty: number){
+    constructor(id: number , projectId: number, priority: string, description: string, difficulty: number, sprint: number){
         this.setId(id);
         this.setProjectId(projectId);
         this.setDescription(description);
         this.setPriority(priority);
         this.setDifficulty(difficulty);
+        this.setSprint(sprint);
     }
 
     static fromJSON(json): Us {
@@ -21,12 +23,12 @@ export class Us implements PossesId {
             json.projectId,
             json.priority,
             json.description,
-            json.difficulty
+            json.difficulty,
+            json.sprint
         );
     }
 
     public setId(id: number): void {
-        if (id < 0) { id = 0; }
         this.id = id;
     }
 
@@ -66,5 +68,13 @@ export class Us implements PossesId {
 
     public getDifficulty(): number{
         return this.difficulty;
+    }
+
+    private setSprint(sprint: number): void {
+        this.sprint = (sprint) ? sprint : null;
+    }
+
+    public getSprint(): number {
+        return this.sprint;
     }
 }

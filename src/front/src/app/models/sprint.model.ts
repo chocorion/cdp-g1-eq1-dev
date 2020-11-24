@@ -8,7 +8,7 @@ export class Sprint implements PossesId {
     constructor(name: string, projectId: number, id?: number) {
         this.name = name;
         this.projectId = projectId;
-        this.id = (id) ? id : -1;
+        this.id = id;
     }
 
     static fromJSON(json): Sprint {
@@ -17,10 +17,6 @@ export class Sprint implements PossesId {
 
     getProjectId(): number {
         return this.projectId;
-    }
-
-    setProjectId(value: number): void {
-        this.projectId = value;
     }
 
     getId(): number {

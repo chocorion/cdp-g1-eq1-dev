@@ -1,70 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { Project } from '../../../../models/project.model';
-import { Subscription } from 'rxjs';
-import { ProjectService } from 'src/app/services/project.service';
-import { TaskService } from 'src/app/services/task.service';
-import { Task } from '../../../../models/task.model';
-import { Router } from '@angular/router';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Project} from '../../../../models/project.model';
+import {Subscription} from 'rxjs';
+import {ProjectService} from 'src/app/services/project.service';
+import {TaskService} from 'src/app/services/task.service';
+import {Task} from '../../../../models/task.model';
+import {Router} from '@angular/router';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 @Component({
-  selector: 'app-task-container',
-  templateUrl: './task-container.component.html',
-  styleUrls: ['./task-container.component.css']
+    selector: 'app-task-container',
+    templateUrl: './task-container.component.html',
+    styleUrls: ['./task-container.component.css']
 })
-export class TaskContainerComponent implements OnInit {
-  currentProject: Project = null;
-  currentProjectSubscription: Subscription;
-  tasksTodo: Task[] = [];
-  tasksDoing: Task[] = [];
-  tasksDone: Task[] = [];
+export class TaskContainerComponent implements OnInit, OnDestroy {
+    currentProject: Project = null;
+    currentProjectSubscription: Subscription;
+    tasksSubscription: Subscription;
 
-  constructor(
-    private projectService: ProjectService,
-    private taskService: TaskService,
-    private router: Router) { }
+    tasks: Task[] = [];
 
-  ngOnInit(): void {
-    this.currentProjectSubscription = this.projectService.currentProjectSubject.subscribe(
-      (project: Project) => {
-        if (project === null) {
-          this.router.navigate(['']);
-          return;
-        }
-        this.currentProject = Project.fromJSON(project);
-        this.updateTask();
-      }
-    );
-    this.projectService.emitCurrentProject();
-  }
+    tasksTodo: Task[] = [];
+    tasksDoing: Task[] = [];
+    tasksDone: Task[] = [];
+    
+    constructor(
+        private projectService: ProjectService,
+        private taskService: TaskService,
+        private router: Router) {
+    }
 
-  ngOnDestroy(): void {
-    this.currentProjectSubscription.unsubscribe();
-  }
 
-  updateTask(): void {
-    console.log('Updating task for project with id ' + this.currentProject.getId());
-    this.taskService.getAllForProject(this.currentProject.getId()).subscribe(
-      result => {
-        this.tasksTodo = result.map(x => {
-          if (x.status === 'TODO') {
-            return Task.fromJSON(x);
-          }
-        });
 
-        this.tasksDoing = result.map(x => {
-          if (x.status === 'DOING') {
-            return Task.fromJSON(x);
-          }
-        });
+    
 
-        this.tasksDone = result.map(x => {
-          if (x.status === 'DONE') {
-            return Task.fromJSON(x);
-          }
-        });
-      }
-    );
-  }
+    updateTask(): void {
+        this.tasksTodo = this.tasks.filter(x => x.status === 'TODO');
+        this.tasksDoing = this.tasks.filter(x => x.status === 'DOING');
+        this.tasksDone = this.tasks.filter(x => x.status === 'DONE');
+    }
+    
   dropped(event: CdkDragDrop<any>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data,
@@ -102,5 +76,31 @@ export class TaskContainerComponent implements OnInit {
       () => { }
     );
   }
+    ngOnInit(): void {
+        this.currentProjectSubscription = this.projectService.currentProjectSubject.subscribe(
+            (project: Project) => {
+                if (project === null) {
+                    this.router.navigate(['']);
+                    return;
+                }
+                this.currentProject = Project.fromJSON(project);
+                this.updateTask();
+            }
+        );
+        this.projectService.emitCurrentProject();
 
+        this.tasksSubscription = this.taskService.subject.subscribe(
+            result => {
+                this.tasks = result;
+                this.updateTask();
+            }
+        );
+
+        this.taskService.getAllForProject(this.projectService.currentProject.getId());
+    }
+
+    ngOnDestroy(): void {
+        this.currentProjectSubscription.unsubscribe();
+        this.tasksSubscription.unsubscribe();
+    }
 }
