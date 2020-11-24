@@ -17,20 +17,58 @@
                             #{{task.getId()}}
                         </h6>
                         <div class="card-text">
-                            <p>UsId: {{task.getUsId()}}</p>
-                            <p>Duration: {{task.getDuration()}}</p>
-                            <p>Status: {{task.getStatus()}}</p>
-                            <p>Dépendances Parents: {{this.getParents()}}</p>
-                            <p>Dépendances Enfants: {{this.getChildren()}}</p>
-                            <p>Member: Not done</p>
-                            <div class="dodstate" *ngFor="let dod of dods">
-                                <div class="card">
-                                    <div class="card-header"> DOD #{{dod.getId()}} - Task #{{dod.getTaskId()}}</div>
-                                    <h6>{{dod.getDescription()}}</h6>
-                                    <mat-checkbox class="example-margin" [(ngModel)]="dod.state"
-                                        (change)="updateDOD(dod)">state </mat-checkbox>
+                            <div *ngIf="!modify">
+                                <p>UsId: {{task.getUsId()}}</p>
+                                <p>Duration: {{task.getDuration()}}</p>
+                                <p>Status: {{task.getStatus()}}</p>
+                                <p>Dépendances Parents: {{this.getParents()}}</p>
+                                <p>Dépendances Enfants: {{this.getChildren()}}</p>
+                                <p>Member: Not done</p>
+                                <div class="dodstate" *ngFor="let dod of dods">
+                                    <div class="card">
+                                        <div class="card-header"> DOD #{{dod.getId()}} - Task #{{dod.getTaskId()}}</div>
+                                        <h6>{{dod.getDescription()}}</h6>
+                                        <mat-checkbox class="example-margin" [(ngModel)]="dod.state"
+                                            (change)="updateDOD(dod)">state </mat-checkbox>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="modify" *ngIf = "modify">
+                                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                                    <div>
+                                        <label for="title">title</label>
+                                        <input type="text" formControlName="title">
+                                    </div>
+                                    <div>
+                                        <label for="usId">usId</label>
+                                        <input id="usId" type="text" formControlName="usId">
+                                    </div>
+                                    <div>
+                                        <label for="duration">duration</label>
+                                        <input id="duration" type="text" formControlName="duration">
+                                    </div>
+                                    <div>
+                                        <label for="status">status</label>
+                                        <input id="status" type="text" formControlName="status">
+                                    </div>
+                                    <div>
+                                        <label for="parents">parents</label>
+                                        <input id="parents" type="text" formControlName="parents">
+                                    </div>
+                                    <div>
+                                        <label for="children">children</label>
+                                        <input id="children" type="text" formControlName="children">
+                                    </div>
+                                    <div>
+                                        <label for="member">member</label>
+                                        <input id="member" type="text" formControlName="member">
+                                    </div>
+                                    
+                                    <button type="submit" class="button">Ajouter</button>
+
+                                </form>
+                            </div>
+                            <button type="button" class="btn btn-primary" (click)= updateModify()>Modifier</button>
                         </div>
 
                     </div>
