@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
 import {Sprint} from '../../../models/sprint.model';
 import {SprintService} from '../../../services/sprint.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -15,8 +16,7 @@ export class BacklogComponent implements OnInit {
     constructor(
         private projectService: ProjectService,
         private sprintService: SprintService
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.sprintService.getAllForProject(this.projectService.currentProject.getId()).subscribe(
@@ -33,10 +33,16 @@ export class BacklogComponent implements OnInit {
 
         this.sprints.forEach(s => {
             if (s.getId() !== id) {
-                result.push('us-container' + s.getId());
+                result.push('sprint' + s.getId());
             }
         });
 
+        result.push('unplanned-container');
+
         return result;
+    }
+
+    unplannedConnectedTo(): string[] {
+        return [...this.sprints].map(s => 'sprint' + s.getId());
     }
 }

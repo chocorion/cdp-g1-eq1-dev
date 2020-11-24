@@ -1,33 +1,36 @@
 import {PossesId} from './possesId';
+import {FromJSON} from './fromJSON';
 
-export class Us implements PossesId {
+export class Us implements PossesId, FromJSON<Us> {
     public id: number;
     private projectId: number;
     private description: string;
     private priority: string;
     private difficulty: number;
+    private sprint: number;
 
-    constructor(id: number , projectId: number, priority: string, description: string, difficulty: number){
+    constructor(id: number , projectId: number, priority: string, description: string, difficulty: number, sprint: number){
         this.setId(id);
         this.setProjectId(projectId);
         this.setDescription(description);
         this.setPriority(priority);
         this.setDifficulty(difficulty);
+        this.setSprint(sprint);
     }
 
-    static fromJSON(json): Us {
+    fromJSON(json): Us {
         return new Us(
             json.id,
             json.projectId,
             json.priority,
             json.description,
-            json.difficulty
+            json.difficulty,
+            json.sprint
         );
     }
 
     public setId(id: number): void {
-        if (id < 0) { id = 0; }
-        this.id = id;
+        this.id = (id) ? id : null;
     }
 
     public setProjectId(projectId: number): void {
@@ -66,5 +69,13 @@ export class Us implements PossesId {
 
     public getDifficulty(): number{
         return this.difficulty;
+    }
+
+    private setSprint(sprint: number): void {
+        this.sprint = (sprint) ? sprint : -1;
+    }
+
+    public getSprint(): number {
+        return this.sprint;
     }
 }

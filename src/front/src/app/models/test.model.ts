@@ -1,6 +1,7 @@
 import {PossesId} from './possesId';
+import {FromJSON} from './fromJSON';
 
-export class Test implements PossesId {
+export class Test implements PossesId, FromJSON<Test> {
     private id: number;
     private name: string;
     private description: string;
@@ -17,7 +18,7 @@ export class Test implements PossesId {
         this.id = (id) ? id : -1;
     }
 
-    static fromJSON(json): Test {
+    fromJSON(json): Test {
         return new Test(
             json.name,
             json.description,

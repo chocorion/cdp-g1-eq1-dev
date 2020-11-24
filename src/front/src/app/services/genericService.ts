@@ -1,31 +1,62 @@
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
+import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {PossesId} from '../models/possesId';
+import {FromJSON} from '../models/fromJSON';
 
-export class GenericService<T extends PossesId> {
-    private projectRoute = environment.apiUrl + 'projects/';
+
+export class GenericService<T extends PossesId & FromJSON<T>> {
+    private static projectRoute = environment.apiUrl + 'projects/';
+
+    private TList: T[];
+    public subject = new Subject<T[]>();
 
     constructor(
         private httpClient: HttpClient,
         private routeBaseName: string
     ) {}
 
-    getAllForProject(projectId: number): Observable<T[]> {
-        const url = this.projectRoute + `${projectId}/${this.routeBaseName}`;
-        console.log('Get all projects for route ' + url);
-        return this.httpClient.get<T[]>(url);
+    emit(): void {
+        this.subject.next(this.TList);
     }
 
-    post(projectId: number, item: T): Observable<T> {
-        return this.httpClient.post<T>(this.projectRoute + `${projectId}/${this.routeBaseName}`, item);
+    getAllForProject(projectId: number): void {
+        const url = GenericService.projectRoute + `${projectId}/${this.routeBaseName}`;
+
+        this.httpClient.get<T[]>(url).subscribe(
+            result => {
+                this.TList = result.map(element => element.fromJSON(element));
+                this.emit();
+            }
+        );
     }
 
-    update(projectId: number, item: T): Observable<T> {
-        return this.httpClient.put<T>(this.projectRoute + `${projectId}/${this.routeBaseName}/${item.getId()}`, item);
+    post(projectId: number, item: T): void {
+        const url = GenericService.projectRoute + `${projectId}/${this.routeBaseName}`;
+
+        this.httpClient.post<T>(url, item).subscribe(
+            result => {
+                this.TList.push(result.fromJSON(result));
+                this.emit();
+            }
+        );
+    }
+
+    update(projectId: number, item: T): void {
+        const url = GenericService.projectRoute + `${projectId}/${this.routeBaseName}/${item.getId()}`;
+
+        this.httpClient.put<T>(url, item).subscribe(
+            result => {
+                this.TList.push(result.fromJSON(result));
+                this.emit();
+            }
+        );
     }
 
     delete(projectId: number, item: T): void {
-        this.httpClient.delete(this.projectRoute + `${projectId}/${this.routeBaseName}/${item.getId()}`);
+        const url = GenericService.projectRoute + `${projectId}/${this.routeBaseName}/${item.getId()}`;
+        this.httpClient.delete(url).subscribe(
+            result => {}
+        );
     }
 }

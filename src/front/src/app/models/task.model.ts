@@ -1,6 +1,7 @@
 import {PossesId} from './possesId';
+import {FromJSON} from './fromJSON';
 
-export class Task implements PossesId {
+export class Task implements PossesId, FromJSON<Task> {
     private id: number;
     private projectId: number;
     private usId: number;
@@ -17,7 +18,7 @@ export class Task implements PossesId {
         this.status = status;
     }
 
-    static fromJSON(json): Task {
+    fromJSON(json): Task {
         return new Task(
             json.id,
             json.projectId,

@@ -8,10 +8,10 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 
 @Component({
     selector: 'app-us-container',
-    templateUrl: './us-container.component.html',
-    styleUrls: ['./us-container.component.css']
+    templateUrl: './sprint.component.html',
+    styleUrls: ['./sprint.component.css']
 })
-export class UsContainerComponent implements OnInit {
+export class SprintComponent implements OnInit {
     @Input() sprint: Sprint;
     @Input() connectedTo: string[];
 
@@ -34,10 +34,6 @@ export class UsContainerComponent implements OnInit {
     }
 
     drop(event: CdkDragDrop<Us[], any>): void {
-        console.log(event);
-        console.log(event.previousContainer);
-        console.log(event.container);
-
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {

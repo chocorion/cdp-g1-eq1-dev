@@ -1,12 +1,12 @@
 <div
     class="container us-container my-4"
     cdkDropList
-    id="{{'us-container' + sprint.getId()}}"
+    id='unplanned-container'
     [cdkDropListData]="userStories"
     [cdkDropListConnectedTo]="connectedTo"
     (cdkDropListDropped)="drop($event)"
 >
-    <h4 class="container-title ml-2 mt-2">{{sprint.getName()}}</h4>
+    <h4 class="container-title ml-2 mt-2">Unplanned user stories</h4>
 
     <app-us-card *ngFor="let userStory of userStories" [us]="userStory" cdkDrag></app-us-card>
 </div>
