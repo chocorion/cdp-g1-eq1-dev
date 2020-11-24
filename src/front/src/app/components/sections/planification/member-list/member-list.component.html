@@ -1,0 +1,45 @@
+<ul class="list-group">
+ <div class = "row">
+        <div class="col">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target ="#new">Nouveau</button>
+            <!-- Modal -->
+            <div class="modal fade" id ="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un Membre</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="updateMembers()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                                <div>
+                                    <label for="role">role</label>
+                                    <input id="role" type="text" formControlName="role">
+                                </div>
+
+                                <div>
+                                    <label for="level"> level </label>
+                                    <input id="level" type="text" formControlName="level">
+                                </div>
+
+                                <button type="submit" class="button">Ajouter</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+    <div class="row">
+        <app-member-item  *ngFor="let member of members"
+        [currentMember] ="member"
+        [currentProjectId] = "currentProject.getId()"
+    ></app-member-item>
+    </div>
+
+    
+</ul>
