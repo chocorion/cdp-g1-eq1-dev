@@ -53,5 +53,6 @@ class SQLTaskDAOTest {
 
         assertDoesNotThrow(() -> taskDAO.addDependency(task1, task2));
         assertThrows(SQLException.class, () -> taskDAO.addDependency(task1, task2));
+        assertDoesNotThrow(() -> taskDAO.deleteDependency(task1, task2));
     }
 }

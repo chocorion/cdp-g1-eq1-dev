@@ -141,4 +141,17 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
 
         SQLDatabase.exec(statement, opt);
     }
+
+    @Override
+    public void deleteDependency(Task parent, Task child) throws SQLException {
+        if (parent.id == null)
+            throw new SQLException("The parent doesn't have an id, cannot delete");
+        if (child.id == null)
+            throw new SQLException("The child doesn't have an id, cannot delete");
+
+        String statement = "DELETE FROM task_dep WHERE project = ? AND parent = ? AND child = ?";
+        List<Object> opt = Arrays.asList(parent.projectId, parent.id, child.id);
+
+        SQLDatabase.exec(statement, opt);
+    }
 }

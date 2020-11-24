@@ -10,6 +10,7 @@ public interface TaskDAO {
     List<Task> getAllForUserStory(int projectId, int usId) throws Exception;
 
     void addDependency(Task parent, Task child) throws Exception;
+    void deleteDependency(Task parent, Task child) throws Exception;
     List<Task> getParentTasks(Task task) throws Exception;
     List<Task> getChildrenTasks(Task task) throws Exception;
 
