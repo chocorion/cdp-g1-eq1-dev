@@ -35,9 +35,10 @@ export class TestItemComponent implements OnInit {
     changeState(newState: string): void {
         this.test.setState(newState);
         this.test.setLastExecution(new Date().toISOString().slice(0, 10));
+
         this.testService.update(this.test.getProjectId(), this.test).subscribe(
             test => {
-                this.test = Test.fromJSON(test);
+                this.test = test;
                 this.stateChange.emit();
             }
         );

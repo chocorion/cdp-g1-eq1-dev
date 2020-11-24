@@ -35,4 +35,8 @@ export class TaskService extends GenericService<Task>{
         return this.http.put<DOD>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/DOD`, dod);
     }
 
+    getElementFromJSON(jsonObject): Task {
+        return Task.fromJSON(jsonObject);
+    }
+
 }

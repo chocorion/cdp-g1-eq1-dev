@@ -18,4 +18,8 @@ export class SprintService extends GenericService<Sprint> {
     getUs(projectId: number, sprintId: number): Observable<Us[]> {
         return this.http.get<Us[]>(environment.apiUrl + `projects/${projectId}/sprints/${sprintId}/us`);
     }
+
+    getElementFromJSON(jsonObject): Sprint {
+        return Sprint.fromJSON(jsonObject);
+    }
 }
