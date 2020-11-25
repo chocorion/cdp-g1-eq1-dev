@@ -15,6 +15,5 @@ jobs:
     - name: Install eslint
       run: npm i eslint
 
-    steps:
     - name: Run ESLint
       run: eslint ./src --ext .ts,.js
