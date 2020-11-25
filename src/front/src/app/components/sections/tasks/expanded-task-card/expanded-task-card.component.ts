@@ -170,7 +170,7 @@ export class ExpandedTaskCardComponent implements OnInit {
             this.taskService.deleteChildrenTask(this.task.getProjectId(), this.task.getId(), c.getId() ).subscribe
         (( () => {} )));
         children.forEach( c  =>
-            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId() , 
+            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId() ,
             this.tasks.find( e => e.getId() === parseInt(c, 10))).subscribe
         (( () => {} )));
         parents.forEach( p =>
