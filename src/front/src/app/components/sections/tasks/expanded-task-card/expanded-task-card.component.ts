@@ -114,7 +114,7 @@ export class ExpandedTaskCardComponent implements OnInit {
                 this.form.patchValue({ children: this.getChildren() });
             }
         );
-        this.taskService.getParentTasks(this.task.getId(), this.task.getId()).subscribe(
+        this.taskService.getParentTasks(this.task.getProjectId(), this.task.getId()).subscribe(
             result => {
                 this.parentDependency = result.map(t => Task.fromJSON(t));
                 this.form.patchValue({ parents: this.getParents() });
@@ -170,10 +170,12 @@ export class ExpandedTaskCardComponent implements OnInit {
             this.taskService.deleteChildrenTask(this.task.getProjectId(), this.task.getId(), c.getId() ).subscribe
         (( () => {} )));
         children.forEach( c  =>
-            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId() ,  this.tasks.find( e => e.getId() == c)).subscribe
+            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId() , 
+            this.tasks.find( e => e.getId() === parseInt(c, 10))).subscribe
         (( () => {} )));
         parents.forEach( p =>
-         this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(), this.tasks.find( e => e.getId() == p )).subscribe
+            this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
+            this.tasks.find( e => e.getId() === parseInt(p, 10) )).subscribe
         (( () => {})));
 
     }
