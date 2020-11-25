@@ -5,48 +5,48 @@ import { ProjectService } from '../../services/project.service';
 import { ProjectListComponent } from './project-list/project-list.component';
 
 @Component({
-  selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.css']
+    selector: 'app-project',
+    templateUrl: './project.component.html',
+    styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
 
-  @ViewChild('child')
-  private child: ProjectListComponent;
-  submit: string;
-  searchForm: any;
-  private formBuilder: FormBuilder = new FormBuilder();
-  newProjectForm: any;
-  private newProject: Project;
+    @ViewChild('child')
+    private child: ProjectListComponent;
+    submit: string;
+    searchForm: any;
+    private formBuilder: FormBuilder = new FormBuilder();
+    newProjectForm: any;
+    private newProject: Project;
 
-  constructor(private projectService: ProjectService) {
-    this.searchForm = this.formBuilder.group({
-      search: ''
-    });
-    this.newProjectForm = this.formBuilder.group({
-      name: '',
-      description: ''
-    });
-  }
+    constructor(private projectService: ProjectService) {
+        this.searchForm = this.formBuilder.group({
+            search: ''
+        });
+        this.newProjectForm = this.formBuilder.group({
+            name: '',
+            description: ''
+        });
+    }
 
-  ngOnInit(): void {
-    this.projectService.clearCurrentProject();
-  }
+    ngOnInit(): void {
+        this.projectService.clearCurrentProject();
+    }
 
-  onSubmitSearch(data): void {
-    this.submit = data.search;
-    this.child.notifyMe('search', this.submit);
-  }
+    onSubmitSearch(data): void {
+        this.submit = data.search;
+        this.child.notifyMe('search', this.submit);
+    }
 
-  onSubmitNewProject(data): void {
-    this.newProject = new Project(data.name, data.description);
-    this.projectService.postProject(this.newProject).subscribe(
-      () => { }
-    );
-  }
+    onSubmitNewProject(data): void {
+        this.newProject = new Project(data.name, data.description);
+        this.projectService.postProject(this.newProject).subscribe(
+            () => { }
+        );
+    }
 
-  updateChild(): void {
-    this.child.notifyMe('update');
-  }
+    updateChild(): void {
+        this.child.notifyMe('update');
+    }
 
 }

@@ -39,7 +39,7 @@ export class ProjectListComponent implements OnInit {
         }
         else if (exec === 'update') {
             this.updateProjects();
- }
+        }
     }
 
 

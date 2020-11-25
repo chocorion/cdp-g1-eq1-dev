@@ -9,35 +9,35 @@ import { MemberService } from 'src/app/services/member.service';
   styleUrls: ['./member-item.component.css']
 })
 export class MemberItemComponent implements OnInit {
-  @Input() currentMember : Member;
-  @Input() currentProjectId : number;
+  @Input() currentMember: Member;
+  @Input() currentProjectId: number;
   form: any;
-  private formBuilder : FormBuilder = new FormBuilder();
+  private formBuilder: FormBuilder = new FormBuilder();
 
   constructor(
-    private memberService : MemberService
-    ) { 
-      this.form = this.formBuilder.group({
-        role:'',
-        level: ''
-      });
+    private memberService: MemberService
+  ) {
+    this.form = this.formBuilder.group({
+      role: '',
+      level: ''
+    });
   }
 
   ngOnInit(): void {
   }
 
-  deleteMember() : void {
+  deleteMember(): void {
     this.memberService.deleteMember(this.currentMember).subscribe(
-      () => {}
-    ); 
+      () => { }
+    );
   }
 
-  onSubmit(data) : void {
+  onSubmit(data): void {
     this.currentMember.setRole(data.role);
     this.currentMember.setLevel(data.level);
     this.currentMember.setProject(this.currentProjectId);
     this.memberService.updateMember(this.currentMember).subscribe(
-      () => {}
+      () => { }
     )
 
   }
