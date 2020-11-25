@@ -4,19 +4,18 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-20.04
-    env:
-      working-directory: ./src/front
 
     steps:
-    - name: Install eslint
-      run: npm i eslint
-
-    - name: Init eslint
-      run: npx eslint --init 
+    - uses: actions/checkout@v2
+    - name: Install tslint
+      working-directory: ./src/front/
+      run: npm i --save tslint
 
     - name: Run ESLint
-      run: eslint ./src --ext .ts,.js
+      working-directory: ./src/front/
+      run: ./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'
