@@ -1,6 +1,7 @@
 CREATE TABLE member (
     user int AUTO_INCREMENT,
     project int,
+    name TEXT,
     role TEXT,
     level TEXT,
 

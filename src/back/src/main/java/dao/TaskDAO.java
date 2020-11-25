@@ -8,6 +8,7 @@ public interface TaskDAO {
     Task getById(int project_id, int id) throws Exception;
     List<Task> getAllForProject(int projectId) throws Exception;
     List<Task> getAllForUserStory(int projectId, int usId) throws Exception;
+    List<Task> getAllForMember(int projectId, int memberId) throws Exception;
 
     void addDependency(Task parent, Task child) throws Exception;
     void deleteDependency(Task parent, Task child) throws Exception;

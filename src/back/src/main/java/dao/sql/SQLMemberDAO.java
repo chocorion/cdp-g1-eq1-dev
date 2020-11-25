@@ -14,6 +14,7 @@ public class SQLMemberDAO extends SQLDAO<Member> implements MemberDAO {
     protected Member createObjectFromResult(ResultSet resultSet) throws SQLException{
         return new Member(
             resultSet.getInt("project"),
+            resultSet.getString("name"),
             resultSet.getString("role"),
             resultSet.getString("level"),
             resultSet.getInt("user"));
@@ -42,10 +43,10 @@ public class SQLMemberDAO extends SQLDAO<Member> implements MemberDAO {
         if(member.user != null)
             throw new SQLException("This member already has a user, use update !");
         
-        String statement = "INSERT INTO member (`project`, `role`, `level`) VALUES (?, ?, ?)";
-        List<Object> opt = Arrays.asList(member.project, member.role, member.level);
+        String statement = "INSERT INTO member (`project`, `name`, `role`, `level`) VALUES (?, ?, ?, ?)";
+        List<Object> opt = Arrays.asList(member.project, member.name, member.role, member.level);
 
-        return new Member(member.project, member.role, member.level, doInsert(statement, opt));
+        return new Member(member.project, member.name, member.role, member.level, doInsert(statement, opt));
     }
 
     @Override
@@ -53,8 +54,8 @@ public class SQLMemberDAO extends SQLDAO<Member> implements MemberDAO {
         if(member.user == null)
             throw new SQLException("This member doesn't have a user, use insertOne");
         
-        String statement = "UPDATE member SET project=?, role=?, level=? WHERE user=? LIMIT 1";
-        List<Object> opt = Arrays.asList(member.project, member.role, member.level, member.user);
+        String statement = "UPDATE member SET project=?, name=?, role=?, level=? WHERE user=? LIMIT 1";
+        List<Object> opt = Arrays.asList(member.project, member.name, member.role, member.level, member.user);
 
         SQLDatabase.exec(statement,opt);
     }
