@@ -28,7 +28,7 @@ jobs:
       - name: Run db
         run: docker-compose --file docker-compose.test.yml up db &
       - name: Run tests
-        run: (r=docker-compose --file docker-compose.test.yml up tests; docker-compose kill db); echo $r
+        run: r=(docker-compose --file docker-compose.test.yml up tests; docker-compose kill db); echo $r
 
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
