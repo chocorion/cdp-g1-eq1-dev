@@ -27,5 +27,3 @@ jobs:
 
       - name: Run tests
         run: docker-compose --file docker-compose.test.yml up --exit-code-from tests
-      - name: Close db
-        run: docker-compose kill db
