@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { DOD } from 'src/app/models/dod.model';
+import { MemberService } from 'src/app/services/member.service';
+import { UsService } from 'src/app/services/us.service';
 import { Task } from '../../../../models/task.model';
 import { TaskService } from '../../../../services/task.service';
 
@@ -18,19 +21,23 @@ export class ExpandedTaskCardComponent implements OnInit {
   childrenDependency: Task[] = [];
   dods: DOD[] = [];
   combinaisons = [];
-
+  usIds = [];
+  usSubscription: Subscription;
   private formBuilder: FormBuilder = new FormBuilder();
   form: any;
   modify = false;
 
   constructor(
-    private taskService: TaskService) {
+    private taskService: TaskService,
+    private usService: UsService,
+    private memberService: MemberService) {
      }
 
   ngOnInit(): void {
     this.getDependencies();
     this.getDOD();
     this.combinaison();
+    this.usIdList();
     this.form = this.formBuilder.group({
       title: this.task.getTitle(),
       usId: this.task.getUsId(),
@@ -42,9 +49,18 @@ export class ExpandedTaskCardComponent implements OnInit {
     });
   }
 
+  usIdList(): void{
+    this.usSubscription = this.usService.subject.subscribe(
+      result => {
+        this.usIds = result.map( x => x.getId());
+      }
+    );
+    this.usService.getAllForProject(this.task.getProjectId());
+  }
+
   combinaison(): void {
     let array = this.tasks.map(v => v.getId());
-    array = array.filter(x => x != this.task.getId());
+    array = array.filter(x => x !== this.task.getId());
     const results = [];
 
     array.forEach(item => {
@@ -110,6 +126,7 @@ export class ExpandedTaskCardComponent implements OnInit {
 
   onSubmit(data: any): void {
     console.log(data);
+    //si usId différent -> delete la task ; create task avec ancien id
     this.task = new Task(this.task.getId(), this.task.getProjectId(), data.usId, data.title, data.duration, data.status);
     this.taskService.update(this.task.getProjectId(), this.task).subscribe(
       () => {}
