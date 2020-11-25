@@ -28,7 +28,7 @@
         - sql : Implémentation concrète des data access object et l'accès à la db
     - routes : Implémentation des routes de l'api
 - test
-    - dao/sql : Tests des comportements attendus lors des intérations avec la base de données
+    - dao/sql : Tests des comportements attendus lors des intéractions avec la base de données
     - domain : Tests de la validité des objets du domaine
 
 ### Front-end
