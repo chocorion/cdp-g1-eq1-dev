@@ -1,1 +1,58 @@
+<ul class="list-group">
+    <div class = "row">
+           <div class="col">
+               <!-- Button trigger modal -->
+               <button type="button" id='newbuttontask' class="btn btn-primary float-right mt-2" data-toggle="modal" data-target ="#newTask">Nouveau</button>
+               <!-- Modal -->
+               <div class="modal fade" id ="newTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal-dialog" role="document">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h5 class="modal-title" id="exampleModalLabel">Ajouter un Membre</h5>
+                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                               </button>
+                           </div>
+                           <div class="modal-body">
+                            <form [formGroup]="form" (ngSubmit)="createTask(form.value)">
+                                <div>
+                                    <label for="taskId">taskId</label>
+                                    <input  class="form-control" type="number" formControlName="taskId">
+                                </div>
+                                <div>
+                                    <label for="title">title</label>
+                                    <input  class="form-control" type="text" formControlName="title">
+                                </div>
+                                <div>
+                                    <label for="usId">usId</label>
+                                    <input  class="form-control" id="usId" type="text" formControlName="usId">
+                                </div>
+                                <div>
+                                    <label for="duration">duration</label>
+                                    <input  class="form-control" id="duration" type="text" formControlName="duration">
+                                </div>
+                                <div>
+                                    <label for="status">status</label>
+                                    <input  class="form-control" id="status" type="text" formControlName="status">
+                                </div>
+                                <div>
+                                    <label for="parents">parents</label>
+                                    <input  class="form-control" id="parents" type="text" formControlName="parents">
+                                </div>
+                                <div>
+                                    <label for="children">children</label>
+                                    <input  class="form-control" id="children" type="text" formControlName="children">
+                                </div>
+                                <div>
+                                    <label for="member">member</label>
+                                    <input  class="form-control" id="member" type="text" formControlName="member">
+                                </div>
+                                <button type="submit" class="button">Ajouter</button>
+                             </form>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+    </div>
 <app-task-container></app-task-container>
