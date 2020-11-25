@@ -62,12 +62,13 @@ public class Tasks {
     }
 
     @DELETE
-    @Path("{taskId}/parents")
+    @Path("{taskId}/parents/{parentId}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response deleteParentTask(@PathParam("projectId") int projectId, @PathParam("taskId") int childId, Task parent) {
+    public Response deleteParentTask(@PathParam("projectId") int projectId, @PathParam("taskId") int childId, @PathParam("parentId") int parentId) {
         try {
             Task child = taskDAO.getById(projectId, childId);
+            Task parent = taskDAO.getById(projectId, parentId);
             taskDAO.deleteDependency(parent, child);
             return Response.status(200).entity(taskDAO.getParentTasks(child)).build();
         } catch (Exception e) {
@@ -102,12 +103,13 @@ public class Tasks {
     }
 
     @DELETE
-    @Path("{taskId}/children")
+    @Path("{taskId}/children/{childId}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response deleteChildTask(@PathParam("projectId") int projectId, @PathParam("taskId") int parentId, Task child) {
+    public Response deleteChildTask(@PathParam("projectId") int projectId, @PathParam("taskId") int parentId,  @PathParam("childId") int childId) {
         try {
             Task parent = taskDAO.getById(projectId, parentId);
+            Task child = taskDAO.getById(projectId, childId);
             taskDAO.deleteDependency(parent, child);
             return Response.status(200).entity(taskDAO.getChildrenTasks(parent)).build();
         } catch (Exception e) {

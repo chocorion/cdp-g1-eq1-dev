@@ -42,8 +42,8 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
         if (task.id == null)
             throw new SQLException("This task doesn't have an id, cannot select");
 
-        String statement = "SELECT * FROM task_dep as td, task as t WHERE td.project = t.project AND td.parent = t.id AND td.child = ?";
-        List<Object> opt = Arrays.asList(task.id);
+        String statement = "SELECT * FROM task_dep as td, task as t WHERE td.project = t.project AND t.project = ? AND td.parent = t.id AND td.child = ?";
+        List<Object> opt = Arrays.asList(task.projectId, task.id);
 
         return queryAllObjects(statement, opt);
     }
@@ -53,8 +53,8 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
         if (task.id == null)
             throw new SQLException("This task doesn't have an id, cannot select");
 
-        String statement = "SELECT * FROM task_dep as td, task as t WHERE td.project = t.project AND td.child = t.id AND td.parent = ?";
-        List<Object> opt = Arrays.asList(task.id);
+        String statement = "SELECT * FROM task_dep as td, task as t WHERE td.project = t.project AND t.project = ? AND td.child = t.id AND td.parent = ?";
+        List<Object> opt = Arrays.asList(task.projectId, task.id);
 
         return queryAllObjects(statement, opt);
     }

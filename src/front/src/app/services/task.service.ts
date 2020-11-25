@@ -27,6 +27,22 @@ export class TaskService extends GenericService<Task>{
         return this.http.get<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/parents`);
     }
 
+    addParentTask(projectId: number, parentId: number, task: Task): any{
+        return this.http.post<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${parentId}/parents`, task);
+    }
+
+    deleteParentTask(projectId: number, childId: number, parentId: number): any{
+        return this.http.delete<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${childId}/parents/${parentId}`);
+    }
+
+    addChildrenTask(projectId: number, childId: number, task: Task): any{
+        return this.http.post<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${childId}/children`, task);
+    }
+
+    deleteChildrenTask(projectId: number, parentId: number, childId: number): any{
+        return this.http.delete<Task[]>(environment.apiUrl + `projects/${projectId}/tasks/${parentId}/children/${childId}`);
+    }
+
     getDOD(projectId: number, taskId: number): Observable<DOD[]> {
         return this.http.get<DOD[]>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}/DOD`);
     }
