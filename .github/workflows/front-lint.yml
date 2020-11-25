@@ -6,10 +6,8 @@ on:
       - main
 
 jobs:
-  eslint:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: stefanoeb/eslint-action@1.0.2
-        with:
-          files: src/front/src/
+    - name: Run ESLint
+      run: cd src/front && eslint ./src/ --ext .js,.jsx,.ts,.tsx
