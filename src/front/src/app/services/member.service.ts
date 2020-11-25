@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../models/member.model';
 
@@ -17,11 +17,11 @@ export class MemberService {
     }
 
     getMember(user: number, projectId: number): Observable<Member> {
-        return this.http.get<Member>(environment.apiUrl + 'project/' + projectId + '/members/' + user);
+        return this.http.get<Member>(environment.apiUrl + 'projects/' + projectId + '/members/' + user);
     }
 
     updateMember(member: Member): Observable<Member> {
-        return this.http.put<Member>(environment.apiUrl + 'project/' + member.getProject() + '/members', member);
+        return this.http.put<Member>(environment.apiUrl + 'projects/' + member.getProject() + '/members', member);
     }
 
     postMember(member: Member): Observable<Member> {
@@ -29,7 +29,7 @@ export class MemberService {
     }
 
     deleteMember(member: Member): any {
-        return this.http.delete(environment.apiUrl + 'project/' + member.getProject() + '/members/' + member.getUser());
+        return this.http.delete(environment.apiUrl + 'projects/' + member.getProject() + '/members/' + member.getUser());
     }
 
 }

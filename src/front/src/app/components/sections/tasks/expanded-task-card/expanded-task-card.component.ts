@@ -23,7 +23,9 @@ export class ExpandedTaskCardComponent implements OnInit {
     dods: DOD[] = [];
     combinaisons = [];
     usIds = [];
-    members = [];
+    projectMembers = [];
+    currentMember: Member = new Member(null, null, null, null);
+
     usSubscription: Subscription;
     private formBuilder: FormBuilder = new FormBuilder();
     form: any;
@@ -41,6 +43,7 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.combinaison();
         this.usIdList();
         this.memberList();
+        this.getMember();
 
         this.form = this.formBuilder.group({
             title: this.task.getTitle(),
@@ -49,7 +52,7 @@ export class ExpandedTaskCardComponent implements OnInit {
             status: this.task.getStatus(),
             parents: this.getParents(),
             children: this.getChildren(),
-            member: '',
+            member: this.getMember(),
         });
     }
 
@@ -65,19 +68,19 @@ export class ExpandedTaskCardComponent implements OnInit {
     memberList(): void {
         this.memberService.getMembers(this.task.getProjectId()).subscribe(
             result => {
-                this.members = result.map(x => Member.fromJSON(x));
+                this.projectMembers = result.map(x => Member.fromJSON(x));
+                this.form.patchValue({ member: this.getMembers() });
             }
         );
     }
 
-    /* [TODO]: No way to found a member of task, back doesn't tell
     getMember(): void {
-        this.memberService.getMember(this.task.getProjectId(), TODO).subscribe(
-                result => {
-                    this.members = result.map(x => Member.fromJSON(x));
-                }
+        this.memberService.getMember(this.task.getMemberId(), this.task.getProjectId()).subscribe(
+            result => {
+                this.currentMember = Member.fromJSON(result);
+            }
         );
-    }*/
+    }
 
     combinaison(): void {
         let array = this.tasks.map(v => v.getId());
@@ -145,10 +148,16 @@ export class ExpandedTaskCardComponent implements OnInit {
         return s.slice(0, -2);
     }
 
+    getMembers(): string {
+        let s = '';
+        this.projectMembers.forEach(x => s += x.getUser() + ', ');
+        return s.slice(0, -2);
+    }
+
     onSubmit(data: any): void {
-        console.log(data);
         // si usId différent -> delete la task ; create task avec ancien id
-        this.task = new Task(this.task.getId(), this.task.getProjectId(), data.usId, data.title, data.duration, data.status);
+        console.log(data.member);
+        this.task = new Task(this.task.getId(), this.task.getProjectId(), data.usId, data.member, data.title, data.duration, data.status);
         this.taskService.update(this.task.getProjectId(), this.task).subscribe(
             () => { }
         );

@@ -29,8 +29,6 @@ export class TaskCardComponent implements OnInit {
                 this.currentState = t.length + '/' + result.length;
             }
         );
-        console.log('cc');
     }
-
 
 }

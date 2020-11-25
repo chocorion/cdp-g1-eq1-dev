@@ -28,6 +28,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
         private router: Router
     ) {
         this.form = this.formBuilder.group({
+            name: '',
             role: '',
             level: ''
         });
@@ -61,7 +62,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(data): void {
-        this.newMember = new Member(this.currentProject.getId(), data.role, data.level);
+        this.newMember = new Member(this.currentProject.getId(), data.name, data.role, data.level);
         this.memberService.postMember(this.newMember).subscribe(
             () => { }
         );

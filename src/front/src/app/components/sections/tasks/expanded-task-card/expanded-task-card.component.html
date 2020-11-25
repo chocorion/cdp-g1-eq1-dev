@@ -23,7 +23,7 @@
                                 <p>Status: {{task.getStatus()}}</p>
                                 <p>Dépendances Parents: {{this.getParents()}}</p>
                                 <p>Dépendances Enfants: {{this.getChildren()}}</p>
-                                <p>Member: Not done</p>
+                                <p>Member: {{currentMember.getName()}}</p>
                                 <div class="dodstate" *ngFor="let dod of dods">
                                     <div class="card">
                                         <div class="card-header"> DOD #{{dod.getId()}} - Task #{{dod.getTaskId()}}</div>
@@ -72,7 +72,7 @@
                                     <div>
                                         <label for="member">member</label>
                                         <select id= "select-member"  class="form-control" formControlName= "member">
-                                            <option *ngFor= "let m of members" [ngValue]= "m.getRole()">{{ m.getRole() }}</option>
+                                            <option *ngFor= "let m of projectMembers" [ngValue]= "m.getUser()">{{ m.getUser() }}</option>
                                         </select>
                                     </div>
                                     
