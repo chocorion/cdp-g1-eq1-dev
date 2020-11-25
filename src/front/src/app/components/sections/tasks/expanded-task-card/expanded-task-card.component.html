@@ -41,7 +41,9 @@
                                     </div>
                                     <div>
                                         <label for="usId">usId</label>
-                                        <input  class="form-control" id="usId" type="number" formControlName="usId">
+                                        <select id= "select-parents"  type = 'number' class="form-control" formControlName= "usId">
+                                            <option *ngFor= "let usId of usIds" [ngValue]= "usId">{{ usId }}</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="duration">duration</label>
