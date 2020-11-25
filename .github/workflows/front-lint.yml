@@ -7,7 +7,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    env:
+      working-directory: ./src/front
+
     steps:
     - name: Run ESLint
-      run: cd src/front && eslint ./src/ --ext .js,.jsx,.ts,.tsx
+    - run: eslint ./src --ext .ts,.js
