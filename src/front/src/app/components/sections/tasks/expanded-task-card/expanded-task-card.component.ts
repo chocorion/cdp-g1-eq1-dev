@@ -161,7 +161,20 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.taskService.update(this.task.getProjectId(), this.task).subscribe(
             () => { }
         );
-        // Then update parents etc...
+        const children = data.children.split(', ');
+        const parents = data.parents.split(', ');
+        this.parentDependency.forEach( c  =>
+            this.taskService.deleteParentTask(this.task.getProjectId(), this.task.getId(), c.getId() ).subscribe
+        (( () => {} )));
+        this.childrenDependency.forEach( c  =>
+            this.taskService.deleteChildrenTask(this.task.getProjectId(), this.task.getId(), c.getId() ).subscribe
+        (( () => {} )));
+        children.forEach( c  =>
+            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId() ,  this.tasks.find( e => e.getId() == c)).subscribe
+        (( () => {} )));
+        parents.forEach( p =>
+         this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(), this.tasks.find( e => e.getId() == p )).subscribe
+        (( () => {})));
 
     }
 
