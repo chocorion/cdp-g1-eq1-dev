@@ -8,131 +8,132 @@ import { Task } from '../../../../models/task.model';
 import { TaskService } from '../../../../services/task.service';
 
 @Component({
-  selector: 'app-expanded-task-card',
-  templateUrl: './expanded-task-card.component.html',
-  styleUrls: ['./expanded-task-card.component.css']
+    selector: 'app-expanded-task-card',
+    templateUrl: './expanded-task-card.component.html',
+    styleUrls: ['./expanded-task-card.component.css']
 })
 export class ExpandedTaskCardComponent implements OnInit {
-  @Input() task: Task;
-  @Output() expand = new EventEmitter<any>();
-  @Output() stateChange = new EventEmitter<any>();
-  @Input() tasks: Task[];
-  parentDependency: Task[] = [];
-  childrenDependency: Task[] = [];
-  dods: DOD[] = [];
-  combinaisons = [];
-  usIds = [];
-  usSubscription: Subscription;
-  private formBuilder: FormBuilder = new FormBuilder();
-  form: any;
-  modify = false;
+    @Input() task: Task;
+    @Output() expand = new EventEmitter<any>();
+    @Output() stateChange = new EventEmitter<any>();
+    @Input() tasks: Task[];
+    parentDependency: Task[] = [];
+    childrenDependency: Task[] = [];
+    dods: DOD[] = [];
+    combinaisons = [];
+    usIds = [];
+    usSubscription: Subscription;
+    private formBuilder: FormBuilder = new FormBuilder();
+    form: any;
+    modify = false;
 
-  constructor(
-    private taskService: TaskService,
-    private usService: UsService,
-    private memberService: MemberService) {
-     }
+    constructor(
+        private taskService: TaskService,
+        private usService: UsService,
+        private memberService: MemberService) {
+    }
 
-  ngOnInit(): void {
-    this.getDependencies();
-    this.getDOD();
-    this.combinaison();
-    this.usIdList();
-    this.form = this.formBuilder.group({
-      title: this.task.getTitle(),
-      usId: this.task.getUsId(),
-      duration: this.task.getDuration(),
-      status: this.task.getStatus(),
-      parents: this.getParents(),
-      children: this.getChildren(),
-      member: '',
-    });
-  }
+    ngOnInit(): void {
+        this.getDependencies();
+        this.getDOD();
+        this.combinaison();
+        this.usIdList();
 
-  usIdList(): void{
-    this.usSubscription = this.usService.subject.subscribe(
-      result => {
-        this.usIds = result.map( x => x.getId());
-      }
-    );
-    this.usService.getAllForProject(this.task.getProjectId());
-  }
+        this.form = this.formBuilder.group({
+            title: this.task.getTitle(),
+            usId: this.task.getUsId(),
+            duration: this.task.getDuration(),
+            status: this.task.getStatus(),
+            parents: this.getParents(),
+            children: this.getChildren(),
+            member: '',
+        });
+    }
 
-  combinaison(): void {
-    let array = this.tasks.map(v => v.getId());
-    array = array.filter(x => x !== this.task.getId());
-    const results = [];
+    usIdList(): void {
+        this.usSubscription = this.usService.subject.subscribe(
+            result => {
+                this.usIds = result.map(x => x.getId());
+            }
+        );
+        this.usService.getAllForProject(this.task.getProjectId());
+    }
 
-    array.forEach(item => {
-      const t = results.map(row => [...row, item]);
-      results.push(...t);
-      results.push([item]);
-    });
-    this.combinaisons = results.map(x => x.join(', '));
-  }
+    combinaison(): void {
+        let array = this.tasks.map(v => v.getId());
+        array = array.filter(x => x !== this.task.getId());
+        const results = [];
 
-  emitExpand(): void {
-    this.expand.emit();
-  }
+        array.forEach(item => {
+            const t = results.map(row => [...row, item]);
+            results.push(...t);
+            results.push([item]);
+        });
+        this.combinaisons = results.map(x => x.join(', '));
+    }
 
-  emitStateChange(): void {
-    this.stateChange.emit();
-  }
+    emitExpand(): void {
+        this.expand.emit();
+    }
 
-  updateModify(): void{
-    this.modify = !this.modify;
-  }
+    emitStateChange(): void {
+        this.stateChange.emit();
+    }
 
-  getDependencies(): void {
-    this.taskService.getChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(
-      result => {
-        this.childrenDependency = result.map(t => Task.fromJSON(t));
-        this.form.patchValue({children : this.getChildren()});
-      }
-    );
-    this.taskService.getParentTasks(this.task.getId(), this.task.getId()).subscribe(
-      result => {
-        this.parentDependency = result.map(t => Task.fromJSON(t));
-        this.form.patchValue({parents : this.getParents()});
-      }
-    );
-  }
+    updateModify(): void {
+        this.modify = !this.modify;
+    }
 
-  getDOD(): void {
-    this.taskService.getDOD(this.task.getProjectId(), this.task.getId()).subscribe(
-      result => {
-        this.dods = result.map(t => DOD.fromJSON(t));
-      }
-    );
-  }
+    getDependencies(): void {
+        this.taskService.getChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(
+            result => {
+                this.childrenDependency = result.map(t => Task.fromJSON(t));
+                this.form.patchValue({ children: this.getChildren() });
+            }
+        );
+        this.taskService.getParentTasks(this.task.getId(), this.task.getId()).subscribe(
+            result => {
+                this.parentDependency = result.map(t => Task.fromJSON(t));
+                this.form.patchValue({ parents: this.getParents() });
+            }
+        );
+    }
 
-  updateDOD(dod: DOD): void {
-    this.taskService.updateDOD(this.task.getProjectId(), this.task.getId(), dod).subscribe(
-      () => { this.emitStateChange(); }
-    );
-  }
+    getDOD(): void {
+        this.taskService.getDOD(this.task.getProjectId(), this.task.getId()).subscribe(
+            result => {
+                this.dods = result.map(t => DOD.fromJSON(t));
+            }
+        );
+    }
 
-  getChildren(): string {
-    let s = '';
-    this.childrenDependency.forEach(x => s += x.getId() + ', ');
-    return s.slice(0, -2);
-  }
+    updateDOD(dod: DOD): void {
+        this.taskService.updateDOD(this.task.getProjectId(), this.task.getId(), dod).subscribe(
+            () => { this.emitStateChange(); }
+        );
+    }
 
-  getParents(): string {
-    let s = '';
-    this.parentDependency.forEach(x => s += x.getId() + ', ');
-    return s.slice(0, -2);
-  }
+    getChildren(): string {
+        let s = '';
+        this.childrenDependency.forEach(x => s += x.getId() + ', ');
+        return s.slice(0, -2);
+    }
 
-  onSubmit(data: any): void {
-    console.log(data);
-    //si usId différent -> delete la task ; create task avec ancien id
-    this.task = new Task(this.task.getId(), this.task.getProjectId(), data.usId, data.title, data.duration, data.status);
-    this.taskService.update(this.task.getProjectId(), this.task).subscribe(
-      () => {}
-    );
-    // Then update parents etc...
+    getParents(): string {
+        let s = '';
+        this.parentDependency.forEach(x => s += x.getId() + ', ');
+        return s.slice(0, -2);
+    }
 
-  }
+    onSubmit(data: any): void {
+        console.log(data);
+        // si usId différent -> delete la task ; create task avec ancien id
+        this.task = new Task(this.task.getId(), this.task.getProjectId(), data.usId, data.title, data.duration, data.status);
+        this.taskService.update(this.task.getProjectId(), this.task).subscribe(
+            () => { }
+        );
+        // Then update parents etc...
+
+    }
 
 }

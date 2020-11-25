@@ -6,6 +6,7 @@ import { Project } from 'src/app/models/project.model';
 import { Task } from 'src/app/models/task.model';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
+import { UsService } from 'src/app/services/us.service';
 
 @Component({
   selector: 'app-tasks',
@@ -19,11 +20,14 @@ export class TasksComponent implements OnInit {
   currentProjectSubscription: Subscription;
   tasksSubscription: Subscription;
   combinaisons = [];
+  usIds = [];
+  usSubscription: Subscription;
   private formBuilder: FormBuilder = new FormBuilder();
 
   constructor(
     private projectService: ProjectService,
     private taskService: TaskService,
+    private usService: UsService,
     private router: Router) {
   }
 
@@ -44,13 +48,15 @@ export class TasksComponent implements OnInit {
       result => {
         this.tasks = result;
         this.combinaison();
+        this.usIdList();
+        this.form.patchValue({ taskId: this.tasks.length + 1});
       }
     );
 
     this.taskService.getAllForProject(this.projectService.currentProject.getId());
 
     this.form = this.formBuilder.group({
-      taskId: 0,
+      taskId: this.tasks.length + 1,
       title: '',
       usId: '',
       duration: '',
@@ -78,4 +84,13 @@ export class TasksComponent implements OnInit {
     this.taskService.post(this.currentProject.getId(), task).subscribe( () => {});
   }
 
+
+  usIdList(): void{
+    this.usSubscription = this.usService.subject.subscribe(
+      result => {
+        this.usIds = result.map( x => x.getId());
+      }
+    );
+    this.usService.getAllForProject(this.currentProject.getId());
+  }
 }

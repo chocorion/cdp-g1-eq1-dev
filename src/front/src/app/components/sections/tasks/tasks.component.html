@@ -17,7 +17,7 @@
                             <form [formGroup]="form" (ngSubmit)="createTask(form.value)">
                                 <div>
                                     <label for="taskId">taskId</label>
-                                    <input  class="form-control" type="number" formControlName="taskId">
+                                    <input  class="form-control" type="number" formControlName="taskId" [attr.min]="tasks.length + 1">
                                 </div>
                                 <div>
                                     <label for="title">title</label>
@@ -25,7 +25,9 @@
                                 </div>
                                 <div>
                                     <label for="usId">usId</label>
-                                    <input  class="form-control" id="usId" type="text" formControlName="usId">
+                                    <select id= "select-parents"  type = 'number' class="form-control" formControlName= "usId">
+                                        <option *ngFor= "let usId of usIds" [ngValue]= "usId">{{ usId }}</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label for="duration">duration</label>
