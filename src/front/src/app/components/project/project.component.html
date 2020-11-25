@@ -25,12 +25,12 @@
                             <form [formGroup]="newProjectForm" (ngSubmit)="onSubmitNewProject(newProjectForm.value)">
                                 <div>
                                     <label for="name">Name</label>
-                                    <input id="name" type="text" formControlName="name">
+                                    <input class="form-control" id="name" type="text" formControlName="name">
                                 </div>
 
                                 <div>
                                     <label for="description"> Description </label>
-                                    <input id="description" type="text" formControlName="description">
+                                    <input class="form-control" id="description" type="text" formControlName="description">
                                 </div>
 
                                 <button type="submit" class="button">Ajouter</button>
