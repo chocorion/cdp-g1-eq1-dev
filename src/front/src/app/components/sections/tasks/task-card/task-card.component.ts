@@ -9,6 +9,7 @@ import { TaskService } from '../../../../services/task.service';
 })
 export class TaskCardComponent implements OnInit {
   @Input() task: Task;
+  @Input() tasks: Task[];
   expanded = false;
   currentState: string;
   constructor(private taskService: TaskService) { }

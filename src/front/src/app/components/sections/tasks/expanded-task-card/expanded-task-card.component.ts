@@ -13,10 +13,11 @@ export class ExpandedTaskCardComponent implements OnInit {
   @Input() task: Task;
   @Output() expand = new EventEmitter<any>();
   @Output() stateChange = new EventEmitter<any>();
-
+  @Input() tasks: Task[];
   parentDependency: Task[] = [];
   childrenDependency: Task[] = [];
   dods: DOD[] = [];
+  combinaisons = [];
 
   private formBuilder: FormBuilder = new FormBuilder();
   form: any;
@@ -29,6 +30,7 @@ export class ExpandedTaskCardComponent implements OnInit {
   ngOnInit(): void {
     this.getDependencies();
     this.getDOD();
+    this.combinaison();
     this.form = this.formBuilder.group({
       title: this.task.getTitle(),
       usId: this.task.getUsId(),
@@ -38,6 +40,19 @@ export class ExpandedTaskCardComponent implements OnInit {
       children: this.getChildren(),
       member: '',
     });
+  }
+
+  combinaison(): void {
+    let array = this.tasks.map(v => v.getId());
+    array = array.filter(x => x != this.task.getId());
+    const results = [];
+
+    array.forEach(item => {
+      const t = results.map(row => [...row, item]);
+      results.push(...t);
+      results.push([item]);
+    });
+    this.combinaisons = results.map(x => x.join(', '));
   }
 
   emitExpand(): void {
@@ -94,6 +109,7 @@ export class ExpandedTaskCardComponent implements OnInit {
   }
 
   onSubmit(data: any): void {
+    console.log(data);
     this.task = new Task(this.task.getId(), this.task.getProjectId(), data.usId, data.title, data.duration, data.status);
     this.taskService.update(this.task.getProjectId(), this.task).subscribe(
       () => {}
