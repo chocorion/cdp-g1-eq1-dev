@@ -11,6 +11,8 @@
 
 **Membre de l'équipe :**  Alexis Perignon, Robin Navarro, Chaïma Tarmil et Adrien Boitelle.
 
+**Organisation :** En plus des fichiers .md, nous utilisons [ce tableur](https://docs.google.com/spreadsheets/d/1kiDOeNhRBDjNWb-zRZRpTgfK5jp7cz7PSObkAmD9f3s/edit#gid=0) pour nous y retrouver plus rapidement.
+
 ## Architecture du projet
 
 - 3 images docker dans leur dossier respectif :
