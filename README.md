@@ -9,8 +9,35 @@
 
 
 
-**Membre de l'équipe :**  Alexis Perignon, Robin Navarro et Chaïma Tarmil.
+**Membre de l'équipe :**  Alexis Perignon, Robin Navarro, Chaïma Tarmil et Adrien Boitelle.
 
+**Organisation :** En plus des fichiers .md, nous utilisons [ce tableur](https://docs.google.com/spreadsheets/d/1kiDOeNhRBDjNWb-zRZRpTgfK5jp7cz7PSObkAmD9f3s/edit#gid=0) pour nous y retrouver plus rapidement.
+
+## Architecture du projet
+
+- 3 images docker dans leur dossier respectif :
+    - Back-end (Java)
+    - Front-end (Angular)
+    - Base de données (MySQL)
+
+### Back-end
+
+- main
+    - domain : Définition des value object
+    - dao : Définition abstraite des data access object
+        - sql : Implémentation concrète des data access object et l'accès à la db
+    - routes : Implémentation des routes de l'api
+- test
+    - dao/sql : Tests des comportements attendus lors des intéractions avec la base de données
+    - domain : Tests de la validité des objets du domaine
+
+### Front-end
+
+
+### Database
+
+- sql-scripts : Scripts qui seront copiés dans l'initialisation du docker
+    - xx_name.sql : Fichier sql qui sera exécuté par ordre alphabétique des noms de fichier, `xx` sert à les ordonner
 
 
 ## Définition des Rôles

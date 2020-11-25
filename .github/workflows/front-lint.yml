@@ -1,0 +1,22 @@
+name: Front-lint
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    env:
+      working-directory: ./src/front
+
+    steps:
+    - name: Install eslint
+      run: npm i eslint
+
+    - name: Init eslint
+      run: npx eslint --init 
+
+    - name: Run ESLint
+      run: eslint ./src --ext .ts,.js
