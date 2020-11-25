@@ -29,7 +29,7 @@ jobs:
         run: |
           if [ -f docker-compose.test.yml ]; then
             docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml up
+            docker-compose --file docker-compose.test.yml up db & (docker-compose --file docker-compose.test.yml up tests; docker-compose kill db)
           else
             docker build . --file Dockerfile
           fi
