@@ -172,7 +172,7 @@ public class Tasks {
     @Consumes("application/json")
     @Produces("application/json")
     public Response insert(@PathParam("projectId") int projectId, Task task) {
-        task = new Task(projectId, task.usId, task.title, task.duration, task.status);
+        task = new Task(projectId, task.usId, task.memberId, task.title, task.duration, task.status);
 
         try {
             return Response.status(200).entity(taskDAO.insert(task)).build();
@@ -186,7 +186,7 @@ public class Tasks {
     @Consumes("application/json")
     @Produces("application/json")
     public Response update(@PathParam("projectId") int projectId, @PathParam("taskId") int taskId, Task task) {
-        task = new Task(projectId, task.usId, task.title, task.duration, task.status, taskId);
+        task = new Task(projectId, task.usId, task.memberId, task.title, task.duration, task.status, taskId);
 
         try {
             taskDAO.update(task);

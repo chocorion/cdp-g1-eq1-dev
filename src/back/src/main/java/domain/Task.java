@@ -6,6 +6,7 @@ public class Task {
     final public Integer id;
     final public Integer projectId;
     final public Integer usId;
+    final public Integer memberId;
     final public String title;
     final public String duration;
     final public String status;
@@ -24,6 +25,9 @@ public class Task {
                         (Task task) -> task.usId,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
+                        (Task task) -> task.memberId,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
                         (Task task) -> task.title,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
@@ -38,14 +42,15 @@ public class Task {
         this(null, null, null, null, null, null);
     }
 
-    public Task(Integer projectId, Integer usId, String title, String duration, String status) {
-        this(projectId, usId, title, duration, status, null);
+    public Task(Integer projectId, Integer usId, Integer memberId, String title, String duration, String status) {
+        this(projectId, usId, memberId, title, duration, status, null);
     }
 
-    public Task(Integer projectId, Integer usId, String title, String duration, String status, Integer id) {
+    public Task(Integer projectId, Integer usId, Integer memberId, String title, String duration, String status, Integer id) {
         this.id = id;
         this.projectId = projectId;
         this.usId = usId;
+        this.memberId = memberId;
         this.title = title;
         this.duration = duration;
         this.status = status;

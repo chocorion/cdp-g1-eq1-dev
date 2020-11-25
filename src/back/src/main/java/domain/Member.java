@@ -5,6 +5,7 @@ import java.util.Comparator;
 public class Member {
     final public Integer user;
     final public Integer project;
+    final public String name;
     final public String role;
     final public String level;
 
@@ -19,6 +20,9 @@ public class Member {
                         (Member member) -> member.project,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
+                    (Member member) -> member.name,
+                    Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
                         (Member member) -> member.role,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
@@ -29,15 +33,16 @@ public class Member {
 
     //Requiered by Jackson
     public Member() {
-        this(null,null,null);
+        this(null, null, null, null);
     }
 
-    public Member(Integer project, String role, String level){
-        this(project,role,level,null);
+    public Member(Integer project, String name, String role, String level){
+        this(project, name, role, level, null);
     }
 
-    public Member(Integer project, String role, String level, Integer user){
+    public Member(Integer project, String name, String role, String level, Integer user){
         this.project = project;
+        this.name = name;
         this.role = role;
         this.level = level;
         this.user = user;

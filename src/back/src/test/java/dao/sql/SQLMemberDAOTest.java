@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class SQLMemberDAOTest {
 
     @Test 
-    void testSimpleInsertDelete(){
+    void testSimpleInsertDelete() {
         SQLMemberDAO memberDAO = new SQLMemberDAO();
-        Member member = new Member(1,"developper","senior");
+        Member member = new Member(1, "anna", "developper", "senior");
 
         assertDoesNotThrow(() -> memberDAO.delete(memberDAO.insert(member)));
     }
@@ -24,7 +24,7 @@ class SQLMemberDAOTest {
     @Test 
     void testSimpleInsertTwice() {
         SQLMemberDAO memberDAO = new SQLMemberDAO();
-        Member member = new Member(1,"product owner","junior");
+        Member member = new Member(1, "Marc", "product owner","junior");
 
         Member insertedMember = (Member) assertDoesNotThrow(() -> memberDAO.insert(member));
         assertThrows(SQLException.class, () -> memberDAO.insert(insertedMember));
@@ -39,13 +39,13 @@ class SQLMemberDAOTest {
     @Test
     void testInsert() throws SQLException {
         SQLMemberDAO memberDAO = new SQLMemberDAO();
-        Member member = new Member(1,"product owner","junior");
+        Member member = new Member(1,"David", "product owner","junior");
 
         Member insertedMember = memberDAO.insert(member);
         assertEquals(member.project , insertedMember.project);
+        assertEquals(member.name, insertedMember.name);
         assertEquals(member.role , insertedMember.role);
         assertEquals(member.level , insertedMember.level);
-
 
         try {
             memberDAO.delete(insertedMember);

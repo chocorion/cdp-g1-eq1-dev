@@ -37,7 +37,7 @@ public class Members {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putMember(@PathParam("projectId") int projectId, @PathParam("user") int user, Member member) {
-        member = new Member(projectId, member.role, member.level, user);
+        member = new Member(projectId, member.name, member.role, member.level, user);
 
         try{
             memberDAO.update(member);
@@ -54,7 +54,7 @@ public class Members {
     @Consumes("application/json")
     @Produces("applciation/json")
     public Response postMember(@PathParam("projectId") int projectId , Member member){
-        member = new Member(projectId, member.role, member.level);
+        member = new Member(projectId, member.name, member.role, member.level);
         Member built;
         try {
             built = memberDAO.insert(member);

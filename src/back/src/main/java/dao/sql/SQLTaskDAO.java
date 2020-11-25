@@ -14,6 +14,7 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
         return new Task(
             resultSet.getInt("project"),
             resultSet.getInt("us"),
+            resultSet.getInt("member"),
             resultSet.getString("title"),
             resultSet.getString("duration"),
             resultSet.getString("status"),
@@ -69,21 +70,32 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
     }
 
     @Override
+    public List<Task> getAllForMember(int projectId, int memberId) throws SQLException {
+
+        String statement = "SELECT * FROM task WHERE project=? AND member=?";
+        List<Object> opt = Arrays.asList(projectId, memberId);
+
+        return queryAllObjects(statement, opt);
+    }
+
+
+    @Override
     public Task insert(Task task) throws Exception {
         if (task.id != null)
             throw new SQLException("This task has an id, cannot insert");
 
-        String statement = "{CALL insert_task(?, ?, ?, ?, ?, @id)}";
+        String statement = "{CALL insert_task(?, ?, ?, ?, ?, ?, @id)}";
 
         List<Object> opt = Arrays.asList(
                 task.projectId,
                 task.title,
                 task.duration,
                 task.status,
-                task.usId
+                task.usId,
+                task.memberId
         );
 
-        return new Task(task.projectId, task.usId, task.title, task.duration, task.status, doInsert(statement, opt));
+        return new Task(task.projectId, task.usId, task.memberId, task.title, task.duration, task.status, doInsert(statement, opt));
     }
 
     @Override 
