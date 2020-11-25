@@ -38,7 +38,7 @@ export class MemberItemComponent implements OnInit {
     this.currentMember.setProject(this.currentProjectId);
     this.memberService.updateMember(this.currentMember).subscribe(
       () => { }
-    )
+    );
 
   }
 
