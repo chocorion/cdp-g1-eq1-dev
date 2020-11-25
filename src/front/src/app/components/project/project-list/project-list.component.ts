@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, SimpleChange, SimpleChanges} from '@angular/core';
-import {Project} from '../../../models/project.model';
-import {ProjectService} from '../../../services/project.service';
-import {Router} from '@angular/router';
+import { Component, OnInit, Input, SimpleChange, SimpleChanges } from '@angular/core';
+import { Project } from '../../../models/project.model';
+import { ProjectService } from '../../../services/project.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-project-list',
@@ -10,12 +10,12 @@ import {Router} from '@angular/router';
 })
 export class ProjectListComponent implements OnInit {
     allprojects: Project[] = [];
-    projects: Project[] =[];
+    projects: Project[] = [];
 
     constructor(
         private projectService: ProjectService,
         protected router: Router
-        ) {
+    ) {
     }
 
 
@@ -23,21 +23,23 @@ export class ProjectListComponent implements OnInit {
         this.updateProjects();
     }
 
-    updateProjects(): void{
-        console.log("update");
+    updateProjects(): void {
+        console.log('update');
         this.projectService.getProjects().subscribe(
             result => {
                 this.projects = result.map(x => Project.fromJSON(x));
                 this.projects.forEach(val => this.allprojects.push(Project.assign(val)));
             }
-        )
+        );
     }
 
-    notifyMe(exec: string, value?: string): void{
-        if(exec === "search")
+    notifyMe(exec: string, value?: string): void {
+        if (exec === 'search') {
             this.projects = this.allprojects.filter(p => p.getName().includes(value));
-        else if (exec === "update")
+        }
+        else if (exec === 'update') {
             this.updateProjects();
+ }
     }
 
 
