@@ -15,7 +15,7 @@
             {{currentState}}
             </div></h5>
         <span *ngIf = "expanded">
-            <app-expanded-task-card [task]="task" (expand) = "expand()" (stateChange) = "getCurrentDodStates()"></app-expanded-task-card>
+            <app-expanded-task-card [task]="task" [tasks]="tasks" (expand) = "expand()" (stateChange) = "getCurrentDodStates()"></app-expanded-task-card>
         </span>
     </div>
 

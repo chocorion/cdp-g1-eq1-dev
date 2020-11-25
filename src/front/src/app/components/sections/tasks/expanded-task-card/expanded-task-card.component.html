@@ -1,5 +1,5 @@
 <div class="modal fade" [attr.id]="'id'+task.getId()" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" >
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -34,14 +34,14 @@
                                 </div>
                             </div>
                             <div class="modify" *ngIf = "modify">
-                                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                                <form [formGroup]="form">
                                     <div>
                                         <label for="title">title</label>
                                         <input  class="form-control" type="text" formControlName="title">
                                     </div>
                                     <div>
                                         <label for="usId">usId</label>
-                                        <input  class="form-control" id="usId" type="text" formControlName="usId">
+                                        <input  class="form-control" id="usId" type="number" formControlName="usId">
                                     </div>
                                     <div>
                                         <label for="duration">duration</label>
@@ -49,36 +49,44 @@
                                     </div>
                                     <div>
                                         <label for="status">status</label>
-                                        <input  class="form-control" id="status" type="text" formControlName="status">
+                                        <select id= "status" type="text"  class="form-control" formControlName= "status">
+                                            <option value="TODO">TODO</option>
+                                            <option value="DOING">DOING</option>
+                                            <option value="DONE">DONE</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="parents">parents</label>
-                                        <input  class="form-control" id="parents" type="text" formControlName="parents">
+                                        <select id= "select-parents"  class="form-control" formControlName= "parents">
+                                            <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="children">children</label>
-                                        <input  class="form-control" id="children" type="text" formControlName="children">
+                                        <select id= "select-children"  class="form-control" formControlName= "children">
+                                            <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="member">member</label>
                                         <input  class="form-control" id="member" type="text" formControlName="member">
                                     </div>
                                     
-                                    <button type="submit" class="button">Ajouter</button>
+                                    <button type="submit" class="button" (click)= onSubmit(form.value) data-dismiss="modal">Ajouter</button>
 
                                 </form>
                             </div>
-                            <button type="button" class="btn btn-primary" (click)= updateModify()>Modifier</button>
+                            <button type="button" class="btn btn-primary" (click)= updateModify() *ngIf = "!modify" >Modifier</button>
                         </div>
-
+                        
                     </div>
-
+                    
                 </div>
             </div>
-
-
+            
+            
         </div>
-
-
+        
+        
     </div>
 </div>
