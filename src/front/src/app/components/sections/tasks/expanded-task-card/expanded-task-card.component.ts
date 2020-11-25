@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DOD } from 'src/app/models/dod.model';
+import { Member } from 'src/app/models/member.model';
 import { MemberService } from 'src/app/services/member.service';
 import { UsService } from 'src/app/services/us.service';
 import { Task } from '../../../../models/task.model';
@@ -22,6 +23,7 @@ export class ExpandedTaskCardComponent implements OnInit {
     dods: DOD[] = [];
     combinaisons = [];
     usIds = [];
+    members = [];
     usSubscription: Subscription;
     private formBuilder: FormBuilder = new FormBuilder();
     form: any;
@@ -38,6 +40,7 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.getDOD();
         this.combinaison();
         this.usIdList();
+        this.memberList();
 
         this.form = this.formBuilder.group({
             title: this.task.getTitle(),
@@ -58,6 +61,23 @@ export class ExpandedTaskCardComponent implements OnInit {
         );
         this.usService.getAllForProject(this.task.getProjectId());
     }
+
+    memberList(): void {
+        this.memberService.getMembers(this.task.getProjectId()).subscribe(
+            result => {
+                this.members = result.map(x => Member.fromJSON(x));
+            }
+        );
+    }
+
+    /* [TODO]: No way to found a member of task, back doesn't tell
+    getMember(): void {
+        this.memberService.getMember(this.task.getProjectId(), TODO).subscribe(
+                result => {
+                    this.members = result.map(x => Member.fromJSON(x));
+                }
+        );
+    }*/
 
     combinaison(): void {
         let array = this.tasks.map(v => v.getId());

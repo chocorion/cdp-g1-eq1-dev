@@ -55,7 +55,9 @@
                                 </div>
                                 <div>
                                     <label for="member">member</label>
-                                    <input  class="form-control" id="member" type="text" formControlName="member">
+                                    <select id= "select-member"  class="form-control" formControlName= "member">
+                                            <option *ngFor= "let m of members" [ngValue]= "m.getRole()">{{ m.getRole() }}</option>
+                                        </select>
                                 </div>
                                 <button type="submit" class="button">Ajouter</button>
                              </form>

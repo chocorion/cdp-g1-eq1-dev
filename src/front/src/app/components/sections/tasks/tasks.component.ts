@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Member } from 'src/app/models/member.model';
 import { Project } from 'src/app/models/project.model';
 import { Task } from 'src/app/models/task.model';
+import { MemberService } from 'src/app/services/member.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UsService } from 'src/app/services/us.service';
@@ -21,6 +23,7 @@ export class TasksComponent implements OnInit {
     tasksSubscription: Subscription;
     combinaisons = [];
     usIds = [];
+    members = [];
     usSubscription: Subscription;
     private formBuilder: FormBuilder = new FormBuilder();
 
@@ -28,6 +31,7 @@ export class TasksComponent implements OnInit {
         private projectService: ProjectService,
         private taskService: TaskService,
         private usService: UsService,
+        private memberService: MemberService,
         private router: Router) {
     }
 
@@ -49,7 +53,9 @@ export class TasksComponent implements OnInit {
                 this.tasks = result;
                 this.combinaison();
                 this.usIdList();
-                this.form.patchValue({ taskId: this.tasks.length + 1 });
+                if (this.form) {
+                    this.form.patchValue({ taskId: this.tasks.length + 1 });
+                }
             }
         );
 
@@ -92,5 +98,13 @@ export class TasksComponent implements OnInit {
             }
         );
         this.usService.getAllForProject(this.currentProject.getId());
+    }
+
+    memberList(): void {
+        this.memberService.getMembers(this.currentProject.getId()).subscribe(
+            result => {
+                this.members = result.map(x => Member.fromJSON(x));
+            }
+        );
     }
 }
