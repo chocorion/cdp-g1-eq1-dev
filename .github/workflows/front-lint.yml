@@ -13,4 +13,4 @@ jobs:
 
     steps:
     - name: Run ESLint
-    - run: eslint ./src --ext .ts,.js
+      run: eslint ./src --ext .ts,.js
