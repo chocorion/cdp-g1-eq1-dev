@@ -12,14 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install eslint
+    - name: Install tslint
       working-directory: ./src/front/
-      run: npm i --save eslint
-
-    - name: Init eslint
-      working-directory: ./src/front/
-      run: ./node_modules/.bin/eslint --init 
+      run: npm i --save tslint
 
     - name: Run ESLint
       working-directory: ./src/front/
-      run: ./node_modules/.bin/eslint ./src --ext .ts,.js
+      run: ./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'
