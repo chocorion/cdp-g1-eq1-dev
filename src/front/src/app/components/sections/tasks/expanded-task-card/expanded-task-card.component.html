@@ -74,7 +74,7 @@
                                     <div>
                                         <label for="member">member</label>
                                         <select id= "select-member"  class="form-control" formControlName= "member">
-                                            <option *ngFor= "let m of projectMembers" [ngValue]= "m.getUser()">{{ m.getUser() }}</option>
+                                            <option *ngFor= "let m of projectMembers" [ngValue]= "m.getUser()">{{ m.getName() }}</option>
                                         </select>
                                     </div>
                                     

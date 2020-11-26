@@ -25,7 +25,7 @@
                                 </div>
                                 <div>
                                     <label for="usId">usId</label>
-                                    <select id= "select-parents"  type = 'number' class="form-control" formControlName= "usId">
+                                    <select id= "select-usId"  type = 'number' class="form-control" formControlName= "usId">
                                         <option *ngFor= "let usId of usIds" [ngValue]= "usId">{{ usId }}</option>
                                     </select>
                                 </div>
@@ -45,18 +45,20 @@
                                     <label for="parents">parents</label>
                                     <select id= "select-parents"  class="form-control" formControlName= "parents">
                                         <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
+                                        <option value = ''> Clear </option>
                                     </select>
                                 </div>
                                 <div>
                                     <label for="children">children</label>
                                     <select id= "select-children"  class="form-control" formControlName= "children">
                                         <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
+                                        <option value = ''> Clear </option>
                                     </select>
                                 </div>
                                 <div>
                                     <label for="member">member</label>
-                                    <select id= "select-member"  class="form-control" formControlName= "member">
-                                            <option *ngFor= "let m of members" [ngValue]= "m.getRole()">{{ m.getRole() }}</option>
+                                        <select id= "select-member"  class="form-control" formControlName= "member">
+                                            <option *ngFor= "let m of members" [ngValue]= "m.getUser()">{{ m.getName() }}</option>
                                         </select>
                                 </div>
                                 <button type="submit" class="button">Ajouter</button>

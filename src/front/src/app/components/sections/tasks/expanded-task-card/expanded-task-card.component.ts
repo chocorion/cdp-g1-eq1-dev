@@ -69,7 +69,7 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.memberService.getMembers(this.task.getProjectId()).subscribe(
             result => {
                 this.projectMembers = result.map(x => Member.fromJSON(x));
-                this.form.patchValue({ member: this.getMembers() });
+                this.form.patchValue({ member: this.getMember() });
             }
         );
     }
@@ -145,12 +145,6 @@ export class ExpandedTaskCardComponent implements OnInit {
     getParents(): string {
         let s = '';
         this.parentDependency.forEach(x => s += x.getId() + ', ');
-        return s.slice(0, -2);
-    }
-
-    getMembers(): string {
-        let s = '';
-        this.projectMembers.forEach(x => s += x.getUser() + ', ');
         return s.slice(0, -2);
     }
 
