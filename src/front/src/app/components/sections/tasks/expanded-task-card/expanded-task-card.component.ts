@@ -110,7 +110,8 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     delete(): void {
-        this.taskService.delete(this.task.getId(), this.task);
+        this.taskService.delete(this.task.getProjectId(), this.task);
+        console.log('cc');
         this.modify = !this.modify;
     }
 
