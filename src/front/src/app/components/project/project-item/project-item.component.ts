@@ -11,28 +11,33 @@ import {Router} from '@angular/router';
 })
 export class ProjectItemComponent implements OnInit {
     @Input() currentProject: Project;
-    form: any;
+    formP: any;
     private formBuilder: FormBuilder = new FormBuilder();
 
     constructor(
         private projectService: ProjectService,
         private router: Router
     ) {
-        this.form = this.formBuilder.group({
-            name: '',
-            description: ''
-        });
+    }
+
+    refresh(): void{
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['project']);
     }
 
     deleteProject(): void{
         this.projectService.deleteProject(this.currentProject).subscribe(
-            () => {}
-        );
+            () => this.refresh());
         console.log('delete incoming...');
     }
 
     ngOnInit(): void {
         console.log('id ' + this.currentProject.getId() + ' ' + this.currentProject.getName());
+        this.formP = this.formBuilder.group({
+            name: this.currentProject.getName(),
+            description: this.currentProject.getDescription()
+        });
     }
 
     onSubmit(data): void {
@@ -40,8 +45,7 @@ export class ProjectItemComponent implements OnInit {
         this.currentProject.setName(data.name);
         this.currentProject.setDescription(data.description);
         this.projectService.updateProject(this.currentProject).subscribe(
-            () => {}
-        );
+            () => this.refresh());
     }
 
     onClick(): void {
