@@ -28,8 +28,6 @@ export class UnplannedComponent implements OnInit {
                 this.userStories = usList.filter(us => us.getSprint() === null);
             }
         );
-
-        this.usService.getAllForProject(this.projectService.currentProject.getId());
     }
 
     drop(event: CdkDragDrop<Us[], any>): void {

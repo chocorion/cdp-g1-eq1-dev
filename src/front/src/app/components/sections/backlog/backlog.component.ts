@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
+import {Project} from '../../../models/project.model';
 import {Sprint} from '../../../models/sprint.model';
 import {SprintService} from '../../../services/sprint.service';
 import {Subscription} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,20 +18,31 @@ export class BacklogComponent implements OnInit, OnDestroy {
 
     constructor(
         private projectService: ProjectService,
-        private sprintService: SprintService
+        private sprintService: SprintService,
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
-        this.subscription = this.sprintService.subject.subscribe(
-            sprintList => {
-                console.log('In backlog init : ');
-                console.log('Receive sprintlist : ');
-                console.log(sprintList);
-                this.sprints = sprintList;
-            }
-        );
+        this.route.paramMap.subscribe(params => {
+            this.projectService.getProject(parseInt(params.get('projectId'), 10)).subscribe(
+                project => {
+                    this.projectService.setCurrentProject(Project.fromJSON(project));
 
-        this.sprintService.getAllForProject(this.projectService.currentProject.getId());
+                    this.subscription = this.sprintService.subject.subscribe(
+                        sprintList => {
+                            console.log('In backlog init : ');
+                            console.log('Receive sprintlist : ');
+                            console.log(sprintList);
+                            this.sprints = sprintList;
+                        }
+                    );
+
+                    this.sprintService.getAllForProject(this.projectService.currentProject.getId());
+                },
+                error => this.router.navigate(['/projects'])
+            );
+        });
     }
 
     ngOnDestroy(): void {

@@ -14,16 +14,16 @@ import { ProjectComponent } from './components/project/project.component';
 
 
 const routes: Routes = [
-  { path: 'backlog'      , component: BacklogComponent },
-  { path: 'tasks'        , component: TasksComponent },
+  { path: 'project/:projectId/backlog'      , component: BacklogComponent },
+  { path: 'project/:projectId/tasks'        , component: TasksComponent },
   { path: 'planification', component: PlanificationComponent },
   { path: 'sprintActif'  , component: SprintActifComponent },
   { path: 'tests'        , component: TestsComponent },
   { path: 'releases'     , component: ReleasesComponent },
   { path: 'documentation', component: DocumentationComponent },
   { path: 'statistics'   , component: StatisticsComponent },
-  { path: 'project'      , component: ProjectComponent},
-  { path: ''             , redirectTo: '/project', pathMatch: 'full'},
+  { path: 'projects'      , component: ProjectComponent},
+  { path: ''             , redirectTo: '/projects', pathMatch: 'full'},
   { path: '**'           , component: PageNotFoundComponent}
 ];
 

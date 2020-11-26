@@ -23,7 +23,6 @@ export class ProjectItemComponent implements OnInit {
     refresh(): void{
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['project']);
     }
 
     deleteProject(): void{
@@ -49,7 +48,6 @@ export class ProjectItemComponent implements OnInit {
     }
 
     onClick(): void {
-        this.projectService.setCurrentProject(this.currentProject);
-        this.router.navigate(['backlog']);
+        this.router.navigate(['project/' + this.currentProject.getId() + '/backlog']);
     }
 }

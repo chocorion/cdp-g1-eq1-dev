@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
+import { SidebarState } from 'src/app/models/sidebar-state';
+import { SidebarService } from 'src/app/services/sidebar.service';
 import { ProjectService } from '../../services/project.service';
 import { ProjectListComponent } from './project-list/project-list.component';
 
@@ -21,7 +23,8 @@ export class ProjectComponent implements OnInit {
     private newProject: Project;
 
     constructor(private projectService: ProjectService,
-                private router: Router) {
+                private router: Router,
+                private sidebarService: SidebarService) {
         this.searchForm = this.formBuilder.group({
             search: ''
         });
@@ -32,6 +35,7 @@ export class ProjectComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.sidebarService.changeState(SidebarState.disabled);
         this.projectService.clearCurrentProject();
     }
 
@@ -43,7 +47,6 @@ export class ProjectComponent implements OnInit {
     refresh(): void{
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['project']);
     }
 
     onSubmitNewProject(data): void {

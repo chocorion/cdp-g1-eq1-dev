@@ -77,15 +77,12 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.currentProjectSubscription = this.projectService.currentProjectSubject.subscribe(
             (project: Project) => {
-                if (project === null) {
-                    this.router.navigate(['']);
-                    return;
-                }
                 this.currentProject = Project.fromJSON(project);
                 this.updateTask();
+
+                this.taskService.getAllForProject(this.projectService.currentProject.getId());
             }
         );
-        this.projectService.emitCurrentProject();
 
         this.tasksSubscription = this.taskService.subject.subscribe(
             result => {
@@ -93,8 +90,6 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
                 this.updateTask();
             }
         );
-
-        this.taskService.getAllForProject(this.projectService.currentProject.getId());
     }
 
     ngOnDestroy(): void {
