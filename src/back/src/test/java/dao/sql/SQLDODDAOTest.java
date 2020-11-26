@@ -44,4 +44,19 @@ class SQLDODDAOTest {
         assertEquals(dod.taskId, dod.taskId);
         assertEquals(dod.state, dod.state);
     }
+
+    @Test
+    void testUpdate() throws Exception {
+        SQLDODDAO DODDAO = new SQLDODDAO();
+        DOD dod = new DOD(1, 1, "Description de la DOD", false);
+
+        DOD inserted = DODDAO.insert(dod);
+        
+        DOD updateDod = new DOD(inserted.projectId, inserted.taskId, "New desc", !inserted.state, inserted.id);
+        DODDAO.update(updateDod);
+
+        DOD updatedDod = DODDAO.getById(updateDod.id);
+
+        assertTrue(updateDod.equals(updatedDod));
+    }
 }
