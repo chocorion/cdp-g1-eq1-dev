@@ -61,12 +61,14 @@
                                         <label for="parents">parents</label>
                                         <select id= "select-parents"  class="form-control" formControlName= "parents">
                                             <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
+                                            <option value = ''> Clear </option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="children">children</label>
                                         <select id= "select-children"  class="form-control" formControlName= "children">
                                             <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
+                                            <option value = ''> Clear </option>
                                         </select>
                                     </div>
                                     <div>
