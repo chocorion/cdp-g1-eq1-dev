@@ -31,7 +31,7 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter@v3
         env:
-          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: true
           VALIDATE_JAVA: true
           FILTER_REGEX_INCLUDE: src/back/src/.*.java
           DEFAULT_BRANCH: main
