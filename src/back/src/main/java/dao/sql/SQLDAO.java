@@ -90,4 +90,9 @@ public abstract class SQLDAO<T> {
 
         throw new SQLException("Could not insert : " + sql);
     }
+
+    protected Integer getInteger(ResultSet set, String columnName) throws SQLException {
+        int value = set.getInt(columnName);
+        return set.wasNull() ? null : value;
+    }
 }

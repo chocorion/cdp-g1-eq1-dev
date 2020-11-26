@@ -15,7 +15,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         return new Project(
                 resultSet.getString("name"),
                 resultSet.getString("description"),
-                resultSet.getInt("id"));
+                getInteger(resultSet, "id"));
     }
 
     @Override

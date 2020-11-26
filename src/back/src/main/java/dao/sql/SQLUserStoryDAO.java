@@ -12,12 +12,12 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
     @Override
     protected UserStory createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new UserStory(
-            resultSet.getInt("project"),
+            getInteger(resultSet, "project"),
             resultSet.getString("description"),
             resultSet.getString("priority"),
-            resultSet.getInt("difficulty"),
-            resultSet.getInt("sprint"),
-            resultSet.getInt("id")
+            getInteger(resultSet, "difficulty"),
+            getInteger(resultSet, "sprint"),
+            getInteger(resultSet, "id")
         );
     }
 

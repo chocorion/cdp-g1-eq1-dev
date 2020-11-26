@@ -17,8 +17,8 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
             resultSet.getString("description"),
             (resultSet.getDate("lastExecution") == null) ? null : resultSet.getDate("lastExecution").toString(),
             resultSet.getString("state"),
-            resultSet.getInt("project"),
-            resultSet.getInt("id")
+            getInteger(resultSet, "project"),
+            getInteger(resultSet, "id")
         );
     }
 

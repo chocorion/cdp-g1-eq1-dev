@@ -12,9 +12,9 @@ public class SQLSprintDAO extends SQLDAO<Sprint> implements SprintDAO {
     @Override
     protected Sprint createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Sprint(
-            resultSet.getInt("project"),
+            getInteger(resultSet, "project"),
             resultSet.getString("name"),
-            resultSet.getInt("id")
+            getInteger(resultSet, "id")
         );
     }
 

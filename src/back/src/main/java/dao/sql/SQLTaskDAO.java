@@ -12,13 +12,13 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
     @Override
     protected Task createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Task(
-            resultSet.getInt("project"),
-            resultSet.getInt("us"),
-            resultSet.getInt("member"),
+            getInteger(resultSet, "project"),
+            getInteger(resultSet, "us"),
+            getInteger(resultSet, "member"),
             resultSet.getString("title"),
             resultSet.getString("duration"),
             resultSet.getString("status"),
-            resultSet.getInt("id")
+            getInteger(resultSet, "id")
         );
     }
 
