@@ -1,9 +1,6 @@
 package dao.sql;
 
-import domain.UserStory;
 import org.junit.jupiter.api.Test;
-
-import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,7 +48,7 @@ class SQLTestDAOTest {
         domain.Test test = new domain.Test("Test important", "Tester que ça marche pas", null, "validate", 1);
 
         domain.Test inserted = testDAO.insert(test);
-        
+
         domain.Test updateTest = new domain.Test("Très important", "Tester que ça marche bien", null, "not executed", 1, inserted.id);
         testDAO.update(updateTest);
 

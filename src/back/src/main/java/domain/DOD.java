@@ -3,17 +3,17 @@ package domain;
 import java.util.Comparator;
 
 public class DOD {
-    final public Integer id;
+    public final Integer id;
 
-    final public Integer projectId;
-    final public Integer taskId;
-    final public String description;
-    final public Boolean state;
+    public final Integer projectId;
+    public final String description;
+    public final Integer taskId;
+    public final Boolean state;
 
-    final public static Comparator<DOD> comparator;
+    public static final Comparator<DOD> COMPARATOR;
 
     static {
-        comparator = Comparator
+        COMPARATOR = Comparator
                 .comparing(
                         (DOD dod) -> dod.id,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
@@ -56,6 +56,6 @@ public class DOD {
         if (!(obj instanceof DOD))
             return false;
 
-        return comparator.compare(this, (DOD) obj) == 0;
+        return COMPARATOR.compare(this, (DOD) obj) == 0;
     }
 }

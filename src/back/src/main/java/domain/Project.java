@@ -3,14 +3,14 @@ package domain;
 import java.util.Comparator;
 
 public class Project {
-    final public Integer id;
-    final public String name;
-    final public String description;
+    public final Integer id;
+    public final String name;
+    public final String description;
 
-    final public static Comparator<Project> comparator;
+    public static final Comparator<Project> COMPARATOR;
 
     static {
-        comparator = Comparator
+        COMPARATOR = Comparator
                 .comparing(
                         (Project project) -> project.id,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
@@ -45,6 +45,6 @@ public class Project {
         if (!(obj instanceof Project))
             return false;
 
-        return comparator.compare(this, (Project) obj) == 0;
+        return COMPARATOR.compare(this, (Project) obj) == 0;
     }
 }

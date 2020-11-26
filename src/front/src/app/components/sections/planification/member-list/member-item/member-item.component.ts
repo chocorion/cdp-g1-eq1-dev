@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Member } from 'src/app/models/member.model';
 import { MemberService } from 'src/app/services/member.service';
@@ -11,6 +11,7 @@ import { MemberService } from 'src/app/services/member.service';
 export class MemberItemComponent implements OnInit {
   @Input() currentMember: Member;
   @Input() currentProjectId: number;
+  @Output() update = new EventEmitter<any>();
   form: any;
   private formBuilder: FormBuilder = new FormBuilder();
 
@@ -28,7 +29,9 @@ export class MemberItemComponent implements OnInit {
 
   deleteMember(): void {
     this.memberService.deleteMember(this.currentMember).subscribe(
-      () => { }
+      () => {
+        this.emitUpdate();
+      }
     );
   }
 
@@ -37,11 +40,14 @@ export class MemberItemComponent implements OnInit {
     this.currentMember.setLevel(data.level);
     this.currentMember.setProject(this.currentProjectId);
     this.memberService.updateMember(this.currentMember).subscribe(
-      () => { }
+      () => {
+        this.emitUpdate();
+      }
     );
-
   }
 
-
+  emitUpdate(): void {
+    this.update.emit();
+  }
 
 }

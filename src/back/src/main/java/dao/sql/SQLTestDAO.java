@@ -4,12 +4,11 @@ import dao.TestDAO;
 import domain.Test;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
-    
+
     @Override
     protected Test createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new Test(
@@ -52,7 +51,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
             test.projectId,
             test.name,
             test.description,
-            (lastExecution != null)? java.sql.Date.valueOf(lastExecution):null,
+            (lastExecution != null) ? java.sql.Date.valueOf(lastExecution) : null,
             test.state
         );
 
@@ -71,7 +70,7 @@ public class SQLTestDAO extends SQLDAO<Test> implements TestDAO {
                 test.name,
                 test.description,
                 test.state,
-                (lastExecution != null)? java.sql.Date.valueOf(lastExecution) : null,
+                (lastExecution != null) ? java.sql.Date.valueOf(lastExecution) : null,
                 test.id,
                 test.projectId
         );

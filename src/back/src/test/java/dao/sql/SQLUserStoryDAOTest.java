@@ -3,8 +3,6 @@ package dao.sql;
 import domain.UserStory;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SQLUserStoryDAOTest {
@@ -51,7 +49,7 @@ class SQLUserStoryDAOTest {
         UserStory us = new UserStory(1, "US trop bien", "High", 2, null);
 
         UserStory inserted = userStoryDAO.insert(us);
-        
+
         UserStory updateUS = new UserStory(1, "US super bien", "Medium", 3, null, inserted.id);
         userStoryDAO.update(updateUS);
 

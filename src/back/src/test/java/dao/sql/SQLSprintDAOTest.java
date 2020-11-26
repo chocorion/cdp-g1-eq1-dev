@@ -3,8 +3,6 @@ package dao.sql;
 import domain.Sprint;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SQLSprintDAOTest {
@@ -12,7 +10,7 @@ class SQLSprintDAOTest {
     @Test
     void testSimpleInsert() {
         SQLSprintDAO sprintDAO = new SQLSprintDAO();
-        Sprint sprint = new Sprint(1,"I am a sprint");
+        Sprint sprint = new Sprint(1, "I am a sprint");
 
         assertDoesNotThrow(() -> sprintDAO.insert(sprint));
     }
@@ -43,7 +41,7 @@ class SQLSprintDAOTest {
         Sprint sprint = new Sprint(1, "I am a sprint and i need an update");
 
         Sprint inserted = sprintDAO.insert(sprint);
-        
+
         Sprint updateSprint = new Sprint(inserted.projectId, "i have a new name", inserted.id);
         sprintDAO.update(updateSprint);
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from '../../services/project.service';
 import { ProjectListComponent } from './project-list/project-list.component';
@@ -19,7 +20,8 @@ export class ProjectComponent implements OnInit {
     newProjectForm: any;
     private newProject: Project;
 
-    constructor(private projectService: ProjectService) {
+    constructor(private projectService: ProjectService,
+                private router: Router) {
         this.searchForm = this.formBuilder.group({
             search: ''
         });
@@ -38,11 +40,16 @@ export class ProjectComponent implements OnInit {
         this.child.notifyMe('search', this.submit);
     }
 
+    refresh(): void{
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['project']);
+    }
+
     onSubmitNewProject(data): void {
         this.newProject = new Project(data.name, data.description);
         this.projectService.postProject(this.newProject).subscribe(
-            () => { }
-        );
+            () => this.refresh());
     }
 
     updateChild(): void {

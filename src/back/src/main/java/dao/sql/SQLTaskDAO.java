@@ -98,7 +98,7 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
         return new Task(task.projectId, task.usId, task.memberId, task.title, task.duration, task.status, doInsert(statement, opt));
     }
 
-    @Override 
+    @Override
     public void addDependency(Task parent, Task child) throws SQLException {
         if (parent.id == null)
             throw new SQLException("The parent task is missing an id, cannot add dependency");
@@ -109,8 +109,8 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
 
         List<Task> children = this.getChildrenTasks(child);
 
-        for(int i = 0; i < children.size(); i++)
-            if(children.get(i).id == parent.id)
+        for (int i = 0; i < children.size(); i++)
+            if (children.get(i).id == parent.id)
                 throw new SQLException("Cannot set a parent for a child that is already its parent");
 
         String statement = "INSERT INTO task_dep (project, parent, child) VALUES (?,?,?)";
