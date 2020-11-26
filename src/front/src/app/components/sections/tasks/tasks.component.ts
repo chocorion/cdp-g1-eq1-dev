@@ -53,6 +53,7 @@ export class TasksComponent implements OnInit {
                 this.tasks = result;
                 this.combinaison();
                 this.usIdList();
+                this.memberList();
                 if (this.form) {
                     this.form.patchValue({ taskId: this.tasks.length + 1 });
                 }
@@ -69,7 +70,7 @@ export class TasksComponent implements OnInit {
             status: '',
             parents: '',
             children: '',
-            member: '',
+            member: 1,
         });
     }
 
@@ -86,8 +87,23 @@ export class TasksComponent implements OnInit {
     }
 
     createTask(data: any): void {
-        const task = new Task(data.taskId, this.currentProject.getId(), data.usId, data.memberId, data.title, data.duration, data.status);
+        console.log(data);
+        const task = new Task(data.taskId, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, data.status);
         this.taskService.post(this.currentProject.getId(), task).subscribe(() => { });
+
+        const children = data.children.split(', ');
+        const parents = data.parents.split(', ');
+
+        children.forEach(c =>
+            this.taskService.addChildrenTask(task.getProjectId(), task.getId(),
+                this.tasks.find(e => e.getId() === parseInt(c, 10))).subscribe
+                ((() => { })));
+
+        parents.forEach(p =>
+            this.taskService.addParentTask(task.getProjectId(), task.getId(),
+                this.tasks.find(e => e.getId() === parseInt(p, 10))).subscribe
+                ((() => { })));
+
     }
 
 
@@ -107,4 +123,5 @@ export class TasksComponent implements OnInit {
             }
         );
     }
+
 }
