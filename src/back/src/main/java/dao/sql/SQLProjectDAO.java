@@ -65,8 +65,19 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         if (project.id == null) {
             throw new SQLException("This project doesn't have an id !");
         }
-        String statement = "DELETE FROM project WHERE id=? LIMIT 1";
+
+        String statement = "DELETE FROM task WHERE project=?";
         List<Object> opt = Arrays.asList(project.id);
+
+        SQLDatabase.exec(statement, opt);
+
+        statement = "DELETE FROM us WHERE project=?";
+        opt = Arrays.asList(project.id);
+
+        SQLDatabase.exec(statement, opt);
+
+        statement = "DELETE FROM project WHERE id=? LIMIT 1";
+        opt = Arrays.asList(project.id);
 
         SQLDatabase.exec(statement, opt);
     }
