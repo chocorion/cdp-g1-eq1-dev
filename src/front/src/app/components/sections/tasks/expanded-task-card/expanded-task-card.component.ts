@@ -19,7 +19,8 @@ export class ExpandedTaskCardComponent implements OnInit {
     @Output() expand = new EventEmitter<any>();
     @Output() stateChange = new EventEmitter<any>();
     @Input() tasks: Task[];
-
+    checkParent: boolean[] = [];
+    checkChild: boolean[] = [];
     parentDependency: Task[] = [];
     childrenDependency: Task[] = [];
     dods: DOD[] = [];
@@ -42,6 +43,10 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.tasks.forEach(() => {
+            this.checkChild.push(false);
+            this.checkParent.push(false);
+        });
         this.getDependencies();
         this.getDOD();
         this.combinaison();
@@ -133,14 +138,40 @@ export class ExpandedTaskCardComponent implements OnInit {
             result => {
                 this.childrenDependency = result.map(t => Task.fromJSON(t));
                 this.form.patchValue({ children: this.getChildren() });
+                this.childrenDependency.forEach( t => this.checkChild[t.getId() - 1] = true);
             }
         );
         this.taskService.getParentTasks(this.task.getProjectId(), this.task.getId()).subscribe(
             result => {
                 this.parentDependency = result.map(t => Task.fromJSON(t));
-                this.form.patchValue({ parents: this.getParents() });
+                this.form.patchValue({ parents: this.getParents()});
+                this.parentDependency.forEach( t => this.checkParent[t.getId() - 1] = true);
             }
         );
+
+    }
+
+    updateParent(task: Task): void{
+        if (!this.checkParent[task.getId() - 1]){
+            this.taskService.deleteParentTask(this.task.getProjectId(), this.task.getId(), task.getId()).subscribe(() => {});
+        }
+        else if (this.checkParent[task.getId() - 1]){
+            this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
+                    this.tasks.find(e => e.getId() === task.getId())).subscribe
+                    ((() => this.checkParent[task.getId() - 1] = true));
+        }
+    }
+
+    updateChild(task: Task): void{
+        if (!this.checkChild[task.getId() - 1]) {
+            this.taskService.deleteChildrenTask(this.task.getProjectId(), this.task.getId(), task.getId()).subscribe(() => {});
+        }
+        else if (this.checkChild[task.getId() - 1]){
+            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(),
+                    this.tasks.find(e => e.getId() === task.getId())).subscribe
+                    ((() => this.checkChild[task.getId() - 1] = true));
+        }
+
     }
 
     getDOD(): void {
@@ -174,21 +205,6 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.taskService.update(this.task.getProjectId(), this.task).subscribe(
             () => { }
         );
-        const children = data.children.split(', ');
-        const parents = data.parents.split(', ');
-
-        this.taskService.deleteChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(() =>
-            children.forEach(c =>
-                this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(),
-                    this.tasks.find(e => e.getId() === parseInt(c, 10))).subscribe
-                    ((() => { }))));
-
-        this.taskService.deleteParentTasks(this.task.getProjectId(), this.task.getId()).subscribe(() =>
-            parents.forEach(p =>
-                this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
-                    this.tasks.find(e => e.getId() === parseInt(p, 10))).subscribe
-                    ((() => { }))));
-
     }
 
 }
