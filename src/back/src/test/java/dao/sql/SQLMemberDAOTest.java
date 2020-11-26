@@ -54,4 +54,19 @@ class SQLMemberDAOTest {
             // It is to be able to launch the tests twice in a row
         }
     }
+
+    @Test
+    void testUpdate() throws Exception {
+        SQLMemberDAO memberDAO = new SQLMemberDAO();
+        Member member = new Member(1,"David", "product owner","junior");
+
+        Member inserted = memberDAO.insert(member);
+        
+        Member updateMember = new Member(inserted.project, "David2", "owner", "senior", inserted.user);
+        memberDAO.update(updateMember);
+
+        Member updatedMember = memberDAO.getById(updateMember.project, updateMember.user);
+
+        assertTrue(updateMember.equals(updatedMember));
+    }
 }

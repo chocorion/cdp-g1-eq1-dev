@@ -63,4 +63,15 @@ public class UserStory {
 
         return comparator.compare(this, (UserStory) obj) == 0;
     }
+
+    @Override
+    public String toString() {
+        return "UserStory(id=" + id +
+                ", projectId=" + projectId +
+                ", description=" + description +
+                ", priority=" + priority +
+                ", difficulty=" + difficulty +
+                ", sprint=" + sprint +
+                ")";
+    }
 }

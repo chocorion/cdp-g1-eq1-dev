@@ -15,7 +15,7 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         return new Project(
                 resultSet.getString("name"),
                 resultSet.getString("description"),
-                resultSet.getInt("id"));
+                getInteger(resultSet, "id"));
     }
 
     @Override
@@ -65,8 +65,19 @@ public class SQLProjectDAO extends SQLDAO<Project> implements ProjectDAO {
         if (project.id == null) {
             throw new SQLException("This project doesn't have an id !");
         }
-        String statement = "DELETE FROM project WHERE id=? LIMIT 1";
+
+        String statement = "DELETE FROM task WHERE project=?";
         List<Object> opt = Arrays.asList(project.id);
+
+        SQLDatabase.exec(statement, opt);
+
+        statement = "DELETE FROM us WHERE project=?";
+        opt = Arrays.asList(project.id);
+
+        SQLDatabase.exec(statement, opt);
+
+        statement = "DELETE FROM project WHERE id=? LIMIT 1";
+        opt = Arrays.asList(project.id);
 
         SQLDatabase.exec(statement, opt);
     }

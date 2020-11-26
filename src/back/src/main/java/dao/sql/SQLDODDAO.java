@@ -13,11 +13,11 @@ public class SQLDODDAO extends SQLDAO<DOD> implements DODDAO {
     @Override
     protected DOD createObjectFromResult(ResultSet resultSet) throws SQLException {
         return new DOD(
-            resultSet.getInt("project"),
-            resultSet.getInt("task"),
+            getInteger(resultSet, "project"),
+            getInteger(resultSet, "task"),
             resultSet.getString("description"),
             resultSet.getBoolean("state"),
-            resultSet.getInt("id")
+            getInteger(resultSet, "id")
         );
     }
 

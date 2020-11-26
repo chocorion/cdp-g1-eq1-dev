@@ -15,6 +15,13 @@ class SQLTaskDAOTest {
 
         assertDoesNotThrow(() -> taskDAO.insert(task));
     }
+    @Test
+    void testDeleteInsert() {
+        SQLTaskDAO taskDAO = new SQLTaskDAO();
+        Task task = new Task(1, 1, 1, "super title", "1h.h", "TODO");
+
+        assertDoesNotThrow(() -> taskDAO.delete(taskDAO.insert(task)));
+    }
 
     @Test
     void testGetNotThrow()  {
@@ -55,5 +62,19 @@ class SQLTaskDAOTest {
         assertDoesNotThrow(() -> taskDAO.addDependency(task1, task2));
         assertThrows(SQLException.class, () -> taskDAO.addDependency(task1, task2));
         assertDoesNotThrow(() -> taskDAO.deleteDependency(task1, task2));
+    }
+
+    @Test
+    void testUpdate() throws Exception {
+        SQLTaskDAO taskDAO = new SQLTaskDAO();
+        
+        Task inserted = taskDAO.insert(new Task(1, 1, 1, "super title", "1h.h", "TODO"));
+        
+        Task updateTask = new Task(inserted.projectId, inserted.usId, inserted.memberId, "i have a new title", "562hh", "DONE", inserted.id);
+        taskDAO.update(updateTask);
+
+        Task updatedTask = taskDAO.getById(updateTask.projectId, updateTask.id);
+
+        assertTrue(updateTask.equals(updatedTask));
     }
 }

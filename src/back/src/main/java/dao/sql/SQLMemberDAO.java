@@ -13,11 +13,11 @@ public class SQLMemberDAO extends SQLDAO<Member> implements MemberDAO {
     @Override
     protected Member createObjectFromResult(ResultSet resultSet) throws SQLException{
         return new Member(
-            resultSet.getInt("project"),
+            getInteger(resultSet, "project"),
             resultSet.getString("name"),
             resultSet.getString("role"),
             resultSet.getString("level"),
-            resultSet.getInt("user"));
+            getInteger(resultSet, "user"));
     }
 
     @Override

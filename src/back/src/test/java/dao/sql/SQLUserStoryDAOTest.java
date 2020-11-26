@@ -44,4 +44,21 @@ class SQLUserStoryDAOTest {
         assertEquals(us.priority, inserted.priority);
         assertEquals(us.sprint, inserted.sprint);
     }
+
+    @Test
+    void testUpdate() throws Exception {
+        SQLUserStoryDAO userStoryDAO = new SQLUserStoryDAO();
+        UserStory us = new UserStory(1, "US trop bien", "High", 2, null);
+
+        UserStory inserted = userStoryDAO.insert(us);
+        
+        UserStory updateUS = new UserStory(1, "US super bien", "Medium", 3, null, inserted.id);
+        userStoryDAO.update(updateUS);
+
+        UserStory updatedUS = userStoryDAO.getById(updateUS.projectId, updateUS.id);
+
+        System.out.println(updateUS);
+        System.out.println(updatedUS);
+        assertTrue(updateUS.equals(updatedUS));
+    }
 }

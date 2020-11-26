@@ -18,9 +18,11 @@ export class ExpandedTaskCardComponent implements OnInit {
     @Output() expand = new EventEmitter<any>();
     @Output() stateChange = new EventEmitter<any>();
     @Input() tasks: Task[];
+
     parentDependency: Task[] = [];
     childrenDependency: Task[] = [];
     dods: DOD[] = [];
+
     combinaisons = [];
     usIds = [];
     projectMembers = [];
@@ -107,6 +109,12 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.modify = !this.modify;
     }
 
+    delete(): void {
+        this.taskService.delete(this.task.getProjectId(), this.task);
+        console.log('cc');
+        this.modify = !this.modify;
+    }
+
     getDependencies(): void {
         this.taskService.getChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(
             result => {
@@ -161,6 +169,7 @@ export class ExpandedTaskCardComponent implements OnInit {
                 this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(),
                     this.tasks.find(e => e.getId() === parseInt(c, 10))).subscribe
                     ((() => { }))));
+
         this.taskService.deleteParentTasks(this.task.getProjectId(), this.task.getId()).subscribe(() =>
             parents.forEach(p =>
                 this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
