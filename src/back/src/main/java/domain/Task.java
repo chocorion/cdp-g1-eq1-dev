@@ -3,18 +3,18 @@ package domain;
 import java.util.Comparator;
 
 public class Task {
-    final public Integer id;
-    final public Integer projectId;
-    final public Integer usId;
-    final public Integer memberId;
-    final public String title;
-    final public String duration;
-    final public String status;
+    public final Integer id;
+    public final Integer projectId;
+    public final Integer usId;
+    public final Integer memberId;
+    public final String title;
+    public final String duration;
+    public final String status;
 
-    final public static Comparator<Task> comparator;
+    public static final Comparator<Task> COMPARATOR;
 
     static {
-        comparator = Comparator
+        COMPARATOR = Comparator
                 .comparing(
                         (Task task) -> task.id,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
@@ -64,6 +64,6 @@ public class Task {
         if (!(obj instanceof Task))
             return false;
 
-        return comparator.compare(this, (Task) obj) == 0;
+        return COMPARATOR.compare(this, (Task) obj) == 0;
     }
 }

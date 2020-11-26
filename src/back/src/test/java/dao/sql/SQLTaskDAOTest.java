@@ -55,7 +55,7 @@ class SQLTaskDAOTest {
     @Test
     void testDependency() throws Exception {
         SQLTaskDAO taskDAO = new SQLTaskDAO();
-        
+
         Task task1 = taskDAO.insert(new Task(1, 1, 1, "super title", "1h.h", "TODO"));
         Task task2 = taskDAO.insert(new Task(1, 1, 1, "super title", "1h.h", "TODO"));
 
@@ -67,9 +67,9 @@ class SQLTaskDAOTest {
     @Test
     void testUpdate() throws Exception {
         SQLTaskDAO taskDAO = new SQLTaskDAO();
-        
+
         Task inserted = taskDAO.insert(new Task(1, 1, 1, "super title", "1h.h", "TODO"));
-        
+
         Task updateTask = new Task(inserted.projectId, inserted.usId, inserted.memberId, "i have a new title", "562hh", "DONE", inserted.id);
         taskDAO.update(updateTask);
 

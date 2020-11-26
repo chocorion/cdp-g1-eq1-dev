@@ -22,28 +22,28 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
     }
 
     @Override
-    public UserStory getById(int project_id, int id) throws SQLException {
+    public UserStory getById(int projectId, int id) throws SQLException {
         String statement = "SELECT * FROM us WHERE project=? AND id=?";
 
-        List<Object> opt = Arrays.asList(project_id, id);
+        List<Object> opt = Arrays.asList(projectId, id);
 
         return queryFirstObject(statement, opt);
     }
 
     @Override
-    public List<UserStory> getBySprint(int project_id, int sprintId) throws Exception {
+    public List<UserStory> getBySprint(int projectId, int sprintId) throws Exception {
         String statement = "SELECT * FROM us WHERE project=? AND sprint=?";
 
-        List<Object> opt = Arrays.asList(project_id, sprintId);
+        List<Object> opt = Arrays.asList(projectId, sprintId);
 
         return queryAllObjects(statement, opt);
     }
 
     @Override
-    public List<UserStory> getAllForProject(int project_id) throws SQLException {
+    public List<UserStory> getAllForProject(int projectId) throws SQLException {
         String statement = "SELECT * FROM us WHERE project=?";
 
-        List<Object> opt = Arrays.asList(project_id);
+        List<Object> opt = Arrays.asList(projectId);
 
         return queryAllObjects(statement, opt);
     }
@@ -104,19 +104,19 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
     }
 
     @Override
-    public List<UserStory> getByPriority(int project_id, String priority) throws SQLException {
+    public List<UserStory> getByPriority(int projectId, String priority) throws SQLException {
         String statement = "SELECT * FROM us WHERE project=? AND priority = ?";
 
-        List<Object> opt = Arrays.asList(project_id, priority);
+        List<Object> opt = Arrays.asList(projectId, priority);
 
         return queryAllObjects(statement, opt);
     }
 
     @Override
-    public List<UserStory> getByDifficulty(int project_id, int difficulty) throws SQLException {
+    public List<UserStory> getByDifficulty(int projectId, int difficulty) throws SQLException {
         String statement = "SELECT * FROM us WHERE project=? AND difficulty = ?";
 
-        List<Object> opt = Arrays.asList(project_id, difficulty);
+        List<Object> opt = Arrays.asList(projectId, difficulty);
 
         return queryAllObjects(statement, opt);
     }

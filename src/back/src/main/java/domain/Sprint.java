@@ -3,14 +3,14 @@ package domain;
 import java.util.Comparator;
 
 public class Sprint {
-    final public Integer projectId;
-    final public Integer id;
-    final public String name;
+    public final Integer projectId;
+    public final Integer id;
+    public final String name;
 
-    final public static Comparator<Sprint> comparator;
+    public static final Comparator<Sprint> COMPARATOR;
 
     static {
-        comparator = Comparator
+        COMPARATOR = Comparator
                 .comparing(
                         (Sprint sprint) -> sprint.id,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
@@ -19,15 +19,16 @@ public class Sprint {
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
                         (Sprint sprint) -> sprint.name,
-                        Comparator.nullsFirst(Comparator.naturalOrder()));      
+                        Comparator.nullsFirst(Comparator.naturalOrder()));
+
     }
 
     // Required by jackson
-    public Sprint () {
+    public Sprint() {
         this(null, null, null);
     }
 
-    public Sprint(Integer projectId, String name){
+    public Sprint(Integer projectId, String name) {
         this(projectId, name, null);
     }
 
@@ -45,14 +46,14 @@ public class Sprint {
         if (!(obj instanceof Sprint))
             return false;
 
-        return comparator.compare(this, (Sprint) obj) == 0;
+        return COMPARATOR.compare(this, (Sprint) obj) == 0;
     }
 
     @Override
     public String toString() {
-        return "Sprint(projectId=" + projectId +
-                ", id=" + id +
-                ", name=" + name +
-                ")";
+        return "Sprint(projectId=" + projectId
+                + ", id=" + id
+                + ", name=" + name
+                + ")";
     }
 }

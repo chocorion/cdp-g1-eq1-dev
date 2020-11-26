@@ -11,12 +11,12 @@ import javax.ws.rs.core.Response;
 public class Members {
     @Inject MemberDAO memberDAO;
 
-    @GET 
+    @GET
     @Produces("application/json")
     public Response getAllMembers(@PathParam("projectId") int projectId) {
         try {
             return Response.status(200).entity(memberDAO.getAllForProject(projectId)).build();
-        } catch (Exception exception ) {
+        } catch (Exception exception) {
             return Response.status(400).entity(exception.getMessage()).build();
         }
     }
@@ -24,10 +24,10 @@ public class Members {
     @GET
     @Path("{user}")
     @Produces("application/json")
-    public Response getMember( @PathParam("projectId") int projectId , @PathParam("user") int user){
-        try{
+    public Response getMember(@PathParam("projectId") int projectId, @PathParam("user") int user) {
+        try {
             return Response.status(200).entity(memberDAO.getById(projectId, user)).build();
-        } catch (Exception exception){
+        } catch (Exception exception) {
             return Response.status(400).entity(exception.getMessage()).build();
         }
     }
@@ -39,7 +39,7 @@ public class Members {
     public Response putMember(@PathParam("projectId") int projectId, @PathParam("user") int user, Member member) {
         member = new Member(projectId, member.name, member.role, member.level, user);
 
-        try{
+        try {
             memberDAO.update(member);
         } catch (Exception exception) {
             return Response
@@ -53,7 +53,7 @@ public class Members {
     @POST
     @Consumes("application/json")
     @Produces("applciation/json")
-    public Response postMember(@PathParam("projectId") int projectId , Member member){
+    public Response postMember(@PathParam("projectId") int projectId, Member member) {
         member = new Member(projectId, member.name, member.role, member.level);
         Member built;
         try {

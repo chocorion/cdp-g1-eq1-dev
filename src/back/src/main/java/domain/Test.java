@@ -4,18 +4,18 @@ package domain;
 import java.util.Comparator;
 
 public class Test {
-    final public Integer id;
+    public final Integer id;
 
-    final public String name;
-    final public String description;
-    final public String lastExecution;
-    final public String state;
-    final public Integer projectId;
+    public final String name;
+    public final String description;
+    public final String lastExecution;
+    public final String state;
+    public final Integer projectId;
 
-    final public static Comparator<Test> comparator;
+    public static final Comparator<Test> COMPARATOR;
 
     static {
-        comparator = Comparator
+        COMPARATOR = Comparator
                 .comparing(
                         (Test test) -> test.id,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
@@ -36,8 +36,8 @@ public class Test {
     }
 
     // Required by jackson
-    public Test () {
-        this(null, null, null,null, null);
+    public Test() {
+        this(null, null, null, null, null);
     }
 
     public Test(String name, String description, String lastExecution, String state, Integer projectId) {
@@ -61,17 +61,17 @@ public class Test {
         if (!(obj instanceof Test))
             return false;
 
-        return comparator.compare(this, (Test) obj) == 0;
+        return COMPARATOR.compare(this, (Test) obj) == 0;
     }
 
     @Override
     public String toString() {
-        return "Test(id=" + id +
-                ", name=" + name +
-                ", description=" + description +
-                ", lastExecution=" + lastExecution +
-                ", state=" + state +
-                ", projectId=" + projectId +
-                ")";
+        return "Test(id=" + id
+                + ", name=" + name
+                + ", description=" + description
+                + ", lastExecution=" + lastExecution
+                + ", state=" + state
+                + ", projectId=" + projectId
+                + ")";
     }
 }

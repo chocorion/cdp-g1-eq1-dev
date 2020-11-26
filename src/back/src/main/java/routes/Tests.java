@@ -43,8 +43,8 @@ public class Tests {
     @Path("{test_id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response putTest(@PathParam("id") int id, @PathParam("test_id") int test_id, Test test) {
-        test = new Test(test.name, test.description, test.lastExecution, test.state, id, test_id);
+    public Response putTest(@PathParam("id") int id, @PathParam("test_id") int testId, Test test) {
+        test = new Test(test.name, test.description, test.lastExecution, test.state, id, testId);
 
         try {
             testDAO.update(test);
@@ -62,9 +62,9 @@ public class Tests {
     @Path("{test_id}")
     @DELETE
     @Produces("application/json")
-    public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int test_id) {
+    public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int testId) {
         try {
-            Test test = testDAO.getById(id, test_id);
+            Test test = testDAO.getById(id, testId);
             if (test.id != id) {
                 return Response
                         .status(Response.Status.CONFLICT)

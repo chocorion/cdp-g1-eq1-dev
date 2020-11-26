@@ -10,7 +10,7 @@ class SprintTest {
     void testEqual() {
         Sprint s1 = new Sprint();
         Sprint s2 = new Sprint(1, "d1");
-        Sprint s3 = new Sprint( 1, "d1");
+        Sprint s3 = new Sprint(1, "d1");
         Sprint s4 = new Sprint(2, "d1");
 
         assertNotEquals(s1, s2);

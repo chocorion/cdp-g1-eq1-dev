@@ -3,18 +3,18 @@ package domain;
 import java.util.Comparator;
 
 public class UserStory {
-    final public Integer id;
+    public final Integer id;
 
-    final public Integer projectId;
-    final public String description;
-    final public String priority;
-    final public Integer difficulty;
-    final public Integer sprint;
+    public final Integer projectId;
+    public final String description;
+    public final String priority;
+    public final Integer difficulty;
+    public final Integer sprint;
 
-    final public static Comparator<UserStory> comparator;
+    public static final Comparator<UserStory> COMPARATOR;
 
     static {
-        comparator = Comparator
+        COMPARATOR = Comparator
                 .comparing(
                         (UserStory us) -> us.id,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
@@ -61,17 +61,17 @@ public class UserStory {
         if (!(obj instanceof UserStory))
             return false;
 
-        return comparator.compare(this, (UserStory) obj) == 0;
+        return COMPARATOR.compare(this, (UserStory) obj) == 0;
     }
 
     @Override
     public String toString() {
-        return "UserStory(id=" + id +
-                ", projectId=" + projectId +
-                ", description=" + description +
-                ", priority=" + priority +
-                ", difficulty=" + difficulty +
-                ", sprint=" + sprint +
-                ")";
+        return "UserStory(id=" + id
+                + ", projectId=" + projectId
+                + ", description=" + description
+                + ", priority=" + priority
+                + ", difficulty=" + difficulty
+                + ", sprint=" + sprint
+                + ")";
     }
 }

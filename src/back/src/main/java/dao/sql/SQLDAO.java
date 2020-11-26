@@ -10,7 +10,7 @@ public abstract class SQLDAO<T> {
 
     protected T queryFirstObject(String statement, List<Object> opt) throws SQLException {
 
-        PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+        PreparedStatement preparedStatement = SQLDatabase.prepare(statement, opt);
 
         String sql = preparedStatement.toString();
 
@@ -25,15 +25,15 @@ public abstract class SQLDAO<T> {
             return item;
         }
 
-        throw new SQLException("Could not query : "+sql);
+        throw new SQLException("Could not query : " + sql);
     }
 
     protected List<T> queryAllObjects(String statement, List<Object> opt) throws SQLException {
 
-        PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+        PreparedStatement preparedStatement = SQLDatabase.prepare(statement, opt);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        
+
         List<T> items = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -57,7 +57,7 @@ public abstract class SQLDAO<T> {
     protected int doInsert(String statement, List<Object> opt) throws SQLException {
         int id;
 
-        PreparedStatement preparedStatement = SQLDatabase.prepare(statement,opt);
+        PreparedStatement preparedStatement = SQLDatabase.prepare(statement, opt);
 
         String sql = preparedStatement.toString();
 
@@ -80,13 +80,13 @@ public abstract class SQLDAO<T> {
         preparedStatement = SQLDatabase.prepare("SELECT @id");
 
         ResultSet rs = preparedStatement.executeQuery();
-        if(rs.next()) {
+        if (rs.next()) {
             id = rs.getInt(1);
             rs.close();
             preparedStatement.close();
             return id;
         }
-        
+
 
         throw new SQLException("Could not insert : " + sql);
     }
