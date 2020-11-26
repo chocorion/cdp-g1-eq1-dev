@@ -15,6 +15,13 @@ class SQLTaskDAOTest {
 
         assertDoesNotThrow(() -> taskDAO.insert(task));
     }
+    @Test
+    void testDeleteInsert() {
+        SQLTaskDAO taskDAO = new SQLTaskDAO();
+        Task task = new Task(1, 1, 1, "super title", "1h.h", "TODO");
+
+        assertDoesNotThrow(() -> taskDAO.delete(taskDAO.insert(task)));
+    }
 
     @Test
     void testGetNotThrow()  {
