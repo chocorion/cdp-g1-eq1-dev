@@ -1,0 +1,21 @@
+name: Front-lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install tslint
+      working-directory: ./src/front/
+      run: npm i --save tslint
+
+    - name: Run ESLint
+      working-directory: ./src/front/
+      run: ./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'
