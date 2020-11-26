@@ -45,10 +45,10 @@ CALL insert_task(2, "Faire un truc on sait pas pourquoi encore", "", "TODO", nul
 -- Create some DODs for a few tasks
 
 INSERT INTO dod (project, task, id, description, state)
-VALUES (1, 1, 1, "Vérifier que ça marche", 0),
-    (1, 1, 2, "Vérifier que ça marche toujours", 0),
-    (1, 2, 3, "Vérifier que ça marche", 1),
-    (2, 1, 4, "Vérifier que ça marche pas", 1);
+VALUES (1, 1, 1, "Verifier que ca marche", 0),
+    (1, 1, 2, "Verifier que ca marche toujours", 0),
+    (1, 2, 3, "Verifier que ca marche", 1),
+    (2, 1, 4, "Verifier que ca marche pas", 1);
 
 -- Add dependencies between tasks
 
