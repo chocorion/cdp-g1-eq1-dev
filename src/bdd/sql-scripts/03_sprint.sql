@@ -8,8 +8,9 @@ CREATE TABLE sprint (
 );
 
 DELIMITER |
-CREATE TRIGGER CK_SPRINT BEFORE INSERT ON sprint FOR EACH ROW 
-BEGIN
-    SET NEW.id = IFNULL((SELECT MAX(id) FROM sprint WHERE project = NEW.project),0) + 1;
-END| 
+CREATE PROCEDURE insert_sprint(project_ int, name_ text, OUT id_ int) 
+BEGIN 
+    SET id_ = IFNULL((SELECT MAX(id) FROM sprint WHERE project = project_),0) + 1; 
+    INSERT INTO sprint (project, id, name) VALUES (project_, id_, name_); 
+END; |
 DELIMITER ;

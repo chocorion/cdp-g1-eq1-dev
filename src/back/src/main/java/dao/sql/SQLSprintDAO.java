@@ -38,8 +38,7 @@ public class SQLSprintDAO extends SQLDAO<Sprint> implements SprintDAO {
     public Sprint insert(Sprint sprint) throws Exception {
         if (sprint.id != null)
             throw new SQLException("This sprint already has an id, use update !");
-        String statement = "INSERT INTO sprint (project, name)";
-        statement += "VALUES (?,?)";
+        String statement = "{CALL insert_sprint(?, ?, @id)}";
 
         List<Object> opt = Arrays.asList(
                 sprint.projectId,
