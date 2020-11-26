@@ -1,8 +1,7 @@
 <ul class="list-group">
     <div class = "row">
+        <br>
            <div class="col">
-               <!-- Button trigger modal -->
-               <button type="button" id='newbuttontask' class="btn btn-primary float-right mt-2" data-toggle="modal" data-target ="#newTask">Nouveau</button>
                <!-- Modal -->
                <div class="modal fade" id ="newTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                    <div class="modal-dialog" role="document">
@@ -14,60 +13,34 @@
                                </button>
                            </div>
                            <div class="modal-body">
-                           <p>Dépendances Parents: </p>
-                           <div class="pstate2" *ngFor="let t of tasks">
-                                        <mat-checkbox class="example-margin" [(ngModel)]="checkParent[t.getId() -1]" [disabled] = "checkChild[t.getId() -1]"
-                                            >{{t.getId()}}</mat-checkbox>
-                                        </div>
-                                <p>Dépendances Enfants:</p>
-                                <div class="cstate2" *ngFor="let t of tasks">
-                                        <mat-checkbox class="example-margin" [(ngModel)]="checkChild[t.getId() -1]" [disabled] = "checkParent[t.getId() -1]"
-                                            >{{t.getId()}}</mat-checkbox>
-                                        </div>
                             <form [formGroup]="form" (ngSubmit)="createTask(form.value)">
                                 <div>
-                                    <label for="taskId">taskId</label>
-                                    <input  class="form-control" type="number" formControlName="taskId" [attr.min]="tasks.length + 1">
-                                </div>
-                                <div>
-                                    <label for="title">title</label>
+                                    <label for="title">Title</label>
                                     <input  class="form-control" type="text" formControlName="title">
                                 </div>
                                 <div>
-                                    <label for="usId">usId</label>
+                                    <label for="usId">User Story</label>
                                     <select id= "select-usId"  type = 'number' class="form-control" formControlName= "usId">
-                                        <option *ngFor= "let usId of usIds" [ngValue]= "usId">{{ usId }}</option>
+                                        <option value = 'null'>None</option>
+                                        <option *ngFor= "let userStory of UserStories" [ngValue]= "userStory.getId()">#{{ userStory.getId() }} - {{ userStory.getDescription() }}</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="duration">duration</label>
+                                    <label for="duration">Duration</label>
                                     <input  class="form-control" id="duration" type="text" formControlName="duration">
                                 </div>
                                 <div>
-                                    <label for="status">status</label>
-                                    <select id= "select-status"  class="form-control" formControlName= "status">
+                                    <label for="status">Status</label>
+                                    <select id= "select-status"  class="form-control" formControlName= "status" value="TODO">
                                         <option value= "TODO">TODO</option>
                                         <option value= "DOING">DOING</option>
                                         <option value= "DONE">DONE</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="parents">parents</label>
-                                    <select id= "select-parents"  class="form-control" formControlName= "parents">
-                                        <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
-                                        <option value = ''> Clear </option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="children">children</label>
-                                    <select id= "select-children"  class="form-control" formControlName= "children">
-                                        <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
-                                        <option value = ''> Clear </option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="member">member</label>
-                                        <select id= "select-member"  class="form-control" formControlName= "member">
+                                    <label for="member">Assigned</label>
+                                        <select id= "select-member"  class="form-control" formControlName= "member" value="undefined">
+                                            <option value = 'undefined'></option>
                                             <option *ngFor= "let m of members" [ngValue]= "m.getUser()">{{ m.getName() }}</option>
                                         </select>
                                 </div>

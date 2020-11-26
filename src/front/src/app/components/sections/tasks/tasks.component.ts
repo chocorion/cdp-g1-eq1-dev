@@ -21,8 +21,8 @@ export class TasksComponent implements OnInit {
     currentProject: Project = null;
     currentProjectSubscription: Subscription;
     tasksSubscription: Subscription;
-    combinaisons = [];
-    usIds = [];
+
+    UserStories = [];
     members = [];
     usSubscription: Subscription;
     private formBuilder: FormBuilder = new FormBuilder();
@@ -78,7 +78,7 @@ export class TasksComponent implements OnInit {
     usIdList(): void {
         this.usSubscription = this.usService.subject.subscribe(
             result => {
-                this.usIds = result.map(x => x.getId());
+                this.UserStories = result;
             }
         );
         this.usService.getAllForProject(this.currentProject.getId());

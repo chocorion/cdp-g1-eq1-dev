@@ -1,8 +1,11 @@
 <div class="container">
-    <h1>Tasks</h1>
     <div class="row">
         <div class="col">
-            <h2>TODO</h2>
+            <div class="card-header">
+                <h2>Todo
+                <button type="button" id='newbuttontask' class="btn btn-primary float-right mt-2" data-toggle="modal" data-target ="#newTask">+</button>
+                </h2>
+            </div>
             <div class="dropzone" cdkDropList id="TODO" #TODO="cdkDropList" [cdkDropListData]="tasksTodo"
                 [cdkDropListConnectedTo]="[DOING, DONE]" (cdkDropListDropped)="dropped($event)">
                 <div class="block">
@@ -13,7 +16,9 @@
         </div>
 
         <div class="col">
-            <h2>DOING</h2>
+            <div class="card-header">
+                <h2>Doing</h2>
+            </div>
             <div class="dropzone" cdkDropList id="DOING" #DOING="cdkDropList" [cdkDropListData]="tasksDoing"
                 [cdkDropListConnectedTo]="[TODO, DONE]" (cdkDropListDropped)="dropped($event)">
                 <div class="block">
@@ -23,7 +28,9 @@
             </div>
         </div>
         <div class="col ">
-            <h2>DONE</h2>
+            <div class="card-header">
+                <h2>Done</h2>
+            </div>
             <div class="dropzone" cdkDropList id="DONE" #DONE="cdkDropList" [cdkDropListData]="tasksDone"
                 [cdkDropListConnectedTo]="[TODO, DOING]" (cdkDropListDropped)="dropped($event)">
                 <div class="block">
