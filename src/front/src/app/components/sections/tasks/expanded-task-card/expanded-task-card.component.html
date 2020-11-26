@@ -22,15 +22,19 @@
                                 <p>Duration: {{task.getDuration()}}</p>
                                 <p>Status: {{task.getStatus()}}</p>
                                 <p>Dépendances Parents: {{this.getParents()}}</p>
-                                <div class="pstate" *ngFor="let t of tasks">
-                                        <mat-checkbox class="example-margin" [(ngModel)]="checkParent[t.getId() -1]" [disabled] = "checkChild[t.getId() -1]"
-                                            (change)="updateParent(t)">{{t.getId()}}</mat-checkbox>
-                                        </div>
+                                <div class='over'>
+                                    <div class="pstate" *ngFor="let t of tasks">
+                                            <mat-checkbox class="example-margin" [(ngModel)]="checkParent[t.getId() -1]" [disabled] = "checkChild[t.getId() -1]"
+                                                (change)="updateParent(t)">{{t.getId()}}</mat-checkbox>
+                                            </div>
+                                </div>
                                 <p>Dépendances Enfants: {{this.getChildren()}}</p>
-                                <div class="cstate" *ngFor="let t of tasks">
-                                        <mat-checkbox class="example-margin" [(ngModel)]="checkChild[t.getId() -1]" [disabled] = "checkParent[t.getId() -1]"
-                                            (change)="updateChild(t)">{{t.getId()}}</mat-checkbox>
-                                        </div>
+                                <div class='over'>
+                                    <div class="cstate" *ngFor="let t of tasks">
+                                            <mat-checkbox class="example-margin" [(ngModel)]="checkChild[t.getId() -1]" [disabled] = "checkParent[t.getId() -1]"
+                                                (change)="updateChild(t)">{{t.getId()}}</mat-checkbox>
+                                            </div>
+                                </div>
                                 <p>Member: {{this.getMemberName()}}</p>
                                 <div class="dodstate" *ngFor="let dod of dods">
                                     <div class="card">
