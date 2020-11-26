@@ -9,7 +9,7 @@ export class DOD implements PossesId {
 
 
     constructor(id: number, projectId: number, taskId: number, description: string, state: boolean) {
-        this.id = (id) ? id : -1;
+        this.id = (id) ? id : null;
         this.projectId = projectId;
         this.taskId = taskId;
         this.description = description;

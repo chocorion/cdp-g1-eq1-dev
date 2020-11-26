@@ -23,7 +23,9 @@ export class ExpandedTaskCardComponent implements OnInit {
     checkChild: boolean[] = [];
     parentDependency: Task[] = [];
     childrenDependency: Task[] = [];
+
     dods: DOD[] = [];
+    newDODText: string;
 
     possibleDependencies: Task[] = [];
     selectedParentAdd: Task;
@@ -209,6 +211,22 @@ export class ExpandedTaskCardComponent implements OnInit {
                 this.childrenDependency.push(this.selectedChildAdd);
                 this.updatePossibleDependencies();
                 this.selectedParentAdd = undefined;
+            },
+            err => {
+            }
+        );
+    }
+
+    addDOD(): void{
+        if (!this.newDODText) { return; }
+        this.taskService.addDOD(
+            this.task.getProjectId(),
+            this.task.getId(),
+            new DOD(null, this.task.getProjectId(), this.task.getId(), this.newDODText, false))
+        .subscribe(
+            suc => {
+                this.dods.push(DOD.fromJSON(suc));
+                this.newDODText = '';
             },
             err => {
             }

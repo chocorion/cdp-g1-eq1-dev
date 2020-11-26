@@ -1,3 +1,12 @@
 .card-title{
     cursor: pointer;
 }
+
+#badge {
+    font-size: 120%;
+}
+
+.badge-valid {
+    color: rgb(255, 255, 255);
+    background-color: #00aa09;
+}

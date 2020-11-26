@@ -11,7 +11,8 @@ export class TaskCardComponent implements OnInit {
     @Input() task: Task;
     @Input() tasks: Task[];
     expanded = false;
-    currentState: string;
+    dodOk: number;
+    dodTotal: number;
     constructor(private taskService: TaskService) { }
 
     ngOnInit(): void {
@@ -26,7 +27,8 @@ export class TaskCardComponent implements OnInit {
         this.taskService.getDOD(this.task.getProjectId(), this.task.getId()).subscribe(
             result => {
                 const t = result.filter(x => x.state === true);
-                this.currentState = t.length + '/' + result.length;
+                this.dodOk = t.length;
+                this.dodTotal = result.length;
             }
         );
     }
