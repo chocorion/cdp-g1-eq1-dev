@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DOD } from 'src/app/models/dod.model';
 import { Member } from 'src/app/models/member.model';
@@ -36,7 +37,8 @@ export class ExpandedTaskCardComponent implements OnInit {
     constructor(
         private taskService: TaskService,
         private usService: UsService,
-        private memberService: MemberService) {
+        private memberService: MemberService,
+        private router: Router) {
     }
 
     ngOnInit(): void {
@@ -111,8 +113,10 @@ export class ExpandedTaskCardComponent implements OnInit {
 
     delete(): void {
         this.taskService.delete(this.task.getProjectId(), this.task);
-        console.log('cc');
         this.modify = !this.modify;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['tasks']);
     }
 
     getDependencies(): void {
