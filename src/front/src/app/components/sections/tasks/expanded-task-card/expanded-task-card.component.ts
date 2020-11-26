@@ -126,10 +126,10 @@ export class ExpandedTaskCardComponent implements OnInit {
 
     updatePossibleDependencies(): void {
         this.possibleDependencies = this.tasks.filter(
-            t => { 
-                return t.getId() != this.task.getId() 
-                && this.childrenDependency.find(tc => t.getId() == tc.getId()) === undefined
-                && this.parentDependency.find(tc => t.getId() == tc.getId()) === undefined
+            t => {
+                return t.getId() !== this.task.getId()
+                && this.childrenDependency.find(tc => t.getId() === tc.getId()) === undefined
+                && this.parentDependency.find(tc => t.getId() === tc.getId()) === undefined;
             }, this
         );
     }
@@ -190,7 +190,7 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     addParent(): void{
-        if(!this.selectedParentAdd) return;
+        if (!this.selectedParentAdd) { return };
         this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(), this.selectedParentAdd).subscribe(
             suc => {
                 this.parentDependency.push(this.selectedParentAdd);
@@ -203,7 +203,7 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     addChild(): void{
-        if(!this.selectedChildAdd) return;
+        if (!this.selectedChildAdd) { return };
         this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(), this.selectedChildAdd).subscribe(
             suc => {
                 this.childrenDependency.push(this.selectedChildAdd);
