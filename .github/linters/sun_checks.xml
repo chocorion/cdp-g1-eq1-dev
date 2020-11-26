@@ -60,6 +60,10 @@
   <!-- See https://checkstyle.org/config_javadoc.html#JavadocPackage -->
   <module name="JavadocPackage"/>
 
+  <!-- Checks whether files end with a new line.                        -->
+  <!-- See https://checkstyle.org/config_misc.html#NewlineAtEndOfFile -->
+  <!-- <module name="NewlineAtEndOfFile"/> -->
+
   <!-- Checks that property files contain the same keys.         -->
   <!-- See https://checkstyle.org/config_misc.html#Translation -->
   <module name="Translation"/>
@@ -84,7 +88,7 @@
     <property name="message" value="Line has trailing spaces."/>
   </module>
 
-  <!-- Checks for Headers                   latest             -->
+  <!-- Checks for Headers                                -->
   <!-- See https://checkstyle.org/config_header.html   -->
   <!-- <module name="Header"> -->
   <!--   <property name="headerFile" value="${checkstyle.header.file}"/> -->
