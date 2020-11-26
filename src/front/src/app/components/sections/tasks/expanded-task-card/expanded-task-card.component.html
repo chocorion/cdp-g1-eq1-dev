@@ -21,8 +21,47 @@
                                 <p>UsId: {{task.getUsId()}}</p>
                                 <p>Duration: {{task.getDuration()}}</p>
                                 <p>Status: {{task.getStatus()}}</p>
-                                <p>Dépendances Parents: {{this.getParents()}}</p>
-                                <p>Dépendances Enfants: {{this.getChildren()}}</p>
+                                <p>Depends on:</p>
+                                <div class="pstate" *ngFor="let t of parentDependency">
+                                    <button mat-stroked-button color="warn" 
+                                    class="mat-focus-indicator mat-stroked-button mat-button-base mat-warn" 
+                                    (click)="deleteParent(t)">-</button>
+                                    #{{t.getId()}} : {{t.getTitle()}}
+                                </div>
+                                <form-field appearance="fill">
+                                    <label>Add dependency</label>
+                                    <select [(ngModel)]="selectedParentAdd" name="selectedParentAdd">
+                                        <option value="undefined">
+                                        </option>
+                                        <option *ngFor="let t of possibleDependencies" [ngValue]="t">
+                                            #{{t.getId()}} : {{t.getTitle()}}
+                                        </option>
+                                    </select>
+                                </form-field>
+                                <button mat-stroked-button color="primary" 
+                                class="mat-focus-indicator mat-stroked-button mat-button-base mat-primary" 
+                                (click)="addParent()">+</button>
+                                <br>
+                                <p>Dependant tasks:</p>
+                                <div class="cstate" *ngFor="let t of childrenDependency">
+                                    <button mat-stroked-button color="warn" 
+                                    class="mat-focus-indicator mat-stroked-button mat-button-base mat-warn" 
+                                    (click)="deleteChild(t)">-</button>
+                                    #{{t.getId()}} : {{t.getTitle()}}
+                                </div>
+                                <form-field appearance="fill">
+                                    <label>Add dependant</label>
+                                    <select [(ngModel)]="selectedChildAdd" name="selectedChildAdd">
+                                        <option value="undefined">
+                                        </option>
+                                        <option *ngFor="let t of possibleDependencies" [ngValue]="t">
+                                            #{{t.getId()}} : {{t.getTitle()}}
+                                        </option>
+                                    </select>
+                                </form-field>
+                                <button mat-stroked-button color="primary" 
+                                class="mat-focus-indicator mat-stroked-button mat-button-base mat-primary" 
+                                (click)="addChild()">+</button>
                                 <p>Member: {{this.getMemberName()}}</p>
                                 <div class="dodstate" *ngFor="let dod of dods">
                                     <div class="card">
@@ -55,20 +94,6 @@
                                             <option value="TODO">TODO</option>
                                             <option value="DOING">DOING</option>
                                             <option value="DONE">DONE</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="parents">parents</label>
-                                        <select id= "select-parents"  class="form-control" formControlName= "parents">
-                                            <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
-                                            <option value = ''> Clear </option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="children">children</label>
-                                        <select id= "select-children"  class="form-control" formControlName= "children">
-                                            <option *ngFor= "let c of combinaisons" [ngValue]= "c">{{ c }}</option>
-                                            <option value = ''> Clear </option>
                                         </select>
                                     </div>
                                     <div>

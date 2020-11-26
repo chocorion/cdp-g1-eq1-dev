@@ -19,10 +19,15 @@ export class ExpandedTaskCardComponent implements OnInit {
     @Output() expand = new EventEmitter<any>();
     @Output() stateChange = new EventEmitter<any>();
     @Input() tasks: Task[];
-
+    checkParent: boolean[] = [];
+    checkChild: boolean[] = [];
     parentDependency: Task[] = [];
     childrenDependency: Task[] = [];
     dods: DOD[] = [];
+
+    possibleDependencies: Task[] = [];
+    selectedParentAdd: Task;
+    selectedChildAdd: Task;
 
     combinaisons = [];
     usIds = [];
@@ -42,9 +47,12 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.tasks.forEach(() => {
+            this.checkChild.push(false);
+            this.checkParent.push(false);
+        });
         this.getDependencies();
         this.getDOD();
-        this.combinaison();
         this.usIdList();
         this.memberList();
         this.getMember();
@@ -95,18 +103,6 @@ export class ExpandedTaskCardComponent implements OnInit {
         return '';
     }
 
-    combinaison(): void {
-        let array = this.tasks.map(v => v.getId());
-        array = array.filter(x => x !== this.task.getId());
-        const results = [];
-
-        array.forEach(item => {
-            const t = results.map(row => [...row, item]);
-            results.push(...t);
-            results.push([item]);
-        });
-        this.combinaisons = results.map(x => x.join(', '));
-    }
 
     emitExpand(): void {
         this.expand.emit();
@@ -128,17 +124,93 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.router.navigate(['tasks']);
     }
 
+    updatePossibleDependencies(): void {
+        this.possibleDependencies = this.tasks.filter(
+            t => {
+                return t.getId() !== this.task.getId()
+                && this.childrenDependency.find(tc => t.getId() === tc.getId()) === undefined
+                && this.parentDependency.find(tc => t.getId() === tc.getId()) === undefined;
+            }, this
+        );
+    }
+
     getDependencies(): void {
         this.taskService.getChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(
             result => {
                 this.childrenDependency = result.map(t => Task.fromJSON(t));
                 this.form.patchValue({ children: this.getChildren() });
+                this.childrenDependency.forEach( t => this.checkChild[t.getId() - 1] = true);
+                this.updatePossibleDependencies();
             }
         );
         this.taskService.getParentTasks(this.task.getProjectId(), this.task.getId()).subscribe(
             result => {
                 this.parentDependency = result.map(t => Task.fromJSON(t));
-                this.form.patchValue({ parents: this.getParents() });
+                this.form.patchValue({ parents: this.getParents()});
+                this.parentDependency.forEach( t => this.checkParent[t.getId() - 1] = true);
+                this.updatePossibleDependencies();
+            }
+        );
+
+    }
+
+    updateParent(task: Task): void{
+        if (!this.checkParent[task.getId() - 1]){
+            this.taskService.deleteParentTask(this.task.getProjectId(), this.task.getId(), task.getId()).subscribe(() => {});
+        }
+        else if (this.checkParent[task.getId() - 1]){
+            this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
+                    this.tasks.find(e => e.getId() === task.getId())).subscribe
+                    ((() => this.checkParent[task.getId() - 1] = true));
+        }
+    }
+
+    updateChild(task: Task): void{
+        if (!this.checkChild[task.getId() - 1]) {
+            this.taskService.deleteChildrenTask(this.task.getProjectId(), this.task.getId(), task.getId()).subscribe(() => {});
+        }
+        else if (this.checkChild[task.getId() - 1]){
+            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(),
+                    this.tasks.find(e => e.getId() === task.getId())).subscribe
+                    ((() => this.checkChild[task.getId() - 1] = true));
+        }
+
+    }
+
+    deleteParent(task: Task): void{
+        this.taskService.deleteParentTask(this.task.getProjectId(), this.task.getId(), task.getId()).subscribe(() => {});
+        this.parentDependency.splice(this.parentDependency.indexOf(task), 1);
+        this.updatePossibleDependencies();
+    }
+
+    deleteChild(task: Task): void{
+        this.taskService.deleteChildrenTask(this.task.getProjectId(), this.task.getId(), task.getId()).subscribe(() => {});
+        this.childrenDependency.splice(this.childrenDependency.indexOf(task), 1);
+        this.updatePossibleDependencies();
+    }
+
+    addParent(): void{
+        if (!this.selectedParentAdd) { return; }
+        this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(), this.selectedParentAdd).subscribe(
+            suc => {
+                this.parentDependency.push(this.selectedParentAdd);
+                this.updatePossibleDependencies();
+                this.selectedParentAdd = undefined;
+            },
+            err => {
+            }
+        );
+    }
+
+    addChild(): void{
+        if (!this.selectedChildAdd) { return; }
+        this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(), this.selectedChildAdd).subscribe(
+            suc => {
+                this.childrenDependency.push(this.selectedChildAdd);
+                this.updatePossibleDependencies();
+                this.selectedParentAdd = undefined;
+            },
+            err => {
             }
         );
     }
@@ -159,13 +231,13 @@ export class ExpandedTaskCardComponent implements OnInit {
 
     getChildren(): string {
         let s = '';
-        this.childrenDependency.forEach(x => s += x.getId() + ', ');
+        this.childrenDependency.forEach(x => s += '#' + x.getId() + ', ');
         return s.slice(0, -2);
     }
 
     getParents(): string {
         let s = '';
-        this.parentDependency.forEach(x => s += x.getId() + ', ');
+        this.parentDependency.forEach(x => s += '#' + x.getId() + ', ');
         return s.slice(0, -2);
     }
 
@@ -174,21 +246,6 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.taskService.update(this.task.getProjectId(), this.task).subscribe(
             () => { }
         );
-        const children = data.children.split(', ');
-        const parents = data.parents.split(', ');
-
-        this.taskService.deleteChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(() =>
-            children.forEach(c =>
-                this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(),
-                    this.tasks.find(e => e.getId() === parseInt(c, 10))).subscribe
-                    ((() => { }))));
-
-        this.taskService.deleteParentTasks(this.task.getProjectId(), this.task.getId()).subscribe(() =>
-            parents.forEach(p =>
-                this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
-                    this.tasks.find(e => e.getId() === parseInt(p, 10))).subscribe
-                    ((() => { }))));
-
     }
 
 }
