@@ -17,6 +17,16 @@ services:
     image: cdp-g1-eq1-db-test
     container_name: cdp-g1-eq1-db-test
 
+  back:
+    restart: always
+    build:
+      context: ./src/back
+      dockerfile: ./Dockerfile.prod
+    ports:
+      - "9000:8080"
+
+    image: cdp-g1-eq1-back-test
+
   tests:
     image: maven:3
     stop_signal: SIGKILL
