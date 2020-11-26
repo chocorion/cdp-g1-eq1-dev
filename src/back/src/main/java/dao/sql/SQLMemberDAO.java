@@ -2,6 +2,7 @@ package dao.sql;
 
 import dao.MemberDAO;
 import domain.Member;
+import domain.Task;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -64,9 +65,14 @@ public class SQLMemberDAO extends SQLDAO<Member> implements MemberDAO {
     public void delete(Member member) throws SQLException {
         if(member.user == null)
             throw new SQLException("This member doesn't have a user");
-        
-        String statement = "DELETE FROM member WHERE user=? LIMIT 1";
+
+        String statement =  "UPDATE task SET member = null WHERE member = ? ";
         List<Object> opt = Arrays.asList(member.user);
+
+        SQLDatabase.exec(statement, opt);
+        
+        statement = "DELETE FROM member WHERE user=? LIMIT 1";
+        opt = Arrays.asList(member.user);
 
         SQLDatabase.exec(statement, opt);
     }

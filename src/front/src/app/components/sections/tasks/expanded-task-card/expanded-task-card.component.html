@@ -23,7 +23,7 @@
                                 <p>Status: {{task.getStatus()}}</p>
                                 <p>Dépendances Parents: {{this.getParents()}}</p>
                                 <p>Dépendances Enfants: {{this.getChildren()}}</p>
-                                <p>Member: {{currentMember.getName()}}</p>
+                                <p>Member: {{this.getMemberName()}}</p>
                                 <div class="dodstate" *ngFor="let dod of dods">
                                     <div class="card">
                                         <div class="card-header"> DOD #{{dod.getId()}} - Task #{{dod.getTaskId()}}</div>

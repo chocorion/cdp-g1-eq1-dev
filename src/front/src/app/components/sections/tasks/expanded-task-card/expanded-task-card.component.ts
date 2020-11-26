@@ -77,11 +77,20 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     getMember(): void {
-        this.memberService.getMember(this.task.getMemberId(), this.task.getProjectId()).subscribe(
-            result => {
-                this.currentMember = Member.fromJSON(result);
-            }
-        );
+        if (this.task.getMemberId() == null) {
+            this.currentMember = null;
+        } else {
+            this.memberService.getMember(this.task.getMemberId(), this.task.getProjectId()).subscribe(
+                result => {
+                    this.currentMember = Member.fromJSON(result);
+                }
+            );
+        }
+    }
+
+    getMemberName(): string {
+        if (this.currentMember) { return this.currentMember.getName(); }
+        return '';
     }
 
     combinaison(): void {

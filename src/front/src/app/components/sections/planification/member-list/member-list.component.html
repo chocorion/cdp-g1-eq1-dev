@@ -9,7 +9,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Ajouter un Membre</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="updateMembers()">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -29,7 +29,7 @@
                                     <input class="form-control" id="level" type="text" formControlName="level">
                                 </div>
 
-                                <button type="submit" class="button">Ajouter</button>
+                                <button type="submit" class="button" (click)="updateMembers()" >Ajouter</button>
 
                             </form>
                         </div>
@@ -42,6 +42,7 @@
         <app-member-item  *ngFor="let member of members"
         [currentMember] ="member"
         [currentProjectId] = "currentProject.getId()"
+        (update) = "updateMembers()"
     ></app-member-item>
     </div>
 

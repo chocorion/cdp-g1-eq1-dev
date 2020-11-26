@@ -42,7 +42,7 @@ public class UserStories {
     @Path("{usId}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response putTest(@PathParam("projectId") int projectId, @PathParam("usId") int usId, UserStory userStory) {
+    public Response putUs(@PathParam("projectId") int projectId, @PathParam("usId") int usId, UserStory userStory) {
         userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty, userStory.sprint, usId);
 
         try {
@@ -60,7 +60,7 @@ public class UserStories {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public Response postTest(@PathParam("projectId") int projectId, UserStory userStory) {
+    public Response postUs(@PathParam("projectId") int projectId, UserStory userStory) {
         userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty, userStory.sprint);
         UserStory built;
         try {
@@ -78,7 +78,7 @@ public class UserStories {
     @Path("{usId}")
     @DELETE
     @Produces("application/json")
-    public Response deleteTest(@PathParam("projectId") int projectId, @PathParam("usId") int usId) {
+    public Response deleteUs(@PathParam("projectId") int projectId, @PathParam("usId") int usId) {
         try {
             UserStory userStory = userStoryDAO.getById(projectId, usId);
 
