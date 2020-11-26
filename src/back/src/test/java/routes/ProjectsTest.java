@@ -2,9 +2,7 @@ package routes;
 
 import domain.Project;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.*;
 import org.apache.http.entity.ContentType;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.junit.jupiter.api.Test;
 
