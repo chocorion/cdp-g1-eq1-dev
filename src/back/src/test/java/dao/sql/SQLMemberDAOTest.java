@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 import domain.Member;
 
 import java.sql.SQLException;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SQLMemberDAOTest {

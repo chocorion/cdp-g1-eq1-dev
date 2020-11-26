@@ -22,7 +22,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form [formGroup]="newProjectForm" (ngSubmit)="onSubmitNewProject(newProjectForm.value)">
+                            <form [formGroup]="newProjectForm">
                                 <div>
                                     <label for="name">Name</label>
                                     <input class="form-control" id="name" type="text" formControlName="name">
@@ -33,7 +33,7 @@
                                     <input class="form-control" id="description" type="text" formControlName="description">
                                 </div>
 
-                                <button type="submit" class="button">Ajouter</button>
+                                <button type="submit" class="button" data-dismiss="modal" (click)="onSubmitNewProject(newProjectForm.value)">Ajouter</button>
 
                             </form>
                         </div>

@@ -3,8 +3,6 @@ package dao.sql;
 import domain.Sprint;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SQLSprintDAOTest {
