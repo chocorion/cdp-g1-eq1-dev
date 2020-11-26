@@ -44,4 +44,19 @@ class SQLTestDAOTest {
         assertEquals(test.state, inserted.state);
         assertEquals(test.projectId, inserted.projectId);
     }
+
+    @Test
+    void testUpdate() throws Exception {
+        SQLTestDAO testDAO = new SQLTestDAO();
+        domain.Test test = new domain.Test("Test important", "Tester que ça marche pas", null, "validate", 1);
+
+        domain.Test inserted = testDAO.insert(test);
+        
+        domain.Test updateTest = new domain.Test("Très important", "Tester que ça marche bien", null, "not executed", 1, inserted.id);
+        testDAO.update(updateTest);
+
+        domain.Test updatedTest = testDAO.getById(updateTest.projectId, updateTest.id);
+
+        assertTrue(updateTest.equals(updatedTest));
+    }
 }
