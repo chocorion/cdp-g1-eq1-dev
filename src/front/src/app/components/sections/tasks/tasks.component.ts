@@ -26,6 +26,8 @@ export class TasksComponent implements OnInit {
     members = [];
     usSubscription: Subscription;
     private formBuilder: FormBuilder = new FormBuilder();
+    checkParent: boolean[] = [];
+    checkChild: boolean[] = [];
 
     constructor(
         private projectService: ProjectService,
@@ -51,7 +53,10 @@ export class TasksComponent implements OnInit {
         this.tasksSubscription = this.taskService.subject.subscribe(
             result => {
                 this.tasks = result;
-                this.combinaison();
+                this.tasks.forEach(() => {
+                    this.checkChild.push(false);
+                    this.checkParent.push(false);
+                });
                 this.usIdList();
                 this.memberList();
                 if (this.form) {
@@ -73,36 +78,19 @@ export class TasksComponent implements OnInit {
             member: 1,
         });
     }
-
-    combinaison(): void {
-        const array = this.tasks.map(v => v.getId());
-        const results = [];
-
-        array.forEach(item => {
-            const t = results.map(row => [...row, item]);
-            results.push(...t);
-            results.push([item]);
-        });
-        this.combinaisons = results.map(x => x.join(', '));
-    }
-
     createTask(data: any): void {
         console.log(data);
         const task = new Task(data.taskId, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, data.status);
-        this.taskService.post(this.currentProject.getId(), task).subscribe(() => { });
-
-        const children = data.children.split(', ');
-        const parents = data.parents.split(', ');
-
-        children.forEach(c =>
-            this.taskService.addChildrenTask(task.getProjectId(), task.getId(),
-                this.tasks.find(e => e.getId() === parseInt(c, 10))).subscribe
-                ((() => { })));
-
-        parents.forEach(p =>
-            this.taskService.addParentTask(task.getProjectId(), task.getId(),
-                this.tasks.find(e => e.getId() === parseInt(p, 10))).subscribe
-                ((() => { })));
+        this.taskService.post(this.currentProject.getId(), task).subscribe(() => {
+            for (let i = 0 ; i < this.checkParent.length ; i++){
+                if (this.checkParent[i]){
+                    this.taskService.addParentTask(this.currentProject.getId(), data.taskId, this.tasks[i]).subscribe(() => {});
+                }
+                if (this.checkChild[i]){
+                    this.taskService.addChildrenTask(this.currentProject.getId(), data.taskId, this.tasks[i]).subscribe(() => {});
+                }
+        }
+         });
 
     }
 

@@ -49,7 +49,6 @@ export class ExpandedTaskCardComponent implements OnInit {
         });
         this.getDependencies();
         this.getDOD();
-        this.combinaison();
         this.usIdList();
         this.memberList();
         this.getMember();
@@ -100,18 +99,6 @@ export class ExpandedTaskCardComponent implements OnInit {
         return '';
     }
 
-    combinaison(): void {
-        let array = this.tasks.map(v => v.getId());
-        array = array.filter(x => x !== this.task.getId());
-        const results = [];
-
-        array.forEach(item => {
-            const t = results.map(row => [...row, item]);
-            results.push(...t);
-            results.push([item]);
-        });
-        this.combinaisons = results.map(x => x.join(', '));
-    }
 
     emitExpand(): void {
         this.expand.emit();
