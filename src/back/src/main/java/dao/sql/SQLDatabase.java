@@ -4,14 +4,14 @@ import java.sql.*;
 import java.util.List;
 
 public class SQLDatabase {
-    private static final String dbHost = "db";
-    private static final String dbUsername = "cdp";
-    private static final String dbPassword = "cdp";
-    private static final String dbName = "cdp";
-    private static final int dbPort = 3306;
+    private static final String DB_HOST = "db";
+    private static final String DB_USERNAME = "cdp";
+    private static final String DB_PASSWORD = "cdp";
+    private static final String DB_NAME = "cdp";
+    private static final int DB_PORT = 3306;
 
-    private static final String backupHost = "localhost";
-    private static final int backupPort = 3307;
+    private static final String BACKUP_HOST = "localhost";
+    private static final int BACKUP_PORT = 3307;
 
     private static Connection connection;
 
@@ -19,15 +19,15 @@ public class SQLDatabase {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?user=" +
-                            dbUsername + "&password=" + dbPassword
+                    "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user="
+                    + DB_USERNAME + "&password=" + DB_PASSWORD
             );
         } catch (Exception ignored) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
                 connection = DriverManager.getConnection(
-                        "jdbc:mysql://" + backupHost + ":" + backupPort + "/" + dbName + "?user=" +
-                                dbUsername + "&password=" + dbPassword
+                        "jdbc:mysql://" + BACKUP_HOST + ":" + BACKUP_PORT + "/" + DB_NAME + "?user="
+                        + DB_USERNAME + "&password=" + DB_PASSWORD
                 );
             } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
                 throw new Error(exception);
@@ -47,8 +47,8 @@ public class SQLDatabase {
 
         PreparedStatement preparedStatement = conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
 
-        for(int i = 1; items != null && i <= items.size(); i++) {
-            preparedStatement.setObject(i, items.get(i-1));
+        for (int i = 1; items != null && i <= items.size(); i++) {
+            preparedStatement.setObject(i, items.get(i - 1));
         }
 
         return preparedStatement;

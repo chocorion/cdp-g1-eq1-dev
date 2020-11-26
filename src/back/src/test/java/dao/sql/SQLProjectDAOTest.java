@@ -12,7 +12,7 @@ class SQLProjectDAOTest {
     @Test
     void testSimpleInsertDelete() {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
-        Project project = new Project("OCaMl project","I am an OCaMl project");
+        Project project = new Project("OCaMl project", "I am an OCaMl project");
 
         assertDoesNotThrow(() -> projectDAO.delete(projectDAO.insert(project)));
     }
@@ -20,7 +20,7 @@ class SQLProjectDAOTest {
     @Test
     void testSimpleInsertTwice() {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
-        Project project = new Project("Java project","I am a java project");
+        Project project = new Project("Java project", "I am a java project");
 
         Project insertedProject = (Project) assertDoesNotThrow(() -> projectDAO.insert(project));
         assertThrows(SQLException.class, () -> projectDAO.insert(project));
@@ -30,7 +30,7 @@ class SQLProjectDAOTest {
     @Test
     void testInsert() throws SQLException {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
-        Project project = new Project("Python project","I am a Python project");
+        Project project = new Project("Python project", "I am a Python project");
 
         Project insertedProject = projectDAO.insert(project);
 
@@ -39,7 +39,7 @@ class SQLProjectDAOTest {
 
         try {
             projectDAO.delete(insertedProject);
-        } catch(Exception exception) {
+        } catch (Exception exception) {
             // We don't want this to fail the test
             // It is to be able to launch the tests twice in a row
         }
@@ -48,10 +48,10 @@ class SQLProjectDAOTest {
     @Test
     void testUpdate() throws Exception {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
-        Project project = new Project("update project","update me !");
+        Project project = new Project("update project", "update me !");
 
         Project inserted = projectDAO.insert(project);
-        
+
         Project updateProject = new Project("brand new project", "updated cool", inserted.id);
         projectDAO.update(updateProject);
 
@@ -64,10 +64,10 @@ class SQLProjectDAOTest {
     @Test
     void testDeleteCascadeProject() throws Exception {
         SQLProjectDAO projectDAO = new SQLProjectDAO();
-        Project project = projectDAO.insert(new Project("test cascade delete","project"));
-        
+        Project project = projectDAO.insert(new Project("test cascade delete", "project"));
+
         Member member = new SQLMemberDAO().insert(new Member(project.id, "Jiji", "owner", "senior"));
-        Sprint sprint = new SQLSprintDAO().insert(new Sprint(project.id,"I am a sprint"));
+        Sprint sprint = new SQLSprintDAO().insert(new Sprint(project.id, "I am a sprint"));
         UserStory us = new SQLUserStoryDAO().insert(new UserStory(project.id, "US trop bien", "High", 2, sprint.id));
         Task t1 = new SQLTaskDAO().insert(new Task(project.id, us.id, member.user, "tache 1", "1hh", "TODO"));
         Task t2 = new SQLTaskDAO().insert(new Task(project.id, us.id, member.user, "tache 2", "1hh", "TODO"));

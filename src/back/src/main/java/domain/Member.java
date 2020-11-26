@@ -3,16 +3,16 @@ package domain;
 import java.util.Comparator;
 
 public class Member {
-    final public Integer user;
-    final public Integer project;
-    final public String name;
-    final public String role;
-    final public String level;
+    public final Integer user;
+    public final Integer project;
+    public final String name;
+    public final String role;
+    public final String level;
 
-    final public static Comparator<Member> comporator;
+    public static final Comparator<Member> COMPARATOR;
 
     static {
-        comporator = Comparator
+        COMPARATOR = Comparator
                 .comparing(
                         (Member member) -> member.user,
                         Comparator.nullsFirst(Comparator.naturalOrder()))
@@ -28,7 +28,7 @@ public class Member {
                 .thenComparing(
                         (Member member) -> member.level,
                         Comparator.nullsFirst(Comparator.naturalOrder()));
-                
+
     }
 
     //Requiered by Jackson
@@ -36,11 +36,11 @@ public class Member {
         this(null, null, null, null);
     }
 
-    public Member(Integer project, String name, String role, String level){
+    public Member(Integer project, String name, String role, String level) {
         this(project, name, role, level, null);
     }
 
-    public Member(Integer project, String name, String role, String level, Integer user){
+    public Member(Integer project, String name, String role, String level, Integer user) {
         this.project = project;
         this.name = name;
         this.role = role;
@@ -49,11 +49,11 @@ public class Member {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj == this)
+    public boolean equals(Object obj) {
+        if (obj == this)
             return true;
         if (!(obj instanceof Member))
             return false;
-        return comporator.compare(this, (Member) obj) == 0;
+        return COMPARATOR.compare(this, (Member) obj) == 0;
     }
 }

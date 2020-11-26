@@ -30,19 +30,19 @@ public class SQLDODDAO extends SQLDAO<DOD> implements DODDAO {
     }
 
     @Override
-    public List<DOD> getAllForProject(int project_id) throws SQLException {
+    public List<DOD> getAllForProject(int projectId) throws SQLException {
         String statement = "SELECT * FROM dod WHERE project=?";
 
-        List<Object> opt = Arrays.asList(project_id);
+        List<Object> opt = Arrays.asList(projectId);
 
         return queryAllObjects(statement, opt);
     }
 
     @Override
-    public List<DOD> getAllForTask(int project_id, int task_id) throws SQLException {
+    public List<DOD> getAllForTask(int projectId, int taskId) throws SQLException {
         String statement = "SELECT * FROM dod WHERE project=? AND task=?";
 
-        List<Object> opt = Arrays.asList(project_id, task_id);
+        List<Object> opt = Arrays.asList(projectId, taskId);
 
         return queryAllObjects(statement, opt);
     }
@@ -51,7 +51,7 @@ public class SQLDODDAO extends SQLDAO<DOD> implements DODDAO {
     public DOD insert(DOD dod) throws SQLException {
         if (dod.id != null)
             throw new SQLException("This DOD already has an id, cannot insert");
-        
+
             String statement = "INSERT INTO dod (project, task, description, state) VALUES (?,?,?,?)";
 
         List<Object> opt = Arrays.asList(
