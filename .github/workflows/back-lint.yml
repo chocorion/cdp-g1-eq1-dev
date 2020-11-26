@@ -34,5 +34,5 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JAVA: true
           FILTER_REGEX_INCLUDE: src/back/.*.java
-          DEFAULT_BRANCH: master
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
