@@ -129,13 +129,14 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
         if (task.id == null)
             throw new SQLException("This task doesn't have an id, cannot update");
 
-        String statement = "UPDATE task SET title = ?, duration = ?, status = ?, us = ? WHERE project = ? AND id = ?";
+        String statement = "UPDATE task SET title = ?, duration = ?, status = ?, us = ?, member = ? WHERE project = ? AND id = ?";
 
         List<Object> opt = Arrays.asList(
                 task.title,
                 task.duration,
                 task.status,
                 task.usId,
+                task.memberId,
                 task.projectId,
                 task.id
         );

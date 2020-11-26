@@ -155,28 +155,23 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     onSubmit(data: any): void {
-        // si usId différent -> delete la task ; create task avec ancien id
-        console.log(data.member);
         this.task = new Task(this.task.getId(), this.task.getProjectId(), data.usId, data.member, data.title, data.duration, data.status);
         this.taskService.update(this.task.getProjectId(), this.task).subscribe(
             () => { }
         );
         const children = data.children.split(', ');
         const parents = data.parents.split(', ');
-        this.parentDependency.forEach( c  =>
-            this.taskService.deleteParentTask(this.task.getProjectId(), this.task.getId(), c.getId() ).subscribe
-        (( () => {} )));
-        this.childrenDependency.forEach( c  =>
-            this.taskService.deleteChildrenTask(this.task.getProjectId(), this.task.getId(), c.getId() ).subscribe
-        (( () => {} )));
-        children.forEach( c  =>
-            this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId() ,
-            this.tasks.find( e => e.getId() === parseInt(c, 10))).subscribe
-        (( () => {} )));
-        parents.forEach( p =>
-            this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
-            this.tasks.find( e => e.getId() === parseInt(p, 10) )).subscribe
-        (( () => {})));
+
+        this.taskService.deleteChildrenTasks(this.task.getProjectId(), this.task.getId()).subscribe(() =>
+            children.forEach(c =>
+                this.taskService.addChildrenTask(this.task.getProjectId(), this.task.getId(),
+                    this.tasks.find(e => e.getId() === parseInt(c, 10))).subscribe
+                    ((() => { }))));
+        this.taskService.deleteParentTasks(this.task.getProjectId(), this.task.getId()).subscribe(() =>
+            parents.forEach(p =>
+                this.taskService.addParentTask(this.task.getProjectId(), this.task.getId(),
+                    this.tasks.find(e => e.getId() === parseInt(p, 10))).subscribe
+                    ((() => { }))));
 
     }
 

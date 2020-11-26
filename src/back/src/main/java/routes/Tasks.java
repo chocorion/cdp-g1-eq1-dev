@@ -8,6 +8,7 @@ import domain.Task;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("projects/{projectId}/tasks/")
 public class Tasks {
@@ -76,6 +77,22 @@ public class Tasks {
         }
     }
 
+    @DELETE
+    @Path("{taskId}/parents/")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response deleteParentTasks(@PathParam("projectId") int projectId, @PathParam("taskId") int childId) {
+        try {
+            Task child = taskDAO.getById(projectId, childId);
+            List<Task> tk = taskDAO.getParentTasks(child);
+            for (Task t : tk)
+                taskDAO.deleteDependency(t, child);
+            return Response.status(200).entity(taskDAO.getParentTasks(child)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
     @GET
     @Path("{taskId}/children")
     @Produces("application/json")
@@ -111,6 +128,22 @@ public class Tasks {
             Task parent = taskDAO.getById(projectId, parentId);
             Task child = taskDAO.getById(projectId, childId);
             taskDAO.deleteDependency(parent, child);
+            return Response.status(200).entity(taskDAO.getChildrenTasks(parent)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("{taskId}/children/")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response deleteChildTasks(@PathParam("projectId") int projectId, @PathParam("taskId") int parentId) {
+        try {
+            Task parent = taskDAO.getById(projectId, parentId);
+            List<Task> tk = taskDAO.getChildrenTasks(parent);
+            for (Task t : tk)
+                taskDAO.deleteDependency(parent, t);
             return Response.status(200).entity(taskDAO.getChildrenTasks(parent)).build();
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
