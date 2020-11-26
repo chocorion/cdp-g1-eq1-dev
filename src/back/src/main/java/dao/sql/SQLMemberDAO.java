@@ -2,7 +2,6 @@ package dao.sql;
 
 import dao.MemberDAO;
 import domain.Member;
-import domain.Task;
 
 import java.sql.*;
 import java.util.Arrays;
@@ -69,7 +68,7 @@ public class SQLMemberDAO extends SQLDAO<Member> implements MemberDAO {
         List<Object> opt = Arrays.asList(member.user);
 
         SQLDatabase.exec(statement, opt);
-        
+
         statement = "DELETE FROM member WHERE user=? LIMIT 1";
         opt = Arrays.asList(member.user);
 
