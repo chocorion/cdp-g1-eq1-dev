@@ -27,6 +27,16 @@ services:
 
     image: cdp-g1-eq1-back-test
 
+  front:
+    restart: always
+    build:
+      context: ./src/front
+      dockerfile: ./Dockerfile.prod
+    ports:
+      - "8080:80"
+
+    image: cdp-g1-eq1-front
+
   tests:
     image: maven:3
     stop_signal: SIGKILL
@@ -39,13 +49,4 @@ services:
     command: mvn test
     container_name: cdp-g1-eq1-back-test
 
-  app:
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
-    container_name: cdp-g1-eq1-phpmyadmin-test
-    restart: always
-    ports:
-      - '4242:80'
-    environment:
-      PMA_HOST: db
+  

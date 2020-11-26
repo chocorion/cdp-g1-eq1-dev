@@ -23,3 +23,5 @@ Pour faire à la Main : pour build le *front*, il faut lancer dans `src/front` l
 Pour lancer les tests unitaires, il faut lancer le script `scripts/run-test.sh`.
 
 Pour ne lancer que le *back* et la *db*, afin de tester le *front* avec `ng serve --watch`: `docker-compose up --build --force-recreate --renew-anon-volumes back db`. Il faut ajouter `app` dans la liste des services pour ajouter *phpmyadmin*, accessible sur le port `4242`.
+
+Pour lancer les tests avec *cypress*, il faut lancer : `$(npm bin)/cypress open `.
