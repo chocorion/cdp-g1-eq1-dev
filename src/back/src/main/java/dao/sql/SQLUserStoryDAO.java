@@ -68,7 +68,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
 
     @Override
     public void update(UserStory us) throws SQLException {
-        if (us.id != null)
+        if (us.id == null)
             throw new SQLException("This us doesn't have an id, cannot update.");
 
         String statement = "UPDATE us SET description = ?, priority = ?, difficulty = ?, sprint = ? WHERE project = ? AND id = ?";
@@ -77,6 +77,7 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
                 us.description,
                 us.priority,
                 us.difficulty,
+                us.sprint,
                 us.projectId,
                 us.id
         );
