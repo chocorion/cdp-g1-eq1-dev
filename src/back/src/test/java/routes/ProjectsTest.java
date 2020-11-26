@@ -120,7 +120,7 @@ class ProjectsTest {
         Project inserted = getProjectFromResponce(response);
 
         HttpDelete delete = new HttpDelete("http://back:8080/api/v1/projects/" + inserted.id);
-        HttpResponse deleteResponse = HttpClientBuilder.create().build().execute(delete);
+        HttpClientBuilder.create().build().execute(delete);
         assertEquals(200, response.getStatusLine().getStatusCode());
 
         HttpUriRequest request = new HttpGet("http://back:8080/api/v1/projects/" + inserted.id);

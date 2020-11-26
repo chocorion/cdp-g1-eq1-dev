@@ -2,7 +2,6 @@ package dao.sql;
 
 import org.junit.jupiter.api.Test;
 
-import dao.sql.*;
 import domain.*;
 
 import java.sql.SQLException;

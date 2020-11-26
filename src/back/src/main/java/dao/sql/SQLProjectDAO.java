@@ -4,7 +4,6 @@ import dao.ProjectDAO;
 import domain.Project;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

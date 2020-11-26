@@ -2,14 +2,11 @@ package routes;
 
 import dao.TaskDAO;
 import dao.UserStoryDAO;
-import domain.Task;
-import domain.Test;
 import domain.UserStory;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 
 @Path("projects/{projectId}/us")
