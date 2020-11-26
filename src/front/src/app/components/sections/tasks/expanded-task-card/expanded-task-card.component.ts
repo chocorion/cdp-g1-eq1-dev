@@ -123,7 +123,7 @@ export class ExpandedTaskCardComponent implements OnInit {
         this.modify = !this.modify;
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['tasks']);
+        this.router.navigate([this.router.url.toString()]);
     }
 
     updatePossibleDependencies(): void {
