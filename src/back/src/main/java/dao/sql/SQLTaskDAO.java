@@ -149,7 +149,7 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
         if (task.id == null)
             throw new SQLException("This task doesn't have an id, cannot delete");
 
-        String statement = "DELETE FROM us WHERE project = ? AND id = ?";
+        String statement = "DELETE FROM task WHERE project = ? AND id = ?";
         List<Object> opt = Arrays.asList(task.projectId, task.id);
 
         SQLDatabase.exec(statement, opt);
