@@ -45,4 +45,20 @@ class SQLProjectDAOTest {
             // It is to be able to launch the tests twice in a row
         }
     }
+
+    @Test
+    void testUpdate() throws Exception {
+        SQLProjectDAO projectDAO = new SQLProjectDAO();
+        Project project = new Project("update project","update me !");
+
+        Project inserted = projectDAO.insert(project);
+        
+        Project updateProject = new Project("brand new project", "updated cool", inserted.id);
+        projectDAO.update(updateProject);
+
+        Project updatedProject = projectDAO.getById(updateProject.id);
+
+        assertTrue(updateProject.equals(updatedProject));
+        assertDoesNotThrow(() -> projectDAO.delete(inserted));
+    }
 }
