@@ -94,6 +94,7 @@ L'action `docker-publish.yml` lance le docker-compose des tests automatiquement 
     - Pour visualiser et manipuler la base de données, phpmyadmin est disponible à `localhost:4242` (package app)
     - La base de données est accessible à `localhost:3307` (package db)
 - Pour tester manuellement le **front-end**, lancer `docker-compose up db back`, il suffit ensuite d'utiliser `ng serve` pour compiler le front en temps réel.
+- Pour tester manuellement le **back-end**, il faut utiliser la même commande que pour les tests complets.
 - Pour les tests **end to end**, il faut utiliser cypress dans `src/front/cypress`
 
 
