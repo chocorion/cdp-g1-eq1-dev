@@ -24,7 +24,6 @@ export class ProjectListComponent implements OnInit {
     }
 
     updateProjects(): void {
-        console.log('update');
         this.projectService.getProjects().subscribe(
             result => {
                 this.projects = result.map(x => Project.fromJSON(x));

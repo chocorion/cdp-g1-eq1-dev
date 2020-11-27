@@ -47,6 +47,7 @@ export class ProjectComponent implements OnInit {
     refresh(): void{
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
+        this.updateChild();
     }
 
     onSubmitNewProject(data): void {
