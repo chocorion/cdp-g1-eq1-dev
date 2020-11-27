@@ -21,11 +21,13 @@
                                 <p>Duration: {{task.getDuration()}}</p>
                                 <p>Status: {{task.getStatus()}}</p>
                                 <p>Depends on:</p>
-                                <div class="pstate" *ngFor="let t of parentDependency">
-                                    <button mat-stroked-button color="warn" 
-                                    class="mat-focus-indicator mat-stroked-button mat-button-base mat-warn" 
-                                    (click)="deleteParent(t)">-</button>
-                                    #{{t.getId()}} : {{t.getTitle()}}
+                                <div class='over'>
+                                    <div class="pstate" *ngFor="let t of parentDependency">
+                                        <button mat-stroked-button color="warn" 
+                                        class="mat-focus-indicator mat-stroked-button mat-button-base mat-warn" 
+                                        (click)="deleteParent(t)">-</button>
+                                        #{{t.getId()}} : {{t.getTitle()}}
+                                    </div>
                                 </div>
                                 <p>
                                 <form-field appearance="fill">
@@ -44,11 +46,13 @@
                                 </p>
                                 <br>
                                 <p>Dependant tasks:</p>
-                                <div class="cstate" *ngFor="let t of childrenDependency">
-                                    <button mat-stroked-button color="warn" 
-                                    class="mat-focus-indicator mat-stroked-button mat-button-base mat-warn" 
-                                    (click)="deleteChild(t)">-</button>
-                                    #{{t.getId()}} : {{t.getTitle()}}
+                                <div class='over'>
+                                    <div class="cstate" *ngFor="let t of childrenDependency">
+                                        <button mat-stroked-button color="warn" 
+                                        class="mat-focus-indicator mat-stroked-button mat-button-base mat-warn" 
+                                        (click)="deleteChild(t)">-</button>
+                                        #{{t.getId()}} : {{t.getTitle()}}
+                                    </div>
                                 </div>
                                 <p>
                                     <form-field appearance="fill">
@@ -121,7 +125,7 @@
                             </div>
                             <p>
                                 <button type="button" class="btn btn-primary" (click)= updateModify() *ngIf = "!modify" >Modifier</button>
-                                <button type="button" class="btn btn-primary" (click)= delete() data-dismiss="modal"> Delete</button>
+                                <button type="button" class="btn btn-danger float-right" (click)= delete() data-dismiss="modal"> Delete</button>
                             </p>
                         </div>
                         
