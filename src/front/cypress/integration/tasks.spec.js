@@ -20,4 +20,29 @@ context('Assertions', () => {
     });
 
 
+    it('Should change the name of a task', () => {
+        // Open card
+        cy.get('.card-title').first().click();
+        cy.get('.modal-dialog').should('be.visible');
+        cy.wait(1000);
+
+        // Click modify
+        cy.get('button').contains("Modifier").click();
+        cy.wait(1000);
+
+        // Enter new task name
+        let text = Date.now();
+        cy.get('.modify > form > div > input[formcontrolname="title"]').first().clear();
+        cy.get('.modify > form > div > input[formcontrolname="title"]').first().type(text);
+
+        // Apply
+        cy.get('.modify > form > button[type="submit"]').first().click();
+        cy.wait(1000);
+
+        cy.get('.modal-dialog').should('not.be.visible');
+        cy.get('.card-title').first().should(($e) => {
+            expect($e).to.contain(text);
+        });
+    });
+
 });
