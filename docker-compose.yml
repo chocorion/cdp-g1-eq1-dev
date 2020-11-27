@@ -5,7 +5,7 @@ services:
     restart: always
     build:
       context: ./src/front
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     ports:
       - "8080:80"
 
@@ -15,7 +15,7 @@ services:
     restart: always
     build:
       context: ./src/back
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     ports:
       - "9000:8080"
 
@@ -25,13 +25,24 @@ services:
     restart: always
     build: 
       context: ./src/bdd
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     environment: 
       MYSQL_DATABASE: 'cdp'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'changeMeLater'
-      MYSQL_ROOT_PASSWORD: 'changeMeLater'
+      MYSQL_USER: 'cdp'
+      MYSQL_PASSWORD: 'cdp'
+      MYSQL_ROOT_PASSWORD: 'cdp'
     ports:
       - "3307:3306"
 
     image: cdp-g1-eq1-db
+
+  app:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: cdp-g1-eq1-phpmyadmin
+    restart: always
+    ports:
+      - '4242:80'
+    environment:
+      PMA_HOST: db

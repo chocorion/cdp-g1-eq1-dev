@@ -6,6 +6,7 @@ import javax.ws.rs.ApplicationPath;
 public class Api extends ResourceConfig {
     public Api() {
         packages("", "routes");
+        register(new ApplicationBinder());
         register(CorsFilter.class);
     }
 }

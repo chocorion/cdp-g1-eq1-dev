@@ -1,0 +1,11 @@
+.content-openside {
+    margin-left: 250px;
+    transition: margin 0.8s;
+
+}
+
+.content-closeside {
+    margin-left: 80px;
+    margin-right: 80px;
+    transition: margin 0.8s;
+}

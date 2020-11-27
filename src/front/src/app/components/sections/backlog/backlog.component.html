@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Backlog</h1>
+
+    <app-sprint-form></app-sprint-form>
+
+    <app-us-container
+        *ngFor="let sprint of sprints"
+        [sprint]="sprint"
+        [connectedTo]="sprintConnectedTo(sprint)"
+    ></app-us-container>
+
+    <app-unplanned
+        [connectedTo]="unplannedConnectedTo()"
+    >
+
+    </app-unplanned>
+</div>

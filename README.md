@@ -9,8 +9,93 @@
 
 
 
-**Membre de l'équipe :**  Alexis Perignon, Robin Navarro et Chaïma Tarmil.
+**Membre de l'équipe :**  Alexis Perignon, Robin Navarro, Chaïma Tarmil et Adrien Boitelle.
 
+**Organisation :** En plus des fichiers .md, nous utilisons [ce tableur](https://docs.google.com/spreadsheets/d/1kiDOeNhRBDjNWb-zRZRpTgfK5jp7cz7PSObkAmD9f3s/edit#gid=0) pour nous y retrouver plus rapidement.
+
+## Architecture du projet
+
+- 3 images docker dans leur dossier respectif :
+    - Back-end (Java)
+    - Front-end (Angular)
+    - Base de données (MySQL)
+
+### Back-end
+
+- main
+    - domain : Définition des value object
+    - dao : Définition abstraite des data access object
+        - sql : Implémentation concrète des data access object et l'accès à la db
+    - routes : Implémentation des routes de l'api
+- test
+    - dao/sql : Tests des comportements attendus lors des intéractions avec la base de données
+    - domain : Tests de la validité des objets du domaine
+
+### Front-end
+
+- src : Point d'entrée de l'application
+    - environments : Configuration du front-end
+    - app : Sources du front-end
+        - components : Implémentation des controlleurs
+        - models : Définition du modèle
+        - services : Implémentation des services
+- cypress : Tests end to end
+
+### Database
+
+- sql-scripts : Scripts qui seront copiés dans l'initialisation du docker
+    - xx_name.sql : Fichier sql qui sera exécuté par ordre alphabétique des noms de fichier, `xx` sert à les ordonner
+
+## Workflow
+
+### Linters
+
+- Pour développer en back-end, nous utilisons checkstyle dont la configuration se trouve dans le fichier `.github/linters/sun_check.xml`
+- Pour développer en front-end, nous utilisons tslint dont la configuration se trouve dans le fichier `src/front/tslint.json`
+- Pour tester la propreté du code, des actions github pour le back et le front sont exécutées à chaque push et pull-request (voir dans `.github/workflows` les fichiers `back-lint.yml` et `front-lint.yml`)
+
+### Commits
+
+Les commits ne doivent concerner qu'une seule tâche/fonctionnalité, dans la mesure où segmenter les commits ne crée pas un état instable sur l'un d'entre eux. Si le commit n'est pas stable, ne pas l'envoyer sur `main` et annoter WIP (work in progress).
+
+Le titre du commit doit contenir entre crochets la partie du projet concernée, exemple :
+- [Kaban] -> modification des .md pour l'organisation
+- [Refactor] -> indiquer des changements importants pour le projet
+- [Back] -> modification de code dans `src/back`
+- [DB] -> modification de code dans `src/bdd`
+- [Tests] -> ajout de tests dans le projet
+- [Actions] -> gestion des actions github
+- [Cleaning] -> retouches apportées au code pour le rendre plus lisble, linter
+- etc...
+
+Lorsque l'on travaille sur une longue fonctionnalité, utiliser une branche à cet effet et push régulièrement pour que tous les développeurs puissent observer et potentiellement intervenir.
+
+### Tests
+
+**Tester intégralement**
+
+La commande `docker-compose --file docker-compose.test.yml up --exit-code-from tests` effectue les groupes de tests suivants, de manière séquentielle :
+- Création de la base de données
+- Utilisation (directe) de la base de données
+- Compilation du back-end
+- Utilisation (depuis le back) de la base de données
+- Utilisation des routes du back-end
+
+Pour l'instant, les tests end to end avec cypress ne sont pas dockerisés, il faut les lancer à la main.
+
+**Intégration automatique github :**
+
+L'action `docker-publish.yml` lance le docker-compose des tests automatiquement à chaque push et pull-request.
+
+**Tests pendant le développement :**
+- Pour tester/reinitialiser manuellement la **base de données**, lancer `docker-compose -f docker-compose.yml up --build --force-recreate --renew-anon-volumes db app`
+    - Cela va reconstruire entièrement la base de données et son schéma, si il fonctionne.
+    - Ensuite cela va faire des insertions qui doivent elles aussi fonctionner
+    - Pour visualiser et manipuler la base de données, phpmyadmin est disponible à `localhost:4242` (package app)
+    - La base de données est accessible à `localhost:3307` (package db)
+- Pour tester manuellement le **front-end**, lancer `docker-compose up db back`, il suffit ensuite d'utiliser `ng serve` pour compiler le front en temps réel.
+- Pour tester manuellement le **back-end**, il faut utiliser la même commande que pour les tests complets.
+- Pour les tests **end to end**, il faut utiliser cypress dans `src/front/cypress`
 
 
 ## Définition des Rôles
@@ -45,10 +130,10 @@
 
 | ID    | Description                                                  | Difficulté | Priorité | Planification |
 | ----- | ------------------------------------------------------------ | :--------: | :------: | :-----------: |
-| US-1  | **En tant que** visiteur, **je souhaite** avoir une section “how to” comprenant la documentaiton utilisateur du site **afin de** pouvoir faciliter la compréhension des différentes fonctionnalités du site.<br>Sur la page principale du site (page contenant la liste des projets) onglet "How to" permettra d'accéder à la page de documentation utilisateur complète. Une icon visible sur chacunes des sections du site permettra d'être redirigé vers la page d'explication.<br>L'icon devra être visible et mise en évidence afin d'attirer l'attention de l'utilisateur. En fonction de la section depuis laquelle l'utilisateur accède à cette page il sera redirigé vers la section de la documentation correspondante.<br> Cette Documentation sera divisée en différentes parties. Chaques parties représentant une des différentes sections du site. |     1      |   Low    |   Sprint 1    |
-| US-2  | **En tant qu’** utilisateur, **je souhaite** pouvoir visualiser une liste de tous les projets, ainsi que modifier, supprimer et créer un projet **afin de** pouvoir gérer les différents projets.<br> Une liste contenant tous les projets crés et leurs informations sera affichée. Un projet est défini par :<br>     - un nom, chaîne de caractère de taille maximum 50.<br>     - une description, chaîne de caractère de taille maximum 500.<br>    - une barre d'avancement (en pourcentage) représentant le travail restant à faire, c'est le nombre de tâche réalisées sur le nombre total.<br>   A droite de chaques descriptions de projet deux boutons seront présents. Un permettant de modifier les informations d'un projet (nom et description) et un permettant de supprimer un projet. Ces boutons sont visibles seulement pour les projets dont l'utilisateur est aussi scrum master. <br>Un bouton "Nouveau Projet" se trouvera près de la barre de recherche sur le haut de la page et permettra lorsqu'on appuie dessus d'ouvrir un formulaire d'ajout sous forme de popup.<br>Le formulaire comportera deux labels "Nom du projet" et "Description du Projet" ainsi que deux bouton "Abandonner" et "Créer". |     2      |   High   |   Sprint 1    |
+| US-1  | **En tant que** visiteur, **je souhaite** avoir une section “how to” comprenant la documentation utilisateur du site **afin de** pouvoir faciliter la compréhension des différentes fonctionnalités du site.<br>Sur la page principale du site (page contenant la liste des projets) onglet "How to" permettra d'accéder à la page de documentation utilisateur complète. Une icon visible sur chacunes des sections du site permettra d'être redirigé vers la page d'explication.<br>L'icon devra être visible et mise en évidence afin d'attirer l'attention de l'utilisateur. En fonction de la section depuis laquelle l'utilisateur accède à cette page il sera redirigé vers la section de la documentation correspondante.<br> Cette Documentation sera divisée en différentes parties. Chaques parties représentant une des différentes sections du site. |     1      |   Low    |   Sprint 1    |
+| US-2  | **En tant qu’** utilisateur, **je souhaite** pouvoir visualiser une liste de tous les projets, ainsi que modifier, supprimer et créer un projet **afin de** pouvoir gérer les différents projets.<br> Une liste contenant tous les projets créés et leurs informations sera affichée. Un projet est défini par :<br>     - un nom, chaîne de caractère de taille maximum 50.<br>     - une description, chaîne de caractère de taille maximum 500.<br>    - une barre d'avancement (en pourcentage) représentant le travail restant à faire, c'est le nombre de tâche réalisées sur le nombre total.<br>   A droite de chaques descriptions de projet deux boutons seront présents. Un permettant de modifier les informations d'un projet (nom et description) et un permettant de supprimer un projet. Ces boutons sont visibles seulement pour les projets dont l'utilisateur est aussi scrum master. <br>Un bouton "Nouveau Projet" se trouvera près de la barre de recherche sur le haut de la page et permettra lorsqu'on appuie dessus d'ouvrir un formulaire d'ajout sous forme de popup.<br>Le formulaire comportera deux labels "Nom du projet" et "Description du Projet" ainsi que deux bouton "Abandonner" et "Créer". |     2      |   High   |   Sprint 1    |
 | US-3  | **En tant qu’** utilisateur, **je souhaite** pouvoir rechercher un projet par un nom **afin** de pouvoir y accéder rapidement. Une barre de recherche se trouvera sur le haut de la page principale.<br>Un bouton "Rechercher" sera à sa droite et permettra de lancer un filtre sur les projets afin d'afficher seulement ceux contenant les termes de la recherche dans leur nom. |     2      |   Low    |   Sprint 1    |
-| US-4  | **En tant qu’** utilisateur, après avoir seléctionné sur un projet, **je souhaite** pouvoir cliquer sur différents onglets, **afin de** pouvoir naviguer entre les différentes parties d'un projet. Sur la partie gauche de la page du projet il y aura un menu avec les onglets suivant :<br>    - Backlog<br>    - Tasks (kanban)<br>    - Planification (seul le scrum master y a accès)<br>    - Sprint actif<br>    - Les tests<br>    - Release<br>    - Documentation<br>    - Statistics<br> Lorsque l'utilisateur clique sur un des onglets la page correspondante s'ouvrira. Ce menu sera présent dans toutes les pages correspondantes aux différents onglets. Une version minimale (seulement les icons) existera lorsque l'utilisateur appuiera sur le bouton de réduction se trouvant sur le haut du menu. |     1      |   High   |   Sprint 1    |
+| US-4  | **En tant qu’** utilisateur, après avoir sélectionné un projet, **je souhaite** pouvoir cliquer sur différents onglets, **afin de** pouvoir naviguer entre les différentes parties d'un projet. Sur la partie gauche de la page du projet il y aura un menu avec les onglets suivant :<br>    - Backlog<br>    - Tasks (kanban)<br>    - Planification (seul le scrum master y a accès)<br>    - Sprint actif<br>    - Les tests<br>    - Release<br>    - Documentation<br>    - Statistics<br> Lorsque l'utilisateur clique sur un des onglets la page correspondante s'ouvrira. Ce menu sera présent dans toutes les pages correspondantes aux différents onglets. Une version minimale (seulement les icons) existera lorsque l'utilisateur appuiera sur le bouton de réduction se trouvant sur le haut du menu. |     1      |   High   |   Sprint 1    |
 | US-5  | **En tant qu’** utilisateur, **je souhaite** pouvoir visualiser le Backlog d'un projet **afin d'** avoir une vue d'ensemble des US. Cette page sera composée de : <br>     - Le menu de navigation à gauche<br>     - Une zone de travail avec :<br>         > En haut le nom de la section "BackLog"<br>         > Une zone Sprint contenant les sprints crés composée pour chaque sprint de: Le nom du sprint, le nombre de tâches associées à ce sprint, un bouton Démarrer  la liste des US correspondantes avec leur identification, leur nom, une icon représentant leur priorité (code couleur + fleches vers le haut ou le bas) et leur difficulté.<br>         > Sous la zone sprint un bouton d'ajout de nouveaux US<br>         > Une zone US Contenant les US créer qui n'ont pas encore étés associées à un sprint.<br> Elles seront représentés sous forme de liste avec leur identification, leur nom, leur proorité et leur difficulté. Un bouton "Creer un Sprint" se trouvera sur le haut de cette zone et un bouton "Ajouter une User Story" se trouvera en bas de cette zone. |     1      |   High   |   Sprint 2    |
 | US-6  | **En tant que** product owner, **je souhaite** pouvoir créer une US pour un projet **afin de** compléter son backlog. Lorsque le product owner clique sur un des boutons "Ajouter une US" un formulaire s'ouvrira lui permettant de renseigner les informations concernant l'US. Ce formulaire comportera :<br>     - Un numéro d'identification de l'US avec le format "US-num" (num étant attribué automatique par incrémentation du nombre d'US dans le projet). Ce champ est pré-remplie, mais le PO peut le modifier s'il veut, tant que l'id reste unique.<br>    - Un nom avec un format "En tant que *rôle* je souhaine *Text* afin de *Text* (la partie texte étant ajouté par le product owner à l'écrit et la partie rôle ajouté à l'aide d'un menu déroulant contenant les différents rôles possibles pour ce projet. Le product owner pourra ajouter un rôle grace au bouton "Autre" se trouvant sur le dernier item du menu déroulant. Le rôle sera ajouté pour le projet)<br>    - Une difficulté : un nombre de la suite de fibonacci (menu déroulant)<br>    - Une priorité : Low, Medium, High (menu déroulant) |     2      |   High   |   Sprint 2    |
 | US-7  | **En tant que** scrum master, **je souhaite** pouvoir changer l'emplacement d'une US d'un projet à l'aide d'un glissé-déposé, **afin de** changer la planification d'une US.<br>Lorsque le scrum master réalise un mouvement de drag'n'drop sur une US vers un sprint ou vers la zone contenant toutes les US sans sprint, si il drop l'US dans une zone valide alors celle-ci est automatiquement ajouté à la zone, sinon elle retrouve sa place initiale.<br>Il est impossible de changer la planification d'un US si toutes ses tâches liées ne sont pas dans la catégorie TODO. |     3      |  Medium  |   Sprint 2    |

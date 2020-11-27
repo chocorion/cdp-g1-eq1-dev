@@ -1,14 +1,12 @@
 package dao;
 
 import domain.Test;
-
-import java.sql.SQLException;
 import java.util.List;
 
 public interface TestDAO {
-    Test getById(int id) throws SQLException;
-    List<Test> getAllForProject(int projectId) throws SQLException;
-    Test addOne(Test test) throws SQLException;
-    void updateOne(Test test) throws SQLException;
-    void deleteOne(Test test) throws SQLException;
+    Test getById(int projectId, int id) throws Exception;
+    List<Test> getAllForProject(int projectId) throws Exception;
+    Test insert(Test test) throws Exception;
+    void update(Test test) throws Exception;
+    void delete(Test test) throws Exception;
 }

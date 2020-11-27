@@ -1,1 +1,10 @@
 src/back/target/
+.github/workflows/node_modules/
+
+.vscode/
+
+src/back/.classpath
+
+src/back/.project
+
+src/back/.settings/

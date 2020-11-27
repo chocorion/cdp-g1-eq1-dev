@@ -1,29 +1,50 @@
 package domain;
 
 
+import java.util.Comparator;
+
 public class Test {
-    private int id;
+    public final Integer id;
 
-    private String name;
-    private String description;
-    private String lastExecution;
-    private String state;
-    private int projectId;
+    public final String name;
+    public final String description;
+    public final String lastExecution;
+    public final String state;
+    public final Integer projectId;
 
+    public static final Comparator<Test> COMPARATOR;
+
+    static {
+        COMPARATOR = Comparator
+                .comparing(
+                        (Test test) -> test.id,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.name,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing((Test test) -> test.description,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.lastExecution,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.state,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Test test) -> test.projectId,
+                        Comparator.nullsFirst(Comparator.naturalOrder()));
+    }
+
+    // Required by jackson
     public Test() {
-        id = -1;
+        this(null, null, null, null, null);
     }
 
-    public Test(String name, String description, String lastExecution, String state, int projectId) {
-        this.name = name;
-        this.description = description;
-        this.lastExecution = lastExecution;
-        this.state = state;
-        this.projectId = projectId;
-        this.id = -1;
+    public Test(String name, String description, String lastExecution, String state, Integer projectId) {
+        this(name, description, lastExecution, state, projectId, null);
     }
 
-    public Test(String name, String description, String lastExecution, String state, int id, int projectId) {
+    public Test(String name, String description, String lastExecution, String state, Integer projectId, Integer id) {
         this.name = name;
         this.description = description;
         this.lastExecution = lastExecution;
@@ -32,31 +53,25 @@ public class Test {
         this.projectId = projectId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+
+        if (!(obj instanceof Test))
+            return false;
+
+        return COMPARATOR.compare(this, (Test) obj) == 0;
     }
 
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getLastExecution() {
-        return lastExecution;
-    }
-
-    public String getState() {
-        return state;
+    @Override
+    public String toString() {
+        return "Test(id=" + id
+                + ", name=" + name
+                + ", description=" + description
+                + ", lastExecution=" + lastExecution
+                + ", state=" + state
+                + ", projectId=" + projectId
+                + ")";
     }
 }

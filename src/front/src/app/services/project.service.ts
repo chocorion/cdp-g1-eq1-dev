@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {Observable, Subject} from 'rxjs';
-import {Project} from '../model/project.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Observable, Subject } from 'rxjs';
+import { Project } from '../models/project.model';
 
 @Injectable({
     providedIn: 'root'
@@ -38,15 +38,17 @@ export class ProjectService {
     }
 
     updateProject(project: Project): Observable<Project> {
-        console.log("Up + " + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
+        console.log('Update + ' + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
         return this.http.put<Project>(environment.apiUrl + 'projects/', project);
     }
 
     postProject(project: Project): Observable<Project> {
-        return this.http.post<Project>(environment.apiUrl + 'projects/' + project.getId(), project);
+        console.log('Add ' + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
+        return this.http.post<Project>(environment.apiUrl + 'projects/', project);
     }
 
-    deleteProject(project: Project): void {
-        this.http.delete(environment.apiUrl + 'projects/' + project.getId());
+    deleteProject(project: Project): any {
+        console.log('Delete ' + project.getId() + ' ' + project.getName() + ' ' + project.getDescription());
+        return this.http.delete<Project>(environment.apiUrl + 'projects/' + project.getId());
     }
 }

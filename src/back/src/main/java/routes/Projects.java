@@ -1,23 +1,23 @@
 package routes;
 
-import dao.DAOFactory;
+
 import dao.ProjectDAO;
 import domain.Project;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 
-@Path("projects")
+@Path("projects/")
 public class Projects {
+    @Inject ProjectDAO projectDAO;
+
     @GET
     @Produces("application/json")
     public Response getProjects() {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-
         try {
             return Response.status(Response.Status.OK).entity(projectDAO.getAll()).build();
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -26,11 +26,9 @@ public class Projects {
     @GET
     @Produces("application/json")
     public Response getProject(@PathParam("id") int id) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-
         try {
             return Response.status(Response.Status.OK).entity(projectDAO.getById(id)).build();
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -39,11 +37,10 @@ public class Projects {
     @Consumes("application/json")
     @Produces("application/json")
     public Response postProject(Project project) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
         Project built;
         try {
-            built = projectDAO.addOne(project);
-        } catch (SQLException exception) {
+            built = projectDAO.insert(project);
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -57,10 +54,9 @@ public class Projects {
     @Consumes("application/json")
     @Produces("application/json")
     public Response putProject(Project project) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
         try {
-            projectDAO.updateOne(project);
-        } catch (SQLException exception) {
+            projectDAO.update(project);
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -73,12 +69,10 @@ public class Projects {
     @Path("{id}")
     @DELETE
     public Response deleteProject(@PathParam("id") int id) {
-        ProjectDAO projectDAO = DAOFactory.getInstance().getProjectDAO();
-
         try {
             Project project = projectDAO.getById(id);
-            projectDAO.deleteOne(project);
-        } catch (SQLException exception) {
+            projectDAO.delete(project);
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .entity(exception.getMessage())

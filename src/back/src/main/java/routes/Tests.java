@@ -1,23 +1,22 @@
 package routes;
 
-import dao.DAOFactory;
 import dao.TestDAO;
 import domain.Test;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 
 @Path("/projects/{id}/tests")
 public class Tests {
+    @Inject TestDAO testDAO;
+
     @GET
     @Produces("application/json")
     public Response getTests(@PathParam("id") int id) {
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
-
         try {
-            return Response.status(Response.Status.OK).entity(dao.getAllForProject(id)).build();
-        } catch (SQLException exception) {
+            return Response.status(Response.Status.OK).entity(testDAO.getAllForProject(id)).build();
+        } catch (Exception exception) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -26,18 +25,11 @@ public class Tests {
     @Consumes("application/json")
     @Produces("application/json")
     public Response postTest(@PathParam("id") int id, Test test) {
-        if (test.getProjectId() != id) {
-            return Response
-                    .status(Response.Status.CONFLICT)
-                    .entity("Project id doesn't match with path id.")
-                    .build();
-        }
-
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
+        test = new Test(test.name, test.description, test.lastExecution, test.state, id);
         Test built;
         try {
-            built = dao.addOne(test);
-        } catch (SQLException exception) {
+            built = testDAO.insert(test);
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -51,18 +43,13 @@ public class Tests {
     @Path("{test_id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response putTest(@PathParam("id") int id, @PathParam("test_id") int test_id, Test test) {
-        if (test.getProjectId() != id) {
-            return Response
-                    .status(Response.Status.CONFLICT)
-                    .entity("Project id doesn't match with path id.")
-                    .build();
-        }
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
+    public Response putTest(@PathParam("id") int id, @PathParam("test_id") int testId, Test test) {
+        test = new Test(test.name, test.description, test.lastExecution, test.state, id, testId);
 
         try {
-            dao.updateOne(test);
-        } catch (SQLException exception) {
+            testDAO.update(test);
+        } catch (Exception exception) {
+            System.out.println("Probleme : " + exception.getMessage());
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())
@@ -75,20 +62,18 @@ public class Tests {
     @Path("{test_id}")
     @DELETE
     @Produces("application/json")
-    public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int test_id) {
-        TestDAO dao = DAOFactory.getInstance().getTestDAO();
-
+    public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int testId) {
         try {
-            Test test = dao.getById(test_id);
-            if (test.getProjectId() != id) {
+            Test test = testDAO.getById(id, testId);
+            if (test.id != id) {
                 return Response
                         .status(Response.Status.CONFLICT)
                         .entity("Test.projectId doesn't match with path")
                         .build();
             }
 
-            dao.deleteOne(test);
-        } catch (SQLException exception) {
+            testDAO.delete(test);
+        } catch (Exception exception) {
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .entity(exception.getMessage())

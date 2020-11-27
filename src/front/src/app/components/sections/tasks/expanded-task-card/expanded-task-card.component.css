@@ -1,0 +1,11 @@
+.card-text{
+    font-size: medium;
+}
+.example-margin {
+    margin: 0 12px;
+  }
+
+.over{
+    overflow-y: auto;
+    max-height: 200px;
+}

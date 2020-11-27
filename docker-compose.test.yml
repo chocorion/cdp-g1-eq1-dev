@@ -1,0 +1,52 @@
+version: "3.3"
+  
+services:
+  db:
+    restart: always
+    build: 
+      context: ./src/bdd
+      dockerfile: ./Dockerfile.prod
+    environment: 
+      MYSQL_DATABASE: 'cdp'
+      MYSQL_USER: 'cdp'
+      MYSQL_PASSWORD: 'cdp'
+      MYSQL_ROOT_PASSWORD: 'cdp'
+    ports:
+      - "3307:3306"
+
+    image: cdp-g1-eq1-db-test
+    container_name: cdp-g1-eq1-db-test
+
+  back:
+    restart: always
+    build:
+      context: ./src/back
+      dockerfile: ./Dockerfile.prod
+    ports:
+      - "9000:8080"
+
+    image: cdp-g1-eq1-back-test
+
+  front:
+    restart: always
+    build:
+      context: ./src/front
+      dockerfile: ./Dockerfile.prod
+    ports:
+      - "8080:80"
+
+    image: cdp-g1-eq1-front
+
+  tests:
+    image: maven:3
+    stop_signal: SIGKILL
+    stdin_open: true
+    tty: true
+    working_dir: $PWD
+    volumes:
+      - $PWD/src/back:$PWD
+
+    command: mvn test
+    container_name: cdp-g1-eq1-back-test
+
+  
