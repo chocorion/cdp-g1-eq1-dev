@@ -1,16 +1,16 @@
 <div class="list-group-item my-2 rounded" ng-hide="expression">
-    <div class ="row">
-        <div class ="row">
+    <div class ="card rounded" style="width: 18rem;">
+        <div class ="card-header">
             <button type="button" class="btn btn-primary ml-2 mt-2" data-toggle="modal" [attr.data-target]="'#user'+currentMember.user">
                 {{currentMember.getName()}}
             </button>
         </div>
-        <div class ="row">
-            <div class ="col-6">
-                Role : <br> {{currentMember.getRole()}}
+        <div class ="card-body">
+            <div class ="a">
+                <b>Role</b> : {{currentMember.getRole()}}
             </div>
-            <div class ="col-6">
-                Level : <br> {{currentMember.getLevel()}}
+            <div class ="a">
+                <b>Level</b> : {{currentMember.getLevel()}}
             </div>
             <button type = "button" class= "btn btn-danger ml-1 mt-2" (click)= "deleteMember()">Supprimer</button>
         </div>
