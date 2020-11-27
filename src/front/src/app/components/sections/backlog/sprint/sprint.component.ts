@@ -5,6 +5,7 @@ import {ProjectService} from '../../../../services/project.service';
 import {UsService} from '../../../../services/us.service';
 import {Us} from '../../../../models/us.model';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {log} from 'util';
 
 @Component({
     selector: 'app-us-container',
@@ -37,10 +38,21 @@ export class SprintComponent implements OnInit {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
+            this.updateUsSprint(
+                event.previousContainer.data[event.previousIndex],
+                event.container.id
+            );
+
             transferArrayItem(event.previousContainer.data,
                 event.container.data,
                 event.previousIndex,
                 event.currentIndex);
         }
+    }
+
+    updateUsSprint(us: Us, sprintHtmlId: string): void {
+        const sprintId = sprintHtmlId.substring(6);
+        us.setSprint(Number(sprintId));
+        this.usService.update(this.projectService.currentProject.getId(), us).subscribe();
     }
 }

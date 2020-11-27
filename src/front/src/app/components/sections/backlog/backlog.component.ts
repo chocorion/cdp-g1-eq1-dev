@@ -31,9 +31,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
 
                     this.subscription = this.sprintService.subject.subscribe(
                         sprintList => {
-                            console.log('In backlog init : ');
-                            console.log('Receive sprintlist : ');
-                            console.log(sprintList);
                             this.sprints = sprintList;
                         }
                     );

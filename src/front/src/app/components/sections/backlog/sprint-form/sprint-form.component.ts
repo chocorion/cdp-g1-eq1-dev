@@ -5,6 +5,7 @@ import {ProjectService} from '../../../../services/project.service';
 import {SprintService} from '../../../../services/sprint.service';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {UsService} from '../../../../services/us.service';
 
 @Component({
     selector: 'app-sprint-form',

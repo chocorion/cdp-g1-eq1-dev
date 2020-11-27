@@ -49,5 +49,7 @@ export class ProjectItemComponent implements OnInit {
 
     onClick(): void {
         this.router.navigate(['project/' + this.currentProject.getId() + '/backlog']);
+        // TODO Remove this quickfix
+        this.projectService.setCurrentProject(this.currentProject);
     }
 }

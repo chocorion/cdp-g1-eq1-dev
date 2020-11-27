@@ -25,19 +25,30 @@ export class UnplannedComponent implements OnInit {
     ngOnInit(): void {
         this.usSubscription = this.usService.subject.subscribe(
             usList => {
-                this.userStories = usList.filter(us => us.getSprint() === null);
+                this.userStories = usList.filter(us => us.getSprint() == null);
             }
         );
+
+        this.usService.getAllForProject(this.projectService.currentProject.getId());
     }
 
     drop(event: CdkDragDrop<Us[], any>): void {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
+            this.updateUsSprint(
+                event.previousContainer.data[event.previousIndex]
+            );
+
             transferArrayItem(event.previousContainer.data,
                 event.container.data,
                 event.previousIndex,
                 event.currentIndex);
         }
+    }
+
+    updateUsSprint(us: Us): void {
+        us.setSprint(null);
+        this.usService.update(this.projectService.currentProject.getId(), us).subscribe();
     }
 }

@@ -70,8 +70,8 @@ export class Us implements PossesId {
         return this.difficulty;
     }
 
-    private setSprint(sprint: number): void {
-        this.sprint = (sprint) ? sprint : null;
+    setSprint(sprint: number): void {
+        this.sprint = sprint;
     }
 
     public getSprint(): number {

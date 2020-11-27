@@ -41,10 +41,4 @@ export class ProjectListComponent implements OnInit {
             this.updateProjects();
         }
     }
-
-
-    onClick(project: Project): void {
-        this.projectService.setCurrentProject(project);
-        this.router.navigate(['tests']);
-    }
 }
