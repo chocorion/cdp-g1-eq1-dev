@@ -72,10 +72,12 @@
                                 <p *ngIf="task.getUsId()">Assigned: {{this.getMemberName()}}</p>
                                 <p *ngIf="!task.getUsId()">Assigned: No one</p>
                                 <div class="card-header"> Definiton of Done</div>
-                                <div class="dodstate" *ngFor="let dod of dods">
-                                    <div class="card">
-                                        <mat-checkbox class="example-margin" [(ngModel)]="dod.state"
-                                            (change)="updateDOD(dod)"><h6>{{dod.getDescription()}}</h6></mat-checkbox>
+                                <div class="over">
+                                    <div class="dodstate" *ngFor="let dod of dods">
+                                        <div class="card">
+                                            <mat-checkbox class="example-margin" [(ngModel)]="dod.state"
+                                                (change)="updateDOD(dod)"><h6>{{dod.getDescription()}}</h6></mat-checkbox>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="dodstate">
