@@ -1,7 +1,4 @@
 .container {
-    display: flex;
-
-    align-items: center;
 
     border-radius: 20px;
     border-style: solid;
@@ -9,10 +6,4 @@
     border-width: 2px;
 
     background-color: white;
-}
-
-.container > * {
-    margin-right: 2%;
-    margin-top: 2px;
-    margin-bottom: 2px;
 }
