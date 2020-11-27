@@ -102,7 +102,7 @@ public class SQLTaskDAO extends SQLDAO<Task> implements TaskDAO {
     public void addDependency(Task parent, Task child) throws SQLException {
         if (parent.id == null)
             throw new SQLException("The parent task is missing an id, cannot add dependency");
-        if (parent.id == null)
+        if (child.id == null)
             throw new SQLException("The child task is missing an id, cannot add dependency");
         if (parent.projectId != child.projectId)
             throw new SQLException("The project id does not match for these tasks, cannot add dependency");
