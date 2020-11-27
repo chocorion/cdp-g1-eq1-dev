@@ -19,7 +19,6 @@ context('Assertions', () => {
         cy.get('form').should('not.be.visible');
     });
 
-
     it('Should change the name of a task', () => {
         // Open card
         cy.get('.card-title').first().click();
@@ -43,6 +42,34 @@ context('Assertions', () => {
         cy.get('.card-title').first().should(($e) => {
             expect($e).to.contain(text);
         });
+    });
+
+    it('Should create a new task', () => {
+        // Open task form
+        cy.get('#newbuttontask').first().click();
+        cy.get('form').should('be.visible');
+        cy.wait(1000);
+
+        let seed = Date.now();
+
+        let taskCreate = {
+            title: "task "+seed,
+            duration: seed/2 + " hh",
+        }
+
+        // Fill the form and send
+        cy.get('#newTask > .modal-dialog > .modal-content > .modal-body > form > div > input[formcontrolname="title"]')
+            .first().type(taskCreate.title);
+        cy.get('#newTask > .modal-dialog > .modal-content > .modal-body > form > div > input[formcontrolname="duration"]')
+            .first().type(taskCreate.duration);
+        cy.get('#newTask > .modal-dialog > .modal-content > .modal-body > form > button[type="submit"]')
+            .first().click();
+
+        // Close form
+        cy.get('#newTask > .modal-dialog > .modal-content >.modal-header > .close').first().click();
+        cy.get('form').should('not.be.visible');
+
+        cy.get('.card-title').contains(taskCreate.title).should('be.visible');
     });
 
 });
