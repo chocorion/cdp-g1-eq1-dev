@@ -1,7 +1,7 @@
 # Sprint 2
 
 * Nombre total d'US : 15
-* Difficulté totale : 29
+* Difficulté totale : 44
 
 
 
