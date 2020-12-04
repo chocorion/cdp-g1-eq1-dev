@@ -2,7 +2,6 @@ import {environment} from '../../environments/environment';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {PossesId} from '../models/possesId';
-import {element} from 'protractor';
 
 export abstract class GenericService<T extends PossesId> {
     private static projectRoute = environment.apiUrl + 'projects/';

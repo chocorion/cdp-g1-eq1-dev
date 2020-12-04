@@ -35,6 +35,7 @@ import { UnplannedComponent } from './components/sections/backlog/unplanned/unpl
 import { SprintFormComponent } from './components/sections/backlog/sprint-form/sprint-form.component';
 import { TestFormComponent } from './components/sections/tests/test-form/test-form.component';
 import { EditTestFormComponent } from './components/sections/tests/test-item/edit-test-form/edit-test-form.component';
+import { UsCreateFormComponent } from './components/sections/backlog/us-create-form/us-create-form.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -62,7 +63,8 @@ import { EditTestFormComponent } from './components/sections/tests/test-item/edi
         UnplannedComponent,
         SprintFormComponent,
         TestFormComponent,
-        EditTestFormComponent
+        EditTestFormComponent,
+        UsCreateFormComponent
     ],
     imports: [
         BrowserModule,
