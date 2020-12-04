@@ -14,6 +14,9 @@
 
         <button class="btn btn-success" (click)="changeState('validate')">Valider</button>
         <button class="btn btn-danger" (click)="changeState('refused')">Refuser</button>
+        <app-edit-test-form [test]="test"></app-edit-test-form>
+        <button class="btn btn-danger" (click)="onDelete()">Supprimer</button>
+
     </div>
 
 </div>

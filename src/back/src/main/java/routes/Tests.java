@@ -65,7 +65,7 @@ public class Tests {
     public Response deleteTest(@PathParam("id") int id, @PathParam("test_id") int testId) {
         try {
             Test test = testDAO.getById(id, testId);
-            if (test.id != id) {
+            if (test.projectId != id) {
                 return Response
                         .status(Response.Status.CONFLICT)
                         .entity("Test.projectId doesn't match with path")

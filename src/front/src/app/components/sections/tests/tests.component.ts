@@ -48,6 +48,7 @@ export class TestsComponent implements OnInit, OnDestroy {
                 this.updateTests();
             }
         );
+
         this.testService.getAllForProject(this.projectService.currentProject.getId());
     }
 

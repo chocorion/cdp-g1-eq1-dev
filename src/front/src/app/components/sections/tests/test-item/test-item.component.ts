@@ -44,4 +44,9 @@ export class TestItemComponent implements OnInit {
         );
 
     }
+
+    onDelete(): void {
+        console.log(`Delete test with id ${this.test.getId()} for project ${this.test.getProjectId()}`);
+        this.testService.delete(this.test.getProjectId(), this.test);
+    }
 }

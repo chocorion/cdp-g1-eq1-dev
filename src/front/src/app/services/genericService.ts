@@ -2,6 +2,7 @@ import {environment} from '../../environments/environment';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {PossesId} from '../models/possesId';
+import {element} from 'protractor';
 
 export abstract class GenericService<T extends PossesId> {
     private static projectRoute = environment.apiUrl + 'projects/';
@@ -38,9 +39,7 @@ export abstract class GenericService<T extends PossesId> {
             subscriber => {
                 this.httpClient.post<T>(url, item).subscribe(
                     result => {
-                        console.log('Receive ' + JSON.stringify(result, null, 4));
                         result = this.getElementFromJSON(result);
-                        console.log('Posting something... Id id : ' + result.getId());
 
                         this.TList.push(result);
                         subscriber.next(result);
@@ -72,7 +71,11 @@ export abstract class GenericService<T extends PossesId> {
     delete(projectId: number, item: T): void {
         const url = GenericService.projectRoute + `${projectId}/${this.routeBaseName}/${item.getId()}`;
         this.httpClient.delete(url).subscribe(
-            result => {}
+            result => {
+                const index = this.TList.findIndex(element => element.getId() === item.getId());
+                this.TList.splice(index, 1);
+                this.emit();
+            }
         );
     }
 }

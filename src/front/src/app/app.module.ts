@@ -34,6 +34,7 @@ import { MemberItemComponent } from './components/sections/planification/member-
 import { UnplannedComponent } from './components/sections/backlog/unplanned/unplanned.component';
 import { SprintFormComponent } from './components/sections/backlog/sprint-form/sprint-form.component';
 import { TestFormComponent } from './components/sections/tests/test-form/test-form.component';
+import { EditTestFormComponent } from './components/sections/tests/test-item/edit-test-form/edit-test-form.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -60,7 +61,8 @@ import { TestFormComponent } from './components/sections/tests/test-form/test-fo
         MemberItemComponent,
         UnplannedComponent,
         SprintFormComponent,
-        TestFormComponent
+        TestFormComponent,
+        EditTestFormComponent
     ],
     imports: [
         BrowserModule,
