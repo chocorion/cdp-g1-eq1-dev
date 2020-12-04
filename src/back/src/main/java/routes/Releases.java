@@ -18,7 +18,8 @@ public class Releases {
         try {
             return Response.status(Response.Status.OK).entity(releaseDAO.getAllForProject(projectId)).build();
         } catch (Exception exception) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+            .entity(exception.getMessage()).build();
         }
     }
 
@@ -29,7 +30,8 @@ public class Releases {
         try {
             return Response.status(Response.Status.OK).entity(releaseDAO.getById(id)).build();
         } catch (Exception exception) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+            .entity(exception.getMessage()).build();
         }
     }
 

@@ -20,7 +20,7 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
                         getInteger(resultSet, "version_minor"),
                         getInteger(resultSet, "version_patch")),
             resultSet.getString("link"),
-            resultSet.getString("creationDate"),
+            resultSet.getString("creation_date"),
             getInteger(resultSet, "id"));
     }
 

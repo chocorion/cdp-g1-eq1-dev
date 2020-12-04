@@ -40,7 +40,7 @@ public class Release {
 
     // Required by Jackson
     public Release() {
-        this(null, null, null, null, null, null);
+        this(null, null, null, new Version(null, null, null), null, null);
     }
 
     public Release(Integer project,
