@@ -60,7 +60,6 @@ public class UserStories {
     public Response postUs(@PathParam("projectId") int projectId, UserStory userStory) {
         userStory = new UserStory(projectId, userStory.description, userStory.priority, userStory.difficulty, userStory.sprint);
 
-        System.out.println("Receive user story " + userStory);
         UserStory built;
         try {
             built = userStoryDAO.insert(userStory);

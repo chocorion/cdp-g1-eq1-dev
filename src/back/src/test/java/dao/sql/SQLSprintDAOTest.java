@@ -27,12 +27,13 @@ class SQLSprintDAOTest {
     @Test
     void testInsert() throws Exception {
         SQLSprintDAO sprintDAO = new SQLSprintDAO();
-        Sprint sprint = new Sprint(1, "I am a sprint 3");
+        Sprint sprint = new Sprint(1, "I am a sprint 3", "archived");
 
         Sprint insertedSprint = sprintDAO.insert(sprint);
 
         assertEquals(sprint.name, insertedSprint.name);
-        assertEquals(sprint.projectId, sprint.projectId);
+        assertEquals(sprint.projectId, insertedSprint.projectId);
+        assertEquals(sprint.state, insertedSprint.state);
     }
 
     @Test
@@ -42,11 +43,13 @@ class SQLSprintDAOTest {
 
         Sprint inserted = sprintDAO.insert(sprint);
 
-        Sprint updateSprint = new Sprint(inserted.projectId, "i have a new name", inserted.id);
+        Sprint updateSprint = new Sprint(inserted.projectId, "i have a new name", "actif", inserted.id);
         sprintDAO.update(updateSprint);
 
-        Sprint updatedSprint = sprintDAO.getById(updateSprint.projectId, updateSprint.id);
 
-        assertTrue(updateSprint.equals(updatedSprint));
+        assertEquals(
+                sprintDAO.getById(updateSprint.projectId, updateSprint.id),
+                updateSprint
+        );
     }
 }

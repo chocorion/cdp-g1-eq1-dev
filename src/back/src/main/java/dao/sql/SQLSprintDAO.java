@@ -14,6 +14,7 @@ public class SQLSprintDAO extends SQLDAO<Sprint> implements SprintDAO {
         return new Sprint(
             getInteger(resultSet, "project"),
             resultSet.getString("name"),
+            resultSet.getString("state"),
             getInteger(resultSet, "id")
         );
     }
@@ -35,25 +36,40 @@ public class SQLSprintDAO extends SQLDAO<Sprint> implements SprintDAO {
     }
 
     @Override
+    public Sprint getActifForProject(int projectId) throws Exception {
+        String statement = "SELECT * FROM sprint WHERE project=? AND status=actif";
+        List<Object> opt = Arrays.asList(projectId);
+
+        try {
+            // If exception is raised, it's because there is no active sprint.
+            return queryFirstObject(statement, opt);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
     public Sprint insert(Sprint sprint) throws Exception {
         if (sprint.id != null)
             throw new SQLException("This sprint already has an id, use update !");
-        String statement = "{CALL insert_sprint(?, ?, @id)}";
+        String statement = "{CALL insert_sprint(?, ?, ?, @id)}";
 
         List<Object> opt = Arrays.asList(
                 sprint.projectId,
-                sprint.name
+                sprint.name,
+                sprint.state
         );
 
-        return new Sprint(sprint.projectId, sprint.name, doInsert(statement, opt));
+        return new Sprint(sprint.projectId, sprint.name, sprint.state, doInsert(statement, opt));
     }
 
     @Override
     public void update(Sprint sprint) throws SQLException {
-        String statement = "UPDATE sprint SET name = ? WHERE project = ? AND id = ?";
+        String statement = "UPDATE sprint SET name = ?, state = ? WHERE project = ? AND id = ?";
 
         List<Object> opt = Arrays.asList(
                 sprint.name,
+                sprint.state,
                 sprint.projectId,
                 sprint.id
         );

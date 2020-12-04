@@ -6,6 +6,7 @@ public class Sprint {
     public final Integer projectId;
     public final Integer id;
     public final String name;
+    public final String state;
 
     public static final Comparator<Sprint> COMPARATOR;
 
@@ -19,22 +20,34 @@ public class Sprint {
                         Comparator.nullsFirst(Comparator.naturalOrder()))
                 .thenComparing(
                         (Sprint sprint) -> sprint.name,
+                        Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparing(
+                        (Sprint sprint) -> sprint.state,
                         Comparator.nullsFirst(Comparator.naturalOrder()));
 
     }
 
     // Required by jackson
     public Sprint() {
-        this(null, null, null);
+        this(null, null, null, null);
     }
 
     public Sprint(Integer projectId, String name) {
-        this(projectId, name, null);
+        this(projectId, name, "pending", null);
+    }
+
+    public Sprint(Integer projectId, String name, String state) {
+        this(projectId, name, state, null);
     }
 
     public Sprint(Integer projectId, String name, Integer id) {
+        this(projectId, name, "pending", id);
+    }
+
+    public Sprint(Integer projectId, String name, String state, Integer id) {
         this.projectId = projectId;
         this.name = name;
+        this.state = state;
         this.id = id;
     }
 
@@ -54,6 +67,7 @@ public class Sprint {
         return "Sprint(projectId=" + projectId
                 + ", id=" + id
                 + ", name=" + name
+                + ", state=" + state
                 + ")";
     }
 }

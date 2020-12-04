@@ -14,9 +14,9 @@ CALL insert_test(2, 'test2 p2', 'test2 p2 description', NULL, 'not executed', @i
 
 -- Create sprints for the projects
 
-CALL insert_sprint(1,"Sprint 1", @id);
-CALL insert_sprint(1,"Le super Sprint", @id);
-CALL insert_sprint(2,"Sprint 1", @id);
+CALL insert_sprint(1,"Sprint 1", "pending", @id);
+CALL insert_sprint(1,"Le super Sprint", "pending", @id);
+CALL insert_sprint(2,"Sprint 1", "pending", @id);
 
 -- Add 3 us to the first project, 1 us to the second us
 
