@@ -32,4 +32,5 @@
 | T3-21 | Appliquer le nouveau design pour la section Us.              |                                                              | Les tests e2e passent.                                       | T3-18       |       | 3                | TODO  |             |
 | T3-22 | Appliquer le nouveau design pour la section Tests.           |                                                              | Les tests e2e passent.                                       | T3-18       |       | 3                | TODO  |             |
 | T3-23 | Refaire le design de la sidebar.                             |                                                              | Les tests e2e passent.                                       | T3-18       |       | 3                | TODO  |             |
+| T3-24 | Limiter la création d'une task au status TODO                              |                                                              | La task est crée avec statut TODO                                       |       |       | 1               | TODO  |             |
 
