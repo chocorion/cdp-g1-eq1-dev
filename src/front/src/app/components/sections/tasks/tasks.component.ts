@@ -69,7 +69,8 @@ export class TasksComponent implements OnInit {
 
     createTask(data: any): void {
         console.log(data);
-        const task = new Task(-1, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, data.status);
+        const todo = 'TODO';
+        const task = new Task(-1, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, todo);
         this.taskService.post(this.currentProject.getId(), task).subscribe(() => { });
 
     }
