@@ -5,7 +5,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from '../../../../models/task.model';
 import { Router } from '@angular/router';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnd, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-task-container',
@@ -42,12 +42,38 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
             moveItemInArray(event.container.data,
                 event.previousIndex,
                 event.currentIndex);
-        } else {
+        }
+        else if (event.container.id !== 'DONE') {
             transferArrayItem(event.previousContainer.data,
                 event.container.data,
                 event.previousIndex, event.currentIndex);
             event.container.data[event.currentIndex].status = event.container.id;
             this.updateTaskState(event);
+        }
+        else {
+            let task: Task;
+            if (event.previousContainer.id === 'TODO'){
+                task = this.tasksTodo[event.previousIndex];
+            }
+            else if (event.previousContainer.id === 'DOING'){
+                task = this.tasksDoing[event.previousIndex];
+            }
+            if (task){
+                this.taskService.getDOD(task.getProjectId(), task.getId()).subscribe(
+                    result => {
+                        const t = result.filter(x => x.state === true);
+                        const dodOk = t.length;
+                        const dodTotal = result.length;
+                        if (dodOk === dodTotal && dodOk > 0 && dodTotal > 0){
+                            transferArrayItem(event.previousContainer.data,
+                                event.container.data,
+                                event.previousIndex, event.currentIndex);
+                            event.container.data[event.currentIndex].status = event.container.id;
+                            this.updateTaskState(event);
+                        }
+                    }
+                );
+            }
         }
     }
 
@@ -64,6 +90,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
             default:
                 task = this.tasksDone[event.currentIndex];
                 break;
+
         }
 
         this.update(task);
