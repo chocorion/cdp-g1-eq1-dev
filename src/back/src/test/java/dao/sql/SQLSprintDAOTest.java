@@ -43,7 +43,7 @@ class SQLSprintDAOTest {
 
         Sprint inserted = sprintDAO.insert(sprint);
 
-        Sprint updateSprint = new Sprint(inserted.projectId, "i have a new name", "actif", inserted.id);
+        Sprint updateSprint = new Sprint(inserted.projectId, "i have a new name", "active", inserted.id);
         sprintDAO.update(updateSprint);
 
 

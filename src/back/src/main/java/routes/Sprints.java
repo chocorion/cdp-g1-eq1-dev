@@ -24,6 +24,22 @@ public class Sprints {
     }
 
     @GET
+    @Path("active")
+    @Produces("application/json")
+    public Response getActive(@PathParam("projectId") int projectId) {
+       try {
+           Sprint activeSprint = sprintDAO.getActiveForProject(projectId);
+
+           if (activeSprint == null)
+               throw new Exception("Can't find active sprint");
+
+            return Response.status(200).entity(activeSprint).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
     @Path("{sprintId}/us")
     @Produces("application/json")
     public Response getUs(@PathParam("projectId") int projectId, @PathParam("sprintId") int sprintId) {
@@ -38,7 +54,7 @@ public class Sprints {
     @Consumes("application/json")
     @Produces("application/json")
     public Response insert(@PathParam("projectId") int projectId, Sprint sprint) {
-        sprint = new Sprint(projectId, sprint.name, sprint.id);
+        sprint = new Sprint(projectId, sprint.name, "pending", sprint.id);
 
         try {
             return Response.status(200).entity(sprintDAO.insert(sprint)).build();
@@ -52,7 +68,18 @@ public class Sprints {
     @Consumes("application/json")
     @Produces("application/json")
     public Response update(@PathParam("projectId") int projectId, @PathParam("sprintId") int sprintId, Sprint sprint) {
-        sprint = new Sprint(projectId, sprint.name, sprintId);
+        sprint = new Sprint(projectId, sprint.name, sprint.state, sprintId);
+
+        if (sprint.state.equals("active")) {
+            Sprint active = sprintDAO.getActiveForProject(projectId);
+
+            if (active != null && !active.equals(sprint)) {
+                return Response
+                        .status(400)
+                        .entity("Can't set this sprint to active, there is another active sprint.")
+                        .build();
+            }
+        }
 
         try {
             sprintDAO.update(sprint);

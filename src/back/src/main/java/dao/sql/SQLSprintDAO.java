@@ -36,8 +36,8 @@ public class SQLSprintDAO extends SQLDAO<Sprint> implements SprintDAO {
     }
 
     @Override
-    public Sprint getActifForProject(int projectId) throws Exception {
-        String statement = "SELECT * FROM sprint WHERE project=? AND status=actif";
+    public Sprint getActiveForProject(int projectId) {
+        String statement = "SELECT * FROM sprint WHERE project=? AND state='active'";
         List<Object> opt = Arrays.asList(projectId);
 
         try {
