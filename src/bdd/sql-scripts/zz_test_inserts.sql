@@ -56,3 +56,8 @@ INSERT INTO task_dep (project, parent, child)
 VALUES (1, 1, 2),
     (1, 2, 3),
     (2, 1, 2);
+
+-- Add a release
+
+INSERT INTO `release` (project, title, description, version_major, version_minor, version_patch, link, creation_date)
+VALUES (1, "Premiere version", "Ceci est la premiere version du logiciel", 1, 0, 0, "https://google.com", "2020-12-04");

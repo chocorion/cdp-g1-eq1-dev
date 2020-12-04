@@ -12,5 +12,6 @@ public class ApplicationBinder extends AbstractBinder {
         bind(SQLDODDAO.class).to(DODDAO.class);
         bind(SQLSprintDAO.class).to(SprintDAO.class);
         bind(SQLMemberDAO.class).to(MemberDAO.class);
+        bind(SQLReleaseDAO.class).to(ReleaseDAO.class);
     }
 }
