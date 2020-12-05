@@ -16,12 +16,12 @@ import { ProjectComponent } from './components/project/project.component';
 const routes: Routes = [
   { path: 'project/:projectId/backlog'      , component: BacklogComponent },
   { path: 'project/:projectId/tasks'        , component: TasksComponent },
-  { path: 'planification', component: PlanificationComponent },
+  { path: 'project/:projectId/planification', component: PlanificationComponent },
   { path: 'sprintActif'  , component: SprintActifComponent },
-  { path: 'tests'        , component: TestsComponent },
-  { path: 'releases'     , component: ReleasesComponent },
-  { path: 'documentation', component: DocumentationComponent },
-  { path: 'statistics'   , component: StatisticsComponent },
+  { path: 'project/:projectId/tests'        , component: TestsComponent },
+  { path: 'project/:projectId/releases'     , component: ReleasesComponent },
+  { path: 'project/:projectId/documentation', component: DocumentationComponent },
+  { path: 'project/:projectId/statistics'   , component: StatisticsComponent },
   { path: 'projects'      , component: ProjectComponent},
   { path: ''             , redirectTo: '/projects', pathMatch: 'full'},
   { path: '**'           , component: PageNotFoundComponent}
