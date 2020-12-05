@@ -1,0 +1,11 @@
+.container{
+    padding-left: 15%;
+    padding-top: 5%;
+}
+.container-sprint{
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #bbbbbb;
+    border-width: 2px;
+    width: 150%;
+}

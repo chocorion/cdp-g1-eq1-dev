@@ -37,6 +37,7 @@ import { TestFormComponent } from './components/sections/tests/test-form/test-fo
 import { EditTestFormComponent } from './components/sections/tests/test-item/edit-test-form/edit-test-form.component';
 import { UsCreateFormComponent } from './components/sections/backlog/us-create-form/us-create-form.component';
 import { UsEditFormComponent } from './components/sections/backlog/us-card/us-edit-form/us-edit-form.component';
+import { HowToComponent } from './components/sections/how-to/how-to.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -66,7 +67,8 @@ import { UsEditFormComponent } from './components/sections/backlog/us-card/us-ed
         TestFormComponent,
         EditTestFormComponent,
         UsCreateFormComponent,
-        UsEditFormComponent
+        UsEditFormComponent,
+        HowToComponent
     ],
     imports: [
         BrowserModule,

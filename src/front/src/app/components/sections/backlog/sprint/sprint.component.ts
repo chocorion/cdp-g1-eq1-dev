@@ -37,7 +37,7 @@ export class SprintComponent implements OnInit {
         );
 
         this.displayStartButton = false;
-        this.sprintService.getActifSprint().subscribe(sprint => {
+        this.sprintService.getActiveSprint().subscribe(sprint => {
             if (sprint === null) {
                 this.displayStartButton = true;
             }
