@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 import { BacklogComponent } from './components/sections/backlog/backlog.component';
 import { TasksComponent } from './components/sections/tasks/tasks.component';
@@ -11,6 +11,7 @@ import { DocumentationComponent } from './components/sections/documentation/docu
 import { StatisticsComponent } from './components/sections/statistics/statistics.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectComponent } from './components/project/project.component';
+import { HowToComponent } from './components/sections/how-to/how-to.component';
 
 
 const routes: Routes = [
@@ -23,12 +24,18 @@ const routes: Routes = [
   { path: 'project/:projectId/documentation', component: DocumentationComponent },
   { path: 'project/:projectId/statistics'   , component: StatisticsComponent },
   { path: 'projects'      , component: ProjectComponent},
+  { path: 'how-to'        , component: HowToComponent},
   { path: ''             , redirectTo: '/projects', pathMatch: 'full'},
   { path: '**'           , component: PageNotFoundComponent}
 ];
 
+const routerOptions: ExtraOptions = {
+  anchorScrolling: 'enabled',
+  scrollPositionRestoration: 'enabled',
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
