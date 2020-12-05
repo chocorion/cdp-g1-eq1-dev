@@ -113,8 +113,6 @@ class SprintsTest {
 
     @Test
     void testGetNoActive() throws IOException {
-        System.out.println("Sending request to projects/" + project.id + "/sprints/active");
-
         HttpResponse response = HttpUtils.get("projects/" + project.id + "/sprints/active");
         assertEquals(400, response.getStatusLine().getStatusCode());
     }
