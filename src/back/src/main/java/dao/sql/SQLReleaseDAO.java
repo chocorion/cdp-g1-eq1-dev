@@ -119,7 +119,6 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
                 if (usGet == null) {
                     throw new SQLException("Invalid us in release : Doesn't exist");
                 }
-                System.out.println(usGet);
             }
         }
         String statement = "UPDATE `release` SET title=?, description=?, version_major=?, version_minor=?, version_patch=?, link=?, creation_date=? WHERE id=? LIMIT 1";
@@ -135,7 +134,6 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
         );
 
         SQLDatabase.exec(statement, opt);
-        System.out.println(release);
 
         statement = "DELETE FROM release_us WHERE `release` = ?";
         opt = Arrays.asList(release.id);
@@ -146,7 +144,6 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
             statement = "INSERT INTO release_us (project, `release`, us) VALUES (?,?,?)";
             opt = Arrays.asList(us.projectId, release.id, us.id);
 
-            System.out.println(us);
             SQLDatabase.exec(statement, opt);
         }
     }
