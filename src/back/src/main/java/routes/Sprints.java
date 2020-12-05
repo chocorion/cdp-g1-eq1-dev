@@ -32,7 +32,6 @@ public class Sprints {
            Sprint activeSprint = sprintDAO.getActiveForProject(projectId);
 
            if (activeSprint == null) {
-               System.out.println("Active sprint not found...");
                throw new Exception("Can't find active sprint");
            }
 
@@ -86,8 +85,6 @@ public class Sprints {
             }
 
             if (active != null && !active.equals(sprint)) {
-                System.out.println("Can't set this sprint to active !");
-
                 return Response
                         .status(400)
                         .entity("Can't set this sprint to active, there is another active sprint.")

@@ -32,6 +32,7 @@ export class SprintFormComponent implements OnInit {
     onSprintSubmit(value: any): void {
         const newSprint = new Sprint(
             value.name,
+            'pending',
             this.projectService.currentProject.getId()
         );
 
