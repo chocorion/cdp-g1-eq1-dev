@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarState } from 'src/app/models/sidebar-state';
+import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
   selector: 'app-how-to',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HowToComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sidebarService: SidebarService) { }
 
   ngOnInit(): void {
+    this.sidebarService.changeState(SidebarState.disabled);
   }
 
 }

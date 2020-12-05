@@ -11,6 +11,7 @@ import { DocumentationComponent } from './components/sections/documentation/docu
 import { StatisticsComponent } from './components/sections/statistics/statistics.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectComponent } from './components/project/project.component';
+import { HowToComponent } from './components/sections/how-to/how-to.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'documentation', component: DocumentationComponent },
   { path: 'statistics'   , component: StatisticsComponent },
   { path: 'projects'      , component: ProjectComponent},
+  { path: 'how-to'        , component: HowToComponent},
   { path: ''             , redirectTo: '/projects', pathMatch: 'full'},
   { path: '**'           , component: PageNotFoundComponent}
 ];
