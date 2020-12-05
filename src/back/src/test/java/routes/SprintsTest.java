@@ -74,17 +74,41 @@ class SprintsTest {
     }
 
     @Test
-    void testGetActive() throws IOException {
+    void addActiveDirectly() throws IOException {
+        Sprint sprint = new Sprint(project.id, "sprint2", "active");
 
-        HttpUtils.postItem(
+        HttpResponse response = HttpUtils.postItem(
                 "projects/" + project.id + "/sprints/",
-                new Sprint(project.id, "sprint2", "active")
+                sprint
         );
-        HttpResponse response = HttpUtils.get("projects/" + project.id + "/sprints/active");
+
+        assertEquals(400, response.getStatusLine().getStatusCode());
+    }
+
+    @Test
+    void testGetActive() throws IOException {
+        Sprint sprint = new Sprint(project.id, "sprint2", "pending");
+        HttpResponse response = HttpUtils.postItem(
+                "projects/" + project.id + "/sprints/",
+                sprint
+        );
+        assertEquals(200, response.getStatusLine().getStatusCode());
+        Sprint result = HttpUtils.getItemFromResponse(Sprint.class, response);
+        sprint = new Sprint(result.projectId, result.name, "active", result.id);
+
+        response = HttpUtils.putItem(
+            "projects/" + project.id + "/sprints/" + sprint.id,
+            sprint
+        );
         assertEquals(200, response.getStatusLine().getStatusCode());
 
-        Sprint result = HttpUtils.getItemFromResponse(Sprint.class, response);
-        assertNotNull(result);
+        response = HttpUtils.get("projects/" + project.id + "/sprints/active");
+        assertEquals(200, response.getStatusLine().getStatusCode());
+
+
+        result = HttpUtils.getItemFromResponse(Sprint.class, response);
+        assertEquals(result.name, sprint.name);
+        assertEquals(result.state, sprint.state);
     }
 
     @Test

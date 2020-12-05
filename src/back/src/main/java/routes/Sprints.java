@@ -7,6 +7,7 @@ import domain.Sprint;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 @Path("projects/{projectId}/sprints")
 public class Sprints {
@@ -30,8 +31,10 @@ public class Sprints {
        try {
            Sprint activeSprint = sprintDAO.getActiveForProject(projectId);
 
-           if (activeSprint == null)
+           if (activeSprint == null){
+               System.out.println("Active sprint not found...");
                throw new Exception("Can't find active sprint");
+           }
 
             return Response.status(200).entity(activeSprint).build();
         } catch (Exception e) {
@@ -54,6 +57,10 @@ public class Sprints {
     @Consumes("application/json")
     @Produces("application/json")
     public Response insert(@PathParam("projectId") int projectId, Sprint sprint) {
+        if (!sprint.state.equals("pending")) {
+            return Response.status(400).entity("You can only create a sprint with state 'pending'.").build();
+        }
+
         sprint = new Sprint(projectId, sprint.name, "pending", sprint.id);
 
         try {
@@ -71,9 +78,16 @@ public class Sprints {
         sprint = new Sprint(projectId, sprint.name, sprint.state, sprintId);
 
         if (sprint.state.equals("active")) {
-            Sprint active = sprintDAO.getActiveForProject(projectId);
+            Sprint active = null;
+            try {
+                active = sprintDAO.getActiveForProject(projectId);
+            } catch (SQLException throwables) {
+                return Response.status(500).entity(throwables.getMessage()).build();
+            }
 
             if (active != null && !active.equals(sprint)) {
+                System.out.println("Can't set this sprint to active !");
+
                 return Response
                         .status(400)
                         .entity("Can't set this sprint to active, there is another active sprint.")
