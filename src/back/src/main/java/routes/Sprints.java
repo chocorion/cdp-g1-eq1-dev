@@ -31,7 +31,7 @@ public class Sprints {
        try {
            Sprint activeSprint = sprintDAO.getActiveForProject(projectId);
 
-           if (activeSprint == null){
+           if (activeSprint == null) {
                System.out.println("Active sprint not found...");
                throw new Exception("Can't find active sprint");
            }
