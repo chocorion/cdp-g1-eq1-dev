@@ -1,6 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class Release {
     public final Integer project;
@@ -10,6 +12,7 @@ public class Release {
     public final String description;
     public final String link;
     public final String creationDate;
+    public final List<UserStory> userStories;
 
     public static final Comparator<Release> COMPARATOR;
 
@@ -40,7 +43,26 @@ public class Release {
 
     // Required by Jackson
     public Release() {
-        this(null, null, null, new Version(null, null, null), null, null);
+        this(null, null, null, new Version(null, null, null), null, null, new ArrayList<UserStory>());
+    }
+
+    @SuppressWarnings("parameternumber")
+    public Release(Integer project,
+                String title,
+                String description,
+                Version version,
+                String link,
+                String creationDate,
+                List<UserStory> userStories,
+                Integer id) {
+        this.project = project;
+        this.title = title;
+        this.description = description;
+        this.version = version;
+        this.link = link;
+        this.creationDate = creationDate;
+        this.userStories = userStories;
+        this.id = id;
     }
 
     public Release(Integer project,
@@ -49,22 +71,8 @@ public class Release {
                 Version version,
                 String link,
                 String creationDate,
-                Integer id) {
-        this.project = project;
-        this.title = title;
-        this.description = description;
-        this.version = version;
-        this.link = link;
-        this.creationDate = creationDate;
-        this.id = id;
-    }
-    public Release(Integer project,
-                String title,
-                String description,
-                Version version,
-                String link,
-                String creationDate) {
-        this(project, title, description, version, link, creationDate, null);
+                List<UserStory> userStories) {
+        this(project, title, description, version, link, creationDate, userStories, null);
     }
 
     @Override
@@ -76,5 +84,19 @@ public class Release {
             return false;
 
         return COMPARATOR.compare(this, (Release) obj) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Release(id=" + id
+                + ", project=" + project
+                + ", title=" + title
+                + ", description=" + description
+                + ", versionMaj=" + version.versionMajor
+                + ", versionMin=" + version.versionMinor
+                + ", versionPatch=" + version.versionPatch
+                + ", link=" + link
+                + ", creationDate=" + creationDate
+                + ")";
     }
 }

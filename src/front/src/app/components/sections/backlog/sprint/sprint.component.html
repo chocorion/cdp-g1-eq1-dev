@@ -6,7 +6,14 @@
     [cdkDropListConnectedTo]="connectedTo"
     (cdkDropListDropped)="drop($event)"
 >
-    <h4 class="container-title ml-2 mt-2">{{sprint.getName()}}</h4>
+    <div class="row">
+        <div class="col">
+            <h4 class="container-title ml-2 mt-2">{{sprint.getName()}}</h4>
+        </div>
+        <div class="col" [attr.disabled]="!displayStartButton">
+            <button class="btn btn-primary" (click)="onStart()">Démarrer</button>
+        </div>
+    </div>
 
     <app-us-card *ngFor="let userStory of userStories" [us]="userStory" cdkDrag></app-us-card>
 </div>
