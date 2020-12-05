@@ -2,7 +2,7 @@ CREATE TABLE sprint (
     project int,
     id int,
     name TEXT,
-    state ENUM('pending', 'actif', 'archived'),
+    state ENUM('pending', 'active', 'archived'),
 
     CONSTRAINT PK_ID PRIMARY KEY (project, id),
     FOREIGN KEY (project) REFERENCES project(id) ON DELETE CASCADE

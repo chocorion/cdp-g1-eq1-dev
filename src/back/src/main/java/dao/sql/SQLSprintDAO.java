@@ -3,6 +3,7 @@ package dao.sql;
 import dao.SprintDAO;
 import domain.Sprint;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -36,16 +37,23 @@ public class SQLSprintDAO extends SQLDAO<Sprint> implements SprintDAO {
     }
 
     @Override
-    public Sprint getActifForProject(int projectId) throws Exception {
-        String statement = "SELECT * FROM sprint WHERE project=? AND status=actif";
-        List<Object> opt = Arrays.asList(projectId);
+    public Sprint getActiveForProject(int projectId) throws SQLException {
+        String statement = "SELECT * FROM sprint WHERE project=? AND state=?";
+        List<Object> opt = Arrays.asList(projectId, "active");
 
-        try {
-            // If exception is raised, it's because there is no active sprint.
-            return queryFirstObject(statement, opt);
-        } catch (Exception e) {
-            return null;
+        PreparedStatement preparedStatement = SQLDatabase.prepare(statement, opt);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        Sprint result = null;
+
+        if (resultSet.next()) {
+            result = createObjectFromResult(resultSet);
         }
+
+        resultSet.close();
+        preparedStatement.close();
+
+        return result;
     }
 
     @Override

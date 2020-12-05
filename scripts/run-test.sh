@@ -21,5 +21,5 @@ then
   exit 1
 fi
 
-cd .. && docker-compose -f docker-compose.test.yml up --abort-on-container-exit back tests
+cd .. && docker-compose -f docker-compose.test.yml up --build --force-recreate --abort-on-container-exit back tests
 docker-compose down --remove-orphans;

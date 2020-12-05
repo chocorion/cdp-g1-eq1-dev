@@ -5,7 +5,8 @@ import {ProjectService} from '../../../../services/project.service';
 import {UsService} from '../../../../services/us.service';
 import {Us} from '../../../../models/us.model';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {log} from 'util';
+import {Router} from '@angular/router';
+
 
 @Component({
     selector: 'app-us-container',
@@ -17,11 +18,13 @@ export class SprintComponent implements OnInit {
     @Input() connectedTo: string[];
 
     public userStories: Us[] = [];
+    public displayStartButton: boolean;
 
     constructor(
         private usService: UsService,
         private projectService: ProjectService,
-        private sprintService: SprintService
+        private sprintService: SprintService,
+        private router: Router
     ) {
     }
 
@@ -32,6 +35,13 @@ export class SprintComponent implements OnInit {
                 usList.forEach(us => this.userStories.push(Us.fromJSON(us)));
             }
         );
+
+        this.displayStartButton = false;
+        this.sprintService.getActiveSprint().subscribe(sprint => {
+            if (sprint === null) {
+                this.displayStartButton = true;
+            }
+        });
     }
 
     drop(event: CdkDragDrop<Us[], any>): void {
@@ -54,5 +64,12 @@ export class SprintComponent implements OnInit {
         const sprintId = sprintHtmlId.substring(6);
         us.setSprint(Number(sprintId));
         this.usService.update(this.projectService.currentProject.getId(), us).subscribe();
+    }
+
+    onStart(): void {
+        this.sprint.setState('active');
+        this.sprintService.update(this.projectService.currentProject.getId(), this.sprint).subscribe(
+            sprint => this.router.navigate(['/sprintActif'])
+        );
     }
 }

@@ -64,6 +64,25 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
                 event.previousIndex,
                 event.currentIndex);
         }
+        else if (event.container.id === 'DOING' && event.previousContainer.id === 'TODO'){
+            let task: Task;
+            task = this.tasksTodo[event.previousIndex];
+            if (task){
+                this.taskService.getDOD(task.getProjectId(), task.getId()).subscribe(
+                    result => {
+                        const t = result.filter(x => x.state === true);
+                        const dodTotal = result.length;
+                        if (dodTotal > 0){
+                            transferArrayItem(event.previousContainer.data,
+                                event.container.data,
+                                event.previousIndex, event.currentIndex);
+                            event.container.data[event.currentIndex].status = event.container.id;
+                            this.updateTaskState(event);
+                        }
+                    }
+                );
+            }
+        }
         else if (event.container.id !== 'DONE') {
             transferArrayItem(event.previousContainer.data,
                 event.container.data,

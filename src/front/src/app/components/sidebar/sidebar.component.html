@@ -1,21 +1,21 @@
 <div class="sidebar" [class.sidebar-collapsed]="collapsed" [class.disabled]="!visible">
     <ul class="list-unstyled pl-2">
         <li class="my-4">
-            <a routerLink="/project/{{projectService.currentProject ? projectService.currentProject.getId() : null}}/backlog" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/backlog" routerLinkActive="active">
                 <img src="https://i.imgur.com/dnz1iBv.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Backlog</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a routerLink="/project/{{projectService.currentProject ? projectService.currentProject.getId() : null}}/tasks" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tasks" routerLinkActive="active">
                 <img src="https://i.imgur.com/k0W5IWE.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Tâches</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a routerLink="/planification" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/planification" routerLinkActive="active">
                 <img src="https://i.imgur.com/whDsfSE.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Planification</span>
             </a>
@@ -29,28 +29,28 @@
         </li>
 
         <li class="my-4">
-            <a routerLink="/tests" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tests" routerLinkActive="active">
                 <img src="https://i.imgur.com/sOwCCf8.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Tests</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a routerLink="/releases" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/releases" routerLinkActive="active">
                 <img src="https://i.imgur.com/ja2hdEG.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Release</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a routerLink="/documentation" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/documentation" routerLinkActive="active">
                 <img src="https://i.imgur.com/tVUu53Z.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Documentation</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a routerLink="/statistics" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/statistics" routerLinkActive="active">
                 <img src="https://i.imgur.com/hm2TrBN.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Statistiques</span>
             </a>
