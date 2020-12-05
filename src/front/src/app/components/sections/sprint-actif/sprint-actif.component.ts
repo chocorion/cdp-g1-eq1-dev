@@ -18,7 +18,7 @@ export class SprintActifComponent implements OnInit {
               private projectService: ProjectService) { }
 
   ngOnInit(): void {
-    this.sprintService.getActive(this.projectService.currentProject.getId()).subscribe(
+    this.sprintService.getActiveSprint().subscribe(
       sprint => {
       this.sprint = sprint;
       this.sprintService.getUs(this.projectService.currentProject.getId(), this.sprint.getId()).subscribe(

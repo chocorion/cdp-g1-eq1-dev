@@ -24,15 +24,11 @@ export class SprintService extends GenericService<Sprint> {
         return this.http.get<Us[]>(environment.apiUrl + `projects/${projectId}/sprints/${sprintId}/us`);
     }
 
-    getActive(projectId: number): Observable<Sprint> {
-        return this.http.get<Sprint>(environment.apiUrl + `projects/${projectId}/sprints/active`);
-    }
-
     getElementFromJSON(jsonObject): Sprint {
         return Sprint.fromJSON(jsonObject);
     }
 
-    getActifSprint(): Observable<Sprint> {
+    getActiveSprint(): Observable<Sprint> {
         return new Observable<Sprint>(observer => {
             this.http.get<Sprint>(
                 environment.apiUrl + `projects/${this.projectService.currentProject.getId()}/sprints/active`
