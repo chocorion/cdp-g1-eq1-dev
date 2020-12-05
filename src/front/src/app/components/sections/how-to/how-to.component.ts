@@ -12,7 +12,6 @@ export class HowToComponent implements OnInit {
   constructor(private sidebarService: SidebarService) { }
 
   ngOnInit(): void {
-    this.sidebarService.changeState(SidebarState.disabled);
   }
 
 }
