@@ -1,4 +1,41 @@
 <div class="container">
+    <div class ="row">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary add-task-button" data-toggle="modal" data-target ="#new">Trier</button>
+        <button type="button" class="btn" (click) ="refreshTasks()">Annuler</button>
+        <!-- Modal -->
+        <div class="modal fade" id ="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog task-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Trier Les Tasks</h5>
+                        <button type="button" class="close close-task-modal" data-dismiss="modal" aria-label="Close" >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="taskFilterForm">
+                            <div>
+                                <label for="type">type</label>
+                                <select id= "type" type="text"  class="form-control" formControlName= "type" (change)="onChange($event.target.value)">
+                                    <option value="member">member</option>
+                                    <option value="sprint">sprint</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="value">value</label>
+                                <select id= "select-value"  value = 'number' class="form-control" formControlName= "value">
+                                    <option *ngFor= "let value of values" [ngValue]= "value">{{ value }}</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn send-task-button" data-dismiss="modal" (click)="onSubmitFilter(taskFilterForm.value)">Filtrer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col">
             <div class="card-header">
