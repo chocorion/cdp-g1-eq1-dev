@@ -1,1 +1,15 @@
-<p>release-item works!</p>
+<div class="container-release my-2">
+    <div class="row">
+        <div class="col" id='release'><h5>Release-{{releaseItem.getId()}}</h5></div>
+        <div class="col">Title<h5>{{releaseItem.getTitle()}}</h5></div>
+        <div class="col-6">Description:<h5>{{releaseItem.getDescription()}}</h5></div>
+        <div class="col">Version : {{this.getFullVersion()}}</div>
+        <div class="col">Link : <a href= {{releaseItem.getLink()}}>{{releaseItem.getLink()}}</a></div>
+        <div class="col" id='date'>Date de Création : {{releaseItem.getCreationDate()}}</div>
+    </div>
+    <div class= "container">
+        Us implémentées:
+        <app-us-card *ngFor="let userStory of userStories" [us]="userStory" [disableEdit]= true></app-us-card>
+    </div>
+</div>
+

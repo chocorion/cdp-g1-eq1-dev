@@ -36,4 +36,10 @@ export class Version {
     setVersionPatch(value: number): void {
         this.versionPatch = value;
     }
+
+    getFull(): string {
+        return this.versionMajor + '.' + this.versionMinor
+        + '.' + this.versionPatch;
+    }
+
 }

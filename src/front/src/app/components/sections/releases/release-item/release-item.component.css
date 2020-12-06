@@ -1,0 +1,12 @@
+.container-release{
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #bbbbbb;
+    border-width: 2px;
+}
+#release{
+    padding-left: 20px;
+}
+#date{
+    padding-left: 20px;
+}
