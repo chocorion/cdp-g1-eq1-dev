@@ -8,7 +8,7 @@ import {Us} from '../../../../models/us.model';
 })
 export class UsCardComponent implements OnInit {
     @Input() us: Us;
-
+    @Input() disableEdit = false;
     constructor() {
     }
 
