@@ -38,6 +38,7 @@ import { EditTestFormComponent } from './components/sections/tests/test-item/edi
 import { UsCreateFormComponent } from './components/sections/backlog/us-create-form/us-create-form.component';
 import { UsEditFormComponent } from './components/sections/backlog/us-card/us-edit-form/us-edit-form.component';
 import { HowToComponent } from './components/sections/how-to/how-to.component';
+import { ReleaseItemComponent } from './components/sections/releases/release-item/release-item.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -68,7 +69,8 @@ import { HowToComponent } from './components/sections/how-to/how-to.component';
         EditTestFormComponent,
         UsCreateFormComponent,
         UsEditFormComponent,
-        HowToComponent
+        HowToComponent,
+        ReleaseItemComponent
     ],
     imports: [
         BrowserModule,
