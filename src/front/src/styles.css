@@ -1,2 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+html,body{
+    background: rgb(74,112,122);
+    height: 100%;
+    width: 100%; 
+    
+}
+.wrapper{ 
+    background: rgb(74,112,122);
+    background: linear-gradient(0deg, rgba(74,112,122,1) 0%, rgba(118,151,160,1) 20%, rgba(148,176,183,1) 40%, rgba(194,200,197,1) 55%, rgba(221,221,218,1) 70%, rgba(248,248,248,1) 90%); 
+    padding-right: 15px;
+    padding-left: 15px;
+
+    min-width: 100%;
+    min-height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.presentationLogo{
+    max-height: 70%;
+    max-width: 70%;
+}
+
+.logo{
+    max-width:25%;
+    max-height: 25%;
+}
+
+.howto_link{
+    line-height: 3;
+    font-size:2vmin;
+
+}
+
+a {
+  color: #40556b;
+  }
+
+.section-title{
+    font-size: 3vmax;
+    color: #60666b;
+    margin-top: 15px;
+}
+
+.modal-header{
+    font:bold 2vmin Sans-Serif;
+    color: #293645;
+    background: #b8b193;
+}
+
+.modal-body{
+    background: #dbd7c3;
+    font: 1.5vmin Sans-Serif;
+}
+
+.form-label{
+    margin-top: 2vmin;
+}
+
+.modal-submit-button{
+    background: #6b605b;
+    color: #ffffff;
+    font-weight: bold Sans-Serif;
+    margin-top:2vmin;
+}

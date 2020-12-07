@@ -40,11 +40,13 @@ export class ProjectComponent implements OnInit {
     }
 
     onSubmitSearch(data): void {
-        this.submit = data.search;
-        this.child.notifyMe('search', this.submit);
+        if (data.search !== '') {
+            this.submit = data.search;
+            this.child.notifyMe('search', this.submit);
+        }
     }
 
-    refresh(): void{
+    refresh(): void {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.updateChild();

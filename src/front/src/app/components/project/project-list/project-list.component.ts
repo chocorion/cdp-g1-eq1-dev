@@ -34,6 +34,7 @@ export class ProjectListComponent implements OnInit {
 
     notifyMe(exec: string, value?: string): void {
         if (exec === 'search') {
+            this.projects = [];
             this.projects = this.allprojects.filter(p => p.getName().includes(value));
         }
         else if (exec === 'update') {

@@ -2,63 +2,63 @@
     <ul class="list-unstyled pl-2">
         <li class="my-4">
             <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/backlog" routerLinkActive="active">
-                <img src="https://i.imgur.com/dnz1iBv.png" width="50" height="50" alt="">
+                <img src="../../../assets/backlog.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Backlog</span>
             </a>
         </li>
 
         <li class="my-4">
             <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tasks" routerLinkActive="active">
-                <img src="https://i.imgur.com/k0W5IWE.png" width="50" height="50" alt="">
+                <img src="../../../assets/tasks.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Tâches</span>
             </a>
         </li>
 
         <li class="my-4">
             <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/planification" routerLinkActive="active">
-                <img src="https://i.imgur.com/whDsfSE.png" width="50" height="50" alt="">
+                <img src="../../../assets/plannification.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Planification</span>
             </a>
         </li>
 
         <li class="my-4">
             <a routerLink="/sprintActif" routerLinkActive="active">
-                <img src="https://i.imgur.com/4cHPv0l.png" width="50" height="50" alt="">
+                <img src="../../../assets/actif-sprint.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Sprint Actif</span>
             </a>
         </li>
 
         <li class="my-4">
             <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tests" routerLinkActive="active">
-                <img src="https://i.imgur.com/sOwCCf8.png" width="50" height="50" alt="">
+                <img src="../../../assets/tests.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Tests</span>
             </a>
         </li>
 
         <li class="my-4">
             <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/releases" routerLinkActive="active">
-                <img src="https://i.imgur.com/ja2hdEG.png" width="50" height="50" alt="">
+                <img src="../../../assets/release.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Release</span>
             </a>
         </li>
 
         <li class="my-4">
             <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/documentation" routerLinkActive="active">
-                <img src="https://i.imgur.com/tVUu53Z.png" width="50" height="50" alt="">
+                <img src="../../../assets/documentation.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Documentation</span>
             </a>
         </li>
 
         <li class="my-4">
             <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/statistics" routerLinkActive="active">
-                <img src="https://i.imgur.com/hm2TrBN.png" width="50" height="50" alt="">
+                <img src="../../../assets/statistique.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Statistiques</span>
             </a>
         </li>
 
         <li>
             <a routerLink="/projects" routerLinkActive="active">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRPT6K0J0bKGku8JN4firPRO0GXT7jSIKYf_A&usqp=CAU" width="50" height="50" alt="">
+                <img src="../../../assets/projet.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Projets</span>
             </a>
         </li>
@@ -67,5 +67,6 @@
 
 <div class="sidebar-button" [class.sidebar-button-collapsed]="collapsed" [class.disabled]="!visible">
     <button class="btn bg-light" (click)="collapse()">Menu</button>
+    <img src="../../../assets/logo.png" class="logo">
 </div>
 
