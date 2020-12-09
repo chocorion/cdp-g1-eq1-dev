@@ -1,0 +1,22 @@
+.member-title{
+    font :  2vmin Sans-Serif;
+    color : #40556b;
+    
+}
+
+.add-member-button{
+    background: #6b605b;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.add-member-button:hover{
+   background: #6b6760;
+}
+
+.modal-submit-button{
+    background: #6b605b;
+    color: #ffffff;
+    font-weight: bold Sans-Serif;
+    margin-top: 1%;
+}

@@ -1,0 +1,25 @@
+.member-name-button{
+    font : 2vmin bolder Sans-Serif;
+    color: #6b605b;
+
+}
+
+.member-name-button:hover{
+    text-decoration: underline;
+}
+
+.delete-member-button{
+    background: #b8a281;
+    color: #293645;
+    margin-left:4vmin;
+}
+.delete-member-button:hover{
+    background:#c8a571;
+}
+
+.modal-submit-button{
+    background: #6b605b;
+    color: #ffffff;
+    font-weight: bold Sans-Serif;
+    margin-top:2vmin;
+}
