@@ -63,12 +63,10 @@ export class TestsComponent implements OnInit, OnDestroy {
     }
 
     updatePercentSuccess(): void {
-        console.log('Test are ' + this.tests);
         this.successRate = this.tests.filter(x => x.getState() === 'validate').length / this.tests.length * 100;
     }
 
     updatePercentFailure(): void {
-        console.log('Test are ' + this.tests);
         this.failureRate = this.tests.filter(x => x.getState() === 'refused').length / this.tests.length * 100;
     }
 }

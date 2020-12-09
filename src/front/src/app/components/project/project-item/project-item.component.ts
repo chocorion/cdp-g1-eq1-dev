@@ -42,10 +42,7 @@ export class ProjectItemComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.taskSubscription = this.taskService.getSubject(this.currentProject.getId()).subscribe(
             result => {
-                console.log("Compute...");
-                result.forEach(e => console.log(e));
                 this.percent = (result.filter(x => x.getStatus() === 'DONE').length / result.length) * 100;
-                console.log("Result is " + this.percent);
             }
         );
 

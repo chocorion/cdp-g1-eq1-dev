@@ -67,7 +67,6 @@ export abstract class GenericService<T extends PossesId> {
             subscriber => {
                 this.httpClient.put<T>(url, item).subscribe(
                     result => {
-                        console.log('In update : ' + this.TList[projectId]);
                         result = this.getElementFromJSON(result);
                         const index = (this.TList[projectId] as T[]).findIndex(element => element.getId() === item.getId());
                         this.TList[projectId][index] = result;
