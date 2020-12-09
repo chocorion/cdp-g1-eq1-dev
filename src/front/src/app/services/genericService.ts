@@ -70,7 +70,7 @@ export abstract class GenericService<T extends PossesId> {
                         console.log('In update : ' + this.TList[projectId]);
                         result = this.getElementFromJSON(result);
                         const index = (this.TList[projectId] as T[]).findIndex(element => element.getId() === item.getId());
-                        this.TList[index] = result;
+                        this.TList[projectId][index] = result;
                         subscriber.next(result);
                         this.emit(projectId);
                     }
