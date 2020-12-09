@@ -23,3 +23,11 @@
     font-weight: bold Sans-Serif;
     margin-top:2vmin;
 }
+
+.card-header{
+    background: #fafaf8;
+}
+
+.card-body{
+    background: #fafaf8;
+}

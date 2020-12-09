@@ -9,3 +9,31 @@
     overflow-y: auto;
     max-height: 200px;
 }
+
+.card-body{
+    background: #dbd7c3;
+    font: 1.5vmin Sans-Serif;
+    border-radius: 4px;
+}
+.card-header{
+    font:bold 2vmin Sans-Serif;
+    color: #293645;
+    background: #b8b193;
+}
+.modify-task-button{
+    background: #6b685b;
+    color: #ffffff;
+    margin-left:4vmin;
+}
+.modify-task-button:hover{
+    background:#c8a571;
+}
+
+.delete-task-button{
+    background: #6b685b;
+    color: #ffffff;
+    margin-left:4vmin;
+}
+.delete-task-button:hover{
+    background:#c8a571;
+}

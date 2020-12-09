@@ -1,54 +1,3 @@
-<ul class="list-group">
-
-    <div class = "row">
-        <br>
-           <div class="col">
-            <div class="howto_link">
-                <a href="how-to#tasks">How-to</a>
-            </div>
-               <!-- Modal -->
-               <div class="modal fade" id ="newTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                   <div class="modal-dialog" role="document">
-                       <div class="modal-content">
-                           <div class="modal-header">
-                               <h5 class="modal-title" id="exampleModalLabel">Ajouter une tâche</h5>
-                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                   <span aria-hidden="true">&times;</span>
-                               </button>
-                           </div>
-                           <div class="modal-body">
-                            <form [formGroup]="form" (ngSubmit)="createTask(form.value)">
-                                <div>
-                                    <label for="title">Title</label>
-                                    <input  class="form-control" type="text" formControlName="title">
-                                </div>
-                                <div>
-                                    <label for="usId">User Story</label>
-                                    <select id= "select-usId"  type = 'number' class="form-control" formControlName= "usId">
-                                        <option value = 'null'>None</option>
-                                        <option *ngFor= "let userStory of UserStories" [ngValue]= "userStory.getId()">#{{ userStory.getId() }} - {{ userStory.getDescription() }}</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="duration">Duration</label>
-                                    <input  class="form-control" id="duration" type="text" formControlName="duration">
-                                </div>
-                                <div>
-                                    <label for="member">Assigned</label>
-                                        <select id= "select-member"  class="form-control" formControlName= "member" value="undefined">
-                                            <option value = 'undefined'></option>
-                                            <option *ngFor= "let m of members" [ngValue]= "m.getUser()">{{ m.getName() }}</option>
-                                        </select>
-                                </div>
-                                <button type="submit" class="button" >Ajouter</button>
-                             </form>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-    </div>
-    </ul>
 <div class="container">
     <div class="row">
         <div class="section-title col-10">Tasks</div>
@@ -56,6 +5,52 @@
             <a href="how-to#tasks">Documentation</a>
         </div>
     </div>
-    <app-task-container></app-task-container>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une tâche</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="form" (ngSubmit)="createTask(form.value)">
+                        <div>
+                            <label for="title">Title</label>
+                            <input class="form-control" type="text" formControlName="title">
+                        </div>
+                        <div>
+                            <label for="usId">User Story</label>
+                            <select id="select-usId" type='number' class="form-control" formControlName="usId">
+                                <option value='null'>None</option>
+                                <option *ngFor="let userStory of UserStories" [ngValue]="userStory.getId()">
+                                    #{{ userStory.getId() }} - {{ userStory.getDescription() }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="duration">Duration</label>
+                            <input class="form-control" id="duration" type="text" formControlName="duration">
+                        </div>
+                        <div>
+                            <label for="member">Assigned</label>
+                            <select id="select-member" class="form-control" formControlName="member" value="undefined">
+                                <option value='undefined'></option>
+                                <option *ngFor="let m of members" [ngValue]="m.getUser()">{{ m.getName() }}</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn modal-submit-button">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="list-group">
+        <app-task-container></app-task-container>
+
+    </ul>
 
 </div>
