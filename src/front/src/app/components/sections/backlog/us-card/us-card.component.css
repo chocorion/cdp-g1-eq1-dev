@@ -5,5 +5,26 @@
     border-color: #dddddd;
     border-width: 2px;
 
-    background-color: white;
+    background-color: #ede8d1;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.us-number{
+    font:  Sans-Serif;
+    color:#6b6760;
+    margin-top: 1%;
+}
+
+.us-title{
+    font: Sans-Serif;
+    color:#6b685b ;
+    margin-top: 1%;
+}
+
+.us-values{
+    font :  Sans-Serif;
+    color:#6b605b;
+    margin-top: 1%;
 }

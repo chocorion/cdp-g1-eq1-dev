@@ -1,6 +1,14 @@
 .us-container {
     border-radius: 20px;
     border-style: solid;
-    border-color: #bbbbbb;
+    border-color: #d6e2ee;
     border-width: 2px;
+    background: #fafaf8;
 }
+
+.container-title{
+    font: Sans-Serif;
+    color : #334456;
+    font-weight: 300;
+}
+

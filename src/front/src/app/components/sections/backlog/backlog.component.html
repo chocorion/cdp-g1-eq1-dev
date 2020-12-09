@@ -1,22 +1,23 @@
 <div class="container">
-    <h1>Backlog</h1>
-
-    <div class="howto_link">
-        <a href="how-to#backlog">How-to</a>
+    <div class="row">
+        <div class="section-title col-10">Backlog</div>
+        <div class="howto_link col-2">
+            <a href="how-to#backlog">Documentation</a>
+        </div>
     </div>
 
-    <app-us-create-form></app-us-create-form>
-    <app-sprint-form></app-sprint-form>
+    <div class="row">
+        <div class="col-10">
+            <app-us-create-form></app-us-create-form>
+        </div>
+        <div clas="col-2">
+            <app-sprint-form></app-sprint-form>
+        </div>
+    </div>
 
-    <app-us-container
-        *ngFor="let sprint of sprints"
-        [sprint]="sprint"
-        [connectedTo]="sprintConnectedTo(sprint)"
-    ></app-us-container>
+    <app-us-container *ngFor="let sprint of sprints" [sprint]="sprint" [connectedTo]="sprintConnectedTo(sprint)">
+    </app-us-container>
 
-    <app-unplanned
-        [connectedTo]="unplannedConnectedTo()"
-    >
-
+    <app-unplanned [connectedTo]="unplannedConnectedTo()">
     </app-unplanned>
 </div>

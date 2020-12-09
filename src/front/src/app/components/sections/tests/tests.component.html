@@ -1,6 +1,9 @@
 <div class="container">
-    <div class="howto_link">
-        <a href="how-to#tests">How-to</a>
+    <div class="row">
+        <div class="section-title col-10">Tests</div>
+        <div class="howto_link">
+            <a href="how-to#tests">Documentation</a>
+        </div>
     </div>
     <h1>Tests</h1>
     <h2>État :</h2>
@@ -17,3 +20,4 @@
         <app-test-item *ngFor="let test of tests" [test]="test" (stateChange)="updateTests()"></app-test-item>
     </div>
 </div>
+

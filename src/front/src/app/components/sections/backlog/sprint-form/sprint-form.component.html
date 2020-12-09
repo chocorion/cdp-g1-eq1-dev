@@ -1,31 +1,25 @@
 
 <ng-template #content let-modal>
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <h4 class="modal-title" id="modal-basic-title">Ajout d'un Sprint</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <form class="form-inline" [formGroup]="sprintForm" (ngSubmit)="onSprintSubmit(sprintForm.value)">
-        <input type="text" class="form-control" placeholder="Sprint name" formControlName="name">
-        <div class="input-group-append">
-            <button class="btn" type="submit">Ajouter</button>
-        </div>
+    <form  [formGroup]="sprintForm" (ngSubmit)="onSprintSubmit(sprintForm.value)">
+        <input type="text" class="form-control" placeholder="Nom du Sprint" formControlName="name">
+         <button class="btn modal-submit-button" type="submit" (click)="modal.close('Save click')" >Ajouter</button>
     </form>
 
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-</div>
-
 </ng-template>
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-right">
-            <button class="btn btn-primary" (click)="open(content)">Ajouter un sprint</button>
+            <button class="btn add-sprint-button" (click)="open(content)">Ajouter un sprint</button>
         </div>
     </div>
 </div>

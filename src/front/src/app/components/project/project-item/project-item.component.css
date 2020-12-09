@@ -1,5 +1,51 @@
 .projectName{
-    color: gray;
-    font: bold 2vmin Sans-Serif;
+    color: #6b605b;
+    font: bold 3vmin Sans-Serif;
     
+}
+
+.projectName:hover{
+    text-decoration: underline;
+}
+
+.projectInfo{
+    font: 2.5vmin Sans-Serif;
+    color: #60666b
+
+}
+
+.edit-button{
+    background: #8dbbeb;
+    margin-left : 2vmin;
+    margin-top:2vmin;
+
+    color :#293645;
+}
+
+.delete-button{
+    background: #b8a281;
+    color: #293645;
+    margin-left:2vmin;
+    margin-top:2vmin;
+
+}
+
+.edit-button:hover{
+    background: #72bbff;
+}
+
+.delete-button:hover{
+    background:#c8a571;
+}
+
+.project-card {
+    border-radius: 5px;
+    background: #fafaf8;
+}
+
+.modal-submit-button{
+    background: #6b605b;
+    color: #ffffff;
+    font-weight: bold Sans-Serif;
+    margin-top:2vmin;
 }

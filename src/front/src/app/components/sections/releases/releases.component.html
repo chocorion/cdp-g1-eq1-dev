@@ -1,15 +1,16 @@
-<div class='container'>
-    <div class="howto_link">
-        <a href="how-to#release">How-to</a>
+<div class="container">
+    <div class="row">
+        <div class="section-title col-10">Release</div>
+        <div class="howto_link">
+            <a href="how-to#release">Documentation</a>
+        </div>
     </div>
-    <div class='col'>
-        <div class='row'>
-            <app-release-item *ngFor="let releaseItem of releases" [releaseItem]='releaseItem'>
-            </app-release-item>
-        </div>
-        <div class="container-release my-2" *ngIf="releases.length === 0">
-            <h4>Aucune release n'a encore été ajoutée :(</h4>
-        </div>
+    <div class='row'>
+        <app-release-item *ngFor="let releaseItem of releases" [releaseItem]='releaseItem'>
+        </app-release-item>
+    </div>
+    <div class="container-release my-2" *ngIf="releases.length === 0">
+        <h4>Aucune release n'a encore été ajoutée :(</h4>
+    </div>
 
-    </div>
 </div>

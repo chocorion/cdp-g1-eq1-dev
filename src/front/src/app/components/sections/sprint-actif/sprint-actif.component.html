@@ -1,15 +1,21 @@
-<div class= "container m-4" *ngIf="sprint">
-    <div class = "container-sprint">
-        <button class="btn btn-danger float-right" (click)= "closeSprint()" >Cloturer</button>
-        <h4 class="container-title ml-2 mt-2"> {{sprint.getName()}}</h4>
-
-    <div class="howto_link">
-        <a href="how-to#active_sprint">How-to</a>
+<div class="container">
+    <div class="row">
+        <div class="section-title col-10">Sprint Actif</div>
+        <div class="howto_link">
+            <a href="how-to#active_sprint">Documentation</a>
+        </div>
     </div>
-
-    <app-us *ngFor="let userStory of userStories" [us]="userStory"></app-us>
-</div>
-
-<div class = "container m-4" *ngIf="!sprint">
-    <h4 class="container-title ml-2 mt-2"> Aucun sprint selectionné</h4>
+    <div class="row">
+        <div class= "container m-4" *ngIf="sprint">
+            <div class = "container-sprint">
+                <button class="btn btn-danger float-right" (click)= "closeSprint()" >Cloturer</button>
+                <h4 class="container-title ml-2 mt-2"> {{sprint.getName()}}</h4>
+                <app-us *ngFor="let userStory of userStories" [us]="userStory"></app-us>
+        </div>
+    </div>
+    <div class="row">
+        <div class = "container m-4" *ngIf="!sprint">
+            <h4 class="container-title ml-2 mt-2"> Aucun sprint selectionné</h4>
+        </div>
+    </div>
 </div>

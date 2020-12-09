@@ -1,11 +1,10 @@
-<div class="container my-2">
+<div class="container ">
     <div class="row">
-        <div class="col"><h5>US-{{us.getId()}}</h5></div>
-        <div class="col-6"><h5>{{us.getDescription()}}</h5></div>
-        <div class="col">Difficulté : {{us.getDifficulty()}}</div>
-        <div class="col">Priorité : {{us.getPriority()}}</div>
-
-        <app-us-edit-form [us]="us" *ngIf='!disableEdit'></app-us-edit-form>
+        <div class="col-2 us-number"><h5>US-{{us.getId()}}</h5></div>
+        <div class="col-5 us-title"><h5>{{us.getDescription()}}</h5></div>
+        <div class="col-2 us-values">Difficulté : {{us.getDifficulty()}}</div>
+        <div class="col-2 us-values">Priorité : {{us.getPriority()}}</div>
+        <div class="col-1"><app-us-edit-form [us]="us" *ngIf='!disableEdit'></app-us-edit-form></div>
     </div>
 </div>
 
