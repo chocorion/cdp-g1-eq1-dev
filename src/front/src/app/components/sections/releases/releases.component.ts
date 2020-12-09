@@ -19,11 +19,10 @@ export class ReleasesComponent implements OnInit {
     ngOnInit(): void {
         console.log('Now entering releases component');
         this.releaseService.getAllForProject(this.projectService.currentProject.getId());
-        this.releaseSubscription = this.releaseService.subject.subscribe(
+        this.releaseSubscription = this.releaseService.getSubject(this.projectService.currentProject.getId()).subscribe(
             result => {
                 this.releases = result;
                 console.log(this.releases);
-
             }
         );
     }
