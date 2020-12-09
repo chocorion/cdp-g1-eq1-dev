@@ -40,6 +40,7 @@ import { UsEditFormComponent } from './components/sections/backlog/us-card/us-ed
 import { HowToComponent } from './components/sections/how-to/how-to.component';
 import { ReleaseItemComponent } from './components/sections/releases/release-item/release-item.component';
 import { UsComponent } from './components/sections/sprint-actif/us/us.component';
+import { SimpleTaskComponent } from './components/sections/sprint-actif/us/simple-task/simple-task.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -72,7 +73,8 @@ import { UsComponent } from './components/sections/sprint-actif/us/us.component'
         UsEditFormComponent,
         HowToComponent,
         ReleaseItemComponent,
-        UsComponent
+        UsComponent,
+        SimpleTaskComponent
     ],
     imports: [
         BrowserModule,
