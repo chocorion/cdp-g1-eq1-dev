@@ -7,7 +7,7 @@
         <a href="how-to#active_sprint">How-to</a>
     </div>
 
-    <app-us-card *ngFor="let userStory of userStories" [us]="userStory" [disableEdit]= true></app-us-card>
+    <app-us *ngFor="let userStory of userStories" [us]="userStory"></app-us>
 </div>
 
 <div class = "container m-4" *ngIf="!sprint">
