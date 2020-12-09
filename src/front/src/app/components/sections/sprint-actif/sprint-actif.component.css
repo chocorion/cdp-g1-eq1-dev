@@ -1,11 +1,27 @@
-.container{
-    padding-left: 15%;
-    padding-top: 5%;
-}
 .container-sprint{
     border-radius: 20px;
     border-style: solid;
-    border-color: #bbbbbb;
+    border-color: #d6e2ee;
     border-width: 2px;
-    width: 150%;
+    background: #fafaf8;
+}
+
+
+.container-title{
+    font: Sans-Serif;
+    color : #334456;
+    font-weight: 300;
+}
+
+.close-sprint-button{
+
+    background: #b89f93;
+    margin-left : 2vmin;
+    margin-bottom: 2vmin;
+
+    color :#293645;
+}
+
+.close-sprint-button:hover{
+    background: #72bbff;
 }

@@ -126,8 +126,8 @@
                                 </form>
                             </div>
                             <p>
-                                <button type="button" class="btn btn-primary" (click)= updateModify() *ngIf = "!modify" >Modifier</button>
-                                <button type="button" class="btn btn-danger float-right" (click)= delete() data-dismiss="modal"> Delete</button>
+                                <button type="button" class="btn modify-task-button float-left" (click)= updateModify() *ngIf = "!modify" >Modifier</button>
+                                <button type="button" class="btn delete-task-button float-right" (click)= delete() data-dismiss="modal"> Supprimer</button>
                             </p>
                         </div>
                         

@@ -10,3 +10,17 @@
     color: rgb(255, 255, 255);
     background-color: #00aa09;
 }
+
+.card-body{
+    
+  font : Sans-Serif;
+  color : #60666b;
+  background: #dfd9bf;
+}
+
+.card-header{
+
+    font : Sans-Serif;
+    color : #60666b;
+    background: #c3b888;
+}
