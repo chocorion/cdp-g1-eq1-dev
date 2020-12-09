@@ -12,8 +12,8 @@
             <div class = "container-sprint">
                 <button class="btn btn-danger float-right" (click)= "closeSprint()" >Cloturer</button>
                 <h4 class="container-title ml-2 mt-2"> {{sprint.getName()}}</h4>
-            <app-us-card *ngFor="let userStory of userStories" [us]="userStory" [disableEdit]= true></app-us-card>
-        </div>
+                <app-us *ngFor="let userStory of userStories" [us]="userStory"></app-us>
+            </div>
     </div>
     <div class="row">
         <div class = "container m-4" *ngIf="!sprint">
@@ -21,3 +21,5 @@
         </div>
     </div>
 </div>
+
+
