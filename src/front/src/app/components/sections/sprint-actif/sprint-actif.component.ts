@@ -3,6 +3,7 @@ import { Sprint } from 'src/app/models/sprint.model';
 import { Us } from 'src/app/models/us.model';
 import { ProjectService } from 'src/app/services/project.service';
 import { SprintService } from 'src/app/services/sprint.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-sprint-actif',
@@ -15,7 +16,8 @@ export class SprintActifComponent implements OnInit {
     sprint: Sprint;
 
     constructor(private sprintService: SprintService,
-                private projectService: ProjectService) { }
+                private projectService: ProjectService,
+                private router: Router) { }
 
     ngOnInit(): void {
         this.sprintService.getActiveSprint().subscribe(
@@ -32,6 +34,7 @@ export class SprintActifComponent implements OnInit {
     closeSprint(): void {
         this.sprint.setState('archived');
         this.sprintService.update(this.projectService.currentProject.getId(), this.sprint).subscribe(() => { });
+        this.router.navigate(['project', this.projectService.currentProject.getId(), 'backlog'])
     }
 
 }

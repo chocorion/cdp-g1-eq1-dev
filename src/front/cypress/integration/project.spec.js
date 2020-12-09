@@ -47,7 +47,5 @@ context('Assertions', () => {
                     .find('.projectName')
             }
         ).should('not.contain.text', name);
-
-
     });
 });
