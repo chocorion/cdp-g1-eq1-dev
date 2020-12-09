@@ -1,0 +1,15 @@
+.modal-submit-button{
+    background: #6b605b;
+    color: #ffffff;
+    font-weight: bold Sans-Serif;
+    margin-top: 1%;
+}
+
+.edit-button{
+    background: #8dbbeb;
+    color :#293645;
+}
+
+.edit-button:hover{
+    background: #72bbff;
+}

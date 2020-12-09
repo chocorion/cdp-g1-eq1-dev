@@ -20,13 +20,11 @@
             <label for="difficulty">Difficultée :</label>
             <input type="number" class="form-control" id="difficulty" [(ngModel)]="usDifficulty" name="usDifficulty">
         </form>
-
+        <button type="button" class="btn modal-submit-button" (click)="modal.close('Save click')">Éditer</button>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Éditer</button>
-    </div>
+    
 
 </ng-template>
 
 
-<button class="btn-sm btn-primary" (click)="open(content)">Éditer</button>
+<button class="btn edit-button" (click)="open(content)">Éditer</button>

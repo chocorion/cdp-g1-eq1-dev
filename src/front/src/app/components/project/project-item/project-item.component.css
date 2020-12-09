@@ -42,3 +42,10 @@
     border-radius: 5px;
     background: #fafaf8;
 }
+
+.modal-submit-button{
+    background: #6b605b;
+    color: #ffffff;
+    font-weight: bold Sans-Serif;
+    margin-top:2vmin;
+}
