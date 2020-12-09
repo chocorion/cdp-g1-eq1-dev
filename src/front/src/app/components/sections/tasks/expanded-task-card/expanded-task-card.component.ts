@@ -71,7 +71,7 @@ export class ExpandedTaskCardComponent implements OnInit {
     }
 
     usIdList(): void {
-        this.usSubscription = this.usService.subject.subscribe(
+        this.usSubscription = this.usService.getSubject(this.task.getProjectId()).subscribe(
             result => {
                 this.usIds = result.map(x => x.getId());
             }

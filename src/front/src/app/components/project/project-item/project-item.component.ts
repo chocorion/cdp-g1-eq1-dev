@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { Project } from 'src/app/models/project.model';
 import { FormBuilder } from '@angular/forms';
 import { ProjectService } from 'src/app/services/project.service';
 import { Router } from '@angular/router';
 import { TaskService } from 'src/app/services/task.service';
-import { Task } from 'src/app/models/task.model';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { Task } from 'src/app/models/task.model';
     templateUrl: './project-item.component.html',
     styleUrls: ['./project-item.component.css']
 })
-export class ProjectItemComponent implements OnInit {
+export class ProjectItemComponent implements OnInit, OnDestroy {
     @Input() currentProject: Project;
     @Output() update = new EventEmitter<any>();
 
@@ -20,7 +20,7 @@ export class ProjectItemComponent implements OnInit {
     private formBuilder: FormBuilder = new FormBuilder();
 
     percent: number;
-
+    taskSubscription: Subscription;
 
     constructor(
         private projectService: ProjectService,
@@ -40,19 +40,21 @@ export class ProjectItemComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.taskService.getAllForProject(this.currentProject.getId());
-
-        this.taskService.subject.subscribe(
+        this.taskSubscription = this.taskService.getSubject(this.currentProject.getId()).subscribe(
             result => {
-                this.percent = (result.filter(x => x.status === 'DONE').length / result.length) * 100;
+                this.percent = (result.filter(x => x.getStatus() === 'DONE').length / result.length) * 100;
             }
         );
+
+        this.taskService.getAllForProject(this.currentProject.getId());
 
         this.formP.get('name').setValue(this.currentProject.getName());
         this.formP.get('description').setValue(this.currentProject.getDescription());
     }
 
-
+    ngOnDestroy(): void {
+        this.taskSubscription.unsubscribe();
+    }
 
     onSubmit(data): void {
         this.currentProject.setName(data.name);

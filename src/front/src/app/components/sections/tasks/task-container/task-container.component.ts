@@ -157,7 +157,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
             }
         );
 
-        this.tasksSubscription = this.taskService.subject.subscribe(
+        this.tasksSubscription = this.taskService.getSubject(this.projectService.currentProject.getId()).subscribe(
             result => {
                 this.tasks = result;
                 this.updateTask();
@@ -213,7 +213,7 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     }
 
     getProjectSprints(): void {
-        this.sprintService.subject.subscribe(
+        this.sprintService.getSubject(this.projectService.currentProject.getId()).subscribe(
             sprintList => {
                 this.sprints = sprintList;
             }

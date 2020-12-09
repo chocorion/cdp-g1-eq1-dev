@@ -29,7 +29,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
                 project => {
                     this.projectService.setCurrentProject(Project.fromJSON(project));
 
-                    this.subscription = this.sprintService.subject.subscribe(
+                    this.subscription = this.sprintService.getSubject(this.projectService.currentProject.getId()).subscribe(
                         sprintList => {
                             this.sprints = sprintList;
                         }

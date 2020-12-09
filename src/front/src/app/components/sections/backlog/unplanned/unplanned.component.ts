@@ -23,7 +23,7 @@ export class UnplannedComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.usSubscription = this.usService.subject.subscribe(
+        this.usSubscription = this.usService.getSubject(this.projectService.currentProject.getId()).subscribe(
             usList => {
                 this.userStories = usList.filter(us => us.getSprint() == null);
             }

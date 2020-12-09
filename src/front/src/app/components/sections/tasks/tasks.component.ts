@@ -52,7 +52,7 @@ export class TasksComponent implements OnInit {
                     this.projectService.setCurrentProject(Project.fromJSON(project));
                     this.currentProject = this.projectService.currentProject;
 
-                    this.tasksSubscription = this.taskService.subject.subscribe(
+                    this.tasksSubscription = this.taskService.getSubject(this.currentProject.getId()).subscribe(
                         result => {
                             this.tasks = result;
                             this.usIdList();
@@ -68,7 +68,6 @@ export class TasksComponent implements OnInit {
 
 
     createTask(data: any): void {
-        console.log(data);
         const todo = 'TODO';
         const task = new Task(-1, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, todo);
         this.taskService.post(this.currentProject.getId(), task).subscribe(() => { });
@@ -77,7 +76,7 @@ export class TasksComponent implements OnInit {
 
 
     usIdList(): void {
-        this.usSubscription = this.usService.subject.subscribe(
+        this.usSubscription = this.usService.getSubject(this.currentProject.getId()).subscribe(
             result => {
                 this.UserStories = result;
             }

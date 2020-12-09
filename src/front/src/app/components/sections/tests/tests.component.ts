@@ -42,7 +42,7 @@ export class TestsComponent implements OnInit, OnDestroy {
 
         this.projectService.emitCurrentProject();
 
-        this.testsSubscription = this.testService.subject.subscribe(
+        this.testsSubscription = this.testService.getSubject(this.projectService.currentProject.getId()).subscribe(
             tests => {
                 this.tests = tests;
                 this.updateTests();
