@@ -1,0 +1,15 @@
+<div class="container my-2" (click)="onClick()">
+    <div class="row">
+        <div class="col"><h5>US-{{us.getId()}}</h5></div>
+        <div class="col-6"><h5>{{us.getDescription()}}</h5></div>
+        <div class="col">Difficulté : {{us.getDifficulty()}}</div>
+        <div class="col">Priorité : {{us.getPriority()}}</div>
+    </div>
+
+    <div class="row mt-3 mb-3" [hidden]="!displayTask">
+        <div class="col-2" *ngFor="let task of tasks">
+            <app-simple-task [task]="task"></app-simple-task>
+        </div>
+    </div>
+</div>
+

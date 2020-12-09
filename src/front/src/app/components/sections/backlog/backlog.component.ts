@@ -48,10 +48,14 @@ export class BacklogComponent implements OnInit, OnDestroy {
 
     sprintConnectedTo(sprint: Sprint): string[] {
         const result = [];
+
+        if (sprint.getState() !== 'pending') {
+            return result;
+        }
         const id = sprint.getId();
 
         this.sprints.forEach(s => {
-            if (s.getId() !== id) {
+            if (s.getId() !== id && s.getState() === 'pending') {
                 result.push('sprint' + s.getId());
             }
         });
@@ -62,6 +66,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
     }
 
     unplannedConnectedTo(): string[] {
-        return [...this.sprints].map(s => 'sprint' + s.getId());
+        return [...this.sprints].filter(s => s.getState() === 'pending').map(s => 'sprint' + s.getId());
     }
 }
