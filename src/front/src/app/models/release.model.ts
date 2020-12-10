@@ -25,7 +25,7 @@ export class Release implements PossesId {
     }
 
     static fromJSON(json): Release {
-        return new Release(json.projectId, json.version, json.title, json.description, json.link,
+        return new Release(json.project, json.version, json.title, json.description, json.link,
         json.creationDate, json.userStories, json.id);
     }
 
