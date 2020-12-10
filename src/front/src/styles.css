@@ -52,6 +52,16 @@ a {
     background: #fafaf8;
 }
 
+.customized-card-title{
+    font: Sans-Serif;
+    color : #334456;
+    font-weight: 300;
+}
+
+.customized-card-values{
+    font :  Sans-Serif;
+    color:#6b605b;
+}
 
 
 /*forms*/
@@ -114,4 +124,15 @@ a {
 
 .add-button:hover{
    background: #6b6760 !important;
+}
+
+
+.common-button{
+
+    background: #b89f93 !important;
+    color :#293645;
+}
+
+.common-button:hover{
+    background: #72bbff !important;
 }
