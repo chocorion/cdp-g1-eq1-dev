@@ -28,6 +28,7 @@ export class DependencyGraphComponent implements OnInit {
                     this.sprintService.getUs(sprint.getProjectId(), sprint.getId()).subscribe(
                         us => {
                             this.extractTaskFromUs(us);
+                            console.log(this.links);
                         }
                     );
                 }
@@ -63,7 +64,7 @@ export class DependencyGraphComponent implements OnInit {
 
     private addRelation(parent: Task, child: Task): void {
         this.links.push({
-            id: `${parent.getId()}_${child.getId()}`,
+            id: `link${parent.getId()}_${child.getId()}`,
             source: parent.getId(),
             target: child.getId(),
             label: 'is parent of'
