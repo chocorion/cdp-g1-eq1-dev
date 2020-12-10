@@ -59,40 +59,40 @@ public abstract class SQLDAO<T> {
 
         PreparedStatement preparedStatement = SQLDatabase.prepare(statement, opt);
 
-        String sql = preparedStatement.toString();
-
         preparedStatement.execute();
 
         ResultSet generatedKey = preparedStatement.getGeneratedKeys();
 
-        // Try to get the generated id
         if (generatedKey.next()) {
             id = generatedKey.getInt(1);
             generatedKey.close();
             preparedStatement.close();
             return id;
         }
-
-        // If not auto-incremented, still try to get last insert id
         generatedKey.close();
         preparedStatement.close();
 
-        preparedStatement = SQLDatabase.prepare("SELECT @id");
-
-        ResultSet rs = preparedStatement.executeQuery();
-        if (rs.next()) {
-            id = rs.getInt(1);
-            rs.close();
-            preparedStatement.close();
-            return id;
-        }
-
-
-        throw new SQLException("Could not insert : " + sql);
+        // If not auto-incremented, still try to get last insert id
+        return getLastGeneratedId();
     }
 
     protected Integer getInteger(ResultSet set, String columnName) throws SQLException {
         int value = set.getInt(columnName);
         return set.wasNull() ? null : value;
+    }
+
+    protected Integer getLastGeneratedId() throws SQLException {
+
+        PreparedStatement preparedStatement = SQLDatabase.prepare("SELECT @id");
+
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            rs.close();
+            preparedStatement.close();
+            return id;
+        }
+
+        throw new SQLException("Could not get last inserted id");
     }
 }
