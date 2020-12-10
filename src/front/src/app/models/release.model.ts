@@ -1,26 +1,26 @@
-import { Version } from '@angular/core';
+import { ReleaseVersion } from './releaseversion.model';
 import {PossesId} from './possesId';
 import { Us } from './us.model';
 
 export class Release implements PossesId {
-    private projectId: number;
+    private project: number;
     private id: number;
-    private version: Version;
+    private version: ReleaseVersion;
     private title: string;
     private description: string;
     private link: string;
     private creationDate: string;
     private userStories: Us[];
 
-    constructor(projectId: number, version: Version, title: string, description: string, link: string,
+    constructor(project: number, version: ReleaseVersion, title: string, description: string, link: string,
                 creationDate: string, userStories: Us[], id?: number) {
-        this.projectId = projectId;
+        this.project = project;
         this.id = id;
         this.version = version;
         this.title = title;
         this.description = description;
         this.link = link;
-        this.creationDate = creationDate;
+        this.creationDate = !creationDate ? new Date().toISOString().slice(0, 10) : creationDate;
         this.userStories = userStories;
     }
 
@@ -30,7 +30,7 @@ export class Release implements PossesId {
     }
 
     getProjectId(): number {
-        return this.projectId;
+        return this.project;
     }
 
     getId(): number {
@@ -41,11 +41,11 @@ export class Release implements PossesId {
         this.id = value;
     }
 
-    getVersion(): Version {
+    getVersion(): ReleaseVersion {
         return this.version;
     }
 
-    setVersion(value: Version): void {
+    setVersion(value: ReleaseVersion): void {
         this.version = value;
     }
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Release } from 'src/app/models/release.model';
 import { Us } from 'src/app/models/us.model';
-import { Version } from 'src/app/models/version.model';
+import { ReleaseVersion } from 'src/app/models/releaseversion.model';
 import {ReleaseService} from '../../../../services/release.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class ReleaseItemComponent implements OnInit {
     }
 
     getFullVersion(): string{
-        const version = Version.fromJSON(this.releaseItem.getVersion());
+        const version = ReleaseVersion.fromJSON(this.releaseItem.getVersion());
         return version.getFull();
     }
 
