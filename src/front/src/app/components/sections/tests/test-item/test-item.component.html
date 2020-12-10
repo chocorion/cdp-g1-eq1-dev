@@ -12,11 +12,12 @@
             {{test.getDescription()}}
         </p>
 
-        <button class="btn btn-success" (click)="changeState('validate')">Valider</button>
-        <button class="btn btn-danger" (click)="changeState('refused')">Refuser</button>
-        <app-edit-test-form [test]="test"></app-edit-test-form>
-        <button class="btn btn-danger" (click)="onDelete()">Supprimer</button>
-
+        <div class="row">
+        <div class="col"><button class="btn valid-button" (click)="changeState('validate')">Valider</button> </div>
+        <div class="col"><button class="btn invalid-button" (click)="changeState('refused')">Refuser</button></div>
+        <div class="col"><app-edit-test-form [test]="test"></app-edit-test-form></div>
+        <div class="col"><button class="btn delete-button" (click)="onDelete()">Supprimer</button></div>
+    </div>
     </div>
 
 </div>

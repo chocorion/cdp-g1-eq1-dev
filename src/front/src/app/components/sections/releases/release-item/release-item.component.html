@@ -1,15 +1,22 @@
-<div class="container-release my-2">
+<div class="container">
     <div class="row">
-        <div class="col" id='release'><h5>Release-{{releaseItem.getId()}}</h5></div>
-        <div class="col">Title<h5>{{releaseItem.getTitle()}}</h5></div>
-        <div class="col-6">Description:<h5>{{releaseItem.getDescription()}}</h5></div>
-        <div class="col">Version : {{this.getFullVersion()}}</div>
-        <div class="col">Link : <a href= {{releaseItem.getLink()}}>{{releaseItem.getLink()}}</a></div>
-        <div class="col" id='date'>Date de Création : {{releaseItem.getCreationDate()}}</div>
+        <div class="col-3 release-number" id='release'>
+            <h3>Release-{{releaseItem.getId()}}</h3>
+        </div>
+        <div class="col-3 release-title">
+            <h3>{{releaseItem.getTitle()}}</h3>
+        </div>
+        <div class="col-6 release-description">
+            <h3>{{releaseItem.getDescription()}}</h3>
+        </div>
     </div>
-    <div class= "container">
-        Us implémentées:
-        <app-us-card *ngFor="let userStory of userStories" [us]="userStory" [disableEdit]= true></app-us-card>
+    <div class="row">
+        <div class="col-4 release-values">Version : {{this.getFullVersion()}}</div>
+        <div class="col-4 release-values"> Liens : <a href={{releaseItem.getLink()}}>{{releaseItem.getLink()}}</a></div>
+        <div class="col-4 release-values" id='date'>Date de Création : {{releaseItem.getCreationDate()}}</div>
+    </div>
+    <div class="container">
+        <div class="implemented-us-title"> Us implémentées:</div>
+        <app-us-card *ngFor="let userStory of userStories" [us]="userStory" [disableEdit]=true></app-us-card>
     </div>
 </div>
-
