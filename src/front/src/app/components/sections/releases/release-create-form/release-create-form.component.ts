@@ -18,7 +18,7 @@ export class ReleaseCreateFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private projectService: ProjectService,
     private releaseService: ReleaseService,
-    private modalService: NgbModal) { 
+    private modalService: NgbModal) {
         this.releaseForm = this.formBuilder.group({
           versionMajor: '1',
           versionMinor: '0',
@@ -36,25 +36,25 @@ export class ReleaseCreateFormComponent implements OnInit {
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
           if (result === 'Save click') {
             console.log(this.releaseForm.value);
-              const release = new Release(
-                this.projectService.currentProject.getId(),
-                new ReleaseVersion(
-                  parseInt(this.releaseForm.value.versionMajor),
-                  parseInt(this.releaseForm.value.versionMinor),
-                  parseInt(this.releaseForm.value.versionPatch)
-                ),
-                this.releaseForm.value.title,
-                this.releaseForm.value.description,
-                this.releaseForm.value.link,
-                null,
-                null,
-              );
+            const release = new Release(
+              this.projectService.currentProject.getId(),
+              new ReleaseVersion(
+                parseInt(this.releaseForm.value.versionMajor, 10),
+                parseInt(this.releaseForm.value.versionMinor, 10),
+                parseInt(this.releaseForm.value.versionPatch, 10)
+              ),
+              this.releaseForm.value.title,
+              this.releaseForm.value.description,
+              this.releaseForm.value.link,
+              null,
+              null,
+            );
 
-              console.log(release);
-              this.releaseService.post(
-                  this.projectService.currentProject.getId(),
-                  release
-              ).subscribe(next => console.log('Release added !'));
+            console.log(release);
+            this.releaseService.post(
+                this.projectService.currentProject.getId(),
+                release
+            ).subscribe(next => console.log('Release added !'));
           }
       });
   }
