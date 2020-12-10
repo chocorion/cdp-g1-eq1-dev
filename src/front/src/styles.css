@@ -63,6 +63,14 @@ a {
     color:#6b605b;
 }
 
+.customized-card-header{
+    border-radius :5px;
+    background: #334456;
+}
+
+.customized-card-body{
+    background : #6b605b;
+}
 
 /*forms*/
 
@@ -135,4 +143,11 @@ a {
 
 .common-button:hover{
     background: #72bbff !important;
+}
+
+/*random*/
+.common-title{
+    font :  2vmin Sans-Serif;
+    color : #40556b
+    
 }

@@ -1,21 +1,22 @@
 <div class="list-group-item" ng-hide="expression">
-    <div class ="card rounded" style="width: 18rem;">
-        <div class ="card-header">
-            <button type="button" class="btn member-name-button" data-toggle="modal" [attr.data-target]="'#user'+currentMember.user">
+    <div class="card rounded" style="width: 18rem;">
+        <div class="card-header customized-card-header">
+            <button type="button" class="btn member-name-button" data-toggle="modal"
+                [attr.data-target]="'#user'+currentMember.user">
                 {{currentMember.getName()}}
             </button>
-            <button type = "button" class= "btn delete-member-button float-right" (click)= "deleteMember()">Supprimer</button>
+            <button type="button" class="btn delete-button float-right" (click)="deleteMember()">Supprimer</button>
         </div>
-        <div class ="card-body">
-            <div class ="a">
+        <div class="card-body customized-card-body">
+            <div class="a">
                 <b>Role</b> : {{currentMember.getRole()}}
             </div>
-            <div class ="a">
+            <div class="a">
                 <b>Level</b> : {{currentMember.getLevel()}}
             </div>
         </div>
-        <div class="modal fade" [attr.id]="'user'+currentMember.user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+        <div class="modal fade" [attr.id]="'user'+currentMember.user" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
