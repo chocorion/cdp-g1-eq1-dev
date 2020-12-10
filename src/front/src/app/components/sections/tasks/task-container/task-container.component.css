@@ -15,7 +15,7 @@ h2{
     border: solid 1px #ccc;
     min-height: 400px;
     min-width: 200px;
-    background: #ede8d1;
+    background: #dce0e0;
     border-radius: 4px;
     overflow: hidden;
     display: block;
@@ -27,7 +27,7 @@ h2{
     color: rgba(0, 0, 0, 0.87);
     box-sizing: border-box;
     cursor: move;
-    background: #ede8d1;
+    background: #dce0e0;
     font-size: 14px;
 }
 
@@ -58,4 +58,10 @@ h2{
   
 .common-button{
     margin-bottom: 2vmin;
+    margin-top: 2vmin;
+    margin-right: 2vmin;
+}
+
+.customized-card-header{
+    color:#f5f5f5;
 }

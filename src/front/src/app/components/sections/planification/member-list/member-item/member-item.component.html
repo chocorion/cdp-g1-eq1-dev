@@ -1,15 +1,15 @@
-<div class="list-group-item" ng-hide="expression">
-    <div class="card rounded" style="width: 18rem;">
-        <div class="card-header customized-card-header">
+<div class="list-group-item">
+    <div class="customized-card rounded" style="width: 18rem;">
+        <div class="customized-card-header">
             <button type="button" class="btn member-name-button" data-toggle="modal"
                 [attr.data-target]="'#user'+currentMember.user">
                 {{currentMember.getName()}}
             </button>
             <button type="button" class="btn delete-button float-right" (click)="deleteMember()">Supprimer</button>
         </div>
-        <div class="card-body customized-card-body">
+        <div class="customized-card-body">
             <div class="a">
-                <b>Role</b> : {{currentMember.getRole()}}
+                <b>Rôle</b> : {{currentMember.getRole()}}
             </div>
             <div class="a">
                 <b>Level</b> : {{currentMember.getLevel()}}
@@ -28,13 +28,13 @@
                     <div class="modal-body">
                         <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
                             <div>
-                                <label for="role">
+                                <label class="form-label" for="role">
                                     Rôle
                                 </label>
                                 <input id="role" type="text" formControlName="role"></div>
 
                             <div>
-                                <label for="level">
+                                <label class="form-label" for="level">
                                     Niveau d'expérience
                                 </label>
                                 <input id="level" type="text" formControlName="level"></div>

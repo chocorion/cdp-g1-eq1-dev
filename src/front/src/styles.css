@@ -3,14 +3,14 @@
 
 
 html,body{
-    background: rgb(74,112,122);
+    background: rgb(45,88,103);
     height: 100%;
     width: 100%; 
     
 }
 .wrapper{ 
-    background: rgb(74,112,122);
-    background: linear-gradient(0deg, rgba(74,112,122,1) 0%, rgba(118,151,160,1) 20%, rgba(148,176,183,1) 40%, rgba(194,200,197,1) 55%, rgba(221,221,218,1) 70%, rgba(248,248,248,1) 90%); 
+    background: rgb(45,88,103);
+    background: linear-gradient(0deg, rgba(45,88,103,1) 0%, rgba(118,151,160,1) 30%, rgba(148,176,183,1) 50%, rgba(191,215,215,1) 70%, rgba(240,243,242,1) 100%);
     padding-right: 15px;
     padding-left: 15px;
 
@@ -47,44 +47,46 @@ a {
 
 /*card*/
 .customized-card{
-    border-radius: 5px;
-    background: #fafaf8;
-    box-shadow: 0 0 10px;
-    box-shadow: #293645;
+    background: #f5f5f5;
+    border-radius: 4px;
+    padding-bottom: 1vmin;
 }
 
 .customized-card-title{
     font: Sans-Serif;
-    color : #ffffff;
+    color : #2d5867;
     font-weight: 300;
+    text-align: center;
 }
 
 .customized-card-values{
-    font :  Sans-Serif;
-    color:#ffffff;
+    font : Sans-Serif;
+    color: #ddebee;
+    text-align: left !important;
 }
 
 .customized-card-header{
     border-radius :5px;
-    background: #334456;
+    background: #6f8a8f;
+
 }
 
 .customized-card-body{
-    background : #6b605b;
+    background : #f5f5f5;
 }
 
 /*forms*/
 
+
 .modal-header{
-    font:bold 2vmin Sans-Serif;
+    font:bolder 2.5vmin Sans-Serif;
     color: #293645;
-    background: #b8b193;
+    background: #93a7ab;
 }
 
 .modal-body{
-    background: #dbd7c3;
-    font: 1.5vmin Sans-Serif;
-    border-radius: 4px;
+    background: #e6eae9;
+    font: 2vmin Sans-Serif;
 }
 
 .form-label{
@@ -92,10 +94,14 @@ a {
 }
 
 .modal-submit-button{
-    background: #6b605b !important;
-    color: #ffffff;
+    background: #6b8393 !important;
+    color: #ffffff !important;
     font-weight: bold Sans-Serif;
     margin-top:2vmin;
+}
+
+.modal-submit-button:hover{
+    background: #4c8c9c !important;
 }
 
 .modal-footer{
@@ -107,39 +113,39 @@ a {
 /*buttons*/
 
 .edit-button{
-    background: #8dbbeb !important;
-    color :#293645;
+    background: #94badd !important;
+    color :#394a45 !important ;
 }
 
 .delete-button{
-    background: #b8a281 !important;
-    color: #293645;
+    background: #7697a0 !important;
+    color: #394a45 !important;
 
 }
 
 .edit-button:hover{
-    background: #72bbff !important;
+    background:  #72baff  !important;
 }
 
 .delete-button:hover{
-    background:#c8a571 !important;
+    background:#8bb6c0 !important;
 }
 
 .add-button{
-    background: #6b605b !important;
-    color: #ffffff;
-    font-weight: bold;
+    background: #4c8c9c !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
 }
 
 .add-button:hover{
-   background: #6b6760 !important;
+   background: #68a8c5 !important;
 }
 
 
 .common-button{
 
-    background: #b89f93 !important;
-    color :#293645;
+    background: #59a9be !important;
+    color :#2d5867 !important;
 }
 
 .common-button:hover{

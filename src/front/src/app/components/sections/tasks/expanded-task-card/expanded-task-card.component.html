@@ -18,9 +18,9 @@
                             <div *ngIf="!modify">
                                 <p *ngIf="task.getUsId()">User Story: #{{task.getUsId()}}</p>
                                 <p *ngIf="!task.getUsId()">User Story: None</p>
-                                <p>Duration: {{task.getDuration()}}</p>
+                                <p>Estimation (en h.h): {{task.getDuration()}}</p>
                                 <p>Status: {{task.getStatus()}}</p>
-                                <p>Depends on:</p>
+                                <p>Dependant de:</p>
                                 <div class='over'>
                                     <div class="pstate" *ngFor="let t of parentDependency">
                                         <button mat-stroked-button
@@ -31,7 +31,7 @@
                                 </div>
                                 <p>
                                     <form-field appearance="fill">
-                                        <label>Add dependency</label>
+                                        <label class="form-label">Ajouter une dépendance</label>
                                         <select [(ngModel)]="selectedParentAdd" name="selectedParentAdd">
                                             <option value="undefined">
                                             </option>
@@ -45,7 +45,7 @@
                                         (click)="addParent()">+</button>
                                 </p>
                                 <br>
-                                <p>Dependant tasks:</p>
+                                <p>Tasks dépendantes:</p>
                                 <div class='over'>
                                     <div class="cstate" *ngFor="let t of childrenDependency">
                                         <button mat-stroked-button
@@ -56,7 +56,7 @@
                                 </div>
                                 <p>
                                     <form-field appearance="fill">
-                                        <label>Add dependant</label>
+                                        <label class="form-label">Ajouter une dépendance</label>
                                         <select [(ngModel)]="selectedChildAdd" name="selectedChildAdd">
                                             <option value="undefined">
                                             </option>
@@ -69,9 +69,9 @@
                                         class="mat-focus-indicator mat-stroked-button mat-button-base mat-primary common-button"
                                         (click)="addChild()">+</button>
                                 </p>
-                                <p *ngIf="task.getUsId()">Assigned: {{this.getMemberName()}}</p>
-                                <p *ngIf="!task.getUsId()">Assigned: No one</p>
-                                <div class="customized-card-header"> Definiton of Done</div>
+                                <p *ngIf="task.getUsId()">Membre: {{this.getMemberName()}}</p>
+                                <p *ngIf="!task.getUsId()">Membre: personne</p>
+                                <div class="customized-card-header "> Definiton of Done</div>
                                 <div class="over">
                                     <div class="dodstate" *ngFor="let dod of dods">
                                         <div class="customized-card card">
@@ -94,11 +94,11 @@
                             <div class="modify" *ngIf="modify">
                                 <form [formGroup]="form">
                                     <div>
-                                        <label for="title">Title</label>
+                                        <label class="form-label" for="title">Titre</label>
                                         <input class="form-control" type="text" formControlName="title">
                                     </div>
                                     <div>
-                                        <label for="usId">User Story</label>
+                                        <label class="form-label" for="usId">User Story</label>
                                         <select id="select-usId" type='number' class="form-control"
                                             formControlName="usId">
                                             <option value='null'>None</option>
@@ -106,12 +106,12 @@
                                         </select>
                                     </div>
                                     <div>
-                                        <label for="duration">Duration</label>
+                                        <label class="form-label" for="duration">Estimation (en h.h)</label>
                                         <input class="form-control" id="duration" type="text"
                                             formControlName="duration">
                                     </div>
                                     <div>
-                                        <label for="status">Status</label>
+                                        <label class="form-label" for="status">Status</label>
                                         <select id="status" type="text" class="form-control" formControlName="status">
                                             <option value="TODO">TODO</option>
                                             <option value="DOING">DOING</option>
@@ -119,14 +119,14 @@
                                         </select>
                                     </div>
                                     <div>
-                                        <label for="member">Assigned</label>
+                                        <label class="form-label" for="member">Membre</label>
                                         <select id="select-member" class="form-control" formControlName="member">
                                             <option *ngFor="let m of projectMembers" [ngValue]="m.getUser()">
                                                 {{ m.getName() }}</option>
                                         </select>
                                     </div>
 
-                                    <button type="submit" class="button" (click)=onSubmit(form.value)
+                                    <button type="submit" class="btn modal-submit-button" (click)=onSubmit(form.value)
                                         data-dismiss="modal">Ajouter</button>
 
                                 </form>

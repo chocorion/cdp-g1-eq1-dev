@@ -1,7 +1,7 @@
 <div class="row">
     <!-- Button trigger modal -->
-    <button type="button" class="btn filter-button" data-toggle="modal" data-target="#new">Filtrer les tâches</button>
-    <button type="button" class="btn cancel-button" (click)="refreshTasks()">Annuler Filtre</button>
+    <button type="button" class="btn common-button" data-toggle="modal" data-target="#new">Filtrer les tâches</button>
+    <button type="button" class="btn common-button" (click)="refreshTasks()">Annuler Filtre</button>
     <!-- Modal -->
     <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog task-modal" role="document">
@@ -15,7 +15,7 @@
                 <div class="modal-body">
                     <form [formGroup]="taskFilterForm">
                         <div>
-                            <label for="type">Type de Filtre</label>
+                            <label class="form-label" for="type">Type de Filtre</label>
                             <select id="type" type="text" class="form-control" formControlName="type"
                                 (change)="onChange($event.target.value)">
                                 <option value="member">Membre</option>
@@ -23,7 +23,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="value"> Choix</label>
+                            <label class="form-label" for="value"> Choix</label>
                             <select id="select-value" value='number' class="form-control" formControlName="value">
                                 <option *ngFor="let value of values" [ngValue]="value">{{ value }}</option>
                             </select>
@@ -39,7 +39,7 @@
 </div>
 <div class="row">
     <div class="col">
-        <div class="card-header">
+        <div class="customized-card-header">
             <h2>Todo
                 <button type="button" id='newbuttontask' class="btn add-button float-right" data-toggle="modal"
                     data-target="#newTask">+</button>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="col">
-        <div class="card-header">
+        <div class="customized-card-header">
             <h2>Doing</h2>
         </div>
         <div class="dropzone" cdkDropList id="DOING" #DOING="cdkDropList" [cdkDropListData]="tasksDoing"
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="col ">
-        <div class="card-header">
+        <div class="customized-card-header">
             <h2>Done</h2>
         </div>
         <div class="dropzone" cdkDropList id="DONE" #DONE="cdkDropList" [cdkDropListData]="tasksDone"

@@ -26,6 +26,7 @@ export class TasksComponent implements OnInit {
     members = [];
     usSubscription: Subscription;
     private formBuilder: FormBuilder = new FormBuilder();
+    estimateValue: number;
 
     constructor(
         private projectService: ProjectService,
@@ -57,6 +58,7 @@ export class TasksComponent implements OnInit {
                             this.tasks = result;
                             this.usIdList();
                             this.memberList();
+                            this.getEstimateValue();
                         }
                     );
 
@@ -69,8 +71,10 @@ export class TasksComponent implements OnInit {
 
     createTask(data: any): void {
         const todo = 'TODO';
-        const task = new Task(-1, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, todo);
-        this.taskService.post(this.currentProject.getId(), task).subscribe(() => { });
+        if (!Number.isNaN(parseInt(data.duration))) {
+            const task = new Task(-1, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, todo);
+            this.taskService.post(this.currentProject.getId(), task).subscribe(() => { });
+        }
 
     }
 
@@ -90,6 +94,11 @@ export class TasksComponent implements OnInit {
                 this.members = result.map(x => Member.fromJSON(x));
             }
         );
+    }
+
+    getEstimateValue(): void {
+        this.estimateValue = 0;
+        this.tasks.forEach(tasks => this.estimateValue = this.estimateValue + parseInt(tasks.getDuration()));
     }
 
 }

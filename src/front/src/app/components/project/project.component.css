@@ -1,19 +1,19 @@
 .search-button{
-    color: #60666b;
+    color: #2d5867;
     font: bold 2.5vmin;
 }
 
 .search-button:hover{
-    border-color: #60666b;
+    border-color: #2d5867;
 }
 
 .cancel-search-button{
-    color:#60666b;
+    color:#2d5867;
     font: bold 2.5vmin;
 }
 
 .cancel-search-button:hover{
-    border-color:#60666b
+    border-color:#2d5867
 }
 
 .search-input{

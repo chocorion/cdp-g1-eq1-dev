@@ -6,6 +6,10 @@
         </div>
     </div>
 
+    <div class="row common-title">
+        Temps estimé de réalisation des tâches : {{this.estimateValue}} h.h
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="newTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -18,13 +22,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form [formGroup]="form" (ngSubmit)="createTask(form.value)">
+                    <form [formGroup]="form">
                         <div>
-                            <label for="title">Title</label>
+                            <label class="form-label" for="title">Titre</label>
                             <input class="form-control" type="text" formControlName="title">
                         </div>
                         <div>
-                            <label for="usId">User Story</label>
+                            <label class="form-label" for="usId">User Story</label>
                             <select id="select-usId" type='number' class="form-control" formControlName="usId">
                                 <option value='null'>None</option>
                                 <option *ngFor="let userStory of UserStories" [ngValue]="userStory.getId()">
@@ -32,17 +36,18 @@
                             </select>
                         </div>
                         <div>
-                            <label for="duration">Duration</label>
+                            <label class="form-label" for="duration">Estimation (en h.h) </label>
                             <input class="form-control" id="duration" type="text" formControlName="duration">
                         </div>
                         <div>
-                            <label for="member">Assigned</label>
+                            <label class="form-label" for="member">Membre</label>
                             <select id="select-member" class="form-control" formControlName="member" value="undefined">
                                 <option value='undefined'></option>
                                 <option *ngFor="let m of members" [ngValue]="m.getUser()">{{ m.getName() }}</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn modal-submit-button">Ajouter</button>
+                        <button type="submit" class="btn modal-submit-button " data-dismiss="modal"
+                            (click)="createTask(form.value)">Ajouter</button>
                     </form>
                 </div>
             </div>

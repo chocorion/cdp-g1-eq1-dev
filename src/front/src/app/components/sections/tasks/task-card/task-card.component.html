@@ -1,4 +1,4 @@
-<div class="card customized-card m-4" *ngIf="task">
+<div class="card m-4" *ngIf="task">
     <div class="customized-card-header" data-toggle="modal" [attr.data-target]="'#id'+task.getId()" (click)="expand()">
         <h5 class="customized-card-title">#{{task.getId()}} {{task.getTitle()}}
         </h5>

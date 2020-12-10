@@ -11,3 +11,16 @@
     background-color: #31b637;
 }
 
+.customized-card-values{
+    color:#2d5867;
+    text-align: center;
+}
+
+.customized-card-body{
+    padding-right: 2%;
+    padding-bottom: 2%;
+}
+
+.customized-card-title{
+    color:#f5f5f5;
+}

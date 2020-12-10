@@ -1,5 +1,5 @@
 .project-name-button{
-    color: #6b605b;
+    color: #2d5867;
     font: bold 3vmin Sans-Serif;
 }
 
@@ -9,7 +9,7 @@
 
 .project-info{
     font: 2.5vmin Sans-Serif;
-    color: #60666b
+    color: #8a99a2
 }
 
 .edit-button{
@@ -20,4 +20,10 @@
 .delete-button{
     margin-left:2vmin;
     margin-top:2vmin;
+}
+
+.customized-card{
+    box-shadow: #2d5867;
+    box-shadow: 0 0 10px;
+
 }

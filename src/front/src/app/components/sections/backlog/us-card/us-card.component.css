@@ -1,9 +1,13 @@
 .customized-card {
     margin-top: 1%;
     margin-bottom: 1%;
-    background:#9097cc;
+    background:#6f8a8f;
+    border-radius: 10px;
+    padding-bottom: 0;
 }
 
 .customized-card-values{
     margin-top: 1%;
+    color: #ffffff;
 }
+

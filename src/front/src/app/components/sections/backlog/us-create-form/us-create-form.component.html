@@ -7,20 +7,20 @@
     </div>
     <div class="modal-body">
         <form class="form" [formGroup]="usForm">
-            <label for="description">Description :</label>
+            <label class="form-label" for="description">Description :</label>
             <input type="text" class="form-control" formControlName="description" id="description">
 
-            <label for="priority">Prioritée :</label>
+            <label class="form-label" for="priority">Prioritée :</label>
             <select class="form-control placeholder" formControlName="priority" id="priority">
                 <option selected>Low</option>
                 <option>Medium</option>
                 <option>High</option>
             </select>
 
-            <label for="difficulty">Difficultée :</label>
+            <label class="form-label" for="difficulty">Difficultée :</label>
             <input type="number" class="form-control" placeholder="0" formControlName="difficulty" id="difficulty">
         </form>
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ajouter</button>
+        <button type="button" class="btn modal-submit-button" (click)="modal.close('Save click')">Ajouter</button>
     </div>
 
 </ng-template>

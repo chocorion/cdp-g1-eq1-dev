@@ -7,17 +7,17 @@
     </div>
     <div class="modal-body">
         <form class="form">
-            <label for="description">Description :</label>
+            <label class="form-label" for="description">Description :</label>
             <input type="text" class="form-control" id="description" [(ngModel)]="usDescription" name="usDescription">
 
-            <label for="priority">Prioritée :</label>
+            <label class="form-label" for="priority">Prioritée :</label>
             <select class="form-control placeholder" id="priority" [(ngModel)]="usPriority" name="usPriority">
                 <option>Low</option>
                 <option>Medium</option>
                 <option>High</option>
             </select>
 
-            <label for="difficulty">Difficultée :</label>
+            <label class="form-label" for="difficulty">Difficultée :</label>
             <input type="number" class="form-control" id="difficulty" [(ngModel)]="usDifficulty" name="usDifficulty">
         </form>
         <button type="button" class="btn modal-submit-button" (click)="modal.close('Save click')">Éditer</button>
@@ -25,6 +25,5 @@
 
 
 </ng-template>
-
 
 <button class="btn edit-button" (click)="open(content)">Éditer</button>
