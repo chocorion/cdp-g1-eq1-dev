@@ -56,7 +56,7 @@ export class DependencyGraphComponent implements OnInit {
         if (index === -1) {
             this.nodes.push({
                 id: task.getId(),
-                label: task.getTitle()
+                label: task.getId()
             });
         }
     }
