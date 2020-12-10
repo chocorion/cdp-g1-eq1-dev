@@ -34,7 +34,7 @@ export class SprintActifComponent implements OnInit {
     closeSprint(): void {
         this.sprint.setState('archived');
         this.sprintService.update(this.projectService.currentProject.getId(), this.sprint).subscribe(() => { });
-        this.router.navigate(['project', this.projectService.currentProject.getId(), 'backlog'])
+        this.router.navigate(['project', this.projectService.currentProject.getId(), 'backlog']);
     }
 
 }
