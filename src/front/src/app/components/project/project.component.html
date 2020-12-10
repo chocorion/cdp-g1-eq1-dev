@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-10">
             <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch(searchForm.value)">
-                <input class="search_input" id="search" type="text" formControlName="search" placeholder="Mots Clés"
+                <input class="search-input" id="search" type="text" formControlName="search" placeholder="Mots Clés"
                     required>
                 <button type="submit" class="btn search-button">Rechercher</button>
                 <button class="btn cancel-search-button" type="button" (click)="updateChild()">Annuler la
@@ -22,7 +22,7 @@
         </div>
         <div class="col">
             <!-- Button trigger modal -->
-            <button type="button" class="btn add-project-button" data-toggle="modal" data-target="#new">Nouveau
+            <button type="button" class="btn add-button" data-toggle="modal" data-target="#new">Nouveau
                 Projet</button>
             <!-- Modal -->
             <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

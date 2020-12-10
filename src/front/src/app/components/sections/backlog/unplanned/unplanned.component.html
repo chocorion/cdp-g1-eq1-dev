@@ -1,12 +1,6 @@
-<div
-    class="container us-container my-4"
-    cdkDropList
-    id='unplanned-container'
-    [cdkDropListData]="userStories"
-    [cdkDropListConnectedTo]="connectedTo"
-    (cdkDropListDropped)="drop($event)"
->
-    <h4 class="container-title ml-2 mt-2">User Stories non plannifiées</h4>
+<div class="container customized-card my-4" cdkDropList id='unplanned-container' [cdkDropListData]="userStories"
+    [cdkDropListConnectedTo]="connectedTo" (cdkDropListDropped)="drop($event)">
+    <h4 class="customized-card-title ml-2 mt-2">User Stories non plannifiées</h4>
 
     <app-us-card *ngFor="let userStory of userStories" [us]="userStory" cdkDrag></app-us-card>
 </div>
