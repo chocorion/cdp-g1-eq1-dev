@@ -43,6 +43,7 @@ public class Releases {
         try {
             built = releaseDAO.insert(release);
         } catch (Exception exception) {
+            exception.printStackTrace();
             return Response
                     .status(Response.Status.CONFLICT)
                     .entity(exception.getMessage())

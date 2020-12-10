@@ -1,4 +1,4 @@
-export class Version {
+export class ReleaseVersion {
     private versionMajor: number;
     private versionMinor: number;
     private versionPatch: number;
@@ -9,8 +9,8 @@ export class Version {
         this.versionPatch = versionPatch;
     }
 
-    static fromJSON(json): Version {
-        return new Version(json.versionMajor, json.versionMinor, json.versionPatch);
+    static fromJSON(json): ReleaseVersion {
+        return new ReleaseVersion(json.versionMajor, json.versionMinor, json.versionPatch);
     }
 
     getVersionMajor(): number {

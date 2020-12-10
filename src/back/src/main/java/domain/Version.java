@@ -50,4 +50,9 @@ public class Version implements Comparable<Version> {
     public int compareTo(Version arg0) {
         return COMPARATOR.compare(this, arg0);
     }
+
+    @Override
+    public String toString() {
+        return versionMajor + "." + versionMinor + "." + versionPatch;
+    }
 }
