@@ -21,7 +21,7 @@ context('Assertions', () => {
         cy.wait(500);
         cy.get('#description').type(description);
         cy.wait(1000);
-        cy.get('.send-project-button').click();
+        cy.get('.modal-submit-button').first().click();
         cy.wait(1000);
         cy.get('.project-modal').should('not.be.visible');
 
@@ -40,12 +40,12 @@ context('Assertions', () => {
         let lastProject = cy.get('app-project-item').last();
         lastProject.find('.projectName').invoke('text').then(
             name => {
-                cy.get('app-project-item').last().find('.btn-danger').click().wait(1000);
+                cy.get('app-project-item').last().find('.delete-button').click().wait(1000);
 
                 cy.get('app-project-item')
                     .last()
-                    .find('.projectName')
+                    .find('.projectName').wait(500).should('not.contain.text', name);
             }
-        ).should('not.contain.text', name);
+        );
     });
 });
