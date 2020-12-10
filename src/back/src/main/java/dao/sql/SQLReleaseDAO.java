@@ -57,16 +57,20 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
         if (release.id != null)
             throw new SQLException("This release already has an id, use update !");
 
-        for (UserStory us : release.userStories) {
-            if (us.projectId != release.project) {
-                throw new SQLException("Invalid us in release : Different project");
-            }
-            if (us.id == null) {
-                throw new SQLException("Invalid us in release : No ID");
-            } else {
-                UserStory usGet = new SQLUserStoryDAO().getById(us.projectId, us.id);
-                if (usGet == null) {
-                    throw new SQLException("Invalid us in release : Doesn't exist");
+        checkLatest(release);
+
+        if (release.userStories != null) {
+            for (UserStory us : release.userStories) {
+                if (us.projectId != release.project) {
+                    throw new SQLException("Invalid us in release : Different project");
+                }
+                if (us.id == null) {
+                    throw new SQLException("Invalid us in release : No ID");
+                } else {
+                    UserStory usGet = new SQLUserStoryDAO().getById(us.projectId, us.id);
+                    if (usGet == null) {
+                        throw new SQLException("Invalid us in release : Doesn't exist");
+                    }
                 }
             }
         }
@@ -85,11 +89,13 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
 
         int id = doInsert(statement, opt);
 
-        for (UserStory us : release.userStories) {
-            statement = "INSERT INTO release_us (project, `release`, us) VALUES (?,?,?)";
-            opt = Arrays.asList(us.projectId, id, us.id);
+        if (release.userStories != null) {
+            for (UserStory us : release.userStories) {
+                statement = "INSERT INTO release_us (project, `release`, us) VALUES (?,?,?)";
+                opt = Arrays.asList(us.projectId, id, us.id);
 
-            SQLDatabase.exec(statement, opt);
+                SQLDatabase.exec(statement, opt);
+            }
         }
 
         return new Release(
@@ -108,6 +114,9 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
         if (release.id == null) {
             throw new SQLException("This release doesn't have an id, use insert !");
         }
+
+        checkLatest(release);
+
         for (UserStory us : release.userStories) {
             if (us.projectId != release.project) {
                 throw new SQLException("Invalid us in release : Different project");
@@ -149,6 +158,14 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
     }
 
     @Override
+    public Release getProjectLatestRelease(int projectId) throws SQLException {
+        String statement = "SELECT * FROM `release` WHERE project=? ORDER BY version_major DESC, version_minor DESC, version_patch DESC LIMIT 1";
+        List<Object> opt = Arrays.asList(projectId);
+
+        return queryFirstObject(statement, opt);
+    }
+
+    @Override
     public void delete(Release release) throws SQLException {
         if (release.id == null) {
             throw new SQLException("This release doesn't have an id ! Cannot delete");
@@ -158,5 +175,20 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
         List<Object> opt = Arrays.asList(release.id);
 
         SQLDatabase.exec(statement, opt);
+    }
+
+    protected void checkLatest(Release release) throws SQLException {
+        Release latest = null;
+        try {
+            latest = getProjectLatestRelease(release.project);
+        } catch (SQLException exception) {
+            return;
+        }
+
+        int cc = release.version.compareTo(latest.version);
+
+        if (latest != null && cc <= 0) {
+            throw new SQLException("The release's version must be greater than the latest one, " + release.version + " < " + latest.version);
+        }
     }
 }

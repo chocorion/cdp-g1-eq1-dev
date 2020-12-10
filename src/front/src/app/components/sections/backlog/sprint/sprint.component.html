@@ -1,17 +1,12 @@
-<div
-    class="container us-container my-4"
-    cdkDropList
-    id="{{'sprint' + sprint.getId()}}"
-    [cdkDropListData]="userStories"
-    [cdkDropListConnectedTo]="connectedTo"
-    (cdkDropListDropped)="drop($event)"
->
+<div class="container customized-card my-4" cdkDropList id="{{'sprint' + sprint.getId()}}"
+    [cdkDropListData]="userStories" [cdkDropListConnectedTo]="connectedTo" (cdkDropListDropped)="drop($event)">
     <div class="row">
         <div class="col">
-            <h4 class="container-title ml-2 mt-2">{{sprint.getName()}}</h4>
+            <h4 class="customized-card-title ml-2 mt-2">{{sprint.getName()}}</h4>
         </div>
         <div class="col">
-            <button class="btn start-sprint-button float-right mt-2" (click)="onStart()" [disabled]="!displayStartButton">Démarrer</button>
+            <button class="btn common-button float-right mt-2" (click)="onStart()"
+                [disabled]="!displayStartButton">Démarrer</button>
         </div>
     </div>
 

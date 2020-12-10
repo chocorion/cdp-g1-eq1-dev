@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-10">
-        <div class="member-title">Liste des membres</div>
+        <div class="common-title">Liste des membres</div>
     </div>
     <div class="col-2">
         <!-- Button trigger modal -->
-        <button type="button" class="btn add-member-button" data-toggle="modal" data-target="#new">Nouveau</button>
+        <button type="button" class="btn add-button" data-toggle="modal" data-target="#new">Nouveau</button>
         <!-- Modal -->
         <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -17,7 +17,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form [formGroup]="form" >
+                        <form [formGroup]="form">
                             <div>
                                 <label for="name">Nom</label>
                                 <input class="form-control" id="name" type="text" formControlName="name">
@@ -32,7 +32,8 @@
                                 <input class="form-control" id="level" type="text" formControlName="level">
                             </div>
 
-                            <button type="submit" class="btn modal-submit-button" data-dismiss="modal" (click)="onSubmit(form.value)">Ajouter</button>
+                            <button type="submit" class="btn modal-submit-button" data-dismiss="modal"
+                                (click)="onSubmit(form.value)">Ajouter</button>
 
                         </form>
                     </div>

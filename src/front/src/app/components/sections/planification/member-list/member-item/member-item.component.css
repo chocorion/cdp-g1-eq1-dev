@@ -8,26 +8,6 @@
     text-decoration: underline;
 }
 
-.delete-member-button{
-    background: #b8a281;
-    color: #293645;
+.delete-button{
     margin-left:4vmin;
-}
-.delete-member-button:hover{
-    background:#c8a571;
-}
-
-.modal-submit-button{
-    background: #6b605b;
-    color: #ffffff;
-    font-weight: bold Sans-Serif;
-    margin-top:2vmin;
-}
-
-.card-header{
-    background: #fafaf8;
-}
-
-.card-body{
-    background: #fafaf8;
 }

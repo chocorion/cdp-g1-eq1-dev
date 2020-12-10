@@ -12,4 +12,5 @@ public interface ReleaseDAO {
     Release insert(Release release) throws Exception;
     void update(Release release) throws Exception;
     void delete(Release release) throws Exception;
+    Release getProjectLatestRelease(int projectId) throws Exception;
 }

@@ -5,9 +5,7 @@
             <a href="how-to#tests">Documentation</a>
         </div>
     </div>
-    <h1>Tests</h1>
-    <h2>État :</h2>
-
+    <div class="test-state">Avancée des tests :</div>
     <div class="progress">
         <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': successRate+'%'}" [attr.aria-valuenow]="successRate" aria-valuemin="0" aria-valuemax="100"></div>
         <div class="progress-bar bg-light" role="progressbar" [ngStyle]="{'width': (100 - failureRate - successRate)+'%'}" [attr.aria-valuenow]="successRate" aria-valuemin="0" aria-valuemax="100"></div>

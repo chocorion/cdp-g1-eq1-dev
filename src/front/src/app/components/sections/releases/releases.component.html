@@ -5,10 +5,11 @@
             <a href="how-to#release">Documentation</a>
         </div>
     </div>
-    <div class='row'>
+    <div class="col-10">
+        <app-release-create-form></app-release-create-form>
+    </div>
         <app-release-item *ngFor="let releaseItem of releases" [releaseItem]='releaseItem'>
         </app-release-item>
-    </div>
     <div class="container-release my-2" *ngIf="releases.length === 0">
         <h4>Aucune release n'a encore été ajoutée :(</h4>
     </div>
