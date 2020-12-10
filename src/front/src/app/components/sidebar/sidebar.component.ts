@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SidebarService} from '../../services/sidebar.service';
 import {SidebarState} from '../../models/sidebar-state';
 import {ProjectService} from 'src/app/services/project.service';
-import { Project } from 'src/app/models/project.model';
+
 
 @Component({
     selector: 'app-sidebar',

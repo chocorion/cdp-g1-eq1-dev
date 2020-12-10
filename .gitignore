@@ -8,3 +8,5 @@ src/back/.classpath
 src/back/.project
 
 src/back/.settings/
+src/front/cypress/cypress.json
+src/front/cypress/examples/

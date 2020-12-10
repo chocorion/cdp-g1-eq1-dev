@@ -1,21 +1,21 @@
 <div class="sidebar" [class.sidebar-collapsed]="collapsed" [class.disabled]="!visible">
     <ul class="list-unstyled pl-2">
         <li class="my-4">
-            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/backlog" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/backlog" routerLinkActive="active" id="sidebar-backlog-link">
                 <img src="../../../assets/backlog.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Backlog</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tasks" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tasks" routerLinkActive="active" id="sidebar-tasks-link">
                 <img src="../../../assets/tasks.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Tâches</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/planification" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/planification" routerLinkActive="active" id="sidebar-planification-link">
                 <img src="../../../assets/plannification.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Planification</span>
             </a>
@@ -23,41 +23,41 @@
 
         <li class="my-4">
             <a routerLink="/sprintActif" routerLinkActive="active">
-                <img src="../../../assets/actif-sprint.png" width="50" height="50" alt="">
+                <img src="../../../assets/actif-sprint.png" width="50" height="50" alt="" id="sidebar-sprintActif-link">
                 <span [class.disabled]="collapsed" class="sidebar-item">Sprint Actif</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tests" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/tests" routerLinkActive="active" id="sidebar-tests-link">
                 <img src="../../../assets/tests.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Tests</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/releases" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/releases" routerLinkActive="active" id="sidebar-releases-link">
                 <img src="../../../assets/release.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Release</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/documentation" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/documentation" routerLinkActive="active" id="sidebar-documentation-link">
                 <img src="../../../assets/documentation.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Documentation</span>
             </a>
         </li>
 
         <li class="my-4">
-            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/statistics" routerLinkActive="active">
+            <a *ngIf="projectService.currentProject" routerLink="/project/{{ projectService.currentProject.getId() }}/statistics" routerLinkActive="active" id="sidebar-statistics-link">
                 <img src="../../../assets/statistique.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Statistiques</span>
             </a>
         </li>
 
         <li>
-            <a routerLink="/projects" routerLinkActive="active">
+            <a routerLink="/projects" routerLinkActive="active" id="sidebar-projects-link">
                 <img src="../../../assets/projet.png" width="50" height="50" alt="">
                 <span [class.disabled]="collapsed" class="sidebar-item">Projets</span>
             </a>
