@@ -6,4 +6,19 @@
     (select)="onNodeSelect($event)"
     [update$]="update$"
 >
+    <ng-template #nodeTemplate let-node>
+
+            <svg:g class="node">
+                <svg:circle
+                    [attr.r]="node.dimension.width/2"
+                    [attr.cx]="node.dimension.width/2"
+                    [attr.cy]="node.dimension.width/2"
+                    [attr.fill]="node.data.color"
+                />
+                <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.width/1.5">
+                    {{node.label}}
+                </svg:text>
+            </svg:g>
+    </ng-template>
+
 </ngx-graph>
