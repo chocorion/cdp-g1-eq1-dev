@@ -46,6 +46,16 @@ a {
     margin-top: 15px;
 }
 
+/*card*/
+.customized-card{
+    border-radius: 5px;
+    background: #fafaf8;
+}
+
+
+
+/*forms*/
+
 .modal-header{
     font:bold 2vmin Sans-Serif;
     color: #293645;
@@ -63,7 +73,7 @@ a {
 }
 
 .modal-submit-button{
-    background: #6b605b;
+    background: #6b605b !important;
     color: #ffffff;
     font-weight: bold Sans-Serif;
     margin-top:2vmin;
@@ -72,4 +82,36 @@ a {
 .modal-footer{
     background: #dbd7c3;
     border-radius: 4px;
+}
+
+
+/*buttons*/
+
+.edit-button{
+    background: #8dbbeb !important;
+    color :#293645;
+}
+
+.delete-button{
+    background: #b8a281 !important;
+    color: #293645;
+
+}
+
+.edit-button:hover{
+    background: #72bbff !important;
+}
+
+.delete-button:hover{
+    background:#c8a571 !important;
+}
+
+.add-button{
+    background: #6b605b !important;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.add-button:hover{
+   background: #6b6760 !important;
 }

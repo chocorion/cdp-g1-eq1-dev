@@ -1,10 +1,10 @@
-<div class="list-group-item my-2 rounded project-card" ng-hide="expression">
+<div class="list-group-item my-2 rounded customized-card" ng-hide="expression">
     <div class="row">
-        <button class="btn projectName" (click)="onClick()">{{currentProject.getName()}}</button>
+        <button class="btn project-name-button" (click)="onClick()">{{currentProject.getName()}}</button>
     </div>
     <div class="row">
         <div class="col-10">
-            <div class="projectInfo"> {{currentProject.getDescription()}}</div>
+            <div class="project-info"> {{currentProject.getDescription()}}</div>
         </div>
         <div class="col-2">
             <div class="progress">
@@ -15,8 +15,7 @@
     </div>
     <div class="row">
         <!-- Button trigger modal -->
-        <button type="button" class="btn edit-button" data-toggle="modal"
-            [attr.data-target]="'#id'+currentProject.id" >
+        <button type="button" class="btn edit-button" data-toggle="modal" [attr.data-target]="'#id'+currentProject.id">
             Editer
         </button>
         <button type="button" class="btn delete-button" (click)="deleteProject()">Supprimer</button>
