@@ -1,23 +1,25 @@
 <div class="card m-4">
-    <div class="card-header" [ngClass]="getColor()" >
+    <div class="card-header" [ngClass]="getColor()">
 
     </div>
-    <div class="card-body">
-        <h5 class="card-title">{{test.getName()}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
+    <div class="customized-card-body">
+        <h5 class="customized-card-title">{{test.getName()}}</h5>
+        <h6 class="customized-card-values mb-2 text-muted">
             Dernière excecution :
             {{test.getLastExecution() === null ? "jamais" : test.getLastExecution()}}
         </h6>
-        <p class="card-text">
+        <p class="customized-card-values">
             {{test.getDescription()}}
         </p>
 
         <div class="row">
-        <div class="col"><button class="btn valid-button" (click)="changeState('validate')">Valider</button> </div>
-        <div class="col"><button class="btn invalid-button" (click)="changeState('refused')">Refuser</button></div>
-        <div class="col"><app-edit-test-form [test]="test"></app-edit-test-form></div>
-        <div class="col"><button class="btn delete-button" (click)="onDelete()">Supprimer</button></div>
-    </div>
+            <div class="col"><button class="btn valid-button" (click)="changeState('validate')">Valider</button> </div>
+            <div class="col"><button class="btn invalid-button" (click)="changeState('refused')">Refuser</button></div>
+            <div class="col">
+                <app-edit-test-form [test]="test"></app-edit-test-form>
+            </div>
+            <div class="col"><button class="btn delete-button" (click)="onDelete()">Supprimer</button></div>
+        </div>
     </div>
 
 </div>
