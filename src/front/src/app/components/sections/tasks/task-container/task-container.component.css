@@ -54,48 +54,8 @@ h2{
   
 .dropzone.cdk-drop-list-dragging .block:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+}
   
-.filter-button{
-    background: #6b685b;
-    font: bold 2.5vmin;
+.common-button{
     margin-bottom: 2vmin;
-
-    color:#ffffff;
-}
-
-.filter-button:hover{
-    border-color: #60666b;
-}
-
-
-.cancel-button{
-  background:#6b685b;
-  color : #ffffff;
-  font: bold 2.5vmin;
-  margin-left: 2vmin;
-  margin-bottom: 2vmin;
-}
-
-.cancel-button:hover{
-  border-color:#60666b
-}
-
-
-.card-header{
-  font : Sans-Serif;
-  color : #ffffff;
-  border-radius: 5px;
-  background: #b8b193;
-}
-
-.new-tasks-button{
-  background: #a0845a;
-}
-
-.modal-submit-button{
-  background: #6b605b;
-  color: #ffffff;
-  font-weight: bold Sans-Serif;
-  margin-top: 1%;
 }

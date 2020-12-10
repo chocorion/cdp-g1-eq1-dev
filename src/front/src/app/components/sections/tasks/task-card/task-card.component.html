@@ -1,22 +1,23 @@
-<div class="card m-4"  *ngIf="task" >
-    <div class="card-header"  data-toggle="modal" [attr.data-target]="'#id'+task.getId()" (click) = "expand()" >
-        <h5 class="card-title">#{{task.getId()}} {{task.getTitle()}}
+<div class="card customized-card m-4" *ngIf="task">
+    <div class="customized-card-header" data-toggle="modal" [attr.data-target]="'#id'+task.getId()" (click)="expand()">
+        <h5 class="customized-card-title">#{{task.getId()}} {{task.getTitle()}}
         </h5>
     </div>
-    <div class="card-body">
-        <div class="card-text">
-            Us associée:  {{task.getUsId()}}
-            <div class="badge badge-primary text-wrap float-right mt-2" id= "badge" *ngIf="dodTotal!=dodOk">
+    <div class="customized-card-body">
+        <div class="customized-card-values">
+            Us associée: {{task.getUsId()}}
+            <div class="badge badge-primary text-wrap float-right mt-2" id="badge" *ngIf="dodTotal!=dodOk">
                 {{dodOk}}/{{dodTotal}}
             </div>
-            <div class="badge badge-warning text-wrap float-right mt-2" id= "badge" *ngIf="dodTotal==0">
+            <div class="badge badge-warning text-wrap float-right mt-2" id="badge" *ngIf="dodTotal==0">
                 !
             </div>
-            <div class="badge badge-valid text-wrap float-right mt-2" id= "badge" *ngIf="dodTotal!=0&&dodTotal==dodOk">
+            <div class="badge badge-valid text-wrap float-right mt-2" id="badge" *ngIf="dodTotal!=0&&dodTotal==dodOk">
                 Ok
             </div>
-            <span *ngIf = "expanded">
-                <app-expanded-task-card [task]="task" [tasks]="tasks" (expand) = "expand()" (stateChange) = "getCurrentDodStates()"></app-expanded-task-card>
+            <span *ngIf="expanded">
+                <app-expanded-task-card [task]="task" [tasks]="tasks" (expand)="expand()"
+                    (stateChange)="getCurrentDodStates()"></app-expanded-task-card>
             </span>
         </div>
     </div>

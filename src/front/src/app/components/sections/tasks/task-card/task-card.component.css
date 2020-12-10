@@ -1,4 +1,4 @@
-.card-title{
+.customized-card-title{
     cursor: pointer;
 }
 
@@ -8,19 +8,6 @@
 
 .badge-valid {
     color: rgb(255, 255, 255);
-    background-color: #00aa09;
+    background-color: #31b637;
 }
 
-.card-body{
-    
-  font : Sans-Serif;
-  color : #60666b;
-  background: #dfd9bf;
-}
-
-.card-header{
-
-    font : Sans-Serif;
-    color : #60666b;
-    background: #c3b888;
-}
