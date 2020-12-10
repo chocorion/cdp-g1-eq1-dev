@@ -14,8 +14,6 @@
 
     <app-test-form></app-test-form>
 
-    <div class="row">
         <app-test-item *ngFor="let test of tests" [test]="test" (stateChange)="updateTests()"></app-test-item>
-    </div>
 </div>
 

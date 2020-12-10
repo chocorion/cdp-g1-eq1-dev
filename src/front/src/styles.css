@@ -33,11 +33,10 @@ html,body{
 .howto_link{
     line-height: 3;
     font-size:2vmin;
-
 }
 
 a {
-  color: #40556b;
+  color: #4c9f70;
   }
 
 .section-title{
@@ -50,6 +49,8 @@ a {
 .customized-card{
     border-radius: 5px;
     background: #fafaf8;
+    box-shadow: 0 0 10px;
+    box-shadow: #293645;
 }
 
 .customized-card-title{
@@ -148,6 +149,5 @@ a {
 /*random*/
 .common-title{
     font :  2vmin Sans-Serif;
-    color : #40556b
-    
+    color : #40556b;
 }
