@@ -41,6 +41,8 @@ import { HowToComponent } from './components/sections/how-to/how-to.component';
 import { ReleaseItemComponent } from './components/sections/releases/release-item/release-item.component';
 import { UsComponent } from './components/sections/sprint-actif/us/us.component';
 import { SimpleTaskComponent } from './components/sections/sprint-actif/us/simple-task/simple-task.component';
+import { DependencyGraphComponent } from './components/sections/planification/dependency-graph/dependency-graph.component';
+import {NgxGraphModule} from '@swimlane/ngx-graph';
 @NgModule({
     declarations: [
         AppComponent,
@@ -74,7 +76,8 @@ import { SimpleTaskComponent } from './components/sections/sprint-actif/us/simpl
         HowToComponent,
         ReleaseItemComponent,
         UsComponent,
-        SimpleTaskComponent
+        SimpleTaskComponent,
+        DependencyGraphComponent
     ],
     imports: [
         BrowserModule,
@@ -84,7 +87,8 @@ import { SimpleTaskComponent } from './components/sections/sprint-actif/us/simpl
         FormsModule,
         ReactiveFormsModule,
         DragDropModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        NgxGraphModule
     ],
     providers: [
         ProjectService
