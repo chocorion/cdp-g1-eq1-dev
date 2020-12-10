@@ -6,14 +6,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 container-sprint" *ngIf="sprint">
-            <button class="btn close-sprint-button float-right" (click)="closeSprint()">Cloturer</button>
-            <h4 class="container-title"> {{sprint.getName()}}</h4>
+        <div class="col-12 customized-card" *ngIf="sprint">
+            <button class="btn common-button float-right" (click)="closeSprint()">Cloturer</button>
+            <h4 class="customized-card-title"> {{sprint.getName()}}</h4>
             <app-us *ngFor="let userStory of userStories" [us]="userStory"></app-us>
         </div>
         <div class="col-12">
             <div class="container m-4" *ngIf="!sprint">
-                <h4 class="container-title ml-2 mt-2"> Aucun sprint selectionné</h4>
+                <h4 class="customized-card-title ml-2 mt-2"> Aucun sprint selectionné</h4>
             </div>
         </div>
     </div>

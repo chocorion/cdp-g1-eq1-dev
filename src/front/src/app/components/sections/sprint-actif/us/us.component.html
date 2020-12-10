@@ -1,9 +1,13 @@
-<div class="container " (click)="onClick()">
+<div class="container customized-card " (click)="onClick()">
     <div class="row">
-        <div class="col-2 us-number"><h5>US-{{us.getId()}}</h5></div>
-        <div class="col-6 us-title"><h5>{{us.getDescription()}}</h5></div>
-        <div class="col-2 us-values">Difficulté : {{us.getDifficulty()}}</div>
-        <div class="col-2 us-values">Priorité : {{us.getPriority()}}</div>
+        <div class="col-2 customized-card-values">
+            <h5>US-{{us.getId()}}</h5>
+        </div>
+        <div class="col-6 customized-card-values">
+            <h5>{{us.getDescription()}}</h5>
+        </div>
+        <div class="col-2 customized-card-values">Difficulté : {{us.getDifficulty()}}</div>
+        <div class="col-2 customized-card-values">Priorité : {{us.getPriority()}}</div>
     </div>
 
     <div class="row" [hidden]="!displayTask">
@@ -12,4 +16,3 @@
         </div>
     </div>
 </div>
-
