@@ -1,13 +1,3 @@
-.add-project-button{
-    background: #6b605b;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.add-project-button:hover{
-   background: #6b6760;
-}
-
 .search-button{
     color: #60666b;
     font: bold 2.5vmin;
@@ -26,16 +16,10 @@
     border-color:#60666b
 }
 
-.search_input{
+.search-input{
     border: 1px solid #ccc;
     border-radius: 4px;
     padding:2px;
     font: 2.2vmin Sans-Serif;
 }
 
-.modal-submit-button{
-    background: #6b605b;
-    color: #ffffff;
-    font-weight: bold Sans-Serif;
-    margin-top:2vmin;
-}

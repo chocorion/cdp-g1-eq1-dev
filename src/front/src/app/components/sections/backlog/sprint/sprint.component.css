@@ -1,26 +1,6 @@
-.us-container {
-    border-radius: 20px;
-    border-style: solid;
-    border-color: #d6e2ee;
-    border-width: 2px;
-    background: #fafaf8;
-}
 
-.container-title{
-    font: Sans-Serif;
-    color : #334456;
-    font-weight: 300;
-}
-
-.start-sprint-button{
-
-    background: #b89f93;
+.common-button{
     margin-left : 2vmin;
     margin-top:2vmin;
-
-    color :#293645;
 }
 
-.start-sprint-button:hover{
-    background: #72bbff;
-}
