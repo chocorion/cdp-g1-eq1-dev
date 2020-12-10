@@ -7,16 +7,16 @@
     </div>
     <div class="modal-body">
         <form class="form" [formGroup]="testForm">
-            <input type="text" class="form-control" placeholder="Test name" formControlName="name">
-            <input type="text" class="form-control" placeholder="Test description" formControlName="description">
+            <input type="text" class="form-control" placeholder="Nom du Test" formControlName="name">
+            <input type="text" class="form-control" placeholder="Description du Test" formControlName="description">
         </form>
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ajouter</button>
+        <button type="button" class="btn modal-submit-button" (click)="modal.close('Save click')">Ajouter</button>
     </div>
 
 </ng-template>
 
 
-<button class="btn btn-primary mt-3" (click)="open(content)">Ajouter un test</button>
+<button class="btn add-test-button" (click)="open(content)">Ajouter un test</button>

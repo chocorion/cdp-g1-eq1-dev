@@ -28,6 +28,4 @@ export class ReleaseItemComponent implements OnInit {
         us.forEach(item => this.userStories.push(Us.fromJSON(item)));
     }
 
-
-
 }

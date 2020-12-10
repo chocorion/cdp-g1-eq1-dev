@@ -1,12 +1,31 @@
-.container-release{
+.container{
     border-radius: 20px;
     border-style: solid;
-    border-color: #bbbbbb;
+    border-color: #d6e2ee;
     border-width: 2px;
+    background: #fafaf8;
 }
-#release{
-    padding-left: 20px;
+
+.release-number{
+    font:  Sans-Serif;
+    color:#6b6760;
+    margin-top: 1%;
 }
-#date{
-    padding-left: 20px;
+
+.release-title{
+    font: Sans-Serif;
+    color:#6b685b ;
+    margin-top: 1%;
+}
+
+.release-description{
+    font: Sans-Serif;
+    color:#6b685b ;
+    margin-top: 1%;
+}
+
+.release-values{
+    font :  Sans-Serif;
+    color:#6b605b;
+    margin-top: 1%;
 }
