@@ -20,7 +20,7 @@
                                 <p *ngIf="!task.getUsId()">User Story: None</p>
                                 <p>Estimation (en h.h): {{task.getDuration()}}</p>
                                 <p>Status: {{task.getStatus()}}</p>
-                                <p>Dependant de:</p>
+                                <p>Dépendant de:</p>
                                 <div class='over'>
                                     <div class="pstate" *ngFor="let t of parentDependency">
                                         <button mat-stroked-button
