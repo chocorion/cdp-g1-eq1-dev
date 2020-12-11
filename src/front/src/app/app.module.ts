@@ -44,6 +44,7 @@ import { SimpleTaskComponent } from './components/sections/sprint-actif/us/simpl
 import { ReleaseCreateFormComponent } from './components/sections/releases/release-create-form/release-create-form.component';
 import { DependencyGraphComponent } from './components/sections/planification/dependency-graph/dependency-graph.component';
 import {NgxGraphModule} from '@swimlane/ngx-graph';
+import { CloseSprintErrorComponent } from './components/sections/sprint-actif/close-sprint-error/close-sprint-error.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -79,7 +80,8 @@ import {NgxGraphModule} from '@swimlane/ngx-graph';
         UsComponent,
         SimpleTaskComponent,
         DependencyGraphComponent,
-        ReleaseCreateFormComponent
+        ReleaseCreateFormComponent,
+        CloseSprintErrorComponent
     ],
     imports: [
         BrowserModule,

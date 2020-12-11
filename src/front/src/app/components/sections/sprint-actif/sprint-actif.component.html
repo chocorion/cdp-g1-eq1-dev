@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-12 customized-card" *ngIf="sprint">
-            <button class="btn common-button float-right" (click)="closeSprint()">Cloturer</button>
+            <button class="btn common-button float-right" (click)="closeSprintTest()">Cloturer</button>
             <h4 class="customized-card-title"> {{sprint.getName()}}</h4>
             <app-us *ngFor="let userStory of userStories" [us]="userStory"></app-us>
         </div>
@@ -17,4 +17,6 @@
             </div>
         </div>
     </div>
+    <app-close-sprint-error #child (closeSprint)="closeSprint()"></app-close-sprint-error>
+
 </div>
