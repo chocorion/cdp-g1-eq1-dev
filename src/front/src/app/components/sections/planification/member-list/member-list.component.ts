@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -64,7 +64,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
     onSubmit(data): void {
         this.newMember = new Member(this.currentProject.getId(), data.name, data.role, data.level);
         this.memberService.postMember(this.newMember).subscribe(
-            () => { this.updateMembers();}
+            () => { this.updateMembers(); }
         );
 
     }
