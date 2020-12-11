@@ -38,7 +38,10 @@ export class DependencyGraphComponent implements OnInit {
 
     extractTaskFromUs(userStories: Us[]): void {
         this.links = [];
-        this.nodes = [];
+        this.nodes = [{
+            id: 'end',
+            label: 'end'
+        }];
 
         userStories.forEach(us => {
             us = Us.fromJSON(us);
@@ -59,16 +62,37 @@ export class DependencyGraphComponent implements OnInit {
                 id: task.getId(),
                 label: task.getId()
             });
+
+            this.addRelationToEnd(task);
+        }
+    }
+
+    private addRelationToEnd(task: Task): void {
+        this.links.push({
+            id: `link${task.getId()}_end`,
+            source: task.getId(),
+            target: 'end',
+            label: task.getDuration()
+        });
+    }
+
+    private removeRelationToEnd(task: Task): void {
+        const index = this.links.findIndex(e => e.id === `link${task.getId()}_end`);
+        if (index !== -1) {
+            this.links.splice(index, 1);
         }
     }
 
     private addRelation(parent: Task, child: Task): void {
+
         this.links.push({
             id: `link${parent.getId()}_${child.getId()}`,
             source: parent.getId(),
             target: child.getId(),
-            label: 'is parent of'
+            label: parent.getDuration()
         });
+
+        this.removeRelationToEnd(parent);
     }
 
     public addTaskToGraph(task: Task): void {
@@ -89,6 +113,6 @@ export class DependencyGraphComponent implements OnInit {
     }
 
     onNodeSelect($event: any): void {
-        console.log('coucou');
+        console.log('click on ' + $event);
     }
 }
