@@ -14,9 +14,10 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
     @Override
     protected Release createObjectFromResult(ResultSet resultSet) throws SQLException {
         int id = getInteger(resultSet, "id");
+        int projectId = getInteger(resultSet, "project");
 
         return new Release(
-            getInteger(resultSet, "project"),
+            projectId,
             resultSet.getString("title"),
             resultSet.getString("description"),
             new Version(getInteger(resultSet, "version_major"),
@@ -24,7 +25,7 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
                         getInteger(resultSet, "version_patch")),
             resultSet.getString("link"),
             resultSet.getString("creation_date"),
-            getUserStories(id),
+            getUserStories(projectId, id),
             id);
     }
 
@@ -37,9 +38,9 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
     }
 
     @Override
-    public List<UserStory> getUserStories(int id) throws SQLException {
-        String statement = "SELECT * FROM us WHERE id IN (SELECT us FROM release_us WHERE `release`=?)";
-        List<Object> opt = Arrays.asList(id);
+    public List<UserStory> getUserStories(int projectId, int id) throws SQLException {
+        String statement = "SELECT * FROM us WHERE project = ? AND id IN (SELECT us FROM release_us WHERE `release`=? AND project=?)";
+        List<Object> opt = Arrays.asList(projectId, id, projectId);
 
         return new SQLUserStoryDAO().queryAllObjects(statement, opt);
     }
@@ -105,7 +106,7 @@ public class SQLReleaseDAO extends SQLDAO<Release> implements ReleaseDAO {
             release.version,
             release.link,
             release.creationDate,
-            getUserStories(id),
+            getUserStories(release.project, id),
             id);
     }
 

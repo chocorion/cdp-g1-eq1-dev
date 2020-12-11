@@ -49,6 +49,15 @@ public class SQLUserStoryDAO extends SQLDAO<UserStory> implements UserStoryDAO {
     }
 
     @Override
+    public List<UserStory> getUnreleasedForProject(int projectId) throws SQLException {
+        String statement = "SELECT * FROM us WHERE project=? AND id NOT IN (SELECT us FROM release_us WHERE project = ?)";
+
+        List<Object> opt = Arrays.asList(projectId, projectId);
+
+        return queryAllObjects(statement, opt);
+    }
+
+    @Override
     public UserStory insert(UserStory us) throws SQLException {
         if (us.id != null)
             throw new SQLException("This us has an id, cannot insert.");

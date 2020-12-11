@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Release } from 'src/app/models/release.model';
 import {Project} from '../../../models/project.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { ReleaseService } from 'src/app/services/release.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-releases',
@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['./releases.component.css']
 })
 export class ReleasesComponent implements OnInit {
-    releases: Release[];
+    releases: Release[] = [];
     releaseSubscription: Subscription;
     constructor(private releaseService: ReleaseService,
                 private projectService: ProjectService,

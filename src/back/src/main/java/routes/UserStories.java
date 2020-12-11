@@ -25,6 +25,17 @@ public class UserStories {
     }
 
     @GET
+    @Path("unreleased")
+    @Produces("application/json")
+    public Response getUnreleased(@PathParam("projectId") int projectId) {
+        try {
+            return Response.status(200).entity(userStoryDAO.getUnreleasedForProject(projectId)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
     @Path("{usId}")
     @Produces("application/json")
     public Response get(@PathParam("projectId") int projectId, @PathParam("usId") int usId) {
