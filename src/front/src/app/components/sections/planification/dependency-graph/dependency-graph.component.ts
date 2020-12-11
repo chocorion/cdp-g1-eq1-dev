@@ -72,7 +72,7 @@ export class DependencyGraphComponent implements OnInit {
             id: `link${task.getId()}_end`,
             source: task.getId(),
             target: 'end',
-            label: task.getDuration()
+            label: task.getDuration() + ' h.h'
         });
     }
 
@@ -89,7 +89,7 @@ export class DependencyGraphComponent implements OnInit {
             id: `link${parent.getId()}_${child.getId()}`,
             source: parent.getId(),
             target: child.getId(),
-            label: parent.getDuration()
+            label: parent.getDuration() + ' h.h'
         });
 
         this.removeRelationToEnd(parent);
