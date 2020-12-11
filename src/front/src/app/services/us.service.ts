@@ -11,6 +11,8 @@ import {map} from 'rxjs/operators';
 })
 export class UsService extends GenericService<Us> {
 
+    protected Unreleased = {};
+
     constructor(private http: HttpClient) {
         super(http, 'us');
     }
@@ -21,5 +23,20 @@ export class UsService extends GenericService<Us> {
 
     getElementFromJSON(jsonObject): Us {
         return Us.fromJSON(jsonObject);
+    }
+
+    getUnreleasedForProject(projectId: number): void {
+        const url = environment.apiUrl + `projects/${projectId}/us/unreleased`;
+
+        this.http.get<Us[]>(url).subscribe(
+            result => {
+                this.Unreleased[projectId] = result.map(element => this.getElementFromJSON(element));
+                this.emit(projectId);
+            }
+        );
+    }
+
+    getUnreleased(projectId: number): Us[] {
+        return this.Unreleased[projectId];
     }
 }

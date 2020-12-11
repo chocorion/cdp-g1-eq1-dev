@@ -7,6 +7,7 @@ public interface UserStoryDAO {
     UserStory getById(int projectId, int id) throws Exception;
     List<UserStory> getBySprint(int projectId, int sprintId) throws Exception;
     List<UserStory> getAllForProject(int projectId) throws Exception;
+    List<UserStory> getUnreleasedForProject(int projectId) throws Exception;
     UserStory insert(UserStory userStory) throws Exception;
     void update(UserStory userStory) throws Exception;
     void delete(UserStory userStory) throws Exception;
