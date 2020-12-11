@@ -42,6 +42,8 @@ import { ReleaseItemComponent } from './components/sections/releases/release-ite
 import { UsComponent } from './components/sections/sprint-actif/us/us.component';
 import { SimpleTaskComponent } from './components/sections/sprint-actif/us/simple-task/simple-task.component';
 import { ReleaseCreateFormComponent } from './components/sections/releases/release-create-form/release-create-form.component';
+import { DependencyGraphComponent } from './components/sections/planification/dependency-graph/dependency-graph.component';
+import {NgxGraphModule} from '@swimlane/ngx-graph';
 @NgModule({
     declarations: [
         AppComponent,
@@ -76,6 +78,7 @@ import { ReleaseCreateFormComponent } from './components/sections/releases/relea
         ReleaseItemComponent,
         UsComponent,
         SimpleTaskComponent,
+        DependencyGraphComponent,
         ReleaseCreateFormComponent
     ],
     imports: [
@@ -86,7 +89,8 @@ import { ReleaseCreateFormComponent } from './components/sections/releases/relea
         FormsModule,
         ReactiveFormsModule,
         DragDropModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        NgxGraphModule
     ],
     providers: [
         ProjectService

@@ -87,8 +87,12 @@ paths:
         - basicAuth: []
       summary: Get list of projects.
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
         '404':
-          description: Inalid url
+          description: Invalid url
           
     put:
       tags:
@@ -106,6 +110,10 @@ paths:
           schema:
             $ref: '#/definitions/Project'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
         '401':
           description: Not Authenticated.
           
@@ -122,6 +130,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Project'
         '401':
           description: Not authenticated.
     
@@ -152,6 +164,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/US'
         '401':
           description: Not authenticated.
           
@@ -176,6 +192,10 @@ paths:
           schema:
             $ref: '#/definitions/US'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/US'
         '405':
           description: Invalid input
           
@@ -195,6 +215,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/US'
         '401':
           description: Not authenticated.
           
@@ -224,6 +248,10 @@ paths:
           schema:
             $ref: '#/definitions/US'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/US'
         '401':
           description: Not Authenticated.
           
@@ -261,6 +289,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '401':
           description: Not authenticated.
           
@@ -285,6 +317,10 @@ paths:
           schema:
             $ref: '#/definitions/Task'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '405':
           description: Invalid input
           
@@ -304,6 +340,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '401':
           description: Not authenticated.
           
@@ -331,6 +371,10 @@ paths:
           schema:
             $ref: '#/definitions/Task'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '405':
           description: Invalid input
           
@@ -351,6 +395,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '401':
           description: Not authenticated.
           
@@ -380,6 +428,10 @@ paths:
           schema:
             $ref: '#/definitions/Task'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '405':
           description: Invalid input
           
@@ -431,6 +483,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '405':
           description: Invalid input
           
@@ -456,6 +512,10 @@ paths:
           type: number
           
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/US'
         '401':
           description: Not authenticated.
           
@@ -476,6 +536,11 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
+            
         '401':
           description: Not authenticated.
           
@@ -502,6 +567,11 @@ paths:
             $ref: '#/definitions/Task'
           
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
+            
         '401':
           description: Not authenticated.
           
@@ -545,6 +615,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
         '401':
           description: Not authenticated.
   
@@ -565,6 +639,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DOD'
         '401':
           description: Not authenticated.
           
@@ -589,6 +667,10 @@ paths:
           schema:
             $ref: '#/definitions/DOD'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DOD'
         '401':
           description: Not authenticated.
           
@@ -613,6 +695,10 @@ paths:
           schema:
             $ref: '#/definitions/DOD'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DOD'
         '401':
           description: Not authenticated.
           
@@ -648,6 +734,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Sprint'
         '401':
           description: Not authenticated.
           
@@ -668,6 +758,10 @@ paths:
           schema:
             $ref: '#/definitions/Sprint'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Sprint'
         '401':
           description: Not authenticated.
           
@@ -686,6 +780,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Sprint'
         '401':
           description: Not authenticated.
           
@@ -705,6 +803,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Sprint'
         '401':
           description: Not authenticated.
           
@@ -729,6 +831,10 @@ paths:
           schema:
             $ref: '#/definitions/Sprint'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Sprint'
         '401':
           description: Not authenticated.
           
@@ -769,11 +875,12 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/US'
         '401':
           description: Not authenticated.
-          
-      
-          
           
   '/projects/{project_id}/tests/':
     get:
@@ -787,6 +894,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Test'
         '401':
           description: Not authenticated.
           
@@ -808,6 +919,10 @@ paths:
           schema:
             $ref: '#/definitions/Test'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Test'
         '401':
           description: Not authenticated.
           
@@ -827,6 +942,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Test'
         '401':
           description: Not authenticated.
           
@@ -851,6 +970,10 @@ paths:
           schema:
             $ref: '#/definitions/Test'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Test'
         '401':
           description: Not authenticated.
           
@@ -887,6 +1010,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Member'
         '401':
           description: Not authenticated.
           
@@ -907,6 +1034,10 @@ paths:
           schema:
             $ref: '#/definitions/Member'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Member'
         '401':
           description: Not authenticated.
           
@@ -926,6 +1057,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Member'
         '401':
           description: Not authenticated.
           
@@ -946,11 +1081,15 @@ paths:
           type: number
         - in: body
           name: body
-          description: Test object
+          description: Member object
           required: true
           schema:
-            $ref: '#/definitions/Test'
+            $ref: '#/definitions/Member'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Member'
         '401':
           description: Not authenticated.
           
@@ -973,7 +1112,7 @@ paths:
         '401':
           description: Not authenticated.
           
-  
+
   
 '/projects/{project_id}/releases/':
     get:
@@ -987,6 +1126,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Release'
         '401':
           description: Not authenticated.
           
@@ -1007,6 +1150,10 @@ paths:
           schema:
             $ref: '#/definitions/Release'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Release'
         '401':
           description: Not authenticated.
           
@@ -1027,6 +1174,10 @@ paths:
           schema:
             $ref: '#/definitions/Release'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Release'
         '401':
           description: Not authenticated.
           
@@ -1046,6 +1197,10 @@ paths:
           required: true
           type: number
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Release'
         '401':
           description: Not authenticated.
           
