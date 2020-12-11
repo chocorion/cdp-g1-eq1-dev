@@ -98,7 +98,7 @@ export class TasksComponent implements OnInit {
 
     getEstimateValue(): void {
         this.estimateValue = 0;
-        this.tasks.forEach(tasks => this.estimateValue = this.estimateValue + parseInt(tasks.getDuration(),10));
+        this.tasks.forEach(tasks => this.estimateValue = this.estimateValue + parseInt(tasks.getDuration(), 10));
     }
 
 }
