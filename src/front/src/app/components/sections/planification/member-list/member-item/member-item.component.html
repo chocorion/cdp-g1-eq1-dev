@@ -28,16 +28,14 @@
                     <div class="modal-body">
                         <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
                             <div>
-                                <label class="form-label" for="role">
-                                    Rôle
-                                </label>
-                                <input id="role" type="text" formControlName="role"></div>
+                                <label class="form-label" for="role">Rôle</label>
+                                <input class="form-control" id="role" type="text" formControlName="role">
+                            </div>
 
                             <div>
-                                <label class="form-label" for="level">
-                                    Niveau d'expérience
-                                </label>
-                                <input id="level" type="text" formControlName="level"></div>
+                                <label class="form-label" for="level">Niveau d'expérience</label>
+                                <input class="form-control" id="level" type="text" formControlName="level">
+                            </div>
 
                             <button type="submit" class="btn modal-submit-button">Enregistrer</button>
                         </form>
