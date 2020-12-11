@@ -3,6 +3,8 @@ import { Release } from 'src/app/models/release.model';
 import { Us } from 'src/app/models/us.model';
 import { ReleaseVersion } from 'src/app/models/releaseversion.model';
 import {ReleaseService} from '../../../../services/release.service';
+import { UsService } from 'src/app/services/us.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
     selector: 'app-release-item',
@@ -13,7 +15,10 @@ export class ReleaseItemComponent implements OnInit {
 
     @Input() releaseItem: Release;
     userStories: Us[] = [];
-    constructor(private releaseService: ReleaseService) { }
+    constructor(
+        private releaseService: ReleaseService,
+        private projectService: ProjectService,
+        private usService: UsService) { }
 
     ngOnInit(): void {
         this.getUserStories();
@@ -31,6 +36,7 @@ export class ReleaseItemComponent implements OnInit {
 
     onDelete(): void {
         this.releaseService.delete(this.releaseItem.getProjectId(), this.releaseItem);
+        this.usService.getUnreleasedForProject(this.projectService.currentProject.getId());
     }
 
 }

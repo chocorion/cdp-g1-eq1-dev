@@ -74,7 +74,20 @@ export class ReleaseCreateFormComponent implements OnInit {
           this.releaseService.post(
               this.projectService.currentProject.getId(),
               release
-          ).subscribe(next => console.log('Release added !'));
+          ).subscribe(next => {
+              this.releaseForm = this.formBuilder.group({
+                versionMajor: '1',
+                versionMinor: '0',
+                versionPatch: '0',
+                title: '',
+                description: '',
+                link: '',
+              });
+
+              this.toAddUserStories = [];
+              this.usService.getUnreleasedForProject(this.projectService.currentProject.getId());
+            }
+          );
         }
     });
   }
@@ -87,6 +100,7 @@ export class ReleaseCreateFormComponent implements OnInit {
   addUs(): void {
     if (!this.selectedUsAdd) { return; }
     this.toAddUserStories.push(this.selectedUsAdd);
+    this.selectedUsAdd = undefined;
     this.updatePossibleUserStories();
   }
 
