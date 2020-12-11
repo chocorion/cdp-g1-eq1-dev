@@ -72,7 +72,7 @@ export class DependencyGraphComponent implements OnInit {
             id: `link${task.getId()}_end`,
             source: task.getId(),
             target: 'end',
-            label: task.getDuration()
+            label: task.getDuration() + ' h.h'
         });
     }
 
