@@ -71,7 +71,7 @@ export class TasksComponent implements OnInit {
 
     createTask(data: any): void {
         const todo = 'TODO';
-        if (!Number.isNaN(parseInt(data.duration))) {
+        if (!Number.isNaN(parseInt(data.duration,10))) {
             const task = new Task(-1, this.currentProject.getId(), data.usId, data.member, data.title, data.duration, todo);
             this.taskService.post(this.currentProject.getId(), task).subscribe(() => { });
         }
@@ -98,7 +98,7 @@ export class TasksComponent implements OnInit {
 
     getEstimateValue(): void {
         this.estimateValue = 0;
-        this.tasks.forEach(tasks => this.estimateValue = this.estimateValue + parseInt(tasks.getDuration()));
+        this.tasks.forEach(tasks => this.estimateValue = this.estimateValue + parseInt(tasks.getDuration(),10));
     }
 
 }
