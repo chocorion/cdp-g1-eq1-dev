@@ -9,7 +9,6 @@
         <div class="col-6 customized-card-values">
             <h3>{{releaseItem.getDescription()}}</h3>
         </div>
-        <div class="col"><button class="btn delete-button" (click)="onDelete()">Supprimer</button></div>
     </div>
     <div class="row">
         <div class="col-4 customized-card-values">Version : {{this.getFullVersion()}}</div>
@@ -18,7 +17,9 @@
         <div class="col-4 customized-card-values" id='date'>Date de Création : {{releaseItem.getCreationDate()}}</div>
     </div>
     <div class="container">
-        <div class="commont-title"> Us implémentées:</div>
+        <div class="common-title"> <br>Us implémentées:</div>
         <app-us-card *ngFor="let userStory of userStories" [us]="userStory" [disableEdit]=true></app-us-card>
     </div>
+    <div class="col"><button class="btn delete-button float-right" (click)="onDelete()">Supprimer</button></div>
+
 </div>

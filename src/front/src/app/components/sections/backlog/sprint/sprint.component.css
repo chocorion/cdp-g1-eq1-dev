@@ -7,3 +7,9 @@
 .customized-card-title{
     text-align: left;
 }
+
+.customized-card{
+
+    box-shadow: #2d5867;
+    box-shadow: 0 0 10px;
+}

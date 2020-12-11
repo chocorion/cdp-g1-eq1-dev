@@ -1,13 +1,5 @@
-
-.close-sprint-button{
-
-    background: #b89f93;
-    margin-left : 2vmin;
-    margin-bottom: 2vmin;
-
-    color :#293645;
-}
-
-.close-sprint-button:hover{
-    background: #72bbff;
+.customized-card{
+    box-shadow: #2d5867;
+    box-shadow: 0 0 10px;
+    padding-top: 1%;
 }

@@ -1,15 +1,15 @@
-<div class="card ">
+<div class="customized-card ">
     <div class="card-header" [ngClass]="getColor()">
     </div>
     <div class="customized-card-body">
-        <h5 class="customized-card-title">{{test.getName()}}</h5>
-        <h6 class="customized-card-values mb-2 text-muted">
+        <div class="customized-card-title">{{test.getName()}}</div>
+        <div class="customized-card-values">
             Dernière excecution :
             {{test.getLastExecution() === null ? "jamais" : test.getLastExecution()}}
-        </h6>
-        <p class="customized-card-values">
+        </div>
+        <div class="customized-card-values">
             {{test.getDescription()}}
-        </p>
+        </div>
 
         <div class="row">
             <div class="col"><button class="btn valid-button" (click)="changeState('validate')">Valider</button> </div>

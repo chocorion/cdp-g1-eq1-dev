@@ -19,13 +19,10 @@
             <input type="number" class="form-control" formControlName="versionMinor" id="versionMinor">
             <input type="number" class="form-control" formControlName="versionPatch" id="versionPatch">
         </form>
+        <button type="button" class="btn modal-submit-button" (click)="modal.close('Save click')">Ajouter</button>
 
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ajouter</button>
-    </div>
-
 </ng-template>
 
 
-<button class="btn add-us-button" (click)="open(content)">Ajouter une release</button>
+<button class="btn add-button" (click)="open(content)">Ajouter une release</button>

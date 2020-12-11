@@ -9,8 +9,8 @@
         <form class="form">
             <input type="text" class="form-control" [(ngModel)]="testName" name="testName">
             <input type="text" class="form-control" [(ngModel)]="testDescription" name="testDescription">
+            <button type="button" class="btn modal-submit-button" (click)="modal.close('Save click')">Appliquer</button>
         </form>
-        <button type="button" class="btn modal-submit-button" (click)="modal.close('Save click')">Appliquer</button>
     </div>
 
 </ng-template>

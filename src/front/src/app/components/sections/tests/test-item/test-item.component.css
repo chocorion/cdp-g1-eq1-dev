@@ -8,3 +8,18 @@
     background: #b32e2e;
     color: #ffffff;
 }
+
+.customized-card{
+    margin: 2%;
+    padding: 1%;
+}
+
+.customized-card-title{
+    font-size: larger;
+    font-weight: bold;
+    text-align: left;
+}
+
+.customized-card-values{
+    color: #2d5867;
+}
